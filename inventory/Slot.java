@@ -29,7 +29,7 @@ public class Slot extends Inventory {
 		return null;
 	}
 
-	public boolean addItem(Item item) {
+	public boolean storeItem(Item item) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -6,9 +6,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class Decal {
 	private BufferedImage image;
 	
+	/**
+	 * @param file File to load decal from
+	 */
 	public Decal(File file) {
 		try {
 			setImage(ImageIO.read(file));

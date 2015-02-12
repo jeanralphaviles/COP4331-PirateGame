@@ -4,6 +4,14 @@ import utility.Decal;
 
 public abstract class Terrain {
 	private Decal decal;
+	
+	public Terrain() {
+
+	}
+	
+	public Terrain(Decal decal) {
+		setDecal(decal);
+	}
 
 	public abstract boolean isPassable();
 

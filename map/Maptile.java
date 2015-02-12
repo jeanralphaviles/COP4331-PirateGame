@@ -6,6 +6,9 @@ import item.Category;
 import item.Item;
 import item.ObstacleItem;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class Maptile {
 	private Slot itemSlot = new Slot(Category.MAPTILE_SLOT);
 	private Entity entity = null;
@@ -16,38 +19,49 @@ public class Maptile {
 		
 	}
 	
-	public boolean addItem(Item item) {
-		return itemSlot.addItem(item);
+	/**
+	 * @param item Item to store
+	 * @return True if item was stored successfully, False if otherwise 
+	 */
+	public boolean storeItem(Item item) {
+		return itemSlot.storeItem(item);
 	}
 	
+	/**
+	 * @param entity Entity to add to Maptile
+	 * @return True if entity was added successfully, False if otherwise
+	 */
 	public boolean addEntity(Entity entity) {
-		if (entity != null) { /* Don't overwrite entity on tile */
+		if (this.entity != null) { /* Don't overwrite entity on tile */
 			return false;
 		}
-        this.entity = entity;
+		setEntity(entity);
         return true;
 	}
 
 	public void removeItem() {
 		itemSlot.removeItem();
 	}
+
+	public void removeEntity() {
+		setEntity(null);
+	}
 	
+	/**
+	 * @return True if an entity is allowed to move to this Maptile, False otherwise
+	 */
 	public boolean isPassable() {
-		if (this.entity != null) { /* Entity already there */
+		if (entity != null) { /* Entity already there */
 			return false;
 		} else if (terrain.isPassable() == false) {
 			return false;
-		} else if (itemSlot.getItem() instanceof ObstacleItem) {
+		} else if (itemSlot.getItem() instanceof ObstacleItem) { /* Tile contains ObstacleItem */
 			return false;
-		} else{
+		} else {
 			return true;
 		}
 	}
 	
-	public void removeEntity() {
-		entity = null;
-	}
-
 	public Slot getItemSlot() {
 		return itemSlot;
 	}

@@ -3,12 +3,39 @@ package map;
 import model.Entity;
 import utility.Decal;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public abstract class AreaEffect {
 	private Decal decal;
-	
+	private boolean isActive = true;
+
+	public AreaEffect() {
+
+	}
+
+	public AreaEffect(Decal decal) {
+		setDecal(decal);
+	}
+
+	/**
+	 * @param entity Entity to be affected by AreaEffect
+	 */
+	public abstract void triggerProximityEffect(Entity entity);
+
 	public final Decal getDecal() {
 		return decal;
 	}
 
-	public abstract void triggerProximityEffect(Entity entity);
+	public final void setDecal(Decal decal) {
+		this.decal = decal;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 }
