@@ -1,6 +1,6 @@
 package inventory;
 
-import ObstacleItem;
+import item.ObstacleItem;
 import item.Category;
 import item.Item;
 

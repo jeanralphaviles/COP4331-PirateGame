@@ -1,3 +1,4 @@
+package model;
 /*
 * Created by Conor Doherty
 * on 2/11/2015
@@ -15,8 +16,12 @@
 
 public class CustomOccupation implements Occupation {
 
+    /* Attributes */
+    
     private Statistics defaultStatistics;
-    private final String occupationName = "Custom";
+    private final String OCCUPATION_NAME = "Custom";
+
+    /* Constructors */
 
     //Initialize all Primary Stats; other parameters organized in alphabetical order
     //Useful for creating other types of entities as a "Default" Occupation.
@@ -44,6 +49,6 @@ public class CustomOccupation implements Occupation {
     }
 
     public String toString() {
-        return occupationName;
+        return OCCUPATION_NAME;
     }
 }

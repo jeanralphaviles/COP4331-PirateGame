@@ -6,7 +6,6 @@ import item.Category;
 import item.Item;
 import item.ObstacleItem;
 
-
 public class Maptile {
 	private Slot itemSlot = new Slot(Category.MAPTILE_SLOT);
 	private Entity entity = null;

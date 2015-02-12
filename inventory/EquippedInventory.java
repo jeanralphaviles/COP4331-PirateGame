@@ -1,3 +1,5 @@
+package inventory;
+
 /**
  * Placeholder
  */

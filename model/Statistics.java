@@ -1,3 +1,4 @@
+package model;
 /*
 * Created by Conor Doherty
 * on 2/11/2015
@@ -5,7 +6,7 @@
 *
 * The Statistics class used to bundle all statistics together. All Entities and Items have Statistics which can
 * be added using the this.combine(Statistics other) function. This is how total stats will be calculated.
-* All Primary Stats are private fields with public accessors and all Derived stats are public methods.
+* All Primary Stats are private fields with public accessors and all Derived Stats are public methods.
 */
 
 /*
@@ -13,7 +14,24 @@
 * 2/11/15 Added file and started skeleton - Conor Doherty
 */
 
+import inventory.EquippedInventory;
+
 public class Statistics {
+
+    /* Attributes */
+
+    private int livesLeft;
+    private int strength;
+    private int agility;
+    private int intellect;
+    private int hardiness;
+    private int experience;
+    private int movement;
+
+    private final int EXP_PER_LVL = 1;
+
+    private int health;
+    private int mana;
 
     /* Constructors */
 
@@ -22,7 +40,7 @@ public class Statistics {
         //Do nothing
     }
 
-    //Initialization
+    //Initialization - What you should use!
     Statistics(Occupation occupation) {
         this(occupation.getDefaultStatistics());
     }
@@ -40,19 +58,8 @@ public class Statistics {
         this.strength = other.strength;
     }
 
-    /* Fields */
+    /* Getters for Primary Stats (Auto-generated) */
 
-    private int livesLeft;
-    private int strength;
-    private int agility;
-    private int intellect;
-    private int hardiness;
-    private int experience;
-    private int movement;
-
-    /* Methods */
-
-    //Getters for Primary Stats (Auto-generated)
     public int getLivesLeft() {
         return livesLeft;
     }
@@ -81,7 +88,15 @@ public class Statistics {
         return movement;
     }
 
-    //Setters for Primary Stats (Auto-generated)
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    /* Setters for Primary Stats (Auto-generated) */
 
     public void setMovement(int movement) {
         this.movement = movement;
@@ -111,30 +126,31 @@ public class Statistics {
         this.livesLeft = livesLeft;
     }
 
-    //Getters for Secondary Stats
+    /* Getters for Secondary Stats */
 
+    //Starts at level 1
     public int getLevel() {
-        return 0;
-    }
-
-    public int getLife() {
-        return 0;
-    }
-
-    public int getMana() {
-        return 0;
+        //Should absolutely never happen, but just in case
+        if (EXP_PER_LVL == 0) {
+            return 1;
+        }
+        return (int)Math.floor(experience / EXP_PER_LVL) + 1;
     }
 
     //These all depend on equipment so may need additional parameters tying that in
-    public int getOffensiveRating( /* Need some params here I think */ ) {
+    public int getOffensiveRating( EquippedInventory eInv ) {
         return 0;
     }
 
-    public int getDefensiveRating( /* Need some params here I think */ ) {
+    public int getDefensiveRating() {
         return 0;
     }
 
-    public int getArmorRating( /* Need some params here I think */ ) {
+    public int getArmorRating( EquippedInventory eInv ) {
+        return 0;
+    }
+
+    public int maxOffensiveItems() {
         return 0;
     }
 
@@ -152,4 +168,37 @@ public class Statistics {
         return other;
     }
 
+    //Returns true if the player should die after
+    //Account
+    public void changeHealth(int amount) {
+        if (health + amount <= 0) {
+            health = 0;
+        } else if (health + amount > getMaxHealth()) {
+            health = getMaxHealth();
+        } else {
+            health += amount;
+        }
+        return;
+    }
+
+    //Returns false if not enough mana left
+    public boolean changeMana(int amount) {
+        if (mana <= 0) {
+            return false;
+        } else if (mana + amount > getMaxMana()) {
+            mana = getMaxMana();
+            return true;
+        } else {
+            mana += amount;
+        }
+        return true;
+    }
+
+    public int getMaxHealth() {
+        return (hardiness * 10 + getLevel() * 10);
+    }
+
+    public int getMaxMana() {
+        return (intellect * 10 + getLevel() * 10);
+    }
 }

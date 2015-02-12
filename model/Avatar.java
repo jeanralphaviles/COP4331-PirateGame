@@ -1,4 +1,7 @@
+package model;
 
+import inventory.EquippedInventory;
+import inventory.Inventory;
 
 import java.awt.*;
 
@@ -49,6 +52,4 @@ public class Avatar extends Entity {
     public void changeName(String name) {
         this.name = name;
     }
-
-
 }

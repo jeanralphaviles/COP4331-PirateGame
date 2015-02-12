@@ -1,3 +1,4 @@
+package model;
 /*
 * Created by Conor Doherty
 * on 2/11/2015
@@ -15,8 +16,12 @@
 
 public class Sneak implements Occupation {
 
+    /* Attributes */
+
     private Statistics defaultStatistics;
-    private final String occupationName = "Sneak";
+    private final String OCCUPATION_NAME = "Sneak";
+
+    /* Constructors */
 
     //Default
     Sneak() {
@@ -48,6 +53,6 @@ public class Sneak implements Occupation {
     }
 
     public String toString() {
-        return occupationName;
+        return OCCUPATION_NAME;
     }
 }
