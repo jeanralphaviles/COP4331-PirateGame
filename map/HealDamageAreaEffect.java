@@ -1,6 +1,7 @@
 package map;
 
-import utility.Decal;
+import utility.decal.Decal;
+import utility.decal.HealDamageAreaEffectDecal;
 import model.Entity;
 
 /**
@@ -10,7 +11,7 @@ public final class HealDamageAreaEffect extends AreaEffect {
 	private int damageHealed = 3;
 	
 	public HealDamageAreaEffect() {
-		super();
+		super(new HealDamageAreaEffectDecal());
 	}
 	
 	public HealDamageAreaEffect(Decal decal) {

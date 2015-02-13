@@ -1,7 +1,7 @@
 package map;
 
-import utility.Decal;
-import utility.GrassDecal;
+import utility.decal.Decal;
+import utility.decal.GrassDecal;
 
 public final class Grass extends Terrain {
 	public Grass() {

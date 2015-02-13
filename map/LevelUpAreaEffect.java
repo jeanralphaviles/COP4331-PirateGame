@@ -1,6 +1,6 @@
 package map;
 
-import utility.Decal;
+import utility.decal.Decal;
 import model.Entity;
 
 /**
@@ -8,7 +8,7 @@ import model.Entity;
  */
 public final class LevelUpAreaEffect extends AreaEffect {
 	public LevelUpAreaEffect() {
-		super();
+		super(new LevelUpAreaEffectDecal());
 	}
 
 	public LevelUpAreaEffect(Decal decal) {

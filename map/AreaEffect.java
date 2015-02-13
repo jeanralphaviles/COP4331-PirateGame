@@ -1,7 +1,8 @@
 package map;
 
 import model.Entity;
-import utility.Decal;
+import utility.decal.BlankDecal;
+import utility.decal.Decal;
 
 /**
  * @author Jean-Ralph Aviles
@@ -11,7 +12,7 @@ public abstract class AreaEffect {
 	private boolean isActive = true;
 
 	public AreaEffect() {
-
+		setDecal(new BlankDecal());
 	}
 
 	public AreaEffect(Decal decal) {
