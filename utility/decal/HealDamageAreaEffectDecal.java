@@ -11,7 +11,7 @@ public final class HealDamageAreaEffectDecal extends Decal {
 	private static final int spriteHeightpx = 32;
 
 	public HealDamageAreaEffectDecal() {
-		File areaEffectFile = new File("./../Sprites/item/S_Holy03.png");
+		File areaEffectFile = new File("./../../Sprites/item/S_Holy03.png");
 		try {
 			BufferedImage healDecal = ImageIO.read(areaEffectFile);
 			setImage(healDecal);

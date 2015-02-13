@@ -11,7 +11,7 @@ public final class TakeDamageAreaEffectDecal extends Decal {
 	private static final int spriteWeightpx = 32;
 
 	public TakeDamageAreaEffectDecal() {
-		File areaEffectFile = new File("./../Sprites/item/S_Fire02.png");
+		File areaEffectFile = new File("./../../Sprites/item/S_Fire02.png");
 		try {
 			BufferedImage damageDecal = ImageIO.read(areaEffectFile);
 			setImage(damageDecal);

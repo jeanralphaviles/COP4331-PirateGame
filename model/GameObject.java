@@ -2,7 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-import map.Map;
+import model.entity.Avatar;
+import model.entity.Entity;
+import model.map.Map;
 
 /**
  * @author Jean-Ralph Aviles

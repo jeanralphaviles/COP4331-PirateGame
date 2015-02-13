@@ -14,7 +14,7 @@ public final class GrassDecal extends Decal {
 	 * Creates a new default grass decal
 	 */
 	public GrassDecal() {
-		File mapSpriteSheet = new File("./../Sprites/map.png");
+		File mapSpriteSheet = new File("./../../Sprites/map.png");
 		try {
 			BufferedImage sprites = ImageIO.read(mapSpriteSheet);
 			BufferedImage grassSprite = sprites.getSubimage(spriteWidthpx * 4,

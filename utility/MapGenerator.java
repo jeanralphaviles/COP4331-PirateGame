@@ -7,11 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import map.Grass;
-import map.Map;
-import map.Maptile;
-import map.Mountain;
-import map.Water;
+import model.map.Map;
+import model.map.Maptile;
+import model.map.terrain.Grass;
+import model.map.terrain.Mountain;
+import model.map.terrain.Water;
 
 public class MapGenerator {
 

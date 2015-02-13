@@ -1,7 +1,7 @@
 package application;
 
+import utility.LoadSave;
 import controller.Controller;
-import model.LoadSave;
 import model.Model;
 
 public class Application {

@@ -14,7 +14,7 @@ public final class MountainDecal extends Decal {
 	 * Creates a new default mountain tile
 	 */
 	public MountainDecal() {
-		File mapSpriteSheet = new File("./../Sprites/map.png");
+		File mapSpriteSheet = new File("./../../Sprites/map.png");
 		try {
 			BufferedImage sprites = ImageIO.read(mapSpriteSheet);
 			BufferedImage mountainSprite = sprites.getSubimage(

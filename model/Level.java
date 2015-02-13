@@ -2,8 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-import map.Map;
-import map.Maptile;
+import model.entity.Entity;
+import model.map.Map;
+import model.map.Maptile;
 
 /**
  * @author Jean-Ralph Aviles
