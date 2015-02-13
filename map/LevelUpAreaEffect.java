@@ -1,6 +1,7 @@
 package map;
 
 import utility.decal.Decal;
+import utility.decal.LevelUpAreaEffectDecal;
 import model.Entity;
 
 /**
