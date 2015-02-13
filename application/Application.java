@@ -5,66 +5,44 @@ import model.LoadSave;
 import model.Model;
 
 public class Application {
-	private static Model model;
-	private static String modelFileName;
-	private static LoadSave loadSave;
-	private static Controller auxController;
-	private static int updatesPerSecond;
 
-	public static void main(String[] args) {
-		System.out.println("Game exit");
-	}
+    /*Properties*/
+    private static Model model;
+    private static final String modelFilename = "MODEL_FILE.txt";
+    private static LoadSave loadSave;
+    private static Controller auxController;
+    private static int updatesPerSecond;
+    
+    /*Constructors*/
+    
+    /*Methods*/
 
-	public static Model initModel(String modelFilename, LoadSave loadSave) {
-		// init Model
-		return null;
-	}
+    public static void main(String[] args) {
+        loadSave = new LoadSave();
+	model = initModel(modelFilename, loadSave);
 
-	public static void initAuxillaryController() {
-		
-	}
+	initAuxiliaryController();
 
-	public static void launchModel(int updatesPerSecond) {
-		
-	}
+	launchModel(updatesPerSecond); //execution goes to main game loop
+    }
 
-	public static Model getModel() {
-		return model;
-	}
+    public static Model initModel(String modelFilename, LoadSave loadSave) {
+//        Model m = loadsave.loadModel(modelFileName);
+//        if (m == null) { //load failed
+//            m = Model.createDefault();
+//        }
+//        return m;
+        return null;
+    }
 
-	public static void setModel(Model model) {
-		Application.model = model;
-	}
+    public static void initAuxiliaryController() {
+//        auxController = new NumPadController();
+    }
 
-	public static String getModelFileName() {
-		return modelFileName;
-	}
+    public static void launchModel(int updatesPerSecond) {
+//        model.mainGameLoop(updatesPerSecond);
+    }
+    
+    /*Get-Sets*/
 
-	public static void setModelFileName(String modelFileName) {
-		Application.modelFileName = modelFileName;
-	}
-
-	public static LoadSave getLoadSave() {
-		return loadSave;
-	}
-
-	public static void setLoadSave(LoadSave loadSave) {
-		Application.loadSave = loadSave;
-	}
-
-	public static Controller getAuxController() {
-		return auxController;
-	}
-
-	public static void setAuxController(Controller auxController) {
-		Application.auxController = auxController;
-	}
-
-	public static int getUpdatesPerSecond() {
-		return updatesPerSecond;
-	}
-
-	public static void setUpdatesPerSecond(int updatesPerSecond) {
-		Application.updatesPerSecond = updatesPerSecond;
-	}
 }
