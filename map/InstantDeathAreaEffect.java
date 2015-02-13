@@ -1,7 +1,6 @@
 package map;
 
 import utility.Decal;
-import utility.InstantDeathAreaEffectDecal;
 import model.Entity;
 
 /**
@@ -9,7 +8,7 @@ import model.Entity;
  */
 public final class InstantDeathAreaEffect extends AreaEffect {
 	public InstantDeathAreaEffect() {
-		super(new InstantDeathAreaEffectDecal());
+		super();
 	}
 	
 	public InstantDeathAreaEffect(Decal decal) {
