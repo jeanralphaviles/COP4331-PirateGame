@@ -181,6 +181,10 @@ public class Statistics {
         return;
     }
 
+    public void setHealth(int amount) {
+        health = amount;
+    }
+
     //Returns false if not enough mana left
     public boolean changeMana(int amount) {
         if (mana <= 0) {
