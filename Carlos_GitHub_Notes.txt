@@ -45,4 +45,5 @@ Process of Merging:
   If everything is up-todate then:
 	-> git push
 
-  
+
+The end.
