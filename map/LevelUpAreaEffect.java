@@ -8,7 +8,7 @@ import model.Entity;
  */
 public final class LevelUpAreaEffect extends AreaEffect {
 	public LevelUpAreaEffect() {
-		super();
+		super(new LevelUpAreaEffectDecal());
 	}
 
 	public LevelUpAreaEffect(Decal decal) {
