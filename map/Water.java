@@ -1,11 +1,11 @@
 package map;
 
 import utility.Decal;
+import utility.WaterDecal;
 
 public final class Water extends Terrain {
 	public Water() {
-		super();
-		// TODO Auto-generated constructor stub
+		super(new WaterDecal());
 	}
 	public Water(Decal decal) {
 		super(decal);

@@ -11,6 +11,17 @@ import javax.imageio.ImageIO;
  */
 public class Decal {
 	private BufferedImage image;
+
+	public Decal() {
+
+	}
+	
+	/**
+	 * @param image Image to set Decal to
+	 */
+	public Decal(BufferedImage image) {
+		setImage(image);
+	}
 	
 	/**
 	 * @param file File to load decal from
