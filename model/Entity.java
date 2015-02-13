@@ -104,6 +104,10 @@ public abstract class Entity {
         //code goes here
         return true;
     }
+    
+    public Maptile getMaptile() {
+    	return mapTile;
+    }
 
     public boolean isDead() {
         return (statistics.getHealth() == 0);
