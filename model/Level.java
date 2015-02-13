@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import map.Map;
 import map.Maptile;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class Level {
 	private ArrayList<Entity> entities;
 	private Map map;
@@ -19,7 +22,7 @@ public class Level {
 	 * @param map Level's Map
 	 * TODO figure out where to place the entities
 	 */
-	public Level(ArrayList<Entity> entities, Map map, int levelNum) {
+	public Level(ArrayList<Entity> entities, Map map) {
 		setEntities(entities);
 		setMap(map);
 	}

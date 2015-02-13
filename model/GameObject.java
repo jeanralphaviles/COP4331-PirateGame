@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import map.Map;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class GameObject {
 	private Avatar avatar;
 	private int avatarLevel;
@@ -12,7 +15,7 @@ public class GameObject {
 	/**
 	 * @param avatar Game's Avatar
 	 * @param avatarLevel Avatar's current Level
-	 * @param levels Ordered List of Levels 1 -> levels.size()
+	 * @param levels Ordered List of Levels from 1 -> levels.size()
 	 */
 	public GameObject(Avatar avatar, int avatarLevel, ArrayList<Level> levels) {
 		setAvatar(avatar, avatarLevel);
