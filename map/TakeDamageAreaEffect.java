@@ -2,6 +2,7 @@ package map;
 
 import model.Entity;
 import utility.Decal;
+import utility.TakeDamageAreaEffectDecal;
 
 /**
  * @author Jean-Ralph Aviles
@@ -10,11 +11,11 @@ public final class TakeDamageAreaEffect extends AreaEffect {
 	private int damageTaken = 3;
 	
 	public TakeDamageAreaEffect() {
-		super();
+		super(new TakeDamageAreaEffectDecal());
 	}
 	
 	public TakeDamageAreaEffect(Decal decal, int damageTaken) {
-		setDecal(decal);
+		super(decal);
 		setDamageTaken(damageTaken);
 	}
 	
