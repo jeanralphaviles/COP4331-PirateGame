@@ -41,6 +41,8 @@ Push:
 Process of Merging:
 
 	-> git pull
+   
+  If everything is up-todate then:
+	-> git push
 
-
-t
+  
