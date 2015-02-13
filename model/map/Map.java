@@ -22,6 +22,18 @@ public class Map {
 			}
 		}
 	}
+
+	public Map(Maptile[][] grid) {
+		this.grid = grid;
+		this.height = grid.length;
+		this.width = grid[0].length;
+
+		for (int i = 0; i < width; ++i) {
+			for (int j = 0; j < height; ++j) {
+				tileLocations.put(grid[i][j].hashCode(), new GridLocation(i, j));
+			}
+		}
+	}
 	
 	public int getHeight() {
 		return height;

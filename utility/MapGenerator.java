@@ -15,8 +15,7 @@ import model.map.terrain.Water;
 
 public class MapGenerator {
 
-	public static Map generateMap(File file)
-	{
+	public static Map generateMap(File file) {
 		ArrayList< ArrayList<Maptile> > grid = new ArrayList< ArrayList<Maptile> >();
 
 		BufferedReader reader = null;
@@ -72,11 +71,12 @@ public class MapGenerator {
 
 		Maptile[][] customGrid = convertArrayListToArray(grid, longest);
 
-		return null;
+		Map custMap = new Map(customGrid);
+
+		return custMap;
 	}
 
-	private static Maptile[][] convertArrayListToArray(ArrayList<ArrayList<Maptile>> grid, int length)
-	{
+	private static Maptile[][] convertArrayListToArray(ArrayList<ArrayList<Maptile>> grid, int length) {
 		Maptile[][] customGrid = new Maptile[length][grid.size()];
 
 		for (int i = 0; i < grid.size(); ++i) {
