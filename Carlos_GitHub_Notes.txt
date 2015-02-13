@@ -1,9 +1,9 @@
 
 GitHub Notes:
 
--> Got to GitHub and get respiratory
+-> Got to GitHub and get repository
 	
-	repository = http//blablabla
+	repository_address = https:://blablabla
 
 In the terminal
 
@@ -17,9 +17,12 @@ Make this file a repository
 	-> git init
 
 Get the repository:
-	-> git remote add orgin repository
+	-> git remote add orgin repository_address
 
-Now, you have a respository!!!
+Clone Project:
+	-> git clone repository_address
+
+Now, you have a respository and the project cloned!!!
 
 Process of adding:
 
@@ -35,5 +38,9 @@ Push:
 
 	-> git push 
 
+Process of Merging:
+
+	-> git pull
 
 
+t
