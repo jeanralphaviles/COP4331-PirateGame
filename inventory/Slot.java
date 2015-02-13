@@ -21,6 +21,7 @@ public class Slot extends Inventory {
 
 	public void removeItem() {
 		// TODO Auto-generated method stub
+		
 	}
 
 	public Item getItem() {

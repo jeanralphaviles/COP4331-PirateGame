@@ -5,7 +5,7 @@ package model;
 * on 2/11/2015
 * Last edited: 2/11/15 by Conor Doherty
 *
-* The Entity abstract class is designed to be a superclass of any entity type in the game, including
+* The model.Entity abstract class is designed to be a superclass of any entity type in the game, including
 * the player's Avatar.
 */
 
@@ -86,7 +86,9 @@ public abstract class Entity {
     }
 
     //Gets final statistics, including equipped inv and base stats
-    public Statistics getFullStatistics() { return statistics; }
+    public Statistics getFullStatistics() {
+        return statistics;
+    }
 
     public boolean dropItem(Item item) {
         //code goes here
@@ -107,18 +109,7 @@ public abstract class Entity {
     	return mapTile;
     }
 
-    public int maxEquippedItems() {
-        //code goes here
-        return 0;
-    }
-
-    //Ded yet?
     public boolean isDead() {
         return (statistics.getHealth() == 0);
-    }
-
-    //Die
-    public void kill() {
-        statistics.setHealth(0);
     }
 }
