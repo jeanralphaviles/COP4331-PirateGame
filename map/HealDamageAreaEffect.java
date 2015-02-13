@@ -1,7 +1,7 @@
 package map;
 
-import utility.Decal;
-import utility.HealDamageAreaEffectDecal;
+import utility.decal.Decal;
+import utility.decal.HealDamageAreaEffectDecal;
 import model.Entity;
 
 /**

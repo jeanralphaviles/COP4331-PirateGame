@@ -1,6 +1,6 @@
 package map;
 
-import utility.Decal;
+import utility.decal.Decal;
 
 public abstract class Terrain {
 	private Decal decal;

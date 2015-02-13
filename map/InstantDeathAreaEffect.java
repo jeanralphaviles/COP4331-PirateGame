@@ -1,7 +1,7 @@
 package map;
 
-import utility.Decal;
-import utility.InstantDeathAreaEffectDecal;
+import utility.decal.Decal;
+import utility.decal.InstantDeathAreaEffectDecal;
 import model.Entity;
 
 /**

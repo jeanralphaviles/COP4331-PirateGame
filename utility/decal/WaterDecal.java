@@ -1,4 +1,4 @@
-package utility;
+package utility.decal;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

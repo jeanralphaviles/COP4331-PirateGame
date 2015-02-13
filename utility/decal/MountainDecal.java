@@ -1,4 +1,4 @@
-package utility;
+package utility.decal;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,31 +6,32 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public final class GrassDecal extends Decal {
+public final class MountainDecal extends Decal {
 	private final int spriteWidthpx = 16;
 	private final int spriteHeightpx = 16;
 
 	/**
-	 * Creates a new default grass decal
+	 * Creates a new default mountain tile
 	 */
-	public GrassDecal() {
+	public MountainDecal() {
 		File mapSpriteSheet = new File("./../Sprites/map.png");
 		try {
 			BufferedImage sprites = ImageIO.read(mapSpriteSheet);
-			BufferedImage grassSprite = sprites.getSubimage(spriteWidthpx * 4,
-					spriteHeightpx * 2, spriteWidthpx, spriteHeightpx);
-			setImage(grassSprite);
+			BufferedImage mountainSprite = sprites.getSubimage(
+					spriteWidthpx * 11, spriteHeightpx * 4, spriteWidthpx,
+					spriteHeightpx);
+			setImage(mountainSprite);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public GrassDecal(File file) {
-		super(file);
+	public MountainDecal(BufferedImage image) {
+		super(image);
 	}
 
-	public GrassDecal(BufferedImage image) {
-		super(image);
+	public MountainDecal(File file) {
+		super(file);
 	}
 
 	public int getSpriteWidthpx() {

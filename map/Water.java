@@ -1,7 +1,7 @@
 package map;
 
-import utility.Decal;
-import utility.WaterDecal;
+import utility.decal.Decal;
+import utility.decal.WaterDecal;
 
 public final class Water extends Terrain {
 	public Water() {

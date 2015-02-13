@@ -1,8 +1,8 @@
 package map;
 
 import model.Entity;
-import utility.BlankDecal;
-import utility.Decal;
+import utility.decal.BlankDecal;
+import utility.decal.Decal;
 
 /**
  * @author Jean-Ralph Aviles

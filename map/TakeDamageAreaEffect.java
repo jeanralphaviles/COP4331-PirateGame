@@ -1,8 +1,8 @@
 package map;
 
 import model.Entity;
-import utility.Decal;
-import utility.TakeDamageAreaEffectDecal;
+import utility.decal.Decal;
+import utility.decal.TakeDamageAreaEffectDecal;
 
 /**
  * @author Jean-Ralph Aviles

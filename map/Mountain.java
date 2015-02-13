@@ -1,7 +1,7 @@
 package map;
 
-import utility.Decal;
-import utility.MountainDecal;
+import utility.decal.Decal;
+import utility.decal.MountainDecal;
 
 public final class Mountain extends Terrain {
 	public Mountain() {
