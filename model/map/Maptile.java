@@ -1,5 +1,7 @@
 package model.map;
 
+import java.util.ArrayList;
+
 import model.entity.Entity;
 import model.inventory.Slot;
 import model.item.Category;
@@ -8,6 +10,7 @@ import model.item.ObstacleItem;
 import model.map.areaeffect.AreaEffect;
 import model.map.terrain.Grass;
 import model.map.terrain.Terrain;
+import utility.decal.Decal;
 
 /**
  * @author Jean-Ralph Aviles
@@ -15,11 +18,11 @@ import model.map.terrain.Terrain;
 public class Maptile {
 	private Slot itemSlot = new Slot(Category.MAPTILE_SLOT);
 	private Entity entity = null;
-	private Terrain terrain = new Grass();
+	private Terrain terrain;
 	private AreaEffect areaEffect = null;
 	
 	public Maptile() {
-		
+		terrain = new Grass();
 	}
 	
 	/**
@@ -63,6 +66,26 @@ public class Maptile {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * @return A list of decals associated with the map tile in decreasing order of importance
+	 */
+	public ArrayList<Decal> getDecals() {
+		ArrayList<Decal> decals = new ArrayList<Decal>();
+		if (entity != null) {
+			decals.add(entity.getDecal());
+		}
+		if (itemSlot != null && itemSlot.getItem() != null) {
+			decals.add(itemSlot.getItem().getDecal());
+		}
+		if (areaEffect != null) {
+			decals.add(areaEffect.getDecal());
+		}
+		if (terrain != null) {
+			decals.add(terrain.getDecal());
+		}
+		return decals;
 	}
 	
 	public Slot getItemSlot() {

@@ -2,6 +2,8 @@ package model.inventory;
 
 import java.util.ArrayList;
 
+import model.item.Item;
+
 /**
  * Author: Carlos Vizcaino
  * Date: 2/13/2015
@@ -48,7 +50,7 @@ public class Inventory{
 
         if ( items.size() < capacity){
 
-            items.add(items);
+            items.add(item);
             return true;
         }
 

@@ -1,6 +1,8 @@
 package model.item;
 
-import java.util.ArrayList;
+import model.entity.Entity;
+import model.entity.Statistics;
+import utility.decal.Decal;
 
 public class TakeableItem extends Item{
 
@@ -15,7 +17,7 @@ public class TakeableItem extends Item{
 
     }
     // Constructor I
-    public Item( Category category ){
+    public TakeableItem( Category category ){
 
         super();
         this.category = category;
@@ -23,7 +25,7 @@ public class TakeableItem extends Item{
 
     }
     // Constructor I
-    public Item( Category category, Decal decal ){
+    public TakeableItem( Category category, Decal decal ){
 
         super(decal);
         this.category = category;
@@ -32,7 +34,7 @@ public class TakeableItem extends Item{
 
     }
     // Constructor III
-    public Item( Category category, Decal decal, Statistics statistics){
+    public TakeableItem( Category category, Decal decal, Statistics statistics){
 
         super(decal, statistics);
         this.category = category;
@@ -51,11 +53,11 @@ public class TakeableItem extends Item{
 
     // Mutator Methods:
     // --------------------------------------------
-    public void setCategory( Category){ this.category = category;}
+    public void setCategory( Category category){ this.category = category;}
 
     @Override
     // --------------------------------------------
-    public void setAugementStatistics( Statistics stats){
+    public void setAugmentStatistics( Statistics stats){
 
         // Todo-Code
     }

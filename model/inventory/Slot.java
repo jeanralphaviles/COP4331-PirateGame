@@ -2,7 +2,6 @@ package model.inventory;
 
 import model.item.Category;
 import model.item.Item;
-import model.item.ObstacleItem;
 
 
 /**
@@ -24,7 +23,6 @@ public class Slot extends Inventory {
     }
     // Constructor
 	public Slot(Category category) {
-
         super();
         setCategory(category);
         setCapacity(1);
@@ -68,20 +66,14 @@ public class Slot extends Inventory {
 	}
 
     // --------------------------------------------------------
-    public Item unquippedItem(){
-
+    public Item unquippedItem() {
         // Remove it and return it
         if ( !items.isEmpty() ){
-
             Item temp = items.get(0);
-            items.remove();
+            items.clear();
             return temp;
         }
-
         return null;
     }
-
-
-
 
 }
