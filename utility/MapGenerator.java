@@ -16,7 +16,7 @@ import model.map.terrain.Water;
 public class MapGenerator {
 
 	public static Map generateMap(File file) {
-		ArrayList< ArrayList<Maptile> > grid = new ArrayList< ArrayList<Maptile> >();
+		ArrayList<ArrayList<Maptile>> grid = new ArrayList<ArrayList<Maptile>>();
 
 		BufferedReader reader = null;
 		String line = "";
@@ -30,64 +30,57 @@ public class MapGenerator {
 				String[] row = line.split(csvSplit);
 				ArrayList<Maptile> rowTiles = new ArrayList<Maptile>();
 
-				if (row.length > longest) { longest = row.length; }
+				longest = row.length > longest ? row.length : longest;
 
 				for (int j = 0; j < row.length; ++j) {
-                    Maptile tile = new Maptile();
+					Maptile tile = new Maptile();
 
-					switch(row[j]) {
-
+					switch (row[j]) {
 					case "Grass":
 						tile.setTerrain(new Grass());
 						break;
-
 					case "Water":
 						tile.setTerrain(new Water());
 						break;
-
 					case "Mountain":
 						tile.setTerrain(new Mountain());
 						break;
-
 					default:
 						break;
 					}
-
 					rowTiles.add(tile);
 				}
 
 				grid.add(rowTiles);
 			}
-
+			reader.close();
 		}
-
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		Maptile[][] customGrid = convertArrayListToArray(grid, longest);
-
-		Map custMap = new Map(customGrid);
-
-		return custMap;
+		return new Map(customGrid);
 	}
 
-	private static Maptile[][] convertArrayListToArray(ArrayList<ArrayList<Maptile>> grid, int length) {
+	private static Maptile[][] convertArrayListToArray(
+			ArrayList<ArrayList<Maptile>> grid, int length) {
 		Maptile[][] customGrid = new Maptile[length][grid.size()];
 
 		for (int i = 0; i < grid.size(); ++i) {
 			Maptile[] mapRow = (Maptile[]) (grid.get(i)).toArray();
 
 			for (int j = 0; j < length; ++j) {
-				if (mapRow[j] != null) { customGrid[j][i] = mapRow[j]; }
-				else { customGrid[j][i] = new Maptile(); }
+				if (mapRow[j] != null) {
+					customGrid[j][i] = mapRow[j];
+				} else {
+					customGrid[j][i] = new Maptile();
+				}
 			}
 		}
-
 		return customGrid;
 	}
 }
