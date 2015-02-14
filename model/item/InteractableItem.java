@@ -34,13 +34,6 @@ public class InteractableItem extends Item{
     // --------------------------------------------
 
     // Mutator Methods:
-    @Override
-    // --------------------------------------------
-    public void setAugmentStatistics( Statistics stats){
-
-        // Todo-Code
-    }
-
     // Abstract Methods:
     // --------------------------------------------
 	@Override

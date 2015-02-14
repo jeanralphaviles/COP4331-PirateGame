@@ -1,10 +1,11 @@
 package model.inventory;
 
+import java.util.ArrayList;
 
+import model.entity.Statistics;
 import model.item.Category;
 import model.item.Item;
 
-import java.util.ArrayList;
 
 /**
  * Author: Carlos Vizcaino
@@ -76,5 +77,13 @@ public class EquippedInventory extends Inventory{
         return false;
     }
 
+	public void augmentStatistics(Statistics statistics) {
+		for (Slot s : slots) {
+			Item item = s.getItem();
+			if (item != null) {
+				item.augmentStatistics(statistics);
+			}
+		}
+	}
 
 }

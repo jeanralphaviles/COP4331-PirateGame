@@ -18,9 +18,8 @@ public final class InstantDeathAreaEffect extends AreaEffect {
 
 	@Override
 	public void triggerProximityEffect(Entity entity) {
-		// TODO ask about a entity.kill() function
 		if (isActive()) {
-			entity.getFullStatistics().changeHealth(-1*entity.getFullStatistics().getHealth());
+			entity.getStatistics().kill();
 			setActive(false);
 		}
 	}

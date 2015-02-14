@@ -60,12 +60,7 @@ public class TakeableItem extends Item{
 
         this.slotCategory = slotCategory;
     }
-    @Override
-    // --------------------------------------------
-    public void setAugmentStatistics( Statistics stats){
 
-        // Todo-Code
-    }
     // Abstract Methods:
     // --------------------------------------------
     public void triggerProximity(Entity entity){

@@ -1,5 +1,8 @@
 package model.inventory;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public enum SlotCategory {
 	ANY_SLOT(1);
 	/* Others */
