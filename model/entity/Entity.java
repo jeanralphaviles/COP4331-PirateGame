@@ -14,6 +14,7 @@ package model.entity;
 * 2/11/15 Added file and started skeleton/overall view - Conor Doherty
 */
 
+import utility.decal.Decal;
 import model.entity.occupation.Occupation;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
@@ -29,16 +30,18 @@ public abstract class Entity {
     protected Inventory inventory;
     protected EquippedInventory equippedInventory;
     protected Maptile mapTile;
+    protected Decal decal;
     //protected int maxEquippedItems; <-- Now stats.maxEquippedItems()
 
     /* Constructors */
 
     //Simple initialization constructor
-    Entity(Occupation occ, Statistics stats, Inventory inv, EquippedInventory eInv ) {
+    Entity(Occupation occ, Statistics stats, Inventory inv, EquippedInventory eInv, Decal decal) {
         this.occupation = occ;
         this.statistics = stats;
         this.inventory = inv;
         this.equippedInventory = eInv;
+        this.decal = decal;
     }
 
     /* Get/Set methods for private fields (Auto-generated) */
@@ -106,6 +109,14 @@ public abstract class Entity {
     
     public Maptile getMaptile() {
     	return mapTile;
+    }
+    
+    public Decal getDecal() {
+    	return this.decal;
+    }
+    
+    public void setDecal(Decal decal) {
+    	this.decal = decal;
     }
 
     public int maxEquippedItems() {

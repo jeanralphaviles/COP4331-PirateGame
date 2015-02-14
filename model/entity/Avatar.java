@@ -1,7 +1,6 @@
 package model.entity;
 
-import java.awt.*;
-
+import utility.decal.Decal;
 import model.entity.occupation.Occupation;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
@@ -24,27 +23,17 @@ public class Avatar extends Entity {
 
     /* Attributes */
 
-    private Color hatColor;
     private String name;
 
     /* Constructors */
 
     Avatar(Occupation occ, Statistics stats, Inventory inv,
-           EquippedInventory eInv, Color hatColor, String name) {
-        super(occ, stats, inv, eInv);
-        this.hatColor = hatColor;
+           EquippedInventory eInv, Decal decal, String name) {
+        super(occ, stats, inv, eInv, decal);
         this.name = name;
     }
 
     /* Get-Set methods (Auto-generated) */
-
-    public Color getHatColor() {
-        return hatColor;
-    }
-
-    public void changeHatColor(Color hatColor) {
-        this.hatColor = hatColor;
-    }
 
     public String getName() {
         return name;
