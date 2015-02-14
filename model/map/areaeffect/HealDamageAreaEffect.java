@@ -29,7 +29,7 @@ public final class HealDamageAreaEffect extends AreaEffect {
 	@Override
 	public void triggerProximityEffect(Entity entity) {
 		if (isActive()) {
-			entity.getFullStatistics().changeHealth(damageHealed);
+			entity.getStatistics().changeCurrentHealth(damageHealed);
 			setActive(false);
 		}
 	}

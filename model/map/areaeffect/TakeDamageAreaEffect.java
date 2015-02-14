@@ -30,7 +30,7 @@ public final class TakeDamageAreaEffect extends AreaEffect {
 	@Override
 	public void triggerProximityEffect(Entity entity) {
 		if (isActive()) {
-			entity.getFullStatistics().changeHealth(-1*damageTaken);
+			entity.getStatistics().changeCurrentHealth(-1*damageTaken);
 		}
 	}
 }

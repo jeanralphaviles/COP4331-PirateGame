@@ -18,9 +18,9 @@ public final class LevelUpAreaEffect extends AreaEffect {
 
 	@Override
 	public void triggerProximityEffect(Entity entity) {
-		// TODO Auto-generated method stub
 		if (isActive()) {
-			// Level Entity up
+			int expToNextLevel = 100 - entity.getStatistics().getExperience() % 100;
+			entity.getStatistics().addExperience(expToNextLevel);
 			setActive(false);
 		}
 	}

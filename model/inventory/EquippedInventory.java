@@ -3,6 +3,7 @@ package model.inventory;
 
 import java.util.ArrayList;
 
+import model.entity.Statistics;
 import model.item.Item;
 import model.item.TakeableItem;
 
@@ -80,6 +81,14 @@ public class EquippedInventory extends Inventory{
         return false;
     }
 
+	public void augmentStatistics(Statistics statistics) {
+		for (Slot s : slots) {
+			Item item = s.getItem();
+			if (item != null) {
+				item.augmentStatistics(statistics);
+			}
+		}
+	}
 
     // Mutators
     // -------------------------------------------------------

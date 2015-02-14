@@ -70,10 +70,18 @@ public abstract class Item {
 
         }
         // --------------------------------------------
-        public void setAugmentStatistics( Statistics statistics ){
 
-                this.statistics = statistics;
-        }
+		public final void setAugmentStatistics(Statistics statistics) {
+			this.statistics = statistics;
+		}
+
+		public void augmentStatistics(Statistics statistics) {
+			statistics.changeAgility(statistics.getAgility());
+			statistics.changeHardiness(statistics.getHardiness());
+			statistics.changeIntellect(statistics.getIntellect());
+			statistics.changeMaxHealth(statistics.getMaxHealth());
+			statistics.changeStrength(statistics.getStrength());
+		}
 
         // Abstract Methods:
         // --------------------------------------------
