@@ -4,12 +4,12 @@ import java.awt.event.*;
 import java.util.Scanner;
 
 
-public class NumpadController extends JFrame implements KeyListener{
+public class KunNumpadController extends JFrame implements KeyListener{
 
 JTextField keyText = new JTextField(80);
 JLabel keyLabel = new JLabel("Press Numbers");
 
-NumpadController() {
+KunNumpadController() {
 		keyText.addKeyListener(this);
 		setSize(400,400);
 		setVisible(true);
@@ -49,8 +49,12 @@ NumpadController() {
 			keyLabel.setText("you pressed 9 move top right");
 		else if(keyCode == KeyEvent.VK_0)
 			keyLabel.setText("you pressed 0 do nothing!");
+		else if(keyCode == KeyEvent.VK_P)
+			JOptionPane.showMessageDialog(null, "You've Paused the Game!");
+
 		else{
 			keyLabel.setText("You pressed an invalid control");
+
 		}
 
 
@@ -62,7 +66,7 @@ NumpadController() {
 
 
 	public static void main(String[] args){
-		NumpadController go = new NumpadController();
+		KunNumpadController go = new KunNumpadController();
 
 	}
 }
