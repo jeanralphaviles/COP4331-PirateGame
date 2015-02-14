@@ -1,5 +1,5 @@
 
-
+package model;
 /*
  * 	Author: Carlos Vizcaino
  *  Development Days:

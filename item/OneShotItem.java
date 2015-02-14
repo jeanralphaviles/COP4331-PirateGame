@@ -2,13 +2,12 @@ package item;
 
 import java.lang.Override;
 
-
-public class ObstacleItem extends Item{
+public class OneShotItem extends Item{
 
     // Atrributes
 
     // Default Constructor
-    public ObstacleItem(){
+    public OneShotItem(){
 
         super();
 
@@ -22,8 +21,7 @@ public class ObstacleItem extends Item{
     // --------------------------------------------
 
     // Mutator Methods:
-    // --------------------------------------------
-
+    //---------------------------------------------
 
     // Abstract Methods:
     // --------------------------------------------

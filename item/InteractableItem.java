@@ -3,12 +3,12 @@ package item;
 import java.lang.Override;
 
 
-public class ObstacleItem extends Item{
+public class InteractableItem extends Item{
 
     // Atrributes
 
     // Default Constructor
-    public ObstacleItem(){
+    public InteractableItem(){
 
         super();
 
@@ -22,8 +22,12 @@ public class ObstacleItem extends Item{
     // --------------------------------------------
 
     // Mutator Methods:
+    @Override
     // --------------------------------------------
+    public void setAugementStatistics( Statistics stats){
 
+        // Todo-Code
+    }
 
     // Abstract Methods:
     // --------------------------------------------
