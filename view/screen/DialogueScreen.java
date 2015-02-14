@@ -9,7 +9,8 @@ public abstract class DialogueScreen extends Screen {
 	}
 
 	public void init() {
-		// Does something
+		// Create viewport (may need to create other sub-viewports)
+		
 	}
 
 }
