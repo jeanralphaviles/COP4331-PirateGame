@@ -11,7 +11,7 @@ public class DefaultEntityDecal extends Decal {
 	private final int spriteWidthpx = 16;
 
 	public DefaultEntityDecal() {
-		File areaEffectFile = new File("./../../Sprites/item/C_Hat02.png");
+		File areaEffectFile = new File("./Sprites/item/C_Hat02.png");
 		try {
 			BufferedImage itemDecal = ImageIO.read(areaEffectFile);
 			setImage(itemDecal);

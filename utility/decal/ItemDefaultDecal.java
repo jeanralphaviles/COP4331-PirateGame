@@ -11,7 +11,7 @@ public final class ItemDefaultDecal extends Decal {
 	private static final int spriteWidthpx = 32;
 
 	public ItemDefaultDecal() {
-		File areaEffectFile = new File("./../../Sprites/item/W_Mace010.png");
+		File areaEffectFile = new File("./Sprites/item/W_Mace010.png");
 		try {
 			BufferedImage itemDecal = ImageIO.read(areaEffectFile);
 			setImage(itemDecal);

@@ -2,6 +2,9 @@ package model.entity.occupation;
 
 import model.entity.Statistics;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class Smasher extends Occupation {
 	
 	public Smasher() {
