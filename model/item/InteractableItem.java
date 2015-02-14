@@ -1,11 +1,14 @@
 package model.item;
 
-public class ObstacleItem extends Item{
+import java.lang.Override;
+
+
+public class InteractableItem extends Item{
 
     // Atrributes
 
     // Default Constructor
-    public ObstacleItem(){
+    public InteractableItem(){
 
         super();
 
@@ -19,8 +22,12 @@ public class ObstacleItem extends Item{
     // --------------------------------------------
 
     // Mutator Methods:
+    @Override
     // --------------------------------------------
+    public void setAugementStatistics( Statistics stats){
 
+        // Todo-Code
+    }
 
     // Abstract Methods:
     // --------------------------------------------
