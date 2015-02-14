@@ -18,6 +18,7 @@ public class Application {
     /*Methods*/
 
     public static void main(String[] args) {
+
         loadSave = new LoadSave();
 	model = initModel(modelFilename, loadSave);
 

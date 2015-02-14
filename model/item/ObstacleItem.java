@@ -1,6 +1,10 @@
 package model.item;
 
 import model.entity.Entity;
+import utility.decal.Decal;
+import utility.decal.ItemDefaultDecal;
+import model.entity.Statistics;
+
 
 public class ObstacleItem extends Item{
 
@@ -13,13 +17,13 @@ public class ObstacleItem extends Item{
 
     }
     // Constructor I
-     public OneShotItem( Decal decal){
+     public ObstacleItem( Decal decal){
 
        super( decal, Category.OBSTACLE_ITEM);
 
      }
      // Constructor II
-     public OneShotItem( Decal decal, Statistics statistics){
+     public ObstacleItem( Decal decal, Statistics statistics){
 
        super( decal, Category.OBSTACLE_ITEM, statistics);
 
