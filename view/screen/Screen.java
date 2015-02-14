@@ -1,22 +1,24 @@
 package view.screen;
 
+import view.viewport.ViewPort;
+import model.GameObject;
 import model.Model;
 import controller.Controller;
 
 public abstract class Screen {
 	protected Controller controller;
+	protected ViewPort viewPort;
 	protected Model model;
-	//protected ViewPort viewPort;
-	
+
 	public Screen(Model model) {
-		// TODO Auto-generated constructor stub
+		this.model = model;
+		init();
 	}
 
 	public abstract void init();
-	
-	public void updateView(GameObject gameObject){
-		//forwards message from model to viewPort
+
+	public final void updateView(GameObject gameObject) {
+		// TODO
 	}
-	
-	
+
 }

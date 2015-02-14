@@ -1,15 +1,15 @@
 package view.screen;
 
 import model.Model;
-import controller.Controller;
 
-public abstract class Screen {
+public abstract class GameScreen extends Screen {
+
 	public GameScreen(Model model) {
 		super(model);
 	}
 
-	public void init(){
-		//Does something
+	public void init() {
+		// Does something
 	}
-	
+
 }
