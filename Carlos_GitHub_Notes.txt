@@ -1,0 +1,49 @@
+
+GitHub Notes:
+
+-> Got to GitHub and get repository
+	
+	repository_address = https:://blablabla
+
+In the terminal
+
+Create a directory:
+	-> mkdir <directory_name>
+
+Go to that folder
+	-> cd <directory_name>
+
+Make this file a repository
+	-> git init
+
+Get the repository:
+	-> git remote add orgin repository_address
+
+Clone Project:
+	-> git clone repository_address
+
+Now, you have a respository and the project cloned!!!
+
+Process of adding:
+
+	-> git add <file_name>
+OR
+	-> git add . to add everything
+
+Make a commit:
+
+	->  git commit -m "Message of commmit"
+
+Push:
+
+	-> git push 
+
+Process of Merging:
+
+	-> git pull
+   
+  If everything is up-todate then:
+	-> git push
+
+
+The end.

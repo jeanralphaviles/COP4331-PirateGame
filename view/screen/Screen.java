@@ -24,7 +24,7 @@ public abstract class Screen {
 		//From viewport, generate IntentComponentMaps
 		ArrayList<IntentComponentMap> icm = viewPort.generateIntentComponentMapping();
 		//Create controller from IntentComponentMaps
-		ScreenController s = new ScreenController(model, icm);
+//		ScreenController s = new ScreenController(model, icm);
 	}
 	public abstract void init();
 

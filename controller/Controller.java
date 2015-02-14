@@ -3,55 +3,66 @@ package controller;
 import utility.Course;
 import model.Model;
 
-public abstract class Controller {
-	private Model model;
+public abstract class Controller extends Thread {
 
-	public Controller(Model model) {
-		
-	}
-	
-	public void move(Course course) {
+    /*Properties*/
+    
+    private Model model;
 
-	}
-	
-	private void load() {
-		
-	}
-	
-	private void save() {
-		
-	}
-	
-	private void exit() {
-		
-	}
-	
-	protected void action(Intent intent) {
-		switch(intent) {
-		case LOAD:
-			load();
-			break; 
-		case SAVE:
-			save();
-			break;
-		case EXIT:
-			exit();
-			break;
-		default:
-			break;
-		}
-	}
-	
-	protected void mapActionToComponent() {
-		
-	}
+    /*Constructors*/
+    
+    public Controller(Model model) {
 
-	public Model getModel() {
-		return model;
-	}
+    }
+    
+    /*Methods*/
+    
+    protected void print(String content) {
+        System.out.println(content);
+    }
 
-	public void setModel(Model model) {
-		this.model = model;
-	}
-	
+    public void move(Course course) {
+
+    }
+
+    private void load() {
+
+    }
+
+    private void save() {
+
+    }
+
+    private void exit() {
+
+    }
+
+//    protected void action(Intent intent) {
+//        switch (intent) {
+//            case LOAD:
+//                load();
+//                break;
+//            case SAVE:
+//                save();
+//                break;
+//            case EXIT:
+//                exit();
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+
+    protected void mapActionToComponent() {
+
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
 }
