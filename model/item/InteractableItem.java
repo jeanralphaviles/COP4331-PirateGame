@@ -23,9 +23,15 @@ public class InteractableItem extends Item{
 
     }
     // Constructor II
-    public InteractableItem(Decal decal, Statistics statistics){
+    public InteractableItem(Decal decal, String name){
 
-        super( decal, Category.INTERACTIVE_ITEM, statistics);
+        super( decal, Category.INTERACTIVE_ITEM, name);
+    }
+    // Constructor III
+    public InteractableItem(Decal decal, String name, Statistics statistics){
+
+
+        super( decal, Category.INTERACTIVE_ITEM, name, statistics);
     }
     // ---------- METHODS IMPLEMENTATION ---------
     // ----------                         ---------

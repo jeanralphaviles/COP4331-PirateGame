@@ -1,7 +1,6 @@
 package model.item;
 
 import model.entity.Entity;
-import model.entity.Statistics;
 import utility.decal.Decal;
 import utility.decal.ItemDefaultDecal;
 
@@ -23,9 +22,9 @@ public class OneShotItem extends Item{
 
     }
     // Constructor II
-    public OneShotItem( Decal decal, Statistics statistics){
+    public OneShotItem( Decal decal, String name){
 
-        super( decal, Category.ONE_SHOT_ITEM, statistics);
+        super( decal, Category.ONE_SHOT_ITEM, name);
 
     }
 

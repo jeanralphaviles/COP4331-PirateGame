@@ -26,6 +26,12 @@ public class TakeableItem extends Item{
         this.slotCategory = SlotCategory.ANY_SLOT;
     }
     // Constructor III
+    public TakeableItem( Decal decal, String name){
+
+        super(decal, Category.TAKEABLE_ITEM, name);
+        this.slotCategory = SlotCategory.ANY_SLOT;
+    }
+    // Constructor III
     public TakeableItem( SlotCategory slotCategory){
 
         super( new ItemDefaultDecal(), Category.TAKEABLE_ITEM);
@@ -38,9 +44,9 @@ public class TakeableItem extends Item{
         this.slotCategory = slotCategory;
     }
     // Constructor V
-    public TakeableItem( SlotCategory slotCategory, Decal decal, Statistics statistics){
+    public TakeableItem( SlotCategory slotCategory, Decal decal, String name, Statistics statistics){
 
-        super(decal, Category.TAKEABLE_ITEM, statistics);
+        super(decal, Category.TAKEABLE_ITEM, name, statistics);
         this.slotCategory = slotCategory;
 
     }

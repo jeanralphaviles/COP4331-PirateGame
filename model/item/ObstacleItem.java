@@ -23,9 +23,15 @@ public class ObstacleItem extends Item{
 
      }
      // Constructor II
-     public ObstacleItem( Decal decal, Statistics statistics){
+     public ObstacleItem( Decal decal, String name){
 
-       super( decal, Category.OBSTACLE_ITEM, statistics);
+       super( decal, Category.OBSTACLE_ITEM, name);
+
+     }
+    // Constructor II
+    public ObstacleItem( Decal decal, String name, Statistics statistic){
+
+        super( decal, Category.OBSTACLE_ITEM, name, statistic);
 
      }
 

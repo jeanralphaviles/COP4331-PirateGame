@@ -1,13 +1,12 @@
 package view.screen;
 
-import java.util.ArrayList;
-
-import utility.IntentComponentMap;
-import view.viewport.ViewPort;
+import controller.Controller;
 import model.GameObject;
 import model.Model;
-import controller.Controller;
-import controller.ScreenController;
+import utility.IntentComponentMap;
+import view.viewport.ViewPort;
+
+import java.util.ArrayList;
 
 public abstract class Screen {
 	protected Controller controller;
@@ -20,11 +19,13 @@ public abstract class Screen {
 	}
 
 	public void initialize(){
-		init();
+
+        init();
 		//From viewport, generate IntentComponentMaps
 		ArrayList<IntentComponentMap> icm = viewPort.generateIntentComponentMapping();
 		//Create controller from IntentComponentMaps
-//		ScreenController s = new ScreenController(model, icm);
+        //screenController s = new ScreenController(model, icm);
+
 	}
 	public abstract void init();
 

@@ -2,6 +2,8 @@ package model.inventory;
 
 
 import model.item.Item;
+import model.item.Weapon;
+import utility.decal.ItemDefaultDecal;
 
 import java.util.ArrayList;
 
@@ -87,6 +89,37 @@ public class Inventory{
 
         return false;
     }
+
+    // ------------------ TESTING INVENTORY ------------------------
+    // ------------------                   ------------------------
+    public static void main(String[] args){
+
+        System.out.println("Hello World from Inventory");
+        testingTakeableItems();
+
+    }
+
+    // -------------------------------------------------------------
+    public static void testingTakeableItems(){
+
+        // Weapon List:
+
+        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol", 5, 5, 5);
+        /*
+        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
+        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);
+        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5, 5);
+        */
+        // Create Inventory:
+        Inventory inventory = new Inventory();
+
+        if ( inventory.isFull() )
+            System.out.println("Inventory is Full");
+
+
+
+    }
+
 
 
 }
