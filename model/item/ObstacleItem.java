@@ -9,10 +9,21 @@ public class ObstacleItem extends Item{
     // Default Constructor
     public ObstacleItem(){
 
-        super();
+       super( new ItemDefaultDecal(), Category.OBSTACLE_ITEM );
 
     }
+    // Constructor I
+     public OneShotItem( Decal decal){
 
+       super( decal, Category.OBSTACLE_ITEM);
+
+     }
+     // Constructor II
+     public OneShotItem( Decal decal, Statistics statistics){
+
+       super( decal, Category.OBSTACLE_ITEM, statistics);
+
+     }
 
     // ---------- METHODS IMPLEMENTATION ---------
     // ----------                         ---------
