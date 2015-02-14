@@ -79,7 +79,8 @@ public abstract class Entity {
 
     /* Other methods */
 
-    private boolean equipItem(Item item) {
+    @SuppressWarnings("unused")
+	private boolean equipItem(Item item) {
         //code goes here
         return true;
     }

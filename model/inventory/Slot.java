@@ -15,7 +15,7 @@ public class Slot extends Inventory {
     private Category category;
 
     // Default Constructor
-    public Slot(){
+    public Slot() {
 
         super();
         setCategory(null);
@@ -59,6 +59,15 @@ public class Slot extends Inventory {
         return null;
     }
 
+	public boolean removeItem() {
+		if (items.isEmpty() == false) {
+			items.clear();
+			return true;
+		}
+		return false;
+	}
+
+
     // Mutators
     // --------------------------------------------------------
 	public void setCategory(Category category) {
@@ -75,5 +84,4 @@ public class Slot extends Inventory {
         }
         return null;
     }
-
 }

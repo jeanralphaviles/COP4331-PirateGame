@@ -37,7 +37,7 @@ public class Statistics {
     /* Constructors */
 
     //Default
-    Statistics() {
+    public Statistics() {
         //Do nothing
     }
 
@@ -47,8 +47,7 @@ public class Statistics {
     }
 
     //Copy
-    Statistics(Statistics other) {
-
+    public Statistics(Statistics other) {
         //Copy over Primary Stats
         this.livesLeft = other.livesLeft;
         this.agility = other.agility;
@@ -130,7 +129,8 @@ public class Statistics {
     /* Getters for Secondary Stats */
 
     //Starts at level 1
-    public int getLevel() {
+    @SuppressWarnings("unused")
+	public int getLevel() {
         //Should absolutely never happen, but just in case
         if (EXP_PER_LVL == 0) {
             return 1;
