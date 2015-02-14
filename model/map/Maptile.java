@@ -16,7 +16,7 @@ import utility.decal.Decal;
  * @author Jean-Ralph Aviles
  */
 public class Maptile {
-	private Slot itemSlot = new Slot(Category.MAPTILE_SLOT);
+	private Slot itemSlot = new Slot(Category.ANY_ITEM);
 	private Entity entity = null;
 	private Terrain terrain;
 	private AreaEffect areaEffect = null;

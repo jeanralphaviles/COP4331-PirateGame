@@ -1,7 +1,11 @@
 package model.item;
 
 public enum Category {
-	MAPTILE_SLOT(1);
+	ANY_ITEM(1),
+	TAKEABLE_ITEM(2),
+	ONE_SHOT_ITEM(3),
+	INTERACTIVE_ITEM(4),
+	OBSTACLE_ITEM(5);
 
 	private int value;
 
