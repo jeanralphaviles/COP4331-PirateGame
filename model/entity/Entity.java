@@ -102,6 +102,22 @@ public abstract class Entity {
         return true;
     }
 
+	public Decal getDecal() {
+		return decal;
+	}
+
+	public void setDecal(Decal decal) {
+		this.decal = decal;
+	}
+
+    public Maptile getMapTile() {
+		return mapTile;
+	}
+
+	public void setMapTile(Maptile mapTile) {
+		this.mapTile = mapTile;
+	}
+
     public boolean move(Maptile mapTile) {
         //code goes here
         return true;
@@ -110,15 +126,7 @@ public abstract class Entity {
     public Maptile getMaptile() {
     	return mapTile;
     }
-    
-    public Decal getDecal() {
-    	return this.decal;
-    }
-    
-    public void setDecal(Decal decal) {
-    	this.decal = decal;
-    }
-
+   
     public int maxEquippedItems() {
         //code goes here
         return 0;

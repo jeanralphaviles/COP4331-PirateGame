@@ -1,5 +1,7 @@
 package model.item;
 
+import model.entity.Entity;
+
 
 public class OneShotItem extends Item{
 

@@ -1,6 +1,10 @@
 package model.item;
 
-public abstact class Item {
+import model.entity.Entity;
+import model.entity.Statistics;
+import utility.decal.Decal;
+
+public abstract class Item {
 
         // Atrributes
         protected Decal decal;
@@ -34,11 +38,11 @@ public abstact class Item {
         public Decal getDecal(){ return decal; }
 
         // --------------------------------------------
-        public Statistics getAugmentStatistics( ){return statistics}
+        public Statistics getAugmentStatistics( ){return statistics;}
 
         // Mutator Methods:
         // --------------------------------------------
-        public void setDecal(Deacal decal){ this.decal = this.decal;}
+        public void setDecal(Decal decal){ this.decal = decal;}
 
         // --------------------------------------------
         public void setAugmentStatistics( Statistics statistics ){ this.statistics = statistics; }

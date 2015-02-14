@@ -2,6 +2,9 @@ package model.item;
 
 import java.lang.Override;
 
+import model.entity.Entity;
+import model.entity.Statistics;
+
 
 public class InteractableItem extends Item{
 
@@ -24,16 +27,17 @@ public class InteractableItem extends Item{
     // Mutator Methods:
     @Override
     // --------------------------------------------
-    public void setAugementStatistics( Statistics stats){
+    public void setAugmentStatistics( Statistics stats){
 
         // Todo-Code
     }
 
     // Abstract Methods:
     // --------------------------------------------
-    public void triggerProximity(Entity entity){
-
-        // Todo-Code
-    }
+	@Override
+	public void triggerProximity(Entity entity) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
