@@ -1,12 +1,15 @@
 package model.inventory;
 
-import java.util.ArrayList;
 
 import model.item.Item;
 
+import java.util.ArrayList;
+
 /**
  * Author: Carlos Vizcaino
+ * Date: 2/12/2015
  * Date: 2/13/2015
+ * Date: 2/14/2015
  */
 
 public class Inventory{
@@ -19,14 +22,14 @@ public class Inventory{
     // Default Constructor
     public Inventory(){
 
-        items = null;
-        capacity = -1;
+        items = new ArrayList<Item>();
+        capacity = 0;
     }
 
     // Constructor
     public Inventory(int capacity){
 
-        items = null;
+        items = new ArrayList<Item>();
         this.capacity = capacity;
     }
 
@@ -35,12 +38,28 @@ public class Inventory{
 
     // Accessors
     // --------------------------------------------------------
-    public ArrayList<Item> getItems(){return items;}
+    public ArrayList<Item> getItems(){
 
+        return items;
+    }
     // --------------------------------------------------------
-    public int getCapacity(){return capacity;}
+    public int getCapacity(){
 
+        return capacity;
+    }
+    // --------------------------------------------------------
+    public boolean hasItem(Item item){
 
+        return items.contains(item);
+    }
+    // --------------------------------------------------------
+    public boolean isFull(){
+
+        if ( items.size() >= capacity )
+            return true;
+
+        return false;
+    }
     // Mutators
     // --------------------------------------------------------
     public void setCapacity(int capacity){ this.capacity = capacity; }
@@ -60,36 +79,14 @@ public class Inventory{
     //-------------------------------------------------------
     public boolean removeItem(Item item){
 
-        // Check if item exists
-        for ( Item c: this.items){
+        if ( items.contains(item)){
 
-            if ( c == item){
-
-                // Remove
-                this.items.remove(item);
-                return true;
-            }
+            this.items.remove(item);
+            return true;
         }
 
         return false;
     }
 
-    // --------------------------------------------------------
-    public boolean hasItem(Item item){
-
-        // Check if item exists
-        for ( Item c: this.items){
-
-            if ( c == item){
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    // Abstract
 
 }

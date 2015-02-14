@@ -1,40 +1,43 @@
 package model.inventory;
 
-import model.item.Category;
 import model.item.Item;
 
 
 /**
  * Author: Carlos Vizcaino
  * Date: 2/13/2015
+ * Date: 2/14/2015
+ *
  */
 
 public class Slot extends Inventory {
 
     // Attributes
-    private Category category;
+    private SlotCategory slotCategory;
 
     // Default Constructor
     public Slot() {
 
         super();
-        setCategory(null);
+        setSlotCategory(SlotCategory.ANY_SLOT);
         setCapacity(1);
     }
-    // Constructor
-	public Slot(Category category) {
+    // Constructor I
+	public Slot(SlotCategory slotCategory) {
         super();
-        setCategory(category);
+        setSlotCategory( slotCategory );
         setCapacity(1);
 	}
+
 
     // ----------- METHODS IMPLEMENTATION -------------------
     // -----------                        -------------------
 
     // Accessors
     // --------------------------------------------------------
-	public Category getCategory() {
-		return category;
+	public SlotCategory getSlotCategory() {
+
+        return slotCategory;
 	}
 
     // --------------------------------------------------------
@@ -59,23 +62,27 @@ public class Slot extends Inventory {
         return null;
     }
 
+    // --------------------------------------------------------
 	public boolean removeItem() {
-		if (items.isEmpty() == false) {
-			items.clear();
+
+        if ( !items.isEmpty() ) {
+
+            items.clear();
 			return true;
 		}
 		return false;
 	}
 
 
-    // Mutators
+    // Mutators Methods:
     // --------------------------------------------------------
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+	public void setSlotCategory(SlotCategory slotCategory ) {
 
+        this.slotCategory = slotCategory;
+	}
     // --------------------------------------------------------
     public Item unquippedItem() {
+
         // Remove it and return it
         if ( !items.isEmpty() ){
             Item temp = items.get(0);

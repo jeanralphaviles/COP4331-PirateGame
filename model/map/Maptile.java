@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.entity.Entity;
 import model.inventory.Slot;
+import model.inventory.SlotCategory;
 import model.item.Category;
 import model.item.Item;
 import model.item.ObstacleItem;
@@ -16,7 +17,7 @@ import utility.decal.Decal;
  * @author Jean-Ralph Aviles
  */
 public class Maptile {
-	private Slot itemSlot = new Slot(Category.ANY_ITEM);
+	private Slot itemSlot = new Slot(SlotCategory.ANY_SLOT);
 	private Entity entity = null;
 	private Terrain terrain;
 	private AreaEffect areaEffect = null;
