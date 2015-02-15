@@ -26,6 +26,7 @@ public class Food extends OneShotItem {
         health = 0;
     }
     // Constructor II
+
     public Food(Decal decal, String name){
 
         super(decal,name);
@@ -34,10 +35,12 @@ public class Food extends OneShotItem {
     // Constructor III
     public Food(Decal decal, String name, int health){
 
-        super(decal);
-        this.name = name;
+        super(decal,name);
         this.health = health;
     }
+
+    // ----------- METHODS IMPLEMENTATION -------------------
+    // -----------                        -------------------
 
     // Accessors:
     // --------------------------------------------------

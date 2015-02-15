@@ -106,6 +106,7 @@ public abstract class Item {
 		}
 
 
+
         // Abstract Methods:
         // --------------------------------------------
         public abstract void triggerProximity( Entity entity );

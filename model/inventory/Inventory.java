@@ -113,11 +113,12 @@ public class Inventory{
         inventory = new Inventory(5);
         testingTakeableItems( inventory );
 
-
     }
 
     // -------------------------------------------------------------
+
     private static void testingTakeableItems(Inventory inventory ){
+
 
         // Weapon List:
 
@@ -140,7 +141,7 @@ public class Inventory{
 
         if ( inventory.getCapacity() > 0){
 
-            // Equipp Inventory
+            // Equipped Inventory
             EquippedInventory equippedInventory = new EquippedInventory(5);
             inventory.storeItem(spade);
             inventory.storeItem(stick);
@@ -214,6 +215,4 @@ public class Inventory{
       }
     }
 
-
-
-}
+} // End of Inventory class

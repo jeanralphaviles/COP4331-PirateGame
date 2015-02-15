@@ -39,6 +39,9 @@ public class PowerUP extends InteractableItem{
         this.experience = experience;
     }
 
+    // ----------- METHODS IMPLEMENTATION -------------------
+    // -----------                        -------------------
+
     // Accessors:
     // --------------------------------------------
     public int getIntellect(){return intellect;}

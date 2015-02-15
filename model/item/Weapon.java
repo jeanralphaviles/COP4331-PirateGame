@@ -24,12 +24,16 @@ public class Weapon extends TakeableItem {
         hardiness = 0;
         slotCategory = SlotCategory.HAND;
 
+
     }
     // Constructor I
     public Weapon(Decal decal,String name){
 
         super(decal,name);
+
         slotCategory = SlotCategory.HAND;
+        hardiness = 0;
+        damage = 0;
         hardiness = 0;
 
     }
@@ -37,12 +41,16 @@ public class Weapon extends TakeableItem {
     public Weapon(Decal decal, String name, int damage, int strength, int hardiness){
 
         super(decal,name);
+
         slotCategory = SlotCategory.HAND;
         this.damage = damage;
         this.strength = strength;
         this.hardiness = hardiness;
 
     }
+
+    // ----------- METHODS IMPLEMENTATION -------------------
+    // -----------                        -------------------
 
     // Accessors:
     // ---------------------------------------------------

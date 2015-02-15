@@ -8,7 +8,8 @@ public enum Category {
 	OBSTACLE_ITEM(5);
 
 	private int value;
-
+    // ----------- METHODS IMPLEMENTATION -------------------
+    // -----------                        -------------------
 	private Category(int value) {
 		this.setValue(value);
 	}

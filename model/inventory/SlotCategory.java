@@ -17,7 +17,9 @@ public enum SlotCategory {
 	/* Others */
 	
 	private int value;
-	
+
+    // ----------- METHODS IMPLEMENTATION -------------------
+    // -----------                        -------------------
 	private SlotCategory(int value) {
 		this.setValue(value);
 	}
