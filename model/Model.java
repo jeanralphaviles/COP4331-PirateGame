@@ -1,6 +1,14 @@
 package model;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import model.entity.Entity;
+import model.map.Map;
+import model.map.Maptile;
+import utility.ItemGenerator;
 import utility.LoadSave;
+import utility.MapGenerator;
 import utility.UtilityData;
 import view.screen.MainScreen;
 import view.screen.Screen;
@@ -17,7 +25,7 @@ public class Model extends Thread {
     /*Constructors*/
     public Model() {
         this.gameObject = new GameObject();
-        this.utilityData = new UtilityData();
+        this.setUtilityData(new UtilityData());
     }
 
     /*Methods*/
@@ -81,7 +89,34 @@ public class Model extends Thread {
     public void loadNextLevel() {
         //
     }
+    
+    public void loadFirstLevel() {
+    	loadLevel(1);
+    }
 
-    /*Get-Sets*/    
+	public void loadLevel(int levelNum) {
+		if (levelNum < 1) {
+			return;
+		}
+		Map map;
+		try {
+			map = MapGenerator.generateMap(new File("Levels/Map" + levelNum + ".csv"));
+			ItemGenerator.generateItems(new File("Levels/Items" + levelNum + ".csv"), map);
+			Maptile avatarMapTile = map.getMapTile(map.getWidth()/2, map.getHeight()/2);
+			Level level = new Level(new ArrayList<Entity>(), map);
+			this.gameObject.setLevel(level);
+			this.gameObject.getAvatar().move(avatarMapTile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    /*Get-Sets*/
 
+	public UtilityData getUtilityData() {
+		return utilityData;
+	}
+
+	public void setUtilityData(UtilityData utilityData) {
+		this.utilityData = utilityData;
+	}    
 }
