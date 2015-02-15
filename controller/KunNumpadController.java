@@ -27,6 +27,10 @@ KunNumpadController() {
 	public void keyTyped (KeyEvent e) {
 
 	}
+
+	//http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html replace VK_codes with 
+	//VK_NUMPADX where x denotes the number pressed on the number pad VK_X denotes number pressed any
+	//where on the keyboard
 	public void keyPressed (KeyEvent e){
 		int keyCode = e.getKeyCode();
 		if (keyCode == KeyEvent.VK_1)
