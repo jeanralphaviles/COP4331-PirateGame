@@ -1,42 +1,43 @@
 package model.inventory;
 
-import model.item.Category;
 import model.item.Item;
-import model.item.ObstacleItem;
 
 
 /**
  * Author: Carlos Vizcaino
  * Date: 2/13/2015
+ * Date: 2/14/2015
+ *
  */
 
 public class Slot extends Inventory {
 
     // Attributes
-    private Category category;
+    private SlotCategory slotCategory;
 
     // Default Constructor
-    public Slot(){
+    public Slot() {
 
         super();
-        setCategory(null);
+        setSlotCategory(SlotCategory.ANY_SLOT);
         setCapacity(1);
     }
-    // Constructor
-	public Slot(Category category) {
-
+    // Constructor I
+	public Slot(SlotCategory slotCategory) {
         super();
-        setCategory(category);
+        setSlotCategory( slotCategory );
         setCapacity(1);
 	}
+
 
     // ----------- METHODS IMPLEMENTATION -------------------
     // -----------                        -------------------
 
     // Accessors
     // --------------------------------------------------------
-	public Category getCategory() {
-		return category;
+	public SlotCategory getSlotCategory() {
+
+        return slotCategory;
 	}
 
     // --------------------------------------------------------
@@ -55,33 +56,40 @@ public class Slot extends Inventory {
         // If this slot has an item
         if (!items.isEmpty() ){
 
-             items.get(0);
+            return  items.get(0);
         }
 
         return null;
     }
 
-    // Mutators
     // --------------------------------------------------------
-	public void setCategory(Category category) {
-		this.category = category;
+	public boolean removeItem() {
+
+        if ( !items.isEmpty() ) {
+
+            items.clear();
+			return true;
+		}
+		return false;
 	}
 
+
+    // Mutators Methods:
     // --------------------------------------------------------
-    public Item unquippedItem(){
+	public void setSlotCategory(SlotCategory slotCategory ) {
+
+        this.slotCategory = slotCategory;
+	}
+    // --------------------------------------------------------
+    public Item unquippedItem() {
 
         // Remove it and return it
         if ( !items.isEmpty() ){
-
             Item temp = items.get(0);
-            items.remove();
+            items.clear();
             return temp;
         }
-
         return null;
     }
 
-
-
-
-}
+} // End of class

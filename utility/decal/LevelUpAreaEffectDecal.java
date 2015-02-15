@@ -11,7 +11,7 @@ public final class LevelUpAreaEffectDecal extends Decal {
 	private static final int spriteHeightpx = 32;
 
 	public LevelUpAreaEffectDecal() {
-		File areaEffectFile = new File("./../../Sprites/item/S_Magic04.png");
+		File areaEffectFile = new File("./Sprites/item/S_Magic04.png");
 		try {
 			BufferedImage levelUpDecal = ImageIO.read(areaEffectFile);
 			setImage(levelUpDecal);

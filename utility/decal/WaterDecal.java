@@ -11,7 +11,7 @@ public final class WaterDecal extends Decal {
 	private final int spriteHeightpx = 16;
 
 	public WaterDecal() {
-		File mapSpriteSheet = new File("./../../Sprites/map.png");
+		File mapSpriteSheet = new File("./Sprites/map.png");
 		try {
 			BufferedImage sprites = ImageIO.read(mapSpriteSheet);
 			BufferedImage waterSprite = sprites.getSubimage(spriteWidthpx*4, spriteHeightpx*8,

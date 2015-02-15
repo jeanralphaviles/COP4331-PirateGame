@@ -1,5 +1,11 @@
 package utility;
 
+import model.map.Map;
+import model.map.Maptile;
+import model.map.terrain.Grass;
+import model.map.terrain.Mountain;
+import model.map.terrain.Water;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,16 +13,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import model.map.Map;
-import model.map.Maptile;
-import model.map.terrain.Grass;
-import model.map.terrain.Mountain;
-import model.map.terrain.Water;
-
 public class MapGenerator {
 
 	public static Map generateMap(File file) {
-		ArrayList< ArrayList<Maptile> > grid = new ArrayList< ArrayList<Maptile> >();
+		ArrayList<ArrayList<Maptile>> grid = new ArrayList<ArrayList<Maptile>>();
 
 		BufferedReader reader = null;
 		String line = "";
@@ -30,64 +30,70 @@ public class MapGenerator {
 				String[] row = line.split(csvSplit);
 				ArrayList<Maptile> rowTiles = new ArrayList<Maptile>();
 
-				if (row.length > longest) { longest = row.length; }
+				for (int i = 0; i < row.length; ++i) {
+					Maptile tile = new Maptile();
 
-				for (int j = 0; j < row.length; ++j) {
-                    Maptile tile = new Maptile();
-
-					switch(row[j]) {
-
+					switch (row[i]) {
 					case "Grass":
 						tile.setTerrain(new Grass());
 						break;
-
 					case "Water":
 						tile.setTerrain(new Water());
 						break;
-
 					case "Mountain":
 						tile.setTerrain(new Mountain());
 						break;
-
 					default:
+						tile.setTerrain(new Grass());
 						break;
 					}
-
 					rowTiles.add(tile);
 				}
-
+				longest = rowTiles.size() > longest ? rowTiles.size() : longest;
 				grid.add(rowTiles);
 			}
-
+			reader.close();
 		}
-
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		Maptile[][] customGrid = convertArrayListToArray(grid, longest);
-
-		Map custMap = new Map(customGrid);
-
-		return custMap;
+		return new Map(customGrid);
 	}
 
-	private static Maptile[][] convertArrayListToArray(ArrayList<ArrayList<Maptile>> grid, int length) {
+	private static Maptile[][] convertArrayListToArray(
+			ArrayList<ArrayList<Maptile>> grid, int length) {
 		Maptile[][] customGrid = new Maptile[length][grid.size()];
-
-		for (int i = 0; i < grid.size(); ++i) {
-			Maptile[] mapRow = (Maptile[]) (grid.get(i)).toArray();
-
-			for (int j = 0; j < length; ++j) {
-				if (mapRow[j] != null) { customGrid[j][i] = mapRow[j]; }
-				else { customGrid[j][i] = new Maptile(); }
+		for (int y = 0; y < grid.size(); ++y) {
+			for (int x = 0; x < length; ++x) {
+				if (x < grid.get(y).size() && grid.get(y).get(x) != null) {
+					customGrid[x][y] = grid.get(y).get(x);
+				} else {
+					customGrid[x][y] = new Maptile();
+				}
 			}
 		}
-
 		return customGrid;
+	}
+	
+	public static void main(String[] args) {
+		File file = new File("TestData/TestMap_1.csv");
+		Map map = MapGenerator.generateMap(file);
+		if (map.getHeight() != 19) {
+			System.out.println("MapGenerator's Height is wrong");
+		}
+		if (map.getWidth() != 30) {
+			System.out.println("MapGenerator's Width is wrong");
+		}
+		if (map.getGrid()[2][2].getTerrain().getClass().getName() != "model.map.terrain.Water") {
+			System.out.println("Tile not made correctly");
+		}
+		if (map.getGrid()[22][15].getTerrain().getClass().getName() != "model.map.terrain.Mountain") {
+			System.out.println("Tile not made correctly");
+		}
 	}
 }

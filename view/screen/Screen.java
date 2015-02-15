@@ -1,22 +1,37 @@
 package view.screen;
 
-import model.Model;
 import controller.Controller;
+import model.GameObject;
+import model.Model;
+import utility.IntentComponentMap;
+import view.viewport.ViewPort;
+
+import java.util.ArrayList;
 
 public abstract class Screen {
-	protected Controller controller;
-	protected Model model;
-	//protected ViewPort viewPort;
-	
-	public Screen(Model model) {
-		// TODO Auto-generated constructor stub
-	}
 
-	public abstract void init();
-	
-	public void updateView(GameObject gameObject){
-		//forwards message from model to viewPort
-	}
-	
-	
+    protected Controller controller;
+    protected ViewPort viewPort;
+    protected Model model;
+
+    public Screen(Model model) {
+        this.model = model;
+        initialize();
+    }
+
+    public void initialize() {
+        init();
+        //From viewport, generate IntentComponentMaps
+        //ArrayList<IntentComponentMap> icm = viewPort.generateIntentComponentMapping();
+	//Create controller from IntentComponentMaps
+
+        //screenController s = new ScreenController(model, icm);
+    }
+
+    public abstract void init();
+
+    public final void updateView(GameObject gameObject) {
+        //viewPort.updateView(gameObject);
+    }
+
 }

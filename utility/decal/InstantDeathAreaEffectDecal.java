@@ -11,7 +11,7 @@ public final class InstantDeathAreaEffectDecal extends Decal {
 	private static final int spriteHeightpx = 32;
 
 	public InstantDeathAreaEffectDecal() {
-		File areaEffectFile = new File("./../../Sprites/item/S_Death01.png");
+		File areaEffectFile = new File("./Sprites/item/S_Death01.png");
 		try {
 			BufferedImage instantDeathDecal = ImageIO.read(areaEffectFile);
 			setImage(instantDeathDecal);

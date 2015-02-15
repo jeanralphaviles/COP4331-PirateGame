@@ -1,136 +1,130 @@
 package model.entity;
 
-/*
-* Created by Conor Doherty
-* on 2/11/2015
-* Last edited: 2/11/15 by Conor Doherty
-*
-* The Entity abstract class is designed to be a superclass of any entity type in the game, including
-* the player's Avatar.
-*/
-
-/*
-* Changelog:
-* 2/11/15 Added file and started skeleton/overall view - Conor Doherty
-*/
-
-import utility.decal.Decal;
 import model.entity.occupation.Occupation;
+import model.entity.occupation.Smasher;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
 import model.item.Item;
 import model.map.Maptile;
+import utility.decal.Decal;
+import utility.decal.DefaultEntityDecal;
 
-public abstract class Entity {
+/**
+ * @author Jean-Ralph Aviles and Carlos Vizcaino
+ */
+public class Entity {
 
-    /* Attributes */
-
-    protected Occupation occupation;
-    protected Statistics statistics;
     protected Inventory inventory;
     protected EquippedInventory equippedInventory;
-    protected Maptile mapTile;
+    protected Occupation occupation;
+    protected Statistics statistics;
+    protected Maptile maptile;
     protected Decal decal;
-    //protected int maxEquippedItems; <-- Now stats.maxEquippedItems()
 
-    /* Constructors */
 
-    //Simple initialization constructor
-    Entity(Occupation occ, Statistics stats, Inventory inv, EquippedInventory eInv, Decal decal) {
-        this.occupation = occ;
-        this.statistics = stats;
-        this.inventory = inv;
-        this.equippedInventory = eInv;
+    public Entity() {
+        this.decal = new DefaultEntityDecal();
+        occupation = new Smasher();
+        statistics = new Statistics();
+        inventory = new Inventory( statistics.getInventoryCapacity() );
+        equippedInventory = new EquippedInventory();
+    }
+    // Constructor I
+    public Entity(Decal decal) {
+
+        this();
         this.decal = decal;
     }
 
-    /* Get/Set methods for private fields (Auto-generated) */
-    public Occupation getOccupation() {
-        return occupation;
-    }
+    // Constructor II
+    public Entity( Decal decal, Statistics statistics ){
 
-    public void setOccupation(Occupation occupation) {
-        this.occupation = occupation;
-    }
-
-    public Statistics getBaseStatistics() {
-        return statistics;
-    }
-
-    public void setBaseStatistics(Statistics statistics) {
+        this.decal = decal;
         this.statistics = statistics;
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
 
-    public void setInventory(Inventory inv) {
-        this.inventory = inv;
-    }
-
-    public EquippedInventory getEquippedInventory() {
-        return equippedInventory;
-    }
-
-    public void setEquippedInventory(EquippedInventory eInv) {
-        this.equippedInventory = eInv;
-    }
-
-    /* Other methods */
-
-    private boolean equipItem(Item item) {
-        //code goes here
-        return true;
+    public int getMaxEquippedItems() {
+        return 15 + (statistics.getLevel() - 1) * 2;
     }
 
     public boolean storeItem(Item item) {
-        //code goes here
-        return true;
+        return inventory.storeItem(item);
     }
 
-    //Gets final statistics, including equipped inv and base stats
-    public Statistics getFullStatistics() { return statistics; }
+    public boolean equipItem(Item item) {
+        return equippedInventory.storeItem(item);
+    }
+
+    public boolean hasItem(Item item) {
+        if (inventory != null && inventory.hasItem(item)) {
+            return true;
+        }
+        if (equippedInventory != null && equippedInventory.hasItem(item)) {
+            return true;
+        }
+        return false;
+    }
+
+    public Statistics getEffectiveStatistics() {
+        Statistics effectiveStats = statistics.clone();
+        equippedInventory.augmentStatistics(effectiveStats);
+        occupation.augmentStatistics(statistics);
+        return effectiveStats;
+    }
 
     public boolean dropItem(Item item) {
-        //code goes here
-        return true;
+        if (!hasItem(item)) {
+            return false;
+        }
+        if (maptile.getItemSlot().isItemAllowed()) {
+            if (maptile.getItemSlot().storeItem(item)) { /* Try to store item in maptile */
+
+                if (inventory != null && inventory.hasItem(item)) { /* Remove item from inventory if it has it */
+
+                    inventory.removeItem(item);
+                } else { /* Else item is in equippedInventory, remove it from there */
+
+                    equippedInventory.removeItem(item);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
-    public boolean putItemInInventory(Item item) {
-        //code goes here
-        return true;
+    protected boolean putItemInInventory(Item item) {
+        return storeItem(item);
     }
 
-    public boolean move(Maptile mapTile) {
-        //code goes here
-        return true;
+    public boolean move(Maptile maptile) {
+        if (maptile.isPassable()) {
+            if (maptile.addEntity(this)) {
+                this.maptile = maptile;
+                return true;
+            }
+        }
+        return false;
     }
-    
+
     public Maptile getMaptile() {
-    	return mapTile;
+        return maptile;
     }
-    
+
+    public void setMaptile(Maptile maptile) {
+        this.maptile = maptile;
+    }
+
     public Decal getDecal() {
-    	return this.decal;
+        return decal;
     }
-    
+
     public void setDecal(Decal decal) {
-    	this.decal = decal;
+        this.decal = decal;
     }
 
-    public int maxEquippedItems() {
-        //code goes here
-        return 0;
+    public Statistics getStatistics() {
+        return statistics;
     }
 
-    //Ded yet?
-    public boolean isDead() {
-        return (statistics.getHealth() == 0);
-    }
-
-    //Die
-    public void kill() {
-        statistics.setHealth(0);
-    }
 }

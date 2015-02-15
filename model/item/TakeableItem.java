@@ -1,41 +1,53 @@
 package model.item;
 
-import java.util.ArrayList;
+import model.entity.Entity;
+import model.entity.Statistics;
+import model.inventory.SlotCategory;
+import utility.decal.Decal;
+import utility.decal.ItemDefaultDecal;
 
 public class TakeableItem extends Item{
 
     // Atrributes
-    protected Category category;
+    protected SlotCategory slotCategory;
 
     // Default Constructor
     public TakeableItem(){
 
         super();
-        category = null;
+        this.category = Category.TAKEABLE_ITEM;
+        slotCategory = SlotCategory.ANY_SLOT;
 
     }
-    // Constructor I
-    public Item( Category category ){
+    // Constructor II
+    public TakeableItem( Decal decal){
 
-        super();
-        this.category = category;
-
-
-    }
-    // Constructor I
-    public Item( Category category, Decal decal ){
-
-        super(decal);
-        this.category = category;
-
-
-
+        super(decal, Category.TAKEABLE_ITEM);
+        this.slotCategory = SlotCategory.ANY_SLOT;
     }
     // Constructor III
-    public Item( Category category, Decal decal, Statistics statistics){
+    public TakeableItem( Decal decal, String name){
 
-        super(decal, statistics);
-        this.category = category;
+        super(decal, Category.TAKEABLE_ITEM, name);
+        this.slotCategory = SlotCategory.ANY_SLOT;
+    }
+    // Constructor III
+    public TakeableItem( SlotCategory slotCategory){
+
+        super( new ItemDefaultDecal(), Category.TAKEABLE_ITEM);
+        this.slotCategory = slotCategory;
+    }
+    // Constructor IV
+    public TakeableItem( SlotCategory slotCategory, Decal decal ){
+
+        super(decal, Category.TAKEABLE_ITEM);
+        this.slotCategory = slotCategory;
+    }
+    // Constructor V
+    public TakeableItem( SlotCategory slotCategory, Decal decal, String name, Statistics statistics){
+
+        super(decal, Category.TAKEABLE_ITEM, name, statistics);
+        this.slotCategory = slotCategory;
 
     }
 
@@ -44,23 +56,16 @@ public class TakeableItem extends Item{
 
     // Accessor Methods:
     // --------------------------------------------
-    public Category getCategory(){return category; }
+    public SlotCategory getSlotSCategory(){
 
-    // --------------------------------------------
-
-
+        return slotCategory;
+    }
     // Mutator Methods:
     // --------------------------------------------
-    public void setCategory( Category){ this.category = category;}
+    public void setSlotCategory( SlotCategory slotCategory ){
 
-    @Override
-    // --------------------------------------------
-    public void setAugementStatistics( Statistics stats){
-
-        // Todo-Code
+        this.slotCategory = slotCategory;
     }
-
-    // --------------------------------------------
 
     // Abstract Methods:
     // --------------------------------------------

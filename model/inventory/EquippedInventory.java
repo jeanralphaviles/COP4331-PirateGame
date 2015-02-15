@@ -1,81 +1,93 @@
 package model.inventory;
 
+import model.entity.Statistics;
+import model.item.Category;
+import model.item.Item;
+import model.item.TakeableItem;
 
 import java.util.ArrayList;
+
 
 /**
  * Author: Carlos Vizcaino
  * Date: 2/13/2015
  */
 
-public class EquippedInventory extends Invenory{
+public class EquippedInventory extends Inventory{
 
     // Attributes
     private ArrayList<Slot> slots;
 
-
     // Default Constructor
     public EquippedInventory(){
 
-        super();
+
+        super( SlotCategory.values().length);
+        createSlots();
     }
+
 
     // ----------- METHODS IMPLEMENTATION -------------------
     // -----------                        -------------------
 
     // Accessors
     // --------------------------------------------------------
-    public ArrayList<Slot> getSlots(){return slots;}
+    public ArrayList<Slot> getSlots(){
 
+        return slots;
+    }
+    // --------------------------------------------------------
     @Override
-    // -------------------------------------------------------
-    public boolean hasItem(Item item ){
+    public int getTotalItems(){
 
-        // Check every slot
-        for ( Slot c : slots){
+        int i = 0;
+        for ( Slot s : slots){
 
-            // Check every item in that slot
-            for( Item i: c.getItems() )
+            if ( s.isFull() ){
 
-                if ( i == item)
-                    return true;
+                ++i;
             }
         }
 
-        // Else
-        return false;
+        return i;
     }
 
+    // Mutators Methods:
+
+    //-------------------------------------------------------
     @Override
-    // -------------------------------------------------------
-    public boolean storeItem(TakeableItem item){
+    public boolean storeItem(Item item){
 
-        // Iterate through the Slots
-        for (Slot s : slots){
+        // Since every slot has ONLY one item:
+        // Then, we check the amount of items
+        if ( getTotalItems() < capacity  && item.getCategory() == Category.TAKEABLE_ITEM ){
 
-            // If catergory matches I will save
-            if( item.getCategory() == s.getCategory() ){
+            TakeableItem tempItem = (TakeableItem)item;
+            for (Slot s: slots){
 
-                if ( s.isItemAllowed() ){
+                if ( !s.isFull() && s.getSlotCategory() == tempItem.getSlotSCategory() ){
 
-                    s.add(item);
+                    s.storeItem(tempItem);
                     return true;
                 }
-
-                return false;
             }
-        } // End of each loop
+        }
 
         return false;
     }
-    @Override
     // -------------------------------------------------------
-    public boolean  removeItem(TakeableItem item){
+    @Override
+    public boolean removeItem(Item item) {
+
+        if ( item.getCategory() != Category.TAKEABLE_ITEM){
+
+            return false;
+        }
 
         // For every slot in the equipped inventory
-        for (Slots s : slots){
+        for (Slot s : slots) {
 
-            if ( s.hasItem(item) ) {
+            if (s.hasItem(item)) {
 
                 return s.removeItem(item);
             }
@@ -83,12 +95,46 @@ public class EquippedInventory extends Invenory{
 
         return false;
     }
-
-
-    // Mutators
     // -------------------------------------------------------
-    public void addSlot(Slot slot){ this.slots.add(slot); }
+    @Override
+    public boolean hasItem(Item item ){
 
-    // Abstract
+        if ( item.getCategory() != Category.TAKEABLE_ITEM){
+
+            return false;
+        }
+
+        // Check every slot
+        for ( Slot c : slots){
+            // Check every item in that slot
+            for( Item i: c.getItems() ) {
+
+                if ( i == item)
+                    return true;
+            }
+        }
+        // Else
+        return false;
+    }
+
+	public void augmentStatistics(Statistics statistics) {
+		for (Slot s : slots) {
+			Item item = s.getItem();
+			if (item != null) {
+				item.augmentStatistics(statistics);
+			}
+		}
+	}
+    // -------------------------------------------------------
+    private void createSlots(){
+
+        slots = new ArrayList<Slot>();
+        for ( SlotCategory i : SlotCategory.values() ){
+
+            slots.add( new Slot(i) );
+        }
+    }
+    // -------------------------------------------------------
+
 
 }
