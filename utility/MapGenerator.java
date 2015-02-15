@@ -30,11 +30,10 @@ public class MapGenerator {
 				String[] row = line.split(csvSplit);
 				ArrayList<Maptile> rowTiles = new ArrayList<Maptile>();
 
-				longest = row.length > longest ? row.length : longest;
-				for (int j = 0; j < row.length; ++j) {
+				for (int i = 0; i < row.length; ++i) {
 					Maptile tile = new Maptile();
 
-					switch (row[j]) {
+					switch (row[i]) {
 					case "Grass":
 						tile.setTerrain(new Grass());
 						break;
@@ -45,10 +44,12 @@ public class MapGenerator {
 						tile.setTerrain(new Mountain());
 						break;
 					default:
+						tile.setTerrain(new Grass());
 						break;
 					}
 					rowTiles.add(tile);
 				}
+				longest = rowTiles.size() > longest ? rowTiles.size() : longest;
 				grid.add(rowTiles);
 			}
 			reader.close();
@@ -67,18 +68,32 @@ public class MapGenerator {
 	private static Maptile[][] convertArrayListToArray(
 			ArrayList<ArrayList<Maptile>> grid, int length) {
 		Maptile[][] customGrid = new Maptile[length][grid.size()];
-
-		for (int i = 0; i < grid.size(); ++i) {
-			Maptile[] mapRow = (Maptile[]) (grid.get(i)).toArray();
-
-			for (int j = 0; j < length; ++j) {
-				if (mapRow[j] != null) {
-					customGrid[j][i] = mapRow[j];
+		for (int y = 0; y < grid.size(); ++y) {
+			for (int x = 0; x < length; ++x) {
+				if (x < grid.get(y).size() && grid.get(y).get(x) != null) {
+					customGrid[x][y] = grid.get(y).get(x);
 				} else {
-					customGrid[j][i] = new Maptile();
+					customGrid[x][y] = new Maptile();
 				}
 			}
 		}
 		return customGrid;
+	}
+	
+	public static void main(String[] args) {
+		File file = new File("TestData/TestMap_1.csv");
+		Map map = MapGenerator.generateMap(file);
+		if (map.getHeight() != 19) {
+			System.out.println("MapGenerator's Height is wrong");
+		}
+		if (map.getWidth() != 30) {
+			System.out.println("MapGenerator's Width is wrong");
+		}
+		if (map.getGrid()[2][2].getTerrain().getClass().getName() != "model.map.terrain.Water") {
+			System.out.println("Tile not made correctly");
+		}
+		if (map.getGrid()[22][15].getTerrain().getClass().getName() != "model.map.terrain.Mountain") {
+			System.out.println("Tile not made correctly");
+		}
 	}
 }

@@ -26,12 +26,12 @@ public class Map {
 
     public Map(Maptile[][] grid) {
         this.grid = grid;
-        this.height = grid.length;
-        this.width = grid[0].length;
+        this.height = grid[0].length;
+        this.width = grid.length;
 
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                tileLocations.put(grid[i][j].hashCode(), new GridLocation(i, j));
+        for (int y = 0; y < this.height; ++y) {
+            for (int x = 0; x < this.width; ++x) {
+                tileLocations.put(this.grid[x][y].hashCode(), new GridLocation(x, y));
             }
         }
     }
