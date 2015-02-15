@@ -42,7 +42,11 @@ public class InteractiveItem extends Item{
     // Mutator Methods:
     // Abstract Methods:
     // --------------------------------------------
-	@Override
+/**
+	 * trigger proximity activates when entity tries to step into tile with item
+	 * the entity can interact with it
+	 * */	
+@Override
 	public void triggerProximity(Entity entity) {
 		// TODO Auto-generated method stub
 		

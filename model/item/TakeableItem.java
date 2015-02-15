@@ -5,7 +5,9 @@ import model.entity.Statistics;
 import model.inventory.SlotCategory;
 import utility.decal.Decal;
 import utility.decal.ItemDefaultDecal;
-
+/**
+*Takeable item goes into inventory upon activation
+*/
 public class TakeableItem extends Item{
 
     // Atrributes

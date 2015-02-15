@@ -11,6 +11,8 @@ import java.util.ArrayList;
 /**
  * Author: Carlos Vizcaino
  * Date: 2/13/2015
+ * 
+ * Stores inventory the entity is wearing and augments stats.
  */
 
 public class EquippedInventory extends Inventory{

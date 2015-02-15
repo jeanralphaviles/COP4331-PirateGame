@@ -12,6 +12,9 @@ public abstract class Occupation {
 		this.occupationName = occupationName;
 	}
 	
+	/**
+	 * @param statistics - the occupation augments statistics depending on which occupation it is.
+	 */
 	public abstract void augmentStatistics(Statistics statistics);
 
 	public String getOccupationName() {

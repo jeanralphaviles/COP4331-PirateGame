@@ -8,6 +8,8 @@ import model.item.Item;
  * Date: 2/13/2015
  * Date: 2/14/2015
  *
+ *Single slot in inventory for a single item
+ *
  */
 
 public class Slot extends Inventory {

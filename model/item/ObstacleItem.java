@@ -47,6 +47,8 @@ public class ObstacleItem extends Item{
 
     // Abstract Methods:
     // --------------------------------------------
+ /** makes tile impassible.
+     */
     public void triggerProximity(Entity entity){
 
         // Todo-Code

@@ -5,6 +5,11 @@ import model.entity.Statistics;
 import utility.decal.Decal;
 import utility.decal.ItemDefaultDecal;
 
+/**
+* Encapsulates all item types. Allows for easy handling by map/entity
+*/
+
+
 public abstract class Item {
 
         // Atrributes

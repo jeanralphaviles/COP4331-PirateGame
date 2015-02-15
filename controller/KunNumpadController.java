@@ -29,6 +29,9 @@ KunNumpadController() {
 	public void keyTyped (KeyEvent e) {
 
 	}
+	/**
+	 * depending on key pressed the entity(our avatar) will be sent a message to move appropriately
+	 */
 	public void keyPressed (KeyEvent e){
 		int keyCode = e.getKeyCode();
 		if (keyCode == KeyEvent.VK_1)

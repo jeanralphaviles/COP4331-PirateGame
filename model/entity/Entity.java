@@ -65,6 +65,11 @@ public class Entity {
         }
         return false;
     }
+    /**
+     * get effective stats returns statistics object.
+     * This stats has been modified depending on:
+     * equiped items, level, occupation, etc.
+     */
 
     public Statistics getEffectiveStatistics() {
         Statistics effectiveStats = statistics.clone();
@@ -72,7 +77,11 @@ public class Entity {
         occupation.augmentStatistics(statistics);
         return effectiveStats;
     }
-
+ /**drop item stores item on map. removes item from inventory/equipped inventory depending on where it is.
+     * @param item - item to be removed from inventory/equiped item and placed on map.
+     * @return - returns true if item managed to drop
+     */
+   
     public boolean dropItem(Item item) {
         if (!hasItem(item)) {
             return false;
@@ -92,10 +101,19 @@ public class Entity {
         }
         return false;
     }
+    /**
+     * @param item - item is attempted to be placed in inventory
+     * @return - true if item is able to be placed in inventory
+     */
 
     protected boolean putItemInInventory(Item item) {
         return storeItem(item);
     }
+
+    /** entity movement
+     * @param maptile - maptile they attempt to move onto
+     * @return - returns true if they were able to move onto tile.
+     */
 
     public boolean move(Maptile maptile) {
         if (maptile.isPassable()) {
