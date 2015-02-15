@@ -2,8 +2,15 @@ package utility;
 
 import model.map.Map;
 import model.map.Maptile;
+import model.map.terrain.Grass;
+import model.map.terrain.Mountain;
+import model.map.terrain.Water;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MapGenerator {
@@ -24,7 +31,6 @@ public class MapGenerator {
 				ArrayList<Maptile> rowTiles = new ArrayList<Maptile>();
 
 				longest = row.length > longest ? row.length : longest;
-                /*
 				for (int j = 0; j < row.length; ++j) {
 					Maptile tile = new Maptile();
 
@@ -43,8 +49,6 @@ public class MapGenerator {
 					}
 					rowTiles.add(tile);
 				}
-				*/
-
 				grid.add(rowTiles);
 			}
 			reader.close();
