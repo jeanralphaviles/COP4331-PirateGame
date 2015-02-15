@@ -48,7 +48,7 @@ public class Map {
 	 * @param y y position of Maptile
 	 * @return Maptile at position (x, y); may return null if tile doesn't exist
 	 */
-	private Maptile getMapTile(int x, int y) {
+	public Maptile getMapTile(int x, int y) {
 		if (x < 0 || x >= width) {
 			return null;
 		}
@@ -81,28 +81,7 @@ public class Map {
 	 * @param maptile Maptile to find location
 	 * @return Gridlocation of maptile; may be null if tile doesn't exist
 	 */
-	private GridLocation getGridLocation(Maptile maptile) {
+	public GridLocation getGridLocation(Maptile maptile) {
 		return tileLocations.get(maptile.hashCode());
-	}
-	
-	/**
-	 * Private nested class to hold grid locations
-	 * @author jraviles
-	 */
-	private class GridLocation {
-		private final int x, y;
-		
-		public GridLocation(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-		
-		public int getX() {
-			return x;
-		}
-		
-		public int getY() {
-			return y;
-		}
 	}
 }
