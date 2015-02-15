@@ -23,7 +23,6 @@ public class Entity {
 
 
     public Entity() {
-
         this.decal = new DefaultEntityDecal();
         occupation = new Smasher();
         statistics = new Statistics();

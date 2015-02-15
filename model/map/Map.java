@@ -10,7 +10,7 @@ public class Map {
     
     private int height = 3, width = 3;
     private Maptile[][] grid = new Maptile[width][height];
-    private HashMap<Integer, GridLocation> tileLocations = new HashMap<Integer, GridLocation>(1); /* Associates Maptiles with GridLocations */
+    private HashMap<Integer, GridLocation> tileLocations = new HashMap<Integer, GridLocation>(); /* Associates Maptiles with GridLocations */
 
     /*Constructors*/
     
@@ -72,8 +72,34 @@ public class Map {
         return height;
     }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public int getWidth() {
         return width;
     }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public Maptile[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Maptile[][] grid) {
+        this.grid = grid;
+    }
+
+    public HashMap<Integer, GridLocation> getTileLocations() {
+        return tileLocations;
+    }
+
+    public void setTileLocations(HashMap<Integer, GridLocation> tileLocations) {
+        this.tileLocations = tileLocations;
+    }
+
+    
     
 }

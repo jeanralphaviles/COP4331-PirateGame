@@ -88,26 +88,28 @@ public class LoadSave {
     
     //Convert object to string; ex. serialize(course) may return "{xDisplacement: 1, yDisplacement: 0}" or something like that
     private String serialize(Object object) {
-        Gson gson = new GsonBuilder()
-                .setExclusionStrategies(new ThreadExclStrat())
-                //.serializeNulls() <-- uncomment to serialize NULL fields as well
-                .create();
-        
-        String objectString = gson.toJson(object);
-        
-        return objectString;
+//        Gson gson = new GsonBuilder()
+//                .setExclusionStrategies(new ThreadExclStrat())
+//                //.serializeNulls() <-- uncomment to serialize NULL fields as well
+//                .create();
+//        
+//        String objectString = gson.toJson(object);
+//        
+//        return objectString;
+        return "";
     }
     
     //Convert string to object; ex. (Course)deserialize(courseString, Course.class) recreates course object ^
     private Object deserialize(String objectString, Class cls) {
-        Gson gson = new GsonBuilder()
-                .setExclusionStrategies(new ThreadExclStrat())
-                //.serializeNulls() <-- uncomment to serialize NULL fields as well
-                .create();
-        
-        Object object = gson.fromJson(objectString, cls);
-        
-        return object;
+//        Gson gson = new GsonBuilder()
+//                .setExclusionStrategies(new ThreadExclStrat())
+//                //.serializeNulls() <-- uncomment to serialize NULL fields as well
+//                .create();
+//        
+//        Object object = gson.fromJson(objectString, cls);
+//        
+//        return object;
+        return null;
     }
     
     /*Get-Sets*/ 
@@ -115,16 +117,16 @@ public class LoadSave {
     
     /*Inner class*/
 
-    private class ThreadExclStrat implements ExclusionStrategy {
-
-        public boolean shouldSkipClass(Class<?> arg0) {
-            return false;
-        }
-
-        public boolean shouldSkipField(FieldAttributes f) {
-            return (f.getDeclaringClass() == Thread.class);
-        }
-
-    }
+//    private class ThreadExclStrat implements ExclusionStrategy {
+//
+//        public boolean shouldSkipClass(Class<?> arg0) {
+//            return false;
+//        }
+//
+//        public boolean shouldSkipField(FieldAttributes f) {
+//            return (f.getDeclaringClass() == Thread.class);
+//        }
+//
+//    }
 
 }
