@@ -1,6 +1,7 @@
 package model.inventory;
 
 
+import model.item.Category;
 import model.item.Item;
 import model.item.Weapon;
 import utility.decal.ItemDefaultDecal;
@@ -76,7 +77,8 @@ public class Inventory{
     //-------------------------------------------------------
     public boolean storeItem(Item item){
 
-        if ( items.size() < capacity){
+
+        if ( items.size() < capacity && item.getCategory() == Category.TAKEABLE_ITEM ) {
 
             items.add(item);
             return true;
@@ -88,7 +90,7 @@ public class Inventory{
     //-------------------------------------------------------
     public boolean removeItem(Item item){
 
-        if ( items.contains(item)){
+        if ( items.contains(item) ){
 
             this.items.remove(item);
             return true;
@@ -112,16 +114,12 @@ public class Inventory{
         // When inventory size is 1
         inventory = new Inventory(5);
         testingTakeableItems( inventory );
-
     }
-
     // -------------------------------------------------------------
 
     private static void testingTakeableItems(Inventory inventory ){
 
-
         // Weapon List:
-
         Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol", 5, 5, 5);
         Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
         Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);
@@ -142,11 +140,10 @@ public class Inventory{
         if ( inventory.getCapacity() > 0){
 
             // Equipped Inventory
-            EquippedInventory equippedInventory = new EquippedInventory(5);
+            EquippedInventory equippedInventory = new EquippedInventory();
             inventory.storeItem(spade);
             inventory.storeItem(stick);
             inventory.storeItem(arch);
-
 
             // Get item
             ArrayList<Item> items = inventory.getItems();
@@ -163,8 +160,6 @@ public class Inventory{
                 if (itemSuccessfullyEquipped )
                     inventory.removeItem( items.get(0) );
             }
-
-
             // Print result
             printInventory(inventory);
             printEquippedInventory(equippedInventory);

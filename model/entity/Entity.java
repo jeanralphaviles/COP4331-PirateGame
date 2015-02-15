@@ -1,16 +1,16 @@
 package model.entity;
 
-import utility.decal.Decal;
-import utility.decal.DefaultEntityDecal;
 import model.entity.occupation.Occupation;
 import model.entity.occupation.Smasher;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
 import model.item.Item;
 import model.map.Maptile;
+import utility.decal.Decal;
+import utility.decal.DefaultEntityDecal;
 
 /**
- * @author Jean-Ralph Aviles
+ * @author Jean-Ralph Aviles and Carlos Vizcaino
  */
 public class Entity {
 
@@ -21,18 +21,29 @@ public class Entity {
     protected Maptile maptile;
     protected Decal decal;
 
+
     public Entity() {
-        inventory = new Inventory();
-        equippedInventory = new EquippedInventory();
+
+        this.decal = new DefaultEntityDecal();
         occupation = new Smasher();
         statistics = new Statistics();
-//        decal = new DefaultEntityDecal();
+        inventory = new Inventory( statistics.getInventoryCapacity() );
+        equippedInventory = new EquippedInventory();
     }
-
+    // Constructor I
     public Entity(Decal decal) {
+
         this();
         this.decal = decal;
     }
+
+    // Constructor II
+    public Entity( Decal decal, Statistics statistics ){
+
+        this.decal = decal;
+        this.statistics = statistics;
+    }
+
 
     public int getMaxEquippedItems() {
         return 15 + (statistics.getLevel() - 1) * 2;

@@ -33,7 +33,6 @@ public class OneShotItem extends Item{
 
         super( decal, Category.ONE_SHOT_ITEM, name, statistics);
 
-
     }
 
     // ---------- METHODS IMPLEMENTATION ---------

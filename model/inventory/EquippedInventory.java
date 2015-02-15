@@ -17,22 +17,15 @@ public class EquippedInventory extends Inventory{
 
     // Attributes
     private ArrayList<Slot> slots;
-    private int totalItems;
 
     // Default Constructor
     public EquippedInventory(){
 
-        super();
-        totalItems = 0;
-        createSlots();
-    }
-    // Constructor I
-    public EquippedInventory(int capacity ){
 
-        super(capacity);
-        totalItems = 0;
+        super( SlotCategory.values().length);
         createSlots();
     }
+
 
     // ----------- METHODS IMPLEMENTATION -------------------
     // -----------                        -------------------
@@ -47,15 +40,19 @@ public class EquippedInventory extends Inventory{
     @Override
     public int getTotalItems(){
 
-        return totalItems;
+        int i = 0;
+        for ( Slot s : slots){
+
+            if ( s.isFull() ){
+
+                ++i;
+            }
+        }
+
+        return i;
     }
 
     // Mutators Methods:
-    // -------------------------------------------------------
-    public void addSlot(Slot slot){
-
-        this.slots.add(slot);
-    }
 
     //-------------------------------------------------------
     @Override
@@ -63,7 +60,7 @@ public class EquippedInventory extends Inventory{
 
         // Since every slot has ONLY one item:
         // Then, we check the amount of items
-        if ( totalItems < capacity  && item.getCategory() == Category.TAKEABLE_ITEM ){
+        if ( getTotalItems() < capacity  && item.getCategory() == Category.TAKEABLE_ITEM ){
 
             TakeableItem tempItem = (TakeableItem)item;
             for (Slot s: slots){
@@ -71,7 +68,6 @@ public class EquippedInventory extends Inventory{
                 if ( !s.isFull() && s.getSlotCategory() == tempItem.getSlotSCategory() ){
 
                     s.storeItem(tempItem);
-                    ++totalItems;
                     return true;
                 }
             }
@@ -91,16 +87,23 @@ public class EquippedInventory extends Inventory{
         // For every slot in the equipped inventory
         for (Slot s : slots) {
 
-            if ( s.hasItem(item) ) {
+            if (s.hasItem(item)) {
 
                 return s.removeItem(item);
             }
         }
+
         return false;
     }
     // -------------------------------------------------------
     @Override
     public boolean hasItem(Item item ){
+
+        if ( item.getCategory() != Category.TAKEABLE_ITEM){
+
+            return false;
+        }
+
         // Check every slot
         for ( Slot c : slots){
             // Check every item in that slot
@@ -131,5 +134,7 @@ public class EquippedInventory extends Inventory{
             slots.add( new Slot(i) );
         }
     }
+    // -------------------------------------------------------
+
 
 }

@@ -6,19 +6,24 @@ package model.entity;
 public class Statistics implements Cloneable {
 
     /*Properties*/
-    private int livesLeft = 3;
-    private int strength = 10;
-    private int agility = 10;
-    private int intellect = 10;
-    private int hardiness = 10;
-    private int experience = 10;
-    private int maxHealth = 10;
-    private int currentHealth = 10;
-    private int currentMana = 10;
+    protected int livesLeft;
+    protected int strength;
+    protected int agility;
+    protected int intellect;
+    protected int hardiness;
+    protected int experience;
+    protected int maxHealth;
+    protected int currentHealth;
+    protected int currentMana;
+
 
     /*Constructors*/
     public Statistics() {
-        //
+
+        // Set values
+        livesLeft = 3; strength = 10; agility = 10; intellect = 10;
+        agility = 10; intellect = 10; hardiness = 10; experience = 10;
+        maxHealth = 10; currentHealth = 10; currentMana = 10;
     }
 
     public Statistics(int livesLeft, int strength, int agility, int intellect,
@@ -248,6 +253,12 @@ public class Statistics implements Cloneable {
         } else if (this.currentMana > getMaxMana()) {
             this.currentMana = getMaxMana();
         }
+    }
+
+    public int getInventoryCapacity(){
+
+        // Increases 2 by level
+        return 15 + getLevel()*2;
     }
 
 }

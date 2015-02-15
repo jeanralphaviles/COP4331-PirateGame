@@ -1,1 +1,0 @@
-{"gameObject":{"level":{"entities":[],"map":{"height":3,"width":3,"grid":[[null,null,null],[null,null,null],[null,null,null]],"tileLocations":{}}}},"utilityData":{"gameObjectFilenames":[]},"updatesPerSecond":0}

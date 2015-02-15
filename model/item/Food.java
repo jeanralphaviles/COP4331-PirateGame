@@ -1,5 +1,6 @@
 package model.item;
 
+import model.entity.Entity;
 import utility.decal.Decal;
 
 /**
@@ -56,6 +57,13 @@ public class Food extends OneShotItem {
         this.health = health;
     }
 
+    // --------------------------------------------------
+    @Override
+    public void triggerProximity(Entity entity){
+
+        int entityHealth = entity.getStatistics().getCurrentHealth();
+        entity.getStatistics().setCurrentHealth( entityHealth + this.health );
+    }
 
 
 

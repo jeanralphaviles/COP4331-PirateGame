@@ -1,5 +1,6 @@
 package model.item;
 
+import model.entity.Entity;
 import utility.decal.Decal;
 
 /**
@@ -31,9 +32,9 @@ public class PowerUP extends InteractableItem{
         experience = 0;
     }
     // Constructor I
-    public PowerUP(Decal decal, int intellect, int agility, int experience){
+    public PowerUP(Decal decal, String name, int intellect, int agility, int experience){
 
-        super(decal);
+        super(decal,name);
         this.intellect = intellect;
         this.agility = agility;
         this.experience = experience;
@@ -63,5 +64,16 @@ public class PowerUP extends InteractableItem{
     // --------------------------------------------
     public void setExperience( int experience){ this.experience = experience; }
 
+    // --------------------------------------------
+    @Override
+    public void triggerProximity(Entity entity){
 
+        int entityAgility = entity.getStatistics().getAgility();
+        int entityIntellect = entity.getStatistics().getIntellect();
+        int entityExperience = entity.getStatistics().getExperience();
+
+        entity.getStatistics().setAgility( entityAgility + this.agility );
+        entity.getStatistics().setIntellect( entityIntellect + this.intellect );
+        entity.getStatistics().setExperience( entityExperience + this.experience);
+    }
 }
