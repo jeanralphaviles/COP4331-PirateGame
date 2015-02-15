@@ -25,22 +25,20 @@ public class GameObject {
     
     /*Get-Sets*/
 
-//    public Avatar getAvatar() {
-//        return avatar;
-//    }
-//
-//    public void setAvatar(Avatar avatar) {
-//        this.avatar = avatar;
-//    }
-//
-//    public Level getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(Level level) {
-//        this.level = level;
-//    }
-    
-    
+    public Avatar getAvatar() {
+        return avatar;
+    }
 
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+    
 }

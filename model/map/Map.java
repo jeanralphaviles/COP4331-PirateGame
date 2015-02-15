@@ -4,18 +4,17 @@ import java.util.HashMap;
 
 import utility.Course;
 
-/**
- * @author Jean-Ralph Aviles
- */
 public class Map {
 
-    private Maptile[][] grid;
+    /*Properties*/
+    
     private int height = 3, width = 3;
+    private Maptile[][] grid = new Maptile[width][height];
     private HashMap<Integer, GridLocation> tileLocations = new HashMap<Integer, GridLocation>(1); /* Associates Maptiles with GridLocations */
 
-
+    /*Constructors*/
+    
     public Map() {
-        grid = new Maptile[width][height];
         for (int i = 0; i < width; ++i) {
             for (int j = 0; j < height; ++j) {
                 Maptile tile = new Maptile();
@@ -36,21 +35,10 @@ public class Map {
             }
         }
     }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * @param x x position of Maptile
-     * @param y y position of Maptile
-     * @return Maptile at position (x, y); may return null if tile doesn't exist
-     */
-    private Maptile getMapTile(int x, int y) {
+    
+    /*Methods*/
+    
+    public Maptile getMapTile(int x, int y) {
         if (x < 0 || x >= width) {
             return null;
         }
@@ -59,12 +47,7 @@ public class Map {
         }
         return grid[x][y];
     }
-
-    /**
-     * @param Start Maptile to move from
-     * @param Course offsets to find destination tile
-     * @return Maptile destination tile; may be null if tile doesn't exist
-     */
+    
     public Maptile getDestination(Maptile start, Course course) {
         int xOffset = course.getRelativeXDisplacement();
         int yOffset = course.getRelativeYDisplacement();
@@ -78,37 +61,19 @@ public class Map {
 
         return getMapTile(destX, destY);
     }
-
-    /**
-     * @param maptile Maptile to find location
-     * @return Gridlocation of maptile; may be null if tile doesn't exist
-     */
-    private GridLocation getGridLocation(Maptile maptile) {
+    
+    public GridLocation getGridLocation(Maptile maptile) {
         return tileLocations.get(maptile.hashCode());
     }
+    
+    /*Get-Sets*/
 
-    /**
-     * Private nested class to hold grid locations
-     *
-     * @author jraviles
-     */
-    private class GridLocation {
-
-        private final int x, y;
-
-        public GridLocation(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-        
-        
+    public int getHeight() {
+        return height;
     }
+
+    public int getWidth() {
+        return width;
+    }
+    
 }
