@@ -56,7 +56,7 @@ public class Slot extends Inventory {
         // If this slot has an item
         if (!items.isEmpty() ){
 
-             items.get(0);
+            return  items.get(0);
         }
 
         return null;

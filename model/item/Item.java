@@ -97,7 +97,8 @@ public abstract class Item {
 		}
 
 		public void augmentStatistics(Statistics statistics) {
-			statistics.changeAgility(statistics.getAgility());
+
+            statistics.changeAgility(statistics.getAgility());
 			statistics.changeHardiness(statistics.getHardiness());
 			statistics.changeIntellect(statistics.getIntellect());
 			statistics.changeMaxHealth(statistics.getMaxHealth());

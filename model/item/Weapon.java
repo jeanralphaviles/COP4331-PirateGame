@@ -1,5 +1,6 @@
 package model.item;
 
+import model.inventory.SlotCategory;
 import utility.decal.Decal;
 
 /**
@@ -21,19 +22,22 @@ public class Weapon extends TakeableItem {
         damage = 0;
         strength = 0;
         hardiness = 0;
+        slotCategory = SlotCategory.HAND;
 
     }
     // Constructor I
     public Weapon(Decal decal,String name){
 
         super(decal,name);
-        damage = 0;
+        slotCategory = SlotCategory.HAND;
         hardiness = 0;
+
     }
     // Constructor II
     public Weapon(Decal decal, String name, int damage, int strength, int hardiness){
 
         super(decal,name);
+        slotCategory = SlotCategory.HAND;
         this.damage = damage;
         this.strength = strength;
         this.hardiness = hardiness;

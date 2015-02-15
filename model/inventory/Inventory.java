@@ -5,6 +5,7 @@ import model.item.Item;
 import model.item.Weapon;
 import utility.decal.ItemDefaultDecal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -44,6 +45,12 @@ public class Inventory{
 
         return items;
     }
+    // --------------------------------------------
+    public int getTotalItems(){
+
+        return items.size();
+    }
+
     // --------------------------------------------------------
     public int getCapacity(){
 
@@ -95,29 +102,116 @@ public class Inventory{
     public static void main(String[] args){
 
         System.out.println("Hello World from Inventory");
-        testingTakeableItems();
+
+        // Create Inventory:
+        Inventory inventory = new Inventory();
+
+        // When inventory has size 0
+        testingTakeableItems( inventory );
+
+        // When inventory size is 1
+        inventory = new Inventory(5);
+        testingTakeableItems( inventory );
+
 
     }
 
     // -------------------------------------------------------------
-    public static void testingTakeableItems(){
+    private static void testingTakeableItems(Inventory inventory ){
 
         // Weapon List:
 
         Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol", 5, 5, 5);
-        /*
         Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
         Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);
         Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5, 5);
-        */
-        // Create Inventory:
-        Inventory inventory = new Inventory();
 
+        // Full or not
         if ( inventory.isFull() )
             System.out.println("Inventory is Full");
+        else
+            System.out.println("Inventory is Full");
+
+        // When storing
+        if (inventory.storeItem(pistol))
+            System.out.println("Item was added successfully");
+        else
+            System.out.println("Item cannot be added");
+
+        if ( inventory.getCapacity() > 0){
+
+            // Equipp Inventory
+            EquippedInventory equippedInventory = new EquippedInventory(5);
+            inventory.storeItem(spade);
+            inventory.storeItem(stick);
+            inventory.storeItem(arch);
 
 
+            // Get item
+            ArrayList<Item> items = inventory.getItems();
 
+            // Add two items from inventory to equipped inventory
+            int half = inventory.getTotalItems()/2;
+            for ( int i = 0 ; i < half; i++ ){
+
+                // Add to Equipped Inventory
+               boolean itemSuccessfullyEquipped = equippedInventory.storeItem( items.get(0) );
+
+
+                // Remove from inventory
+                if (itemSuccessfullyEquipped )
+                    inventory.removeItem( items.get(0) );
+            }
+
+
+            // Print result
+            printInventory(inventory);
+            printEquippedInventory(equippedInventory);
+        }
+    }
+    // ------------------------------------------------------------
+    private static void printInventory(Inventory inventory){
+
+        // Printing items
+        System.out.println("Printing Inventory...");
+        ArrayList<Item> items = inventory.getItems();
+        for ( Item i : items){
+
+            System.out.println( i.getName() );
+        }
+    }
+    // ------------------------------------------------------------
+    private static void printEquippedInventory(EquippedInventory inventory){
+
+        // Printing items
+        System.out.println("Printing EquipedIventory Inventory...");
+        ArrayList<Slot> slots = inventory.getSlots();
+      try{
+          for (Slot s : slots) {
+
+              if ( s == null )
+                  throw new IOException("Something went wrong!");
+
+              try {
+
+                  if (s.isFull()) {
+
+                      if ( s.getItem() == null)
+                          throw new IOException("Item is null");
+
+                      System.out.println(s.getItem().getName());
+                  }
+              }
+              catch (IOException e){
+
+                  System.out.println(e.getMessage() );
+              }
+          }
+      }
+      catch (IOException e ){
+
+          System.out.print(e.getMessage());
+      }
     }
 
 

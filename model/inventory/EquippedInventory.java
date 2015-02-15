@@ -1,10 +1,11 @@
 package model.inventory;
 
-import java.util.ArrayList;
-
 import model.entity.Statistics;
 import model.item.Category;
 import model.item.Item;
+import model.item.TakeableItem;
+
+import java.util.ArrayList;
 
 
 /**
@@ -16,13 +17,21 @@ public class EquippedInventory extends Inventory{
 
     // Attributes
     private ArrayList<Slot> slots;
-
+    private int totalItems;
 
     // Default Constructor
     public EquippedInventory(){
 
         super();
-        slots = new ArrayList<Slot>();
+        totalItems = 0;
+        createSlots();
+    }
+    // Constructor I
+    public EquippedInventory(int capacity ){
+
+        super(capacity);
+        totalItems = 0;
+        createSlots();
     }
 
     // ----------- METHODS IMPLEMENTATION -------------------
@@ -34,6 +43,12 @@ public class EquippedInventory extends Inventory{
 
         return slots;
     }
+    // --------------------------------------------------------
+    @Override
+    public int getTotalItems(){
+
+        return totalItems;
+    }
 
     // Mutators Methods:
     // -------------------------------------------------------
@@ -42,6 +57,28 @@ public class EquippedInventory extends Inventory{
         this.slots.add(slot);
     }
 
+    //-------------------------------------------------------
+    @Override
+    public boolean storeItem(Item item){
+
+        // Since every slot has ONLY one item:
+        // Then, we check the amount of items
+        if ( totalItems < capacity  && item.getCategory() == Category.TAKEABLE_ITEM ){
+
+            TakeableItem tempItem = (TakeableItem)item;
+            for (Slot s: slots){
+
+                if ( !s.isFull() && s.getSlotCategory() == tempItem.getSlotSCategory() ){
+
+                    s.storeItem(tempItem);
+                    ++totalItems;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
     // -------------------------------------------------------
     @Override
     public boolean removeItem(Item item) {
@@ -85,5 +122,14 @@ public class EquippedInventory extends Inventory{
 			}
 		}
 	}
+    // -------------------------------------------------------
+    private void createSlots(){
+
+        slots = new ArrayList<Slot>();
+        for ( SlotCategory i : SlotCategory.values() ){
+
+            slots.add( new Slot(i) );
+        }
+    }
 
 }
