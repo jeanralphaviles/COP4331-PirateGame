@@ -67,13 +67,10 @@ public class PowerUP extends InteractiveItem{
     // --------------------------------------------
     @Override
     public void triggerProximity(Entity entity){
-
-        int entityAgility = entity.getStatistics().getAgility();
-        int entityIntellect = entity.getStatistics().getIntellect();
-        int entityExperience = entity.getStatistics().getExperience();
-
-        entity.getStatistics().setAgility( entityAgility + this.agility );
-        entity.getStatistics().setIntellect( entityIntellect + this.intellect );
-        entity.getStatistics().setExperience( entityExperience + this.experience);
+    	if (entity.getEffectiveStatistics().getLevel() >= 2) {
+    		entity.getStatistics().setAgility( getAgility() + this.agility );
+    		entity.getStatistics().setIntellect( getIntellect() + this.intellect );
+    		entity.getStatistics().setExperience( getExperience() + this.experience);
+        }
     }
 }
