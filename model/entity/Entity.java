@@ -104,7 +104,7 @@ public class Entity {
         return false;
     }
 
-    public Maptile getMaptile() {
+	public Maptile getMaptile() {
         return maptile;
     }
 
