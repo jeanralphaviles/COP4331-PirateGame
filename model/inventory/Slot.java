@@ -91,18 +91,5 @@ public class Slot extends Inventory {
         }
         return null;
     }
-    //-------------------------------------------------------
-    @Override
-    public boolean storeItem(Item item){
-
-
-        if ( items.size() < capacity ) {
-
-            items.add(item);
-            return true;
-        }
-
-        return false;
-    }
 
 } // End of class

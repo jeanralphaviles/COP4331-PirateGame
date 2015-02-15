@@ -1,9 +1,7 @@
 package model.entity;
 
 import model.entity.occupation.Occupation;
-import model.item.Food;
-import model.item.OneShotItem;
-import model.item.PowerUP;
+import model.item.*;
 import model.map.Maptile;
 import model.map.areaeffect.*;
 import utility.decal.Decal;
@@ -24,6 +22,7 @@ public class Avatar extends Entity {
     }
 
     public Avatar(Occupation occupation, Decal decal) {
+
         super(decal);
         this.occupation = occupation;
     }
@@ -85,6 +84,19 @@ public class Avatar extends Entity {
         if (richard.getStatistics().getCurrentHealth() != richardHealth )
             System.out.println("Error: heal damage is wrong");
 
+
+        // -------- TESTING AVATAR AND TAKEABLE ITEM  ---------
+        // --------                                   ---------
+        richard = new Avatar();
+        richard.getStatistics().setHardiness(2);
+
+        // Crate a takeable item
+        int richardHardiness = richard.getStatistics().getHardiness();
+        Item pistol = new Weapon( new ItemDefaultDecal(), "Pistol", 5, 5);
+        pistol.triggerProximity(richard);
+        if ( richard.getStatistics().getHardiness() == richardHardiness)
+             System.out.println("Error: takeable item is wrong");
+
         // -------- TESTING AVATAR AND ONE SHOT ITEM  ---------
         // --------                                   ---------
 
@@ -112,7 +124,7 @@ public class Avatar extends Entity {
         if ( richard.getStatistics().getAgility() == richardAgility )
             System.out.println("Error: interactible item is wrong");
 
-        // -------- TESTING MapTile and Passible Item     ---------
+        // -------- TESTING MapTile and Obstacle Item     ---------
         // --------                                       ---------
         Maptile tile = new Maptile();
         tile.storeItem(new ObstacleItem(new ItemDefaultDecal(), "Palm Tree"));

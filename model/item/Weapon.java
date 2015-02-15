@@ -1,5 +1,7 @@
 package model.item;
 
+import model.entity.Entity;
+import model.entity.Statistics;
 import model.inventory.SlotCategory;
 import utility.decal.Decal;
 
@@ -11,7 +13,6 @@ import utility.decal.Decal;
 public class Weapon extends TakeableItem {
 
     // Atrributes
-    protected int damage;
     protected int strength;
     protected int hardiness;
 
@@ -19,12 +20,9 @@ public class Weapon extends TakeableItem {
     public Weapon(){
 
         super();
-        damage = 0;
         strength = 0;
         hardiness = 0;
         slotCategory = SlotCategory.HAND;
-
-
     }
     // Constructor I
     public Weapon(Decal decal,String name){
@@ -33,17 +31,14 @@ public class Weapon extends TakeableItem {
 
         slotCategory = SlotCategory.HAND;
         hardiness = 0;
-        damage = 0;
-        hardiness = 0;
-
+       strength = 0;
     }
     // Constructor II
-    public Weapon(Decal decal, String name, int damage, int strength, int hardiness){
+    public Weapon(Decal decal, String name,int strength, int hardiness){
 
         super(decal,name);
 
         slotCategory = SlotCategory.HAND;
-        this.damage = damage;
         this.strength = strength;
         this.hardiness = hardiness;
 
@@ -53,11 +48,6 @@ public class Weapon extends TakeableItem {
     // -----------                        -------------------
 
     // Accessors:
-    // ---------------------------------------------------
-    public int getDamage(){
-
-        return damage;
-    }
     // ---------------------------------------------------
     public int getStrength(){
 
@@ -71,11 +61,6 @@ public class Weapon extends TakeableItem {
 
     // Mutators:
     // ---------------------------------------------------
-    public void setDamage(int damage){
-
-        this.damage = damage;
-    }
-    // ---------------------------------------------------
     public void setStrength(int strength){
 
         this.strength = strength;
@@ -84,6 +69,15 @@ public class Weapon extends TakeableItem {
     public void setHardiness(int hardiness){
 
         this.hardiness = hardiness;
+    }
+    // ---------------------------------------------------
+    @Override
+    public void triggerProximity(Entity entity){
+
+        Statistics entityStats = entity.getStatistics();
+
+        entity.getStatistics().setHardiness( entityStats.getHardiness() + this.hardiness );
+        entity.getStatistics().setStrength( entityStats.getStrength() + this.strength );
     }
 
 

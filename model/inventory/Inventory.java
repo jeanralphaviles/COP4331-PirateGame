@@ -1,7 +1,6 @@
 package model.inventory;
 
 
-import model.item.Category;
 import model.item.Item;
 import model.item.Weapon;
 import utility.decal.ItemDefaultDecal;
@@ -14,6 +13,10 @@ import java.util.ArrayList;
  * Date: 2/12/2015
  * Date: 2/13/2015
  * Date: 2/14/2015
+ * Date: 2/15/2015
+ *
+ *
+ *
  */
 
 public class Inventory{
@@ -78,7 +81,7 @@ public class Inventory{
     public boolean storeItem(Item item){
 
 
-        if ( items.size() < capacity && item.getCategory() == Category.TAKEABLE_ITEM ) {
+        if ( items.size() < capacity ) {
 
             items.add(item);
             return true;
@@ -120,10 +123,10 @@ public class Inventory{
     private static void testingTakeableItems(Inventory inventory ){
 
         // Weapon List:
-        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol", 5, 5, 5);
-        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
-        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);
-        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5, 5);
+        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol",  5, 5);
+        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5);
+        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5);
+        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5);
 
         // Full or not
         if ( inventory.isFull() )
