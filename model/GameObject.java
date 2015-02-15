@@ -16,7 +16,7 @@ public class GameObject {
     /*Constructors*/
     
     public GameObject( ) {
-//        this.avatar = new Avatar(); //still making sure this serializes
+        this.avatar = new Avatar(); //still making sure this serializes
         this.level = new Level();
     }
 

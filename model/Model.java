@@ -2,6 +2,7 @@ package model;
 
 import utility.LoadSave;
 import utility.UtilityData;
+import view.screen.MainScreen;
 import view.screen.Screen;
 
 public class Model extends Thread {
@@ -24,7 +25,7 @@ public class Model extends Thread {
         this.updatesPerSecond = updatesPerSecond;
         this.loadsave = loadSave;
 
-        //launchFirstScreen(new MainScreen(this));
+        launchFirstScreen();
         this.start(); //automagically calls run (thread thing)
     }
 
@@ -55,7 +56,8 @@ public class Model extends Thread {
 //    }
     
     public void updateView() {
-        System.out.println("WEEEEEEEEEEEE");
+        currentScreen.updateView(this.gameObject);
+        System.out.println("Model updated view");
     }
 
     public void mainGameLoop() {
@@ -64,12 +66,14 @@ public class Model extends Thread {
     }
 
     private void launchFirstScreen() {
-        //
+        launchScreen(new MainScreen(this));
     }
 
-//    public void launchScreen(Screen screen) {
-//        //
-//    }
+    public void launchScreen(Screen screen) {
+        this.currentScreen = screen;
+        screen.init();
+    }
+    
     private void loadLevel() {
         //
     }

@@ -9,29 +9,29 @@ import view.viewport.ViewPort;
 import java.util.ArrayList;
 
 public abstract class Screen {
-	protected Controller controller;
-	protected ViewPort viewPort;
-	protected Model model;
 
-	public Screen(Model model) {
-		this.model = model;
-		initialize();
-	}
+    protected Controller controller;
+    protected ViewPort viewPort;
+    protected Model model;
 
-	public void initialize(){
+    public Screen(Model model) {
+        this.model = model;
+        initialize();
+    }
 
+    public void initialize() {
         init();
-		//From viewport, generate IntentComponentMaps
-		ArrayList<IntentComponentMap> icm = viewPort.generateIntentComponentMapping();
-		//Create controller from IntentComponentMaps
+        //From viewport, generate IntentComponentMaps
+        //ArrayList<IntentComponentMap> icm = viewPort.generateIntentComponentMapping();
+	//Create controller from IntentComponentMaps
 
         //screenController s = new ScreenController(model, icm);
+    }
 
-	}
-	public abstract void init();
+    public abstract void init();
 
-	public final void updateView(GameObject gameObject) {
-		//viewPort.updateView(gameObject);
-	}
+    public final void updateView(GameObject gameObject) {
+        //viewPort.updateView(gameObject);
+    }
 
 }
