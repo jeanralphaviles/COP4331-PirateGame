@@ -17,107 +17,113 @@ import utility.decal.Decal;
  * @author Jean-Ralph Aviles
  */
 public class Maptile {
-	private Slot itemSlot = new Slot(SlotCategory.ANY_SLOT);
-	private Entity entity = null;
-	private Terrain terrain;
-	private AreaEffect areaEffect = null;
-	
-	public Maptile() {
-		terrain = new Grass();
-	}
-	
-	/**
-	 * @param item Item to store
-	 * @return True if item was stored successfully, False if otherwise 
-	 */
-	public boolean storeItem(Item item) {
-		return itemSlot.storeItem(item);
-	}
-	
-	/**
-	 * @param entity Entity to add to Maptile
-	 * @return True if entity was added successfully, False if otherwise
-	 */
-	public boolean addEntity(Entity entity) {
-		if (this.entity != null) { /* Don't overwrite entity on tile */
-			return false;
-		}
-		setEntity(entity);
+
+    private Slot itemSlot = new Slot(SlotCategory.ANY_SLOT);
+    private Entity entity = null;
+    private Terrain terrain;
+    private AreaEffect areaEffect = null;
+
+    public Maptile() {
+        terrain = new Grass();
+    }
+
+    /**
+     * @param item Item to store
+     * @return True if item was stored successfully, False if otherwise
+     */
+    public boolean storeItem(Item item) {
+        return itemSlot.storeItem(item);
+    }
+
+    /**
+     * @param entity Entity to add to Maptile
+     * @return True if entity was added successfully, False if otherwise
+     */
+    public boolean addEntity(Entity entity) {
+        if (this.entity != null) { /* Don't overwrite entity on tile */
+
+            return false;
+        }
+        setEntity(entity);
         return true;
-	}
+    }
 
-	public void removeItem() {
-		itemSlot.removeItem();
-	}
+    public void removeItem() {
+        itemSlot.removeItem();
+    }
 
-	public void removeEntity() {
-		setEntity(null);
-	}
-	
-	/**
-	 * @return True if an entity is allowed to move to this Maptile, False otherwise
-	 */
-	public boolean isPassable() {
-		if (entity != null) { /* Entity already there */
-			return false;
-		} else if (terrain.isPassable() == false) {
-			return false;
-		} else if (itemSlot.getItem() instanceof ObstacleItem) { /* Tile contains ObstacleItem */
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	/**
-	 * @return A list of decals associated with the map tile in decreasing order of importance
-	 */
-	public ArrayList<Decal> getDecals() {
-		ArrayList<Decal> decals = new ArrayList<Decal>();
-		if (entity != null) {
-			decals.add(entity.getDecal());
-		}
-		if (itemSlot != null && itemSlot.getItem() != null) {
-			decals.add(itemSlot.getItem().getDecal());
-		}
-		if (areaEffect != null) {
-			decals.add(areaEffect.getDecal());
-		}
-		if (terrain != null) {
-			decals.add(terrain.getDecal());
-		}
-		return decals;
-	}
-	
-	public Slot getItemSlot() {
-		return itemSlot;
-	}
+    public void removeEntity() {
+        setEntity(null);
+    }
 
-	public void setItemSlot(Slot itemSlot) {
-		this.itemSlot = itemSlot;
-	}
+    /**
+     * @return True if an entity is allowed to move to this Maptile, False
+     * otherwise
+     */
+    public boolean isPassable() {
+        if (entity != null) { /* Entity already there */
 
-	public Entity getEntity() {
-		return entity;
-	}
+            return false;
+        } else if (terrain.isPassable() == false) {
+            return false;
+        } else if (itemSlot.getItem() instanceof ObstacleItem) { /* Tile contains ObstacleItem */
 
-	public void setEntity(Entity entity) {
-		this.entity = entity;
-	}
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	public Terrain getTerrain() {
-		return terrain;
-	}
+    /**
+     * @return A list of decals associated with the map tile in decreasing order
+     * of importance
+     */
+    public ArrayList<Decal> getDecals() {
+        ArrayList<Decal> decals = new ArrayList<Decal>();
+        if (entity != null) {
+            decals.add(entity.getDecal());
+        }
+        if (itemSlot != null && itemSlot.getItem() != null) {
+            decals.add(itemSlot.getItem().getDecal());
+        }
+        if (areaEffect != null) {
+            decals.add(areaEffect.getDecal());
+        }
+        if (terrain != null) {
+            decals.add(terrain.getDecal());
+        }
+        return decals;
+    }
 
-	public void setTerrain(Terrain terrain) {
-		this.terrain = terrain;
-	}
+    public Slot getItemSlot() {
+        return itemSlot;
+    }
 
-	public AreaEffect getAreaEffect() {
-		return areaEffect;
-	}
+    public void setItemSlot(Slot itemSlot) {
+        this.itemSlot = itemSlot;
+    }
 
-	public void setAreaEffect(AreaEffect areaEffect) {
-		this.areaEffect = areaEffect;
-	}
+    public Entity getEntity() {
+        return entity;
+    }
+
+    public void setEntity(Entity entity) {
+        this.entity = entity;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
+    public AreaEffect getAreaEffect() {
+        return areaEffect;
+    }
+
+    public void setAreaEffect(AreaEffect areaEffect) {
+        this.areaEffect = areaEffect;
+    }
 }

@@ -4,253 +4,250 @@ package model.entity;
  * @author Jean-Ralph Aviles
  */
 public class Statistics implements Cloneable {
-	private int livesLeft;
-	private int strength;
-	private int agility;
-	private int intellect;
-	private int hardiness;
-	private int experience;
-	private int maxHealth;
-	private int currentHealth;
-	private int currentMana;
 
-	public Statistics() {
-		livesLeft = 3;
-		strength = 10;
-		agility = 10;
-		intellect = 10;
-		hardiness = 10;
-		experience = 10;
-		maxHealth = 10;
-		currentHealth = 10;
-		currentMana = 10;
-	}
+    /*Properties*/
+    private int livesLeft = 3;
+    private int strength = 10;
+    private int agility = 10;
+    private int intellect = 10;
+    private int hardiness = 10;
+    private int experience = 10;
+    private int maxHealth = 10;
+    private int currentHealth = 10;
+    private int currentMana = 10;
 
-	public Statistics(int livesLeft, int strength, int agility, int intellect,
-			int hardiness, int experience, int maxHealth, int currentHealth,
-			int currentMana) {
-		super();
-		this.livesLeft = livesLeft;
-		this.strength = strength;
-		this.agility = agility;
-		this.intellect = intellect;
-		this.hardiness = hardiness;
-		this.experience = experience;
-		this.maxHealth = maxHealth;
-		this.currentHealth = currentHealth;
-		this.currentMana = currentMana;
-	}
+    /*Constructors*/
+    public Statistics() {
+        //
+    }
 
-	public Statistics clone() {
-		return new Statistics(livesLeft, strength, agility, intellect,
-				hardiness, experience, maxHealth, currentHealth, currentMana);
-	}
+    public Statistics(int livesLeft, int strength, int agility, int intellect,
+            int hardiness, int experience, int maxHealth, int currentHealth,
+            int currentMana) {
+        super();
+        this.livesLeft = livesLeft;
+        this.strength = strength;
+        this.agility = agility;
+        this.intellect = intellect;
+        this.hardiness = hardiness;
+        this.experience = experience;
+        this.maxHealth = maxHealth;
+        this.currentHealth = currentHealth;
+        this.currentMana = currentMana;
+    }
 
-	public int getLevel() {
-		return experience / 100 + 1;
-	}
+    /*Methods*/
+    public Statistics clone() {
+        return new Statistics(livesLeft, strength, agility, intellect,
+                hardiness, experience, maxHealth, currentHealth, currentMana);
+    }
 
-	public int getMaxMana() {
-		return intellect;
-	}
+    public void kill() {
+        --livesLeft;
+        if (livesLeft > 0) {
+            currentHealth = maxHealth;
+        }
+    }
 
-	public int getOffensiveRating() {
-		return (int) (strength + agility * 0.5);
-	}
+    public void changeCurrentHealth(int difference) {
+        currentHealth += difference;
+        if (isDead()) {
+            currentHealth = 0;
+            kill();
+        } else if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        }
+    }
 
-	public int getDefensiveRating() {
-		return (int) (hardiness + agility * 0.5);
-	}
+    public boolean isDead() {
+        return currentHealth <= 0;
+    }
 
-	public int getArmorRating() {
-		return getDefensiveRating();
-	}
+    public void changeLivesLeft(int difference) {
+        livesLeft += difference;
+        if (livesLeft < 0) {
+            livesLeft = 0;
+        }
+    }
 
-	public int getMovement() {
-		return (int) (agility - (maxHealth - currentHealth) * 0.5);
-	}
+    public void changeStrength(int difference) {
+        strength += difference;
+        if (strength < 0) {
+            strength = 0;
+        }
+    }
 
-	public void changeCurrentHealth(int difference) {
-		currentHealth += difference;
-		if (isDead()) {
-			currentHealth = 0;
-			kill();
-		} else if (currentHealth > maxHealth) {
-			currentHealth = maxHealth;
-		}
-	}
+    public void changeAgility(int difference) {
+        agility += difference;
+        if (agility < 0) {
+            agility = 0;
+        }
+    }
 
-	public void kill() {
-		--livesLeft;
-		if (livesLeft > 0) {
-			currentHealth = maxHealth;
-		}
-	}
+    public void changeIntellect(int difference) {
+        intellect += difference;
+        if (intellect < 0) {
+            intellect = 0;
+        }
+    }
 
-	public boolean isDead() {
-		return currentHealth <= 0;
-	}
+    public void changeMaxHealth(int difference) {
+        maxHealth += difference;
+        if (maxHealth < 0) {
+            maxHealth = 0;
+            kill();
+        }
+    }
 
-	public int getLivesLeft() {
-		return livesLeft;
-	}
+    public void changeHardiness(int difference) {
+        hardiness += difference;
+        if (hardiness < 0) {
+            hardiness = 0;
+        }
+    }
 
-	public void setLivesLeft(int livesLeft) {
-		this.livesLeft = livesLeft;
-		if (this.livesLeft < 0) {
-			this.livesLeft = 0;
-			kill();
-		}
-	}
-	
-	public void changeLivesLeft(int difference) {
-		livesLeft += difference;
-		if (livesLeft < 0) {
-			livesLeft = 0;
-		}
-	}
-	
-	public int getStrength() {
-		return strength;
-	}
+    public void changeCurrentMana(int difference) {
+        currentMana += difference;
+        if (currentMana > getMaxMana()) {
+            currentMana = getMaxMana();
+        } else if (currentMana < 0) {
+            currentMana = 0;
+        }
+    }
 
-	public void setStrength(int strength) {
-		this.strength = strength;
-		if (this.strength < 0) {
-			this.strength = 0;
-		}
-	}
-	
-	public void changeStrength(int difference) {
-		strength += difference;
-		if (strength < 0) {
-			strength = 0;
-		}
-	}
+    /*Get-Sets*/
+    public int getLevel() {
+        return experience / 100 + 1;
+    }
 
-	public int getAgility() {
-		return agility;
-	}
+    public int getMaxMana() {
+        return intellect;
+    }
 
-	public void setAgility(int agility) {
-		this.agility = agility;
-		if (this.agility < 0) {
-			this.agility = 0;
-		}
-	}
-	
-	public void changeAgility(int difference) {
-		agility += difference;
-		if (agility < 0) {
-			agility = 0;
-		}
-	}
+    public int getOffensiveRating() {
+        return (int) (strength + agility * 0.5);
+    }
 
-	public int getIntellect() {
-		return intellect;
-	}
+    public int getDefensiveRating() {
+        return (int) (hardiness + agility * 0.5);
+    }
 
-	public void setIntellect(int intellect) {
-		this.intellect = intellect;
-		if (this.intellect < 0) {
-			this.intellect = 0;
-		}
-	}
-	
-	public void changeIntellect(int difference) {
-		intellect += difference;
-		if (intellect < 0) {
-			intellect = 0;
-		}
-	}
+    public int getArmorRating() {
+        return getDefensiveRating();
+    }
 
-	public int getHardiness() {
-		return hardiness;
-	}
+    public int getMovement() {
+        return (int) (agility - (maxHealth - currentHealth) * 0.5);
+    }
 
-	public void setHardiness(int hardiness) {
-		this.hardiness = hardiness;
-		if (this.hardiness < 0) {
-			this.hardiness = 0;
-		}
-	}
-	
-	public void changeHardiness(int difference) {
-		hardiness += difference;
-		if (hardiness < 0) {
-			hardiness = 0;
-		}
-	}
+    public int getLivesLeft() {
+        return livesLeft;
+    }
 
-	public int getExperience() {
-		return experience;
-	}
+    public void setLivesLeft(int livesLeft) {
+        this.livesLeft = livesLeft;
+        if (this.livesLeft < 0) {
+            this.livesLeft = 0;
+            kill();
+        }
+    }
 
-	public void setExperience(int experience) {
-		this.experience = experience;
-		if (this.experience < 0) {
-			this.experience = 0;
-		}
-	}
+    public int getStrength() {
+        return strength;
+    }
 
-	public void addExperience(int expGain) {
-		experience += expGain;
-	}
+    public void setStrength(int strength) {
+        this.strength = strength;
+        if (this.strength < 0) {
+            this.strength = 0;
+        }
+    }
 
-	public int getMaxHealth() {
-		return maxHealth;
-	}
+    public int getAgility() {
+        return agility;
+    }
 
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-		if (this.maxHealth < 0) {
-			this.maxHealth = 0;
-			kill();
-		}
-	}
-	
-	public void changeMaxHealth(int difference) {
-		maxHealth += difference;
-		if (maxHealth < 0) {
-			maxHealth = 0;
-			kill();
-		}
-	}
+    public void setAgility(int agility) {
+        this.agility = agility;
+        if (this.agility < 0) {
+            this.agility = 0;
+        }
+    }
 
-	public int getCurrentHealth() {
-		return currentHealth;
-	}
+    public int getIntellect() {
+        return intellect;
+    }
 
-	public void setCurrentHealth(int currentHealth) {
-		this.currentHealth = currentHealth;
-		if (this.currentHealth < 0) {
-			currentHealth = 0;
-			kill();
-		} else if (this.currentHealth > maxHealth) {
-			this.currentHealth = maxHealth;
-		}
-	}
+    public void setIntellect(int intellect) {
+        this.intellect = intellect;
+        if (this.intellect < 0) {
+            this.intellect = 0;
+        }
+    }
 
-	public int getCurrentMana() {
-		return currentMana;
-	}
+    public int getHardiness() {
+        return hardiness;
+    }
 
-	public void setCurrentMana(int currentMana) {
-		this.currentMana = currentMana;
-		if (this.currentMana < 0) {
-			this.currentMana = 0;
-		} else if (this.currentMana > getMaxMana()) {
-			this.currentMana = getMaxMana();
-		}
-	}
+    public void setHardiness(int hardiness) {
+        this.hardiness = hardiness;
+        if (this.hardiness < 0) {
+            this.hardiness = 0;
+        }
+    }
 
-	public void changeCurrentMana(int difference) {
-		currentMana += difference;
-		if (currentMana > getMaxMana()) {
-			currentMana = getMaxMana();
-		} else if (currentMana < 0) {
-			currentMana = 0;
-		}
-	}
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+        if (this.experience < 0) {
+            this.experience = 0;
+        }
+    }
+
+    public void addExperience(int expGain) {
+        experience += expGain;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+        if (this.maxHealth < 0) {
+            this.maxHealth = 0;
+            kill();
+        }
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+        if (this.currentHealth < 0) {
+            currentHealth = 0;
+            kill();
+        } else if (this.currentHealth > maxHealth) {
+            this.currentHealth = maxHealth;
+        }
+    }
+
+    public int getCurrentMana() {
+        return currentMana;
+    }
+
+    public void setCurrentMana(int currentMana) {
+        this.currentMana = currentMana;
+        if (this.currentMana < 0) {
+            this.currentMana = 0;
+        } else if (this.currentMana > getMaxMana()) {
+            this.currentMana = getMaxMana();
+        }
+    }
 
 }

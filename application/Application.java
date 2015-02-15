@@ -11,7 +11,7 @@ public class Application {
     private static final String modelFilename = "MODEL_FILE.txt";
     private static LoadSave loadsave;
     private static NumpadController auxController;
-    private static final int updatesPerSecond = 10;
+    private static final int updatesPerSecond = 1;
     
     /*Constructors*/
     

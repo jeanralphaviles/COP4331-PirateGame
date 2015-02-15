@@ -7,15 +7,16 @@ import view.screen.Screen;
 public class Model extends Thread {
 
     /*Properties*/
-//    private GameObject gameObject;
-//    private UtilityData utilityData;
+    private GameObject gameObject;
+    private UtilityData utilityData;
     private LoadSave loadsave;
-//    private Screen currentScreen;
+    private Screen currentScreen;
     private int updatesPerSecond;
 
     /*Constructors*/
     public Model() {
-
+        this.gameObject = new GameObject();
+        this.utilityData = new UtilityData();
     }
 
     /*Methods*/
@@ -42,15 +43,17 @@ public class Model extends Thread {
     }
 
     public void load(String gameObjectFilename) {
-
+        loadsave.loadGameObject(gameObjectFilename);
     }
 
-//    private void save(GameObject gameObject) {
-//        //
-//    }
+    private void save(GameObject gameObject, String gameObjectFilename) {
+        loadsave.saveGameObject(gameObject, gameObjectFilename);
+    }
+    
 //    public void save() {
 //        save(gameObject);
 //    }
+    
     public void updateView() {
         System.out.println("WEEEEEEEEEEEE");
     }
