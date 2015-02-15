@@ -7,7 +7,7 @@ import utility.decal.Decal;
  * Created by Calos Vizcaino
  *  2/14/15.
  */
-public class PowerUP extends InteractableItem{
+public class PowerUP extends InteractiveItem{
 
     // Attributes
     protected int intellect;

@@ -5,8 +5,6 @@ import model.entity.Statistics;
 import utility.decal.Decal;
 import utility.decal.ItemDefaultDecal;
 
-
-
 public abstract class Item {
 
         // Atrributes
@@ -14,7 +12,7 @@ public abstract class Item {
         protected Statistics statistics;
         protected Category category;
         protected String name;
-        protected final String DEFAULT_NAME = "Default Name";
+		protected final String DEFAULT_NAME = "Default Name";
 
         // Default Constructor
         public Item(){
@@ -90,6 +88,11 @@ public abstract class Item {
             this.decal = decal;
 
         }
+       
+        public void setName(String name) {
+			this.name = name;
+		}
+
         // --------------------------------------------
 
 		public final void setAugmentStatistics(Statistics statistics) {
