@@ -15,7 +15,7 @@ public class Decal {
 	private BufferedImage image;
 
 	public Decal() {
-
+		setImage(new File("Sprites/item/A_Armor04.png"));
 	}
 	
 	/**
@@ -56,6 +56,9 @@ public class Decal {
 	@Override
 	public String toString() {
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+		if (getImage() == null) {
+			return "[nullolol]";
+		}
 		try {
 			ImageIO.write(getImage(), ".png", byteStream);
 		} catch (IOException e) {
@@ -66,6 +69,9 @@ public class Decal {
 
 	public static Decal fromString(String string) throws IOException {
 		String stripped = string.substring(1, string.length() - 1);
+		if (stripped.equals("nullolol")) {
+			return new Decal();
+		}
 		@SuppressWarnings("deprecation")
 		StringBufferInputStream sstream = new StringBufferInputStream(stripped);
 		Decal decal = new Decal();
