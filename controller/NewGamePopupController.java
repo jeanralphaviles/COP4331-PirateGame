@@ -1,12 +1,16 @@
 package controller;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import model.Model;
-import model.entity.occupation.*;
+import model.entity.occupation.Occupation;
+import model.entity.occupation.Smasher;
+import model.entity.occupation.Sneak;
+import model.entity.occupation.Summoner;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
 import view.viewport.NewGamePopupViewport;
+
+import javax.swing.*;
+import java.util.ArrayList;
 
 public final class NewGamePopupController extends ScreenController {
 
@@ -34,25 +38,28 @@ public final class NewGamePopupController extends ScreenController {
         Intent intent = icm.getIntent();
         String details = icm.getDetails();
         if (intent == Intent.USER_INPUT) {
-            switch (details) {
-                case NewGamePopupViewport.select_nickname:
+
+
+                if ( details == NewGamePopupViewport.select_nickname){
+
                     JTextField tf = (JTextField)icm.getObject();
                     String nickname = tf.getText();
                     model.setAvatarNickname(nickname);
-                    break;
-                case NewGamePopupViewport.select_parrotmancer:
+                }
+                else if ( details == NewGamePopupViewport.select_parrotmancer){
+
                     setOccupationIfSelected(icm, new Summoner(), model);
-                    break;
-                case NewGamePopupViewport.select_gankplanker:
+                }
+                else if ( details == NewGamePopupViewport.select_gankplanker){
+
                     setOccupationIfSelected(icm, new Smasher(), model);
-                    break;
-                case NewGamePopupViewport.select_turnhat:
+                }
+                else if ( details == NewGamePopupViewport.select_turnhat){
+
                     setOccupationIfSelected(icm, new Sneak(), model);
-                    break;
-                default:
-                //
-            }
-        }
+                }
+
+        } // End of bigger if statement
     }
     
     private void setOccupationIfSelected(IntentComponentMap icm, Occupation occupation, Model model) {

@@ -1,7 +1,7 @@
 package utility;
 
 import javax.swing.JComponent;
-import controller.Intent;
+
 
 /**
  * @author Team Tiger
