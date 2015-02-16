@@ -57,7 +57,7 @@ public class Statistics implements Cloneable {
         }
     }
   /**
-     * update health remaining durring current game play due to game events
+     * update health remaining during current game play due to game events
      */
     public void changeCurrentHealth(int difference) {
         currentHealth += difference;
@@ -133,14 +133,18 @@ public class Statistics implements Cloneable {
     /**
      * @param difference - amount you want to change the amount of manna left by
      * (when you use some to 'cast a spell' it goes down by difference)
+     * @return - If there is not enough mana to cast the spell, the boolean returns
+     * false, otherwise returns true.
      */
-    public void changeCurrentMana(int difference) {
+    public boolean changeCurrentMana(int difference) {
+        if (difference > currentMana) {
+            return false; //not enough mana to cast the spell
+        }
         currentMana += difference;
         if (currentMana > getMaxMana()) {
             currentMana = getMaxMana();
-        } else if (currentMana < 0) {
-            currentMana = 0;
         }
+        return true;
     }
 
     /*Get-Sets*/
