@@ -49,7 +49,7 @@ public class OneShotItem extends Item{
     // --------------------------------------------
     @Override
 	public void triggerProximity(Entity entity){
-    	entity.getStatistics().changeCurrentHealth(15);
+    	entity.getStatistics().addExperience(150);
     }
 
 }

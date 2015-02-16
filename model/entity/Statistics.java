@@ -240,11 +240,10 @@ public class Statistics implements Cloneable {
     }
 
     public void addExperience(int expGain) {
-        int lvl = getLevel();
-        experience += expGain;
-        if (getLevel() > lvl) {
+        if (expGain > 100 - (experience % 100)) {
             levelUp();
         }
+        experience += expGain;
     }
 
     public void levelUp() {

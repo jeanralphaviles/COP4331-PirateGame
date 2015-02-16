@@ -47,7 +47,7 @@ public class InteractiveItem extends Item{
 	 * */	
 @Override
 	public void triggerProximity(Entity entity) {
-		entity.getStatistics().addExperience(100);
+		entity.getStatistics().changeCurrentHealth(15);
 	}
 
 }
