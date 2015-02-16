@@ -21,7 +21,6 @@ public class Entity {
     protected Maptile maptile;
     protected Decal decal;
 
-
     public Entity() {
         this.decal = new DefaultEntityDecal();
         occupation = new Smasher();
@@ -29,14 +28,14 @@ public class Entity {
         inventory = new Inventory( statistics.getInventoryCapacity() );
         equippedInventory = new EquippedInventory();
     }
-    // Constructor I
+
     public Entity(Decal decal) {
 
         this();
         this.decal = decal;
     }
 
-    // Constructor II
+
     public Entity( Decal decal, Statistics statistics ){
 
         this.decal = decal;
@@ -88,12 +87,9 @@ public class Entity {
         }
         if (maptile.getItemSlot().isItemAllowed()) {
             if (maptile.getItemSlot().storeItem(item)) { /* Try to store item in maptile */
-
                 if (inventory != null && inventory.hasItem(item)) { /* Remove item from inventory if it has it */
-
                     inventory.removeItem(item);
                 } else { /* Else item is in equippedInventory, remove it from there */
-
                     equippedInventory.removeItem(item);
                 }
                 return true;
@@ -118,6 +114,7 @@ public class Entity {
     public boolean move(Maptile maptile) {
         if (maptile.isPassable()) {
             if (maptile.addEntity(this)) {
+            	this.maptile.removeEntity();
                 this.maptile = maptile;
                 return true;
             }
@@ -125,7 +122,7 @@ public class Entity {
         return false;
     }
 
-    public Maptile getMaptile() {
+	public Maptile getMaptile() {
         return maptile;
     }
 
