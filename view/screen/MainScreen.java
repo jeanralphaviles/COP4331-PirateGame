@@ -1,6 +1,10 @@
 package view.screen;
 
+import controller.ScreenController;
+import java.util.ArrayList;
 import model.Model;
+import utility.IntentComponentMap;
+import view.viewport.MainScreenViewport;
 
 public class MainScreen extends Screen {
 
@@ -9,7 +13,9 @@ public class MainScreen extends Screen {
     }
 
     public void init() {
-        // Does something
+        viewPort = new MainScreenViewport();
+        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
+        controller = new ScreenController(model, icms);
     }
 
 }

@@ -67,11 +67,6 @@ public class FileChooserDialog extends JFrame {
             @Override
             public void actionPerformed(ActionEvent event) {
             
-            	
-     
-            test1 a = new test1()	;
-            a.setVisible(true);
-            
             }
         });
         

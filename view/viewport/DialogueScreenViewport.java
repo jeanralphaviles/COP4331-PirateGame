@@ -17,13 +17,29 @@ import utility.IntentComponentMap;
  *
  * @author comcc_000
  */
-public class GameScreenViewport extends ViewPort {
+public class DialogueScreenViewport extends ViewPort {
 
-    public GameScreenViewport() {
+    public DialogueScreenViewport() {
         initComponents();
+//        JPanel panel = new JPanel();
+//        this.add(panel);
+//        panel.setBackground(Color.red);
+//        
+//        int width = this.getWidth();
+//        int height = this.getHeight();
+//        panel.setBounds(0, 0, width, height); //x,y top right coordinate, then width, height
+//        
+//        panel.setVisible(true);
+//        
+//        this.add(new JLabel("thing"));
+//        
+//        this.setVisible(true);
+//        initInteriorViewports();
+//        addInteriorViewports();
     }
     
     private void initInteriorViewports() {
+        interiorViewports.add(new FlavorImageViewport());
         //interiorViewports.add(new DialogueViewport());
     }
     
@@ -33,6 +49,9 @@ public class GameScreenViewport extends ViewPort {
         for (int i=0; i<numInteriorViewports; i++) {
             view = interiorViewports.get(i);
             //addViewport(view);
+            this.add(view);
+            this.revalidate();
+            this.repaint();
         }
     }
     
@@ -45,7 +64,7 @@ public class GameScreenViewport extends ViewPort {
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         //subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(pauseButton, IntentComponentMap.Intent.GOTO_PAUSE));
+        icms.add(new IntentComponentMap(continuePastDialogueButton, IntentComponentMap.Intent.GOTO_GAME));
         return icms;
     }
     /**
@@ -57,9 +76,9 @@ public class GameScreenViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pauseButton = new javax.swing.JButton();
+        continuePastDialogueButton = new javax.swing.JButton();
 
-        pauseButton.setText("Pause");
+        continuePastDialogueButton.setText("Continue Past Dialogue");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,21 +86,21 @@ public class GameScreenViewport extends ViewPort {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
-                .addComponent(pauseButton)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addComponent(continuePastDialogueButton)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(pauseButton)
+                .addComponent(continuePastDialogueButton)
                 .addContainerGap(198, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton pauseButton;
+    private javax.swing.JButton continuePastDialogueButton;
     // End of variables declaration//GEN-END:variables
 
     

@@ -16,22 +16,25 @@ public abstract class Screen {
 
     public Screen(Model model) {
         this.model = model;
-        initialize();
-    }
-
-    public void initialize() {
         init();
-        //From viewport, generate IntentComponentMaps
-        //ArrayList<IntentComponentMap> icm = viewPort.generateIntentComponentMapping();
-	//Create controller from IntentComponentMaps
-
-        //screenController s = new ScreenController(model, icm);
     }
 
     public abstract void init();
 
     public final void updateView(GameObject gameObject) {
-        //viewPort.updateView(gameObject);
+        viewPort.updateView(gameObject);
     }
+    
+    /*Get-Sets*/
+
+    public ViewPort getViewPort() {
+        return viewPort;
+    }
+
+    public void setViewPort(ViewPort viewPort) {
+        this.viewPort = viewPort;
+    }
+    
+    
 
 }

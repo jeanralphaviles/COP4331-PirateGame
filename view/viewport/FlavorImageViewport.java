@@ -5,11 +5,9 @@
  */
 package view.viewport;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import model.GameObject;
 import utility.IntentComponentMap;
 
@@ -17,23 +15,13 @@ import utility.IntentComponentMap;
  *
  * @author comcc_000
  */
-public class GameScreenViewport extends ViewPort {
+public class FlavorImageViewport extends ViewPort {
 
-    public GameScreenViewport() {
+    /**
+     * Creates new form FlavorImageViewport
+     */
+    public FlavorImageViewport() {
         initComponents();
-    }
-    
-    private void initInteriorViewports() {
-        //interiorViewports.add(new DialogueViewport());
-    }
-    
-    private void addInteriorViewports() {
-        int numInteriorViewports = interiorViewports.size();
-        ViewPort view;
-        for (int i=0; i<numInteriorViewports; i++) {
-            view = interiorViewports.get(i);
-            //addViewport(view);
-        }
     }
     
     @Override
@@ -43,10 +31,7 @@ public class GameScreenViewport extends ViewPort {
 
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        //subviewports have all the components...
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(pauseButton, IntentComponentMap.Intent.GOTO_PAUSE));
-        return icms;
+        return new ArrayList<IntentComponentMap>(1);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,31 +42,22 @@ public class GameScreenViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pauseButton = new javax.swing.JButton();
-
-        pauseButton.setText("Pause");
+        setBackground(new java.awt.Color(0, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(pauseButton)
-                .addContainerGap(214, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(pauseButton)
-                .addContainerGap(198, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton pauseButton;
     // End of variables declaration//GEN-END:variables
 
     

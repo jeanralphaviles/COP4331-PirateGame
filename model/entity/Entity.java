@@ -127,4 +127,14 @@ public class Entity {
         return statistics;
     }
 
+    public Occupation getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(Occupation occupation) {
+        this.occupation = occupation;
+    }
+    
+    
+
 }

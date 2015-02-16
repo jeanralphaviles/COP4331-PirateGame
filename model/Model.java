@@ -1,9 +1,11 @@
 package model;
 
+import model.entity.occupation.Occupation;
 import utility.LoadSave;
 import utility.UtilityData;
 import view.screen.MainScreen;
 import view.screen.Screen;
+import view.viewport.MainWindow;
 
 public class Model extends Thread {
 
@@ -13,6 +15,8 @@ public class Model extends Thread {
     private LoadSave loadsave;
     private Screen currentScreen;
     private int updatesPerSecond;
+    //
+    private MainWindow mainWindow;
 
     /*Constructors*/
     public Model() {
@@ -51,6 +55,14 @@ public class Model extends Thread {
         loadsave.saveGameObject(gameObject, gameObjectFilename);
     }
     
+    public void setAvatarNickname(String nickname) {
+        this.gameObject.getAvatar().setNickname(nickname);
+    }
+    
+    public void setAvatarOccupation(Occupation occupation) {
+        this.gameObject.getAvatar().setOccupation(occupation);
+    }
+    
 //    public void save() {
 //        save(gameObject);
 //    }
@@ -66,12 +78,13 @@ public class Model extends Thread {
     }
 
     private void launchFirstScreen() {
+        mainWindow = new MainWindow();
         launchScreen(new MainScreen(this));
     }
 
     public void launchScreen(Screen screen) {
+        mainWindow.displayScreen(screen);
         this.currentScreen = screen;
-        screen.init();
     }
     
     private void loadLevel() {
