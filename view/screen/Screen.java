@@ -3,10 +3,7 @@ package view.screen;
 import controller.Controller;
 import model.GameObject;
 import model.Model;
-import utility.IntentComponentMap;
 import view.viewport.ViewPort;
-
-import java.util.ArrayList;
 
 public abstract class Screen {
 
@@ -34,7 +31,5 @@ public abstract class Screen {
     public void setViewPort(ViewPort viewPort) {
         this.viewPort = viewPort;
     }
-    
-    
 
 }

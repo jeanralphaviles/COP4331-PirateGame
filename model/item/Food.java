@@ -6,7 +6,10 @@ import utility.decal.Decal;
 /**
  * Created by Carlos Vizcaino
  * Date 2/14/2015
+<<<<<<< Updated upstream
  * A Food Item is an item which is eaten, does it's thing, and hence is no longer on the map (deleted off map) 
+=======
+>>>>>>> Stashed changes
  */
 
 
@@ -28,7 +31,6 @@ public class Food extends OneShotItem {
         health = 0;
     }
     // Constructor II
-
     public Food(Decal decal, String name){
 
         super(decal,name);
@@ -43,7 +45,11 @@ public class Food extends OneShotItem {
 
     // ----------- METHODS IMPLEMENTATION -------------------
     // -----------                        -------------------
+    public Food(Decal decal, int health){
 
+        super(decal);
+        this.health = health;
+    }
     // Accessors:
     // --------------------------------------------------
     public int getHealth(){
@@ -57,7 +63,6 @@ public class Food extends OneShotItem {
 
         this.health = health;
     }
-
     // --------------------------------------------------
     @Override
     public void triggerProximity(Entity entity){
@@ -65,7 +70,5 @@ public class Food extends OneShotItem {
         int entityHealth = entity.getStatistics().getCurrentHealth();
         entity.getStatistics().setCurrentHealth( entityHealth + this.health );
     }
-
-
 
 }

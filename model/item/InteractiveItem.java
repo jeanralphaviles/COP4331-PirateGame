@@ -30,7 +30,6 @@ public class InteractiveItem extends Item{
     // Constructor III
     public InteractiveItem(Decal decal, String name, Statistics statistics){
 
-
         super( decal, Category.INTERACTIVE_ITEM, name, statistics);
     }
     // ---------- METHODS IMPLEMENTATION ---------

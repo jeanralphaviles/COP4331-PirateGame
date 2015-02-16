@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 
 public class MapGenerator {
@@ -30,7 +32,10 @@ public class MapGenerator {
 				String[] row = line.split(csvSplit);
 				ArrayList<Maptile> rowTiles = new ArrayList<Maptile>();
 
+				longest = row.length > longest ? row.length : longest;
 				for (int i = 0; i < row.length; ++i) {
+
+
 					Maptile tile = new Maptile();
 
 
@@ -49,9 +54,12 @@ public class MapGenerator {
 
 					rowTiles.add(tile);
 				}
+
 				longest = rowTiles.size() > longest ? rowTiles.size() : longest;
+
 				grid.add(rowTiles);
-			}
+
+			} // End of switch-loop
 			reader.close();
 		}
 		catch (FileNotFoundException e) {

@@ -112,9 +112,6 @@ public abstract class Item {
 			statistics.changeMaxHealth(statistics.getMaxHealth());
 			statistics.changeStrength(statistics.getStrength());
 		}
-
-
-
         // Abstract Methods:
         // --------------------------------------------
         public abstract void triggerProximity( Entity entity );
