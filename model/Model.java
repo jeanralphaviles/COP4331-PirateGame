@@ -1,10 +1,7 @@
 package model;
 
-import model.entity.occupation.Occupation;
-import java.io.File;
-import java.util.ArrayList;
-
 import model.entity.Entity;
+import model.entity.occupation.Occupation;
 import model.map.Map;
 import model.map.Maptile;
 import utility.ItemGenerator;
@@ -14,6 +11,9 @@ import utility.UtilityData;
 import view.screen.MainScreen;
 import view.screen.Screen;
 import view.viewport.MainWindow;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class Model extends Thread {
 
@@ -98,6 +98,8 @@ public class Model extends Thread {
     public String getNextDialogue() {
         return gameObject.getLevel().getNextDialogue();
     }
+
+    public GameObject getGameObject(){ return gameObject; }
     
     public void setDialogue(String s) {
         gameObject.getLevel().setCurrentDialogue(s);

@@ -20,6 +20,18 @@ public class Avatar extends Entity {
     public Avatar() {
         super();
         this.name = "Richard Bonehard";
+
+        // This specifically
+        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol",  5, 5);
+        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5);
+        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5);
+        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5);
+        this.storeItem( pistol );
+        this.storeItem( spade );
+        this.storeItem( stick );
+        this.storeItem( arch );
+        this.equipItem( pistol );
+
     }
 
     public Avatar(Occupation occupation, Decal decal) {

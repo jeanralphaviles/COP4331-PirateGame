@@ -36,24 +36,25 @@ public class AreaViewport extends ViewPort {
     
     @Override
     public void updateView(GameObject gameObject) {
-        GridLayout grid = new GridLayout(numTilesWide, numTilesHight);
-        setLayout(grid);
-        
-        Maptile avatarMaptile = gameObject.getAvatar().getMaptile();
-        Map map = gameObject.getLevel().getMap();
-        GridLocation gridLocation = map.getGridLocation(avatarMaptile);
-        int avatarX = gridLocation.getX();
-        int avatarY = gridLocation.getY();
-        
-        Maptile maptile;
-        Tile tile;
-        for (int x=0; x < ( (avatarX-numTilesWide) /2); x++) {
-            for (int y=0; y < ( (avatarY-numTilesWide) /2); y++) {
-                maptile = map.getMapTile(x, y);
-                tile = new Tile(maptile);
-                add(tile.getImage());
-            }
-        }
+        setBackground(Color.RED);
+//        GridLayout grid = new GridLayout(numTilesWide, numTilesHight);
+//        setLayout(grid);
+//        
+//        Maptile avatarMaptile = gameObject.getAvatar().getMaptile();
+//        Map map = gameObject.getLevel().getMap();
+//        GridLocation gridLocation = map.getGridLocation(avatarMaptile);
+//        int avatarX = gridLocation.getX();
+//        int avatarY = gridLocation.getY();
+//        
+//        Maptile maptile;
+//        Tile tile;
+//        for (int x=0; x < ( (avatarX-numTilesWide) /2); x++) {
+//            for (int y=0; y < ( (avatarY-numTilesWide) /2); y++) {
+//                maptile = map.getMapTile(x, y);
+//                tile = new Tile(maptile);
+//                add(tile.getImage());
+//            }
+//        }
     }
 
     @Override
