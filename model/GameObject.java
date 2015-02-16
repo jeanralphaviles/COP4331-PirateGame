@@ -1,7 +1,9 @@
 package model;
 
 import java.io.IOException;
+
 import model.entity.Avatar;
+import model.map.Maptile;
 /**
  * GameObject saves state of game.
  * Little to no logic needed
@@ -17,8 +19,10 @@ public class GameObject {
     /*Constructors*/
     
     public GameObject( ) {
-        this.avatar = new Avatar(); //still making sure this serializes
+        this.avatar = new Avatar();
         this.level = new Level();
+        Maptile avatarTile = this.level.getMap().getMapTile(1, 1);
+        this.avatar.move(avatarTile);
     }
 
     /*Methods*/

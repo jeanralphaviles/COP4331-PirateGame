@@ -138,7 +138,9 @@ public class Entity {
     public boolean move(Maptile maptile) {
         if (maptile.isPassable()) {
             if (maptile.addEntity(this)) {
-            	this.maptile.removeEntity();
+            	if (this.maptile != null) {
+            		this.maptile.removeEntity();
+            	}
                 this.maptile = maptile;
                 return true;
             }

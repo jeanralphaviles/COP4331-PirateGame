@@ -34,7 +34,7 @@ public class Application {
         if (m == null) { //load failed
             m = new Model(); //create Default
         }
-        return m;
+       return m;
     }
 
     public static void initAuxiliaryController() {
