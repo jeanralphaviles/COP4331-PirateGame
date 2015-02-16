@@ -4,10 +4,13 @@ import model.entity.occupation.Occupation;
 import model.entity.occupation.Smasher;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
+import model.inventory.Slot;
 import model.item.Item;
 import model.map.Maptile;
 import utility.decal.Decal;
 import utility.decal.DefaultEntityDecal;
+
+import java.util.ArrayList;
 
 /**
  * @author Jean-Ralph Aviles and Carlos Vizcaino
@@ -44,6 +47,26 @@ public class Entity {
         this.statistics = statistics;
     }
 
+    // Accessors:
+    // ----------------------------------------------------
+    public Inventory getInventory() {return inventory; }
+
+    // ----------------------------------------------------
+    public ArrayList<Item> getEquippedInventoryItems() {
+
+        ArrayList<Item> items = new ArrayList<Item>();
+        ArrayList<Slot> slots = equippedInventory.getSlots();
+        for( Slot s : slots ){
+
+            // When the slot does actually have an item
+            if ( s.isFull() ){
+
+                items.add(s.getItem());
+            }
+        }
+
+        return items;
+    }
 
     public int getMaxEquippedItems() {
         return 15 + (statistics.getLevel() - 1) * 2;
@@ -126,6 +149,18 @@ public class Entity {
 
     public Statistics getStatistics() {
         return statistics;
+    }
+
+    // ----------------------------------------------------
+    public boolean unequipItem(Item item ){
+
+        if ( equippedInventory.hasItem(item)){
+
+            equippedInventory.removeItem(item);
+            inventory.storeItem(item);
+            return true;
+        }
+        return false;
     }
 
 }
