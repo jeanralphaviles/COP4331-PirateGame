@@ -31,7 +31,6 @@ public final class HealDamageAreaEffect extends AreaEffect {
 	public void triggerProximityEffect(Entity entity) {
 		if (isActive()) {
 			entity.getStatistics().changeCurrentHealth(damageHealed);
-			setActive(false);
 		}
 	}
 }

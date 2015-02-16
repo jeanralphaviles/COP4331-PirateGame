@@ -21,7 +21,6 @@ public final class InstantDeathAreaEffect extends AreaEffect {
 	public void triggerProximityEffect(Entity entity) {
 		if (isActive()) {
 			entity.getStatistics().kill();
-			setActive(false);
 		}
 	}
 

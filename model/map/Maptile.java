@@ -116,8 +116,8 @@ public class Maptile {
         if (itemSlot != null && itemSlot.getItem() != null) {
             decals.add(itemSlot.getItem().getDecal());
         }
-        if (areaEffect != null) {
-            //decals.add(areaEffect.getDecal());
+        if (areaEffect != null && !(areaEffect instanceof NullAreaEffect)) {
+            decals.add(areaEffect.getDecal());
         }
         if (terrain != null) {
             decals.add(terrain.getDecal());

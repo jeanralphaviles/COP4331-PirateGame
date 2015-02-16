@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import model.entity.Entity;
 import model.map.Map;
 import model.map.Maptile;
+import model.map.areaeffect.HealDamageAreaEffect;
+import model.map.areaeffect.InstantDeathAreaEffect;
+import model.map.areaeffect.LevelUpAreaEffect;
+import model.map.areaeffect.TakeDamageAreaEffect;
 import utility.Course;
 import utility.ItemGenerator;
 import utility.LoadSave;
@@ -157,6 +161,9 @@ public class Model extends Thread {
         Maptile dest = this.gameObject.getLevel().getMap().getDestination(avatarTile, course);
         this.gameObject.getAvatar().move(dest);
         dest.triggerProximityEffect(this.gameObject.getAvatar());
+        if (this.gameObject.getAvatar().getDerivedStatistics().getLivesLeft() <= 0) {
+        	launchScreen(new MainScreen(new Model()));
+        }
     }
 
     private void loadLevel() {
@@ -184,6 +191,10 @@ public class Model extends Thread {
             level.initDialogueStrings(); //for dialogue
             this.gameObject.setLevel(level);
             this.gameObject.getAvatar().move(avatarMapTile);
+            map.getMapTile(10, 7).setAreaEffect(new HealDamageAreaEffect());
+            map.getMapTile(11, 6).setAreaEffect(new TakeDamageAreaEffect());
+            map.getMapTile(15, 5).setAreaEffect(new InstantDeathAreaEffect());
+            map.getMapTile(15, 6).setAreaEffect(new LevelUpAreaEffect());
         } catch (Exception e) {
             e.printStackTrace();
         }
