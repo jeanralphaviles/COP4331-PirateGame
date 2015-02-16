@@ -51,6 +51,8 @@ public class GameObject {
 		String stripped = string.substring(1, string.length() - 1);
 		GameObject obj = new GameObject();
 		obj.avatar = Avatar.fromString(stripped);
+		obj.getLevel().getMap().addEntity(obj.avatar);
+		// TODO ENTITIESSSSSSSSSSS!@#!@#@!#@!#@!#!@#!@
 		return obj;
 	}
     

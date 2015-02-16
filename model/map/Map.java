@@ -2,6 +2,7 @@ package model.map;
 
 import java.util.HashMap;
 
+import model.entity.Entity;
 import utility.Course;
 
 public class Map {
@@ -75,6 +76,19 @@ public class Map {
      */
     public GridLocation getGridLocation(Maptile maptile) {
         return tileLocations.get(maptile.hashCode());
+    }
+    
+    /**
+     * @param entity Entity with set maptile to add to map. SHOULD NOT BE USED EXECEPT WHEN SERIALIZING
+     */
+    public boolean addEntity(Entity entity) {
+    	if (entity.getMaptile() != null) {
+    		if (getGridLocation(entity.getMaptile()) != null) {
+    			GridLocation gridLocation = getGridLocation(entity.getMaptile());
+    			return grid[gridLocation.getX()][gridLocation.getY()].addEntity(entity);
+    		}
+    	}
+    	return false;
     }
     
     /*Get-Sets*/
