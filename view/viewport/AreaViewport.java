@@ -29,8 +29,10 @@ import utility.decal.Decal;
  */
 public class AreaViewport extends ViewPort {
 
-    private int numTilesWide = 5;
-    private int numTilesHigh = 5;
+    private int numTilesWide = 7; //should be odd
+    private int numTilesHigh = 7; //should be odd
+    //
+    private boolean followAvatar = true;
 
     /**
      * Creates new form AreaViewport
@@ -50,31 +52,86 @@ public class AreaViewport extends ViewPort {
 
         Maptile avatarMaptile = gameObject.getAvatar().getMaptile();
         Map map = gameObject.getLevel().getMap();
-        GridLocation gridLocation = map.getGridLocation(avatarMaptile);
+        GridLocation avatarGridLocation = map.getGridLocation(avatarMaptile);
         GridBagConstraints c = new GridBagConstraints();
         c.ipadx = 0;
         c.ipady = 0;
-        int avatarX = gridLocation.getX();
-        int avatarY = gridLocation.getY();
+        int avatarX = avatarGridLocation.getX();
+        int avatarY = avatarGridLocation.getY();
 
         Maptile maptile;
         Tile tile;
-        numTilesWide = map.getWidth();
-        numTilesHigh = map.getHeight();
+        if (!followAvatar) {
+            numTilesWide = map.getWidth();
+            numTilesHigh = map.getHeight();
 
-        for (int x = 0; x < numTilesWide; x++) {
-            for (int y = 0; y < numTilesHigh; y++) {
-                maptile = map.getMapTile(y, x);
-                if (maptile != null) {
-                    tile = new Tile(maptile);
-                } else {
-                    tile = new Tile(); //BlankDecal
+            for (int x = 0; x < numTilesWide; x++) {
+                for (int y = 0; y < numTilesHigh; y++) {
+                    displayTile(map, x, y);
                 }
-                add(tile.getImage(), c);
+            }
+        } else {
+            int[] minAndMaxXYs = getMinAndMaxXYs(numTilesWide, numTilesHigh, avatarGridLocation);
+            int minX = minAndMaxXYs[0];
+            int maxX = minAndMaxXYs[1];
+            int minY = minAndMaxXYs[2];
+            int maxY = minAndMaxXYs[3];
+            for (int x = minY; x <= maxY; x++) {
+                for (int y = minX; y <= maxX; y++) {
+                    displayTile(map, x, y);
+                }
             }
         }
 
         this.updateUI();
+    }
+
+    private void displayTile(Map map, int x, int y) {
+        Maptile maptile = map.getMapTile(y, x);
+        Tile tile;
+        if (maptile != null) {
+            tile = new Tile(maptile);
+        } else {
+            tile = new Tile(); //BlankDecal
+        }
+        add(tile.getImage());
+    }
+
+//    private GridLocation[] getCorners(int width, int height, GridLocation avatarGridLocation) {
+//        GridLocation[] corners = new GridLocation[4];
+//        //
+//        int[] minAndMaxXYs = getMinAndMaxXYs(width, height, avatarGridLocation);
+//        //
+//        int minX = minAndMaxXYs[0];
+//        int maxX = minAndMaxXYs[1];
+//        int minY = minAndMaxXYs[2];
+//        int maxY = minAndMaxXYs[3];
+//        //
+//        corners[0] = new GridLocation(minX, minY); //top left
+//        corners[1] = new GridLocation(maxX, maxY); //top right
+//        corners[2] = new GridLocation(minX, maxY); //bot left
+//        corners[3] = new GridLocation(maxX, maxY); //bot right
+//        return corners;
+//    }
+
+    private int[] getMinAndMaxXYs(int width, int height, GridLocation avatarGridLocation) {
+        int[] minAndMaxXYs = new int[4];
+        //
+        int xBuffer = width / 2; //relies on int truncation
+        int yBuffer = height / 2; //relies on int truncation
+        int avatarX = avatarGridLocation.getX();
+        int avatarY = avatarGridLocation.getY();
+        //
+        int minX = avatarX - xBuffer; // - 1;
+        int maxX = avatarX + xBuffer; // - 1;
+        int minY = avatarY - yBuffer; // + 1;
+        int maxY = avatarY + yBuffer; //+ 1;
+        //
+        minAndMaxXYs[0] = minX;
+        minAndMaxXYs[1] = maxX;
+        minAndMaxXYs[2] = minY;
+        minAndMaxXYs[3] = maxY;
+        return minAndMaxXYs;
     }
 
     /*Inner classes*/
@@ -82,17 +139,18 @@ public class AreaViewport extends ViewPort {
 
         /*Properties*/
         private ImageIcon imageIcon;// = new ImageIcon("images/grass_tile.jpg"); 
+        private Decal decal;
         private boolean tag;
 
         /*Constructors*/
         public Tile(Maptile maptile) {
-            Decal decal = getLastDecal(maptile);
-            imageIcon = decalToImage(decal);
+            decal = getLastDecal(maptile);
+            autoScale();
         }
 
         public Tile() {
-            Decal decal = new BlankDecal();
-            imageIcon = decalToImage(decal);
+            decal = new BlankDecal();
+            autoScale();
         }
 
         public Tile(Maptile maptile, boolean tag) {
@@ -111,13 +169,29 @@ public class AreaViewport extends ViewPort {
             return label;
         }
 
-        public ImageIcon decalToImage(Decal decal) {
+//        public ImageIcon decalToImage(Decal decal) {
+//            BufferedImage image = decal.getImage();
+//            Image i = (Image) image;
+//            i = getScaledImage(i, 30, 30);
+//            image = (BufferedImage) i;
+//            ImageIcon icon = new ImageIcon(image);
+//            return icon;
+//        }
+        
+        private void autoScale() {
+            if (followAvatar) {
+                scale(140, 140);
+            } else {
+                scale(30, 30);
+            }
+        }
+        
+        public void scale(int width, int height) {
             BufferedImage image = decal.getImage();
-            Image i = (Image)image;
-            i = getScaledImage(i, 30, 30);
-            image = (BufferedImage)i;
-            ImageIcon icon = new ImageIcon(image);
-            return icon;
+            Image i = (Image) image;
+            i = getScaledImage(i, width, height);
+            image = (BufferedImage) i;
+            imageIcon = new ImageIcon(image);
         }
 
         private Image getScaledImage(Image srcImg, int w, int h) {
@@ -144,11 +218,11 @@ public class AreaViewport extends ViewPort {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 868, Short.MAX_VALUE)
+            .addGap(0, 532, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGap(0, 274, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

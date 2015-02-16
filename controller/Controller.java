@@ -13,17 +13,17 @@ import view.screen.popup.PausePopup;
 public abstract class Controller extends Thread {
 
     /*Properties*/
-    
     protected Model model;
 
     /*Constructors*/
-    
     public Controller(Model model) {
         this.model = model;
     }
-    
+
     /*Methods*/
-     /** print; prints out content. Test method.
+    /**
+     * print; prints out content. Test method.
+     *
      * @param content - content to print out
      */
     protected void print(String content) {
@@ -45,39 +45,44 @@ public abstract class Controller extends Thread {
     private void exit() {
         System.exit(0);
     }
-    
+
     private void gotoNewGameMenu() {
         Screen screen = new NewGamePopup(model);
         model.launchScreen(screen);
     }
-    
+
     private void gotoGameScreen() {
         Screen screen = new GameScreen(model);
         model.launchScreen(screen);
     }
-    
+
     private void gotoPauseScreen() {
         Screen screen = new PausePopup(model);
         model.launchScreen(screen);
     }
-    
+
     private void gotoMainScreen() {
         Screen screen = new MainScreen(model);
         model.launchScreen(screen);
     }
-    
+
     private void begin() {
         Screen screen = new DialogueScreen(model);
         model.launchScreen(screen);
     }
-    
+
     private void showNextDialogue() {
-       String dialogue = model.getNextDialogue();
-       if (dialogue != null) {
-           model.setDialogue(dialogue);
-       } else {
-           gotoGameScreen();
-       }
+        String dialogue = model.getNextDialogue();
+        if (dialogue != null) {
+            model.setDialogue(dialogue);
+        } else {
+            Screen screen = model.getCurrentScreen();
+            if (screen instanceof DialogueScreen) {
+                gotoGameScreen();
+            } else if (screen instanceof GameScreen) {
+                gotoMainScreen();
+            }
+        }
     }
 
     protected void action(Intent intent) {
@@ -114,7 +119,7 @@ public abstract class Controller extends Thread {
                 break;
         }
     }
-    
+
     protected abstract void processUserInput(Model model);
 
     protected void mapActionToComponent() {

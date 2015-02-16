@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import java.awt.Frame;
 import javax.swing.JPanel;
 import view.screen.Screen;
 
@@ -33,6 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
         addViewport(view);
         
         pack();
+        setExtendedState(Frame.MAXIMIZED_BOTH); //fullscreen
         setVisible(true);
     }
     

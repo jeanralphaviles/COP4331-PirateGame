@@ -51,8 +51,7 @@ public class DialogueViewport extends ViewPort {
 
         dialogueTextView.setText("Dialogue");
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });

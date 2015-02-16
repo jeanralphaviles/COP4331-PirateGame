@@ -6,6 +6,7 @@
 package view.viewport;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import javax.swing.JPanel;
 import model.GameObject;
 import model.Model;
@@ -32,22 +33,17 @@ public class GameScreenViewport extends ViewPort {
     }
     
     public void generateView(){
-        JPanel northernPanel = new JPanel();
-        JPanel southernPanel = new JPanel();
- 
-        addViewport(new AreaViewport(), BorderLayout.NORTH);
-        //addViewport(new StatusViewport(), BorderLayout.SOUTH);
-        //interiorViewports.add(new InventoryViewport());
-        /*interiorViewports.get(0)*/
-//        add(interiorViewports.get(0), BorderLayout.NORTH);
-//        northernPanel.add(new MainInventoryPanel( new Avatar() ), BorderLayout.SOUTH);
-//        
-//        //southernPanel.add(new "DialogueViewPort", BorderLayout.NORTH);
-//        //southernPanel.add(new "StatusViewPort", BorderLayout.SOUTH);
-//         
-//        this.add( northernPanel, BorderLayout.SOUTH );
-        //this.add(southernPanel, BorderLayout.SOUTH);
-
+//        addViewport(new AreaViewport(), BorderLayout.NORTH);
+//        addViewport(new StatusViewport(), BorderLayout.SOUTH);
+//        addViewport(new UtilityViewport(), BorderLayout.EAST);
+//        this.
+        GridLayout grid = new GridLayout(2, 2, 0, 0);
+        setLayout(grid);
+        
+        addViewport(new AreaViewport());
+        addViewport(new StatusViewport());
+        addViewport(new UtilityViewport());
+        addViewport(new DialogueViewport());
     }
     
     @Override
@@ -58,12 +54,6 @@ public class GameScreenViewport extends ViewPort {
             viewport = interiorViewports.get(i);
             viewport.updateView(gameObject);
         }
-    }
-
-    @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        return icms;
     }
     
     

@@ -47,8 +47,7 @@ public class InteractiveItem extends Item{
 	 * */	
 @Override
 	public void triggerProximity(Entity entity) {
-		// TODO Auto-generated method stub
-		
+		entity.getStatistics().changeCurrentHealth(15);
 	}
 
 }

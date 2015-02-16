@@ -49,8 +49,7 @@ public class OneShotItem extends Item{
     // --------------------------------------------
     @Override
 	public void triggerProximity(Entity entity){
-
-        // Todo-Code
+    	entity.getStatistics().addExperience(150);
     }
 
 }

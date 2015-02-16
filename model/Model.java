@@ -3,6 +3,7 @@ package model;
 import controller.NumpadController;
 import model.entity.occupation.Occupation;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ public class Model extends Thread {
     private LoadSave loadsave;
     private Screen currentScreen;
     private int updatesPerSecond;
-    private NumpadController auxController;
     //
     private MainWindow mainWindow;
 
@@ -100,13 +100,15 @@ public class Model extends Thread {
     public void setAvatarOccupation(Occupation occupation) {
         this.gameObject.getAvatar().setOccupation(occupation);
     }
-    
+
     public String getNextDialogue() {
         return gameObject.getLevel().getNextDialogue();
     }
 
-    public GameObject getGameObject(){ return gameObject; }
-    
+    public GameObject getGameObject() {
+        return gameObject;
+    }
+
     public void setDialogue(String s) {
         gameObject.getLevel().setCurrentDialogue(s);
     }
@@ -137,7 +139,6 @@ public class Model extends Thread {
      */
     private void launchFirstScreen() {
         mainWindow = new MainWindow();
-        mainWindow.addKeyListener(auxController);
         launchScreen(new MainScreen(this));
     }
 
@@ -150,7 +151,7 @@ public class Model extends Thread {
         mainWindow.displayScreen(screen);
         this.currentScreen = screen;
     }
-    
+
     public void move(Course course) {
         Maptile avatarTile = this.gameObject.getAvatar().getMaptile();
         Maptile dest = this.gameObject.getLevel().getMap().getDestination(avatarTile, course);
@@ -189,37 +190,37 @@ public class Model extends Thread {
     }
     /*Get-Sets*/
 
-    public NumpadController getAuxController() {
-        return auxController;
+    public Screen getCurrentScreen() {
+        return currentScreen;
     }
 
-    public void setAuxController(NumpadController auxController) {
-        this.auxController = auxController;
+    public void setCurrentScreen(Screen currentScreen) {
+        this.currentScreen = currentScreen;
     }
-    
-    
 
+    
+    
     public UtilityData getUtilityData() {
         return utilityData;
     }
 
-	public void setUtilityData(UtilityData utilityData) {
-		this.utilityData = utilityData;
-	}    
-	
-	@Override
-	public String toString() {
-		return "[" + gameObject.toString() + "]";
-	}
-	
-	public static Model fromString(String string) throws IOException {
-		System.out.print(string);
-		if (string.length() == 0) {
-			return new Model();
-		}
-		String stripped = string.substring(1, string.length() - 1);
-		Model model = new Model();
-		model.gameObject = GameObject.fromString(stripped);
-		return model;
-	}
+    public void setUtilityData(UtilityData utilityData) {
+        this.utilityData = utilityData;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + gameObject.toString() + "]";
+    }
+
+    public static Model fromString(String string) throws IOException {
+        System.out.print(string);
+        if (string.length() == 0) {
+            return new Model();
+        }
+        String stripped = string.substring(1, string.length() - 1);
+        Model model = new Model();
+        model.gameObject = GameObject.fromString(stripped);
+        return model;
+    }
 }
