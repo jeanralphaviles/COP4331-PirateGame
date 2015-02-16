@@ -155,6 +155,7 @@ public class Model extends Thread {
         Maptile avatarTile = this.gameObject.getAvatar().getMaptile();
         Maptile dest = this.gameObject.getLevel().getMap().getDestination(avatarTile, course);
         this.gameObject.getAvatar().move(dest);
+        dest.triggerProximityEffect(this.gameObject.getAvatar());
     }
 
     private void loadLevel() {

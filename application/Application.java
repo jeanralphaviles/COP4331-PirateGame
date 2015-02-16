@@ -89,22 +89,22 @@ class EnterKeyListener implements KeyEventPostProcessor {
         if (keyCode == KeyEvent.VK_NUMPAD1) {
             System.out.println("you pressed 1");
             model.move(new Course(-1,-1));
-        } else if (keyCode == KeyEvent.VK_NUMPAD2) {
+        } else if (keyCode == KeyEvent.VK_NUMPAD2 || keyCode == KeyEvent.VK_DOWN) {
             System.out.println("pressed 2 move down");
             model.move(new Course(0, -1));
         } else if (keyCode == KeyEvent.VK_NUMPAD3) {
             System.out.println("pressed 3 move left down");
             model.move(new Course(1, -1));
-        } else if (keyCode == KeyEvent.VK_NUMPAD4) {
+        } else if (keyCode == KeyEvent.VK_NUMPAD4 || keyCode == KeyEvent.VK_LEFT) {
             System.out.println("you pressed 4 move left");
             model.move(new Course(-1,0));
-        } else if (keyCode == KeyEvent.VK_NUMPAD6) {
+        } else if (keyCode == KeyEvent.VK_NUMPAD6 || keyCode == KeyEvent.VK_RIGHT) {
             System.out.println("you pressed 6 move right");
             model.move(new Course(1, 0));
         } else if (keyCode == KeyEvent.VK_NUMPAD7) {
             System.out.println("you pressed 7 move top left");
             model.move(new Course(-1,1));
-        } else if (keyCode == KeyEvent.VK_NUMPAD8) {
+        } else if (keyCode == KeyEvent.VK_NUMPAD8 || keyCode == KeyEvent.VK_UP) {
             System.out.println("you pressed 8 move top");
             model.move(new Course(0,1));
         } else if (keyCode == KeyEvent.VK_NUMPAD9) {

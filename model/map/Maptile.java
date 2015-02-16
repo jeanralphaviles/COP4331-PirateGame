@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import model.entity.Entity;
 import model.inventory.Slot;
 import model.inventory.SlotCategory;
+import model.item.Category;
 import model.item.Item;
 import model.item.ObstacleItem;
 import model.map.areaeffect.AreaEffect;
@@ -73,6 +74,26 @@ public class Maptile {
         } else {
             return true;
         }
+    }
+    
+    
+    /**
+     * @param entity Entity triggering effect
+     */
+    public void triggerProximityEffect(Entity entity) {
+    	if (entity != null) {
+    		if (areaEffect != null) {
+    			areaEffect.triggerProximityEffect(entity);
+    		}
+    		if (!entity.getEffectiveStatistics().isDead()) {
+    			Item item = itemSlot.getItem();
+    			if (item != null && item.getCategory() == Category.TAKEABLE_ITEM) {
+    				if (entity.storeItem(item)) {
+    					itemSlot.removeItem();
+    				}
+    			}
+    		}
+    	}
     }
 
     /**
