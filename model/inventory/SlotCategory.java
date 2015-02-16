@@ -2,6 +2,8 @@ package model.inventory;
 
 /**
  * @author Jean-Ralph Aviles AND Carlos Vizcaino
+ * 
+ * slots can be of a type. It can be headware, eyeware, etc.
  */
 public enum SlotCategory {
 	ANY_SLOT(1),

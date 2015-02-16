@@ -6,6 +6,7 @@ import utility.decal.TakeDamageAreaEffectDecal;
 
 /**
  * @author Jean-Ralph Aviles
+* Decrements health by 3 points
  */
 public final class TakeDamageAreaEffect extends AreaEffect {
 	private int damageTaken = 3;

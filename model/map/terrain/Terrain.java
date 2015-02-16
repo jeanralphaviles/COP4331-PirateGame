@@ -1,6 +1,7 @@
 package model.map.terrain;
 
 import utility.decal.Decal;
+/** Determines if tile is passable or not depending on terrain type*/
 
 public abstract class Terrain {
 	private Decal decal;

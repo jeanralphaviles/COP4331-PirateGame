@@ -1,15 +1,21 @@
 package view.screen;
 
+import controller.ScreenController;
+import java.util.ArrayList;
 import model.Model;
+import utility.IntentComponentMap;
+import view.viewport.GameScreenViewport;
 
-public abstract class GameScreen extends Screen {
+public class GameScreen extends Screen {
 
-	public GameScreen(Model model) {
-		super(model);
-	}
+    public GameScreen(Model model) {
+        super(model);
+    }
 
-	public void init() {
-		// Does something
-	}
+    public void init() {
+        viewPort = new GameScreenViewport();
+        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
+        controller = new ScreenController(model, icms);
+    }
 
 }

@@ -6,6 +6,7 @@ import utility.decal.Decal;
 /**
  * Created by Carlos Vizcaino
  * Date 2/14/2015
+ * A Food Item is an item which is eaten, does it's thing, and hence is no longer on the map (deleted off map) 
  */
 
 

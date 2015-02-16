@@ -6,6 +6,7 @@ import model.entity.Entity;
 
 /**
  * @author Jean-Ralph Aviles
+* Heal damage heals damage by 3 points
  */
 public final class HealDamageAreaEffect extends AreaEffect {
 	private int damageHealed = 3;

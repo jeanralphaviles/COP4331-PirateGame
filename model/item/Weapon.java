@@ -71,7 +71,9 @@ public class Weapon extends TakeableItem {
         this.hardiness = hardiness;
     }
     // ---------------------------------------------------
-    @Override
+   
+/**Weapon augments stats*/
+ @Override
     public void triggerProximity(Entity entity){
 
         Statistics entityStats = entity.getStatistics();

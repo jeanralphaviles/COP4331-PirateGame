@@ -6,6 +6,7 @@ import utility.decal.LevelUpAreaEffectDecal;
 
 /**
  * @author Jean-Ralph Aviles
+* increases experience by enough so the entity can level up.
  */
 public final class LevelUpAreaEffect extends AreaEffect {
 	public LevelUpAreaEffect() {

@@ -15,6 +15,7 @@ import utility.decal.ItemDefaultDecal;
 public class Avatar extends Entity {
 
     private String name;
+    private String nickname;
 
     public Avatar() {
         super();
@@ -34,6 +35,16 @@ public class Avatar extends Entity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    
+    
 
     // ------------ TESTING AVATAR -----------------
     // ------------                -----------------

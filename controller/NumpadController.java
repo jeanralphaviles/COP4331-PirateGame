@@ -50,6 +50,11 @@ public class NumpadController extends Controller implements KeyListener {
     public void keyReleased(KeyEvent txt) {
 
     }
+    
+    @Override
+    protected void processUserInput(Model model) {
+        //empty default implementation
+    }
 
     public static void main(String[] args) {
         NumpadController go = new NumpadController(new Model());

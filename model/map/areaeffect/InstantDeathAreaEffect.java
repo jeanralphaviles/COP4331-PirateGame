@@ -6,6 +6,7 @@ import model.entity.Entity;
 
 /**
  * @author Jean-Ralph Aviles
+* decrements lives left by one and resets health bar
  */
 public final class InstantDeathAreaEffect extends AreaEffect {
 	public InstantDeathAreaEffect() {
