@@ -1,5 +1,6 @@
 package utility;
 
+import java.awt.Component;
 import javax.swing.JComponent;
 
 /**
@@ -11,13 +12,13 @@ import javax.swing.JComponent;
 
 public class IntentComponentMap {
 
-    private JComponent component;
+    private Component component;
     private Object object;
     private Intent intent;
     private String details;
 
-    public IntentComponentMap(JComponent jComponent, Intent intent) {
-        this.setComponent(jComponent);
+    public IntentComponentMap(Component component, Intent intent) {
+        this.setComponent(component);
         this.setIntent(intent);
     }
     
@@ -27,10 +28,16 @@ public class IntentComponentMap {
         this.details = details;
     }
 
-    public IntentComponentMap(JComponent component, Intent intent, String details) {
+    public IntentComponentMap(Component component, Intent intent, String details) {
         this.component = component;
         this.intent = intent;
         this.details = details;
+    }
+    
+    public IntentComponentMap(Component component, Object object, Intent intent) {
+        this.component = component;
+        this.object = object;
+        this.intent = intent;
     }
 
     public Intent getIntent() {
@@ -41,11 +48,11 @@ public class IntentComponentMap {
         this.intent = intent;
     }
 
-    public JComponent getComponent() {
+    public Component getComponent() {
         return component;
     }
 
-    public void setComponent(JComponent component) {
+    public void setComponent(Component component) {
         this.component = component;
     }
 
@@ -67,6 +74,7 @@ public class IntentComponentMap {
 
     /*Inner classes*/
     public enum Intent {
-        LOAD, SAVE, EXIT, NEW, USER_INPUT, BEGIN, GOTO_GAME, GOTO_PAUSE, GOTO_MAIN, SHOW_DIALOGUE
+        LOAD, SAVE, EXIT, NEW, USER_INPUT, BEGIN, GOTO_GAME, GOTO_PAUSE, GOTO_MAIN, SHOW_DIALOGUE,
+        EQUIP_ITEM, UNEQUIP_ITEM
     }
 }

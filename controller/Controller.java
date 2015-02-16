@@ -115,6 +115,9 @@ public abstract class Controller extends Thread {
             case BEGIN:
                 begin();
                 break;
+            case EQUIP_ITEM:
+                //
+                break;
             default:
                 break;
         }

@@ -1,5 +1,6 @@
 package view.screen;
 
+import controller.GameScreenController;
 import controller.ScreenController;
 import java.util.ArrayList;
 import model.Model;
@@ -17,8 +18,11 @@ public class GameScreen extends Screen {
     public void init() {
         viewPort = new GameScreenViewport();
         //viewPort = new AreaViewport();
+        viewPort.updateView(model.getGameObject());
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
-        controller = new ScreenController(model, icms);
+        controller = new GameScreenController(model, icms);
     }
+    
+    
 
 }

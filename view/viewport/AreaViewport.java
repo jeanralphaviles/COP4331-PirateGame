@@ -29,8 +29,8 @@ import utility.decal.Decal;
  */
 public class AreaViewport extends ViewPort {
 
-    private int numTilesWide = 7; //should be odd
-    private int numTilesHigh = 7; //should be odd
+    private int numTilesWide = 5; //should be odd
+    private int numTilesHigh = 5; //should be odd
     //
     private boolean followAvatar = true;
 
@@ -180,7 +180,7 @@ public class AreaViewport extends ViewPort {
         
         private void autoScale() {
             if (followAvatar) {
-                scale(140, 140);
+                scale(160, 160);
             } else {
                 scale(30, 30);
             }

@@ -49,7 +49,10 @@ public class Entity {
     // Accessors:
     // ----------------------------------------------------
     public Inventory getInventory() {return inventory; }
-
+    
+    // ----------------------------------------------------
+    public EquippedInventory getEquippedInventory(){ return equippedInventory; }
+    
     // ----------------------------------------------------
     public ArrayList<Item> getEquippedInventoryItems() {
 
@@ -78,7 +81,7 @@ public class Entity {
     public boolean equipItem(Item item) {
         return equippedInventory.storeItem(item);
     }
-
+    
     public boolean hasItem(Item item) {
         if (inventory != null && inventory.hasItem(item)) {
             return true;

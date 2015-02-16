@@ -67,8 +67,9 @@ public class EquippedInventory extends Inventory{
 
             TakeableItem tempItem = (TakeableItem)item;
             for (Slot s: slots){
-
-                if ( !s.isFull() && s.getSlotCategory() == tempItem.getSlotSCategory() ){
+                
+                // s.getSlotCategory() == tempItem.getSlotSCategory()
+                if ( !s.isFull()  ){
 
                     s.storeItem(tempItem);
                     return true;

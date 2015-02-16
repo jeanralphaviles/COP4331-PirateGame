@@ -66,6 +66,14 @@ public class Slot extends Inventory {
 
         return null;
     }
+    
+    public boolean equipItem(Item item) {
+        if (items.isEmpty()) {
+            items.add(item);
+            return true;
+        }
+        return false;
+    }
 
     // --------------------------------------------------------
 	public boolean removeItem() {

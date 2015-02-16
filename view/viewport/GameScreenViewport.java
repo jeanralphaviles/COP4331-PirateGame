@@ -37,13 +37,14 @@ public class GameScreenViewport extends ViewPort {
 //        addViewport(new StatusViewport(), BorderLayout.SOUTH);
 //        addViewport(new UtilityViewport(), BorderLayout.EAST);
 //        this.
-        GridLayout grid = new GridLayout(2, 2, 0, 0);
+        GridLayout grid = new GridLayout(3, 2, 0, 0);
         setLayout(grid);
         
         addViewport(new AreaViewport());
         addViewport(new StatusViewport());
         addViewport(new UtilityViewport());
         addViewport(new DialogueViewport());
+        addViewport(new InventoryViewportConnor());
     }
     
     @Override

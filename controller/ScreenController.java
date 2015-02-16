@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Component;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
@@ -29,7 +30,7 @@ public class ScreenController extends Controller {
     }
 
     protected void setListenerForICM(IntentComponentMap icm) {
-        JComponent component = icm.getComponent();
+        Component component = icm.getComponent();
         final Intent intent = icm.getIntent();
         ActionListener AL = new ActionListener() {
             @Override
