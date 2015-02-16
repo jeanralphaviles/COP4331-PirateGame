@@ -1,14 +1,13 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ScreenController extends Controller {
 
@@ -31,7 +30,7 @@ public class ScreenController extends Controller {
 
     protected void setListenerForICM(IntentComponentMap icm) {
         JComponent component = icm.getComponent();
-        Intent intent = icm.getIntent();
+        final Intent intent = icm.getIntent();
         ActionListener AL = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

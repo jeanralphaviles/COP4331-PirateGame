@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class test {
+public class Test {
 
 
-	public test()
+	public Test()
 	{
 	gui();
 	}
@@ -46,7 +46,8 @@ public class test {
 	frame.setVisible(true);
 
 	}
+
 	public static void main(String[] args) {
-	new test();
+	new Test();
 	}
 }

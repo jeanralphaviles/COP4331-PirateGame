@@ -33,20 +33,20 @@ public class MapGenerator {
 				for (int i = 0; i < row.length; ++i) {
 					Maptile tile = new Maptile();
 
-					switch (row[i]) {
-					case "Grass":
-						tile.setTerrain(new Grass());
-						break;
-					case "Water":
-						tile.setTerrain(new Water());
-						break;
-					case "Mountain":
-						tile.setTerrain(new Mountain());
-						break;
-					default:
-						tile.setTerrain(new Grass());
-						break;
-					}
+
+                    if ( row[i] == "Water"){
+
+                        tile.setTerrain(new Water());
+                    }
+                    else if ( row[i] == "Mountain") {
+
+                        tile.setTerrain(new Mountain());
+                    }
+                    else {
+
+                        tile.setTerrain( new Grass() );
+                    }
+
 					rowTiles.add(tile);
 				}
 				longest = rowTiles.size() > longest ? rowTiles.size() : longest;
