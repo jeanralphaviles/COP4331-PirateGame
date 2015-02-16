@@ -64,7 +64,7 @@ public class DialogueScreenViewport extends ViewPort {
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         //subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        //icms.add(new IntentComponentMap(continuePastDialogueButton, IntentComponentMap.Intent.GOTO_GAME));
+        icms.add(new IntentComponentMap(continuePastDialogueButton, IntentComponentMap.Intent.GOTO_GAME));
         return icms;
     }
     /**
@@ -76,20 +76,31 @@ public class DialogueScreenViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        continuePastDialogueButton = new javax.swing.JButton();
+
+        continuePastDialogueButton.setText("Continue Past Dialogue");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(continuePastDialogueButton)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(continuePastDialogueButton)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton continuePastDialogueButton;
     // End of variables declaration//GEN-END:variables
 
     
