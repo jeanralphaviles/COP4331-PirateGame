@@ -1,8 +1,10 @@
 package model.item;
 
+
 import model.entity.Entity;
 import model.entity.Statistics;
 import model.inventory.SlotCategory;
+
 import utility.decal.Decal;
 
 /**
@@ -13,6 +15,7 @@ import utility.decal.Decal;
 public class Weapon extends TakeableItem {
 
     // Atrributes
+
     protected int strength;
     protected int hardiness;
 
@@ -20,14 +23,20 @@ public class Weapon extends TakeableItem {
     public Weapon(){
 
         super();
+
         strength = 0;
         hardiness = 0;
         slotCategory = SlotCategory.HAND;
+
+        strength = 0;
+        hardiness = 0;
+
     }
     // Constructor I
     public Weapon(Decal decal,String name){
 
         super(decal,name);
+
 
         slotCategory = SlotCategory.HAND;
         hardiness = 0;
@@ -39,6 +48,12 @@ public class Weapon extends TakeableItem {
         super(decal,name);
 
         slotCategory = SlotCategory.HAND;
+        hardiness = 0;
+    }
+    // Constructor II
+    public Weapon(Decal decal, String name, int damage, int strength, int hardiness){
+
+        super(decal,name);
         this.strength = strength;
         this.hardiness = hardiness;
 
@@ -46,6 +61,7 @@ public class Weapon extends TakeableItem {
 
     // ----------- METHODS IMPLEMENTATION -------------------
     // -----------                        -------------------
+
 
     // Accessors:
     // ---------------------------------------------------

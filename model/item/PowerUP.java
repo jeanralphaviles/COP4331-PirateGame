@@ -1,12 +1,15 @@
 package model.item;
 
+
 import model.entity.Entity;
+
 import utility.decal.Decal;
 
 /**
  * Created by Calos Vizcaino
  *  2/14/15.
  */
+
 public class PowerUP extends InteractiveItem{
 
     // Attributes
@@ -35,6 +38,7 @@ public class PowerUP extends InteractiveItem{
     public PowerUP(Decal decal, String name, int intellect, int agility, int experience){
 
         super(decal,name);
+
         this.intellect = intellect;
         this.agility = agility;
         this.experience = experience;
@@ -73,4 +77,5 @@ public class PowerUP extends InteractiveItem{
     		entity.getStatistics().setExperience( getExperience() + this.experience);
         }
     }
+
 }
