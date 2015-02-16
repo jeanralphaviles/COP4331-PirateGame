@@ -129,7 +129,7 @@ public class Maptile {
 
     @Override
 	public String toString() {
-    	return "[" + itemSlot.toString() + "," + entity.toString() + "," + terrain.toString() + "," + areaEffect.toString() + "]";
+    	return "[" + itemSlot.toString() + "," + terrain.toString() + "," + areaEffect.toString() + "]";
     }
     
 	public static Maptile fromString(String string) throws IOException {
@@ -145,12 +145,9 @@ public class Maptile {
 					Slot itemSlot = Slot.fromString(stripped.substring(start, i));
 					mapTile.itemSlot = itemSlot;
 				} else if (itemCount == 1) {
-					Entity entity = Entity.fromString(stripped.substring(start, i));
-					mapTile.entity = entity;
-				} else if (itemCount == 2) {
 					Terrain terrain = Terrain.fromString(stripped.substring(start, i));
 					mapTile.terrain = terrain;
-				} else if (itemCount == 3) {
+				} else if (itemCount == 2) {
 					AreaEffect areaEffect = AreaEffect.fromString(stripped.substring(start, i));
 					mapTile.areaEffect = areaEffect;
 					break;
