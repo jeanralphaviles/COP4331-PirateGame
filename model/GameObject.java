@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import model.entity.Avatar;
@@ -44,5 +45,16 @@ public class GameObject {
     public void setLevel(Level level) {
         this.level = level;
     }
+    
+    public String toString() {
+    	return "[" + avatar.toString() + "]";
+    }
+
+	public static GameObject fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		GameObject obj = new GameObject();
+		obj.avatar = Avatar.fromString(stripped);
+		return obj;
+	}
     
 }

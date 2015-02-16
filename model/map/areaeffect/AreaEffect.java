@@ -39,4 +39,13 @@ public abstract class AreaEffect {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	
+	public String toString() {
+		return "[]";
+	}
+
+	public static AreaEffect fromString(String substring) {
+		// TODO Actually set the effect type
+		return null;
+	}
 }

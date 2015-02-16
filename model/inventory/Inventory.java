@@ -225,5 +225,39 @@ public class Inventory{
           System.out.print(e.getMessage());
       }
     }
+    
+    public String toString() {
+    	return "[" + items.toString() + "," + capacity + "]";
+    }
+
+	public static Inventory fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		Inventory inventory = new Inventory();
+		int bracketCount = 0;
+		int start = 0;
+		for (int i = 0; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				ArrayList<Item> items = new ArrayList<Item>();
+				int start2 = 0;
+				String arrayListStripped = stripped.substring(start + 1, i - 1);
+				for (int j = 0; j < arrayListStripped.length(); ++j) {
+					if (bracketCount == 0 && arrayListStripped.charAt(j) == ',') {
+						Item item = Item.fromString(arrayListStripped.substring(start2, j));
+						items.add(item);
+						start2 = j + 1;
+					}
+				}
+				start = i + 1;
+				inventory.items = items;
+				break;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		inventory.capacity = Integer.parseInt(stripped.substring(start, stripped.length()));
+		return inventory;
+	}
 
 } // End of Inventory class

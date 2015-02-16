@@ -10,6 +10,7 @@ import model.map.Maptile;
 import utility.decal.Decal;
 import utility.decal.DefaultEntityDecal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -182,6 +183,53 @@ public class Entity {
     public void setOccupation(Occupation occupation) {
         this.occupation = occupation;
     }
+    
+    public String toString() {
+    	return "[" + inventory.toString() + "," + equippedInventory.toString() + "," + (occupation != null ? occupation.toString() : "[WishWeHadGSON]") + "," + statistics.toString() + "," + (maptile != null ? maptile.toString() : "[WishWeHadGSON]") + "," + decal.toString() + "]";
+    }
+
+	public static Entity fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		int bracketCount = 0;
+		int start = 0;
+		int itemCount = 0;
+		Entity entity = new Entity();
+		for (int i = 0; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				if (itemCount == 0) {
+					Inventory inventory = Inventory.fromString(stripped.substring(start, i));
+					entity.inventory = inventory;
+				} else if (itemCount == 1) {
+					EquippedInventory equippedInventory = EquippedInventory.fromString(stripped.substring(start, i));
+					entity.equippedInventory = equippedInventory;
+				} else if (itemCount == 2) {
+					Occupation occupation = Occupation.fromString(stripped.substring(start, i));
+					entity.occupation = occupation;
+				} else if (itemCount == 3) {
+					Statistics statistics = Statistics.fromString(stripped.substring(start, i));
+					entity.statistics = statistics;
+				} else if (itemCount == 4) {
+					if (stripped.substring(start, i) != "WishWeHadGSON") {
+						Maptile maptile = Maptile.fromString(stripped.substring(start, i));
+						entity.maptile = maptile;
+					} else {
+						entity.maptile = null;
+					}
+				} else if (itemCount == 5) {
+					Decal decal = Decal.fromString(stripped.substring(start, i));
+					entity.decal = decal;
+					break;
+				}
+				++itemCount;
+				start = i + 1;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		return entity;
+	}
 
 
 }

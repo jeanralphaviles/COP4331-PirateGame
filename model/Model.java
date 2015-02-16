@@ -1,7 +1,9 @@
 package model;
 
 import model.entity.occupation.Occupation;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import model.entity.Entity;
@@ -153,4 +155,19 @@ public class Model extends Thread {
 	public void setUtilityData(UtilityData utilityData) {
 		this.utilityData = utilityData;
 	}    
+	
+	public String toString() {
+		return "[" + gameObject.toString() + "]";
+	}
+	
+	public static Model fromString(String string) throws IOException {
+		System.out.print(string);
+		if (string.length() == 0) {
+			return new Model();
+		}
+		String stripped = string.substring(1, string.length() - 1);
+		Model model = new Model();
+		model.gameObject = GameObject.fromString(stripped);
+		return model;
+	}
 }

@@ -1,5 +1,7 @@
 package model.entity;
 
+import java.io.IOException;
+
 import model.entity.occupation.Occupation;
 import model.item.*;
 import model.map.Maptile;
@@ -144,4 +146,35 @@ public class Avatar extends Entity {
             System.out.println("Error: obstacle item is wrong");
 
     }
+    
+    public String toString() {
+    	return "[" + super.toString() + "," + name + "," + nickname + "]";
+    }
+
+	public static Avatar fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		Avatar avatar = new Avatar();
+		int bracketCount = 0;
+		int start = 0;
+		for (int i = 0; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				Entity entity = Entity.fromString(stripped.substring(start, i));
+				avatar.decal = entity.decal;
+				avatar.equippedInventory = entity.equippedInventory;
+				avatar.maptile = entity.maptile;
+				avatar.occupation = entity.occupation;
+				avatar.statistics = entity.statistics;
+				start = i + 1;
+				break;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		String[] rest = stripped.substring(start, stripped.length()).split(",");
+		avatar.setName(rest[0]);
+		avatar.setNickname(rest[1]);
+		return avatar;
+	}
 }

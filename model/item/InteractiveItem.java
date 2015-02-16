@@ -1,5 +1,7 @@
 package model.item;
 
+import java.io.IOException;
+
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;

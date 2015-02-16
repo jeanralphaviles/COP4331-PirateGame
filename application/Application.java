@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import utility.LoadSave;
 import controller.NumpadController;
 import model.Model;
@@ -17,7 +19,7 @@ public class Application {
     
     /*Methods*/
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         loadsave = new LoadSave();
 	model = initModel(modelFilename, loadsave);
         loadsave.saveModel(model, modelFilename); //for testing
@@ -27,7 +29,7 @@ public class Application {
 	launchModel(updatesPerSecond); //execution goes to main game loop
     }
 
-    public static Model initModel(String modelFilename, LoadSave loadSave) {
+    public static Model initModel(String modelFilename, LoadSave loadSave) throws IOException {
         Model m = loadsave.loadModel(modelFilename);
         if (m == null) { //load failed
             m = new Model(); //create Default

@@ -282,5 +282,25 @@ public class Statistics implements Cloneable {
         // Increases 2 by level
         return 15 + getLevel()*2;
     }
+    
+    public String toString() {
+    	return "[" + livesLeft + "," + strength + "," + agility + "," + intellect + "," + hardiness + "," + experience + "," + maxHealth + "," + currentHealth + "," + currentMana + "]";
+    }
+
+	public static Statistics fromString(String string) {
+		String stripped = string.substring(1, string.length() - 1);
+		String[] components = stripped.split(",");
+		Statistics statistics = new Statistics();
+		statistics.livesLeft = Integer.parseInt(components[0]);
+		statistics.strength = Integer.parseInt(components[1]);
+		statistics.agility = Integer.parseInt(components[2]);
+		statistics.intellect = Integer.parseInt(components[3]);
+		statistics.hardiness = Integer.parseInt(components[4]);
+		statistics.experience = Integer.parseInt(components[5]);
+		statistics.maxHealth = Integer.parseInt(components[6]);
+		statistics.currentHealth = Integer.parseInt(components[7]);
+		statistics.currentMana = Integer.parseInt(components[8]);
+		return statistics;
+	}
 
 }

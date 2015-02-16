@@ -25,4 +25,24 @@ public abstract class Occupation {
 		this.occupationName = occupationName;
 	}
 	
+	public String toString() {
+		return "[" + occupationName + "]";
+	}
+
+	public static Occupation fromString(String string) {
+		String stripped = string.substring(1, string.length() - 1);
+		
+		Occupation occupation = null;
+		
+		if (stripped.equals("Smasher")) {
+			occupation = new Smasher();
+		} else if (stripped.equals("Sneak")) {
+			occupation = new Sneak();
+		} else if (stripped.equals("Summoner")) {
+			occupation = new Summoner();
+		}
+		
+		return occupation;
+	}
+	
 }
