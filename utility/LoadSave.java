@@ -6,7 +6,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Scanner;
+import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,17 +63,29 @@ public class LoadSave {
     //Returns a (text) file as a single string
     public String getFileString(String filename) {
         try {
-            File file = new File(filename);
-            StringBuilder fileContents = new StringBuilder((int) file.length());
-            Scanner scanner = new Scanner(file);
-            String lineSeparator = System.getProperty("line.separator");
-            while (scanner.hasNextLine()) {
-                fileContents.append(scanner.nextLine() + lineSeparator);
+            URL resource = ClassLoader.getSystemClassLoader().getResource(filename);
+            File file = new File(resource.toURI());
+            if (file!=null && file.exists()) {
+                //File file = new File(filename);
+                StringBuilder fileContents = new StringBuilder((int) file.length());
+                Scanner scanner = new Scanner(file);
+                String lineSeparator = System.getProperty("line.separator");
+                while (scanner.hasNextLine()) {
+                    fileContents.append(scanner.nextLine() + lineSeparator);
+                }
+                scanner.close();
+                return fileContents.toString();
+            } else {
+                return "";
             }
-            scanner.close();
-            return fileContents.toString();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LoadSave.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(LoadSave.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoadSave.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace();
         }
         return null;
     }

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import model.Model;
 import utility.Course;
 
-public class Application {
+public class RunGame {
 
     /*Properties*/
     private static Model model;
