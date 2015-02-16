@@ -16,47 +16,45 @@ import utility.IntentComponentMap;
  * @author comcc_000
  */
 public class DialogueViewport extends ViewPort {
-    
+
     /**
      * Creates new form DialogueViewport
      */
     public DialogueViewport() {
-		initComponents();
-		setBackground(Color.BLACK);
+        initComponents();
 		//components should be text and button in panel
-		
-	}
 
-	private void initInteriorViewports() {
-		//interiorViewports.add(new FlavorImageViewport());
-	}
+    }
 
-	private void addInteriorViewports() {
-		int numInteriorViewports = interiorViewports.size();
-		ViewPort view;
-		JPanel panel;
-		for (int i = 0; i < numInteriorViewports; i++) {
-			view = interiorViewports.get(i);
+    private void initInteriorViewports() {
+        //interiorViewports.add(new FlavorImageViewport());
+    }
+
+    private void addInteriorViewports() {
+        int numInteriorViewports = interiorViewports.size();
+        ViewPort view;
+        JPanel panel;
+        for (int i = 0; i < numInteriorViewports; i++) {
+            view = interiorViewports.get(i);
 //			panel = (JPanel) view;
 //			add(panel);
 
-		}
-	}
+        }
+    }
 
-	@Override
-	public void updateView(GameObject gameObject) {
+    @Override
+    public void updateView(GameObject gameObject) {
+        String dialogue = gameObject.getLevel().getCurrentDialogue();
+        dialogueTextView.setText(dialogue);
+    }
 
-	}
-
-	@Override
-	public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-		// subviewports have all the components...
-		ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(
-				1);
-//		icms.add(new IntentComponentMap(continuePastDialogueButton,
-//				IntentComponentMap.Intent.GOTO_GAME));
-		return icms;
-	}
+    @Override
+    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+        // subviewports have all the components...
+        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+        icms.add(new IntentComponentMap(continueButton, IntentComponentMap.Intent.SHOW_DIALOGUE));
+        return icms;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,19 +65,47 @@ public class DialogueViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogueTextView = new javax.swing.JTextField();
+        continueButton = new javax.swing.JButton();
+
+        dialogueTextView.setText("Dialogue");
+        dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dialogueTextViewActionPerformed(evt);
+            }
+        });
+
+        continueButton.setText("Continue");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(continueButton)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(continueButton))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void dialogueTextViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogueTextViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dialogueTextViewActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton continueButton;
+    private javax.swing.JTextField dialogueTextView;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,9 +13,34 @@ public class Level {
 
     private ArrayList<Entity> entities = new ArrayList<Entity>(1);
     private Map map;
+    //
+    private int dialogueIndex = 0;
+    private ArrayList<String> dialogueStrings = new ArrayList<String>(1);
+    //
+    private String currentDialogue = ""; //let this be set outside
 
     public Level() {
         map = new Map();
+        initDialogueStrings();
+    }
+    
+    private void initDialogueStrings() {
+        dialogueStrings.add("Ugh, my head...");
+        dialogueStrings.add("I must have been knocked out...");
+        dialogueStrings.add("I have no idea how long it's been since I've had my last drink...");
+        dialogueStrings.add("The accumulated hangover of the past few years could kill me...");
+        dialogueStrings.add("Best not to take it all at once.");
+    }
+    
+    public String getNextDialogue() {
+        int numDialogueStrings = dialogueStrings.size();
+        if (dialogueIndex >= numDialogueStrings) {
+            return null; //out of dialogue
+        } else {
+            String dialogue = dialogueStrings.get(dialogueIndex);
+            dialogueIndex++;
+            return dialogue;
+        }
     }
 
     /**
@@ -98,5 +123,15 @@ public class Level {
         return null; /* Couldn't find Old Entity */
 
     }
+
+    public String getCurrentDialogue() {
+        return currentDialogue;
+    }
+
+    public void setCurrentDialogue(String currentDialogue) {
+        this.currentDialogue = currentDialogue;
+    }
+    
+    
 
 }

@@ -94,6 +94,14 @@ public class Model extends Thread {
     public void setAvatarOccupation(Occupation occupation) {
         this.gameObject.getAvatar().setOccupation(occupation);
     }
+    
+    public String getNextDialogue() {
+        return gameObject.getLevel().getNextDialogue();
+    }
+    
+    public void setDialogue(String s) {
+        gameObject.getLevel().setCurrentDialogue(s);
+    }
 
 //    public void save() {
 //        save(gameObject);

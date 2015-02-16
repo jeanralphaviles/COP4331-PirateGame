@@ -70,10 +70,22 @@ public abstract class Controller extends Thread {
         Screen screen = new DialogueScreen(model);
         model.launchScreen(screen);
     }
+    
+    private void showNextDialogue() {
+       String dialogue = model.getNextDialogue();
+       if (dialogue != null) {
+           model.setDialogue(dialogue);
+       } else {
+           gotoGameScreen();
+       }
+    }
 
     protected void action(Intent intent) {
         processUserInput(this.model);
         switch (intent) {
+            case SHOW_DIALOGUE:
+                showNextDialogue();
+                break;
             case GOTO_MAIN:
                 gotoMainScreen();
                 break;

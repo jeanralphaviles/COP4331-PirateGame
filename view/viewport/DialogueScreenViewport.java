@@ -33,13 +33,33 @@ public class DialogueScreenViewport extends ViewPort {
 
     @Override
     public void updateView(GameObject gameObject) {
-
+        int numInteriorViewports = interiorViewports.size();
+        ViewPort viewport;
+        for (int i=0; i<numInteriorViewports; i++) {
+            viewport = interiorViewports.get(i);
+            viewport.updateView(gameObject);
+        }
     }
 
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+        ArrayList<IntentComponentMap> temp_icms = new ArrayList<IntentComponentMap>(1);
+        int numInteriorViewports = interiorViewports.size();
+        ViewPort viewport;
+        for (int i=0; i<numInteriorViewports; i++) {
+            viewport = interiorViewports.get(i);
+            temp_icms = viewport.generateIntentComponentMapping();
+            aggregateICMs(icms, temp_icms);
+        }
         return icms;
+    }
+    
+    private void aggregateICMs(ArrayList<IntentComponentMap> icms1, ArrayList<IntentComponentMap> icms2) {
+        int numICMs2 = icms2.size();
+        for (int i=0; i<numICMs2; i++) {
+            icms1.add(icms2.get(i));
+        }
     }
 
 //    private void initInteriorViewports() {
