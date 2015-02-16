@@ -1,7 +1,10 @@
 package model;
 
+import java.io.File;
 import java.io.IOException;
 
+import utility.ItemGenerator;
+import utility.MapGenerator;
 import model.entity.Avatar;
 import model.map.Maptile;
 /**
@@ -56,6 +59,14 @@ public class GameObject {
 		GameObject obj = new GameObject();
 		obj.avatar = Avatar.fromString(stripped);
 		obj.getLevel().getMap().addEntity(obj.avatar);
+		obj.getLevel().setMap(MapGenerator.generateMap(new File("Levels/Map1.csv")));
+		obj.avatar.move(obj.getLevel().getMap().getMapTile(14, 10));
+		try {
+			ItemGenerator.generateItems(new File("Levels/Items1.csv"), obj.getLevel().getMap());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO ENTITIESSSSSSSSSSS!@#!@#@!#@!#@!#!@#!@
 		return obj;
 	}

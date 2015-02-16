@@ -33,7 +33,7 @@ public class Application {
     }
 
     public static Model initModel(String modelFilename, LoadSave loadSave) throws IOException {
-        Model m = null; //loadsave.loadModel(modelFilename);
+        Model m = loadsave.loadModel(modelFilename);
         if (m == null) { //load failed
             m = new Model(); //create Default
         }

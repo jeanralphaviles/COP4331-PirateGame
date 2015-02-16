@@ -3,6 +3,10 @@ package model.map;
 import java.util.HashMap;
 
 import model.entity.Entity;
+import model.map.areaeffect.HealDamageAreaEffect;
+import model.map.areaeffect.InstantDeathAreaEffect;
+import model.map.areaeffect.LevelUpAreaEffect;
+import model.map.areaeffect.TakeDamageAreaEffect;
 import utility.Course;
 
 public class Map {
