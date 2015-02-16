@@ -81,7 +81,7 @@ public class TakeableItem extends Item{
 
     @Override
 	public String toString() {
-    	return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + slotCategory +  "]";
+    	return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + slotCategory.ordinal() +  "]";
     }
 
     public static TakeableItem fromString(String string) throws IOException {
@@ -119,7 +119,7 @@ public class TakeableItem extends Item{
     	}
     	String[] rest = stripped.substring(start, stripped.length()).split(",");
 		item.name = rest[0];
-		item.slotCategory = SlotCategory.valueOf(rest[1]);
+		item.slotCategory = SlotCategory.values()[Integer.parseInt(rest[1]) - 1];
     
     	return item;
     }

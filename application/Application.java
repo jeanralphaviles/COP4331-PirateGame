@@ -22,7 +22,7 @@ public class Application {
     public static void main(String[] args) throws IOException {
         loadsave = new LoadSave();
 	model = initModel(modelFilename, loadsave);
-        //loadsave.saveModel(model, modelFilename); //for testing
+        loadsave.saveModel(model, modelFilename); //for testing
         
 	initAuxiliaryController();
 
@@ -30,11 +30,11 @@ public class Application {
     }
 
     public static Model initModel(String modelFilename, LoadSave loadSave) throws IOException {
-        Model m = null;//loadsave.loadModel(modelFilename);
+        Model m = null; //loadsave.loadModel(modelFilename);
         if (m == null) { //load failed
             m = new Model(); //create Default
         }
-        return m;
+       return m;
     }
 
     public static void initAuxiliaryController() {

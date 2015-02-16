@@ -9,6 +9,7 @@ import model.inventory.SlotCategory;
 import model.item.Item;
 import model.item.ObstacleItem;
 import model.map.areaeffect.AreaEffect;
+import model.map.areaeffect.NullAreaEffect;
 import model.map.terrain.Grass;
 import model.map.terrain.Terrain;
 import utility.decal.Decal;
@@ -21,7 +22,7 @@ public class Maptile {
     private Slot itemSlot = new Slot(SlotCategory.ANY_SLOT);
     private Entity entity = null;
     private Terrain terrain;
-    private AreaEffect areaEffect = null;
+    private AreaEffect areaEffect = new NullAreaEffect();
 
     public Maptile() {
         terrain = new Grass();
