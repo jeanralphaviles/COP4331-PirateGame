@@ -87,10 +87,18 @@ public class Maptile {
     		}
     		if (!entity.getEffectiveStatistics().isDead()) {
     			Item item = itemSlot.getItem();
-    			if (item != null && item.getCategory() == Category.TAKEABLE_ITEM) {
+    			if (item == null) {
+    				return;
+    			}
+    			if (item.getCategory() == Category.TAKEABLE_ITEM) {
     				if (entity.storeItem(item)) {
     					itemSlot.removeItem();
     				}
+    				System.out.println("TakeableItem activated");
+    			} else if (item.getCategory() == Category.ONE_SHOT_ITEM) {
+    				item.triggerProximity(entity);
+    				this.itemSlot.removeItem();
+    				System.out.println("OneShotItem activated");
     			}
     		}
     	}

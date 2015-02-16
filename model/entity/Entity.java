@@ -121,11 +121,11 @@ public class Entity {
         }
         return false;
     }
+
     /**
      * @param item - item is attempted to be placed in inventory
      * @return - true if item is able to be placed in inventory
      */
-
     protected boolean putItemInInventory(Item item) {
         return storeItem(item);
     }

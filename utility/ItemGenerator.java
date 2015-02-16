@@ -53,12 +53,12 @@ public class ItemGenerator {
 					switch (Category.valueOf(category)) { // Create correct item
 															// based on category
 					case INTERACTIVE_ITEM:
-						item = new InteractiveItem();
+						item = new InteractiveItem(); // Will Add Experience
 						break;
 					case OBSTACLE_ITEM:
 						item = new ObstacleItem();
 						break;
-					case ONE_SHOT_ITEM:
+					case ONE_SHOT_ITEM: // Will Add Health and Vanish
 						item = new OneShotItem();
 						break;
 					case TAKEABLE_ITEM:
