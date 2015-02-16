@@ -1,7 +1,6 @@
 package utility;
 
 import javax.swing.JComponent;
-import controller.Intent;
 
 /**
  * @author Team Tiger
@@ -65,9 +64,6 @@ public class IntentComponentMap {
     public void setObject(Object object) {
         this.object = object;
     }
-    
-    
-    
 
     /*Inner classes*/
     public enum Intent {
