@@ -22,24 +22,6 @@ public class DialogueViewport extends ViewPort {
      */
     public DialogueViewport() {
         initComponents();
-		//components should be text and button in panel
-
-    }
-
-    private void initInteriorViewports() {
-        //interiorViewports.add(new FlavorImageViewport());
-    }
-
-    private void addInteriorViewports() {
-        int numInteriorViewports = interiorViewports.size();
-        ViewPort view;
-        JPanel panel;
-        for (int i = 0; i < numInteriorViewports; i++) {
-            view = interiorViewports.get(i);
-//			panel = (JPanel) view;
-//			add(panel);
-
-        }
     }
 
     @Override

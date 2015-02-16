@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -20,30 +21,24 @@ import utility.IntentComponentMap;
 public class GameScreenViewport extends ViewPort {
 
     public GameScreenViewport() {
-        initComponents();
-    }
-    
-    private void initInteriorViewports() {
-        //interiorViewports.add(new DialogueViewport());
-    }
-    
-    private void addInteriorViewports() {
-        int numInteriorViewports = interiorViewports.size();
-        ViewPort view;
-        for (int i=0; i<numInteriorViewports; i++) {
-            view = interiorViewports.get(i);
-            //addViewport(view);
-        }
+        interiorViewports.add(new AreaViewport());
+        add(interiorViewports.get(0), BorderLayout.NORTH);
+//        JPanel panel = new AreaViewport();
+//        add(panel);
     }
     
     @Override
     public void updateView(GameObject gameObject) {
-        
+        int numInteriorViewports = interiorViewports.size();
+        ViewPort viewport;
+        for (int i=0; i<numInteriorViewports; i++) {
+            viewport = interiorViewports.get(i);
+            viewport.updateView(gameObject);
+        }
     }
 
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        //subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
         //icms.add(new IntentComponentMap(pauseButton, IntentComponentMap.Intent.GOTO_PAUSE));
         return icms;
