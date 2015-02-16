@@ -22,7 +22,6 @@ public class InventoryViewPort {
         Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5);
         Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5);
 
-
         avatar.storeItem( pistol );
         avatar.storeItem( spade );
         avatar.storeItem( stick );

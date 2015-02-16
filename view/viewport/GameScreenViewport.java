@@ -5,13 +5,15 @@
  */
 package view.viewport;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import model.GameObject;
+import model.Model;
+import model.entity.Avatar;
 import utility.IntentComponentMap;
+import view.viewport.InventoryViewPort.MainInventoryPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,8 +21,15 @@ import utility.IntentComponentMap;
  */
 public class GameScreenViewport extends ViewPort {
 
+    // Default Constructor
     public GameScreenViewport() {
-        initComponents();
+
+        generateView();
+    }
+    // Constructor I
+    public GameScreenViewport(Model model){
+
+        generateView();
     }
     
     private void initInteriorViewports() {
@@ -35,7 +44,6 @@ public class GameScreenViewport extends ViewPort {
             //addViewport(view);
         }
     }
-    
     @Override
     public void updateView(GameObject gameObject) {
         
@@ -73,5 +81,22 @@ public class GameScreenViewport extends ViewPort {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    
+    // --------------------------------------------
+    public void generateView(){
+
+
+        JPanel northernPanel = new JPanel();
+        JPanel southernPanel = new JPanel();
+
+        // Replace these colorPanel's with appropriate panels.
+        //NorthernPanel.add(new GameScreenSubPanel(Color.pink, 400, 400, "AreaView"), BorderLayout.NORTH);
+        northernPanel.add(new MainInventoryPanel( new Avatar() ), BorderLayout.SOUTH);
+
+        //SouthernPanel.add(new GameScreenSubPanel(Color.red, 400, 200, "DialogueView"), BorderLayout.NORTH);
+        //SouthernPanel.add(new GameScreenSubPanel(Color.green, 200,200, "StatusView"), BorderLayout.SOUTH);
+
+        this.add( northernPanel, BorderLayout.NORTH );
+
+    }
+
 }
