@@ -48,7 +48,8 @@ public class FileChooserDialog extends JFrame {
 
         openb.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent event) {
+            @Override
+			public void actionPerformed(ActionEvent event) {
                 JFileChooser fileopen = new JFileChooser();
                 FileFilter filter = new FileNameExtensionFilter("c files", "c");
                 fileopen.addChoosableFileFilter(filter);
@@ -145,7 +146,8 @@ public class FileChooserDialog extends JFrame {
 
         SwingUtilities.invokeLater(new Runnable() {
 
-            public void run() {
+            @Override
+			public void run() {
                 FileChooserDialog fcd = new FileChooserDialog();
                 fcd.setVisible(true);
             }

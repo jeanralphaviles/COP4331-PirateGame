@@ -5,6 +5,7 @@ import model.item.Category;
 import model.item.Item;
 import model.item.TakeableItem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -138,5 +139,72 @@ public class EquippedInventory extends Inventory{
     }
     // -------------------------------------------------------
 
+    @Override
+	public String toString() {
+    	return "[" + items.toString() + "," + slots.toString() + "," + capacity + "]";
+    }
+    
+    public static EquippedInventory fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		EquippedInventory equippedInventory = new EquippedInventory();
+		int bracketCount = 0;
+		int start = 0;
+		for (int i = 0; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				ArrayList<Item> items = new ArrayList<Item>();
+				int start2 = 0;
+				String arrayListStripped = stripped.substring(start + 1, i - 1);
+				for (int j = 0; j < arrayListStripped.length(); ++j) {
+					if (bracketCount == 0 && arrayListStripped.charAt(j) == ',') {
+						Item item = Item.fromString(arrayListStripped.substring(start2, j));
+						items.add(item);
+						start2 = j + 1;
+					} else if (arrayListStripped.charAt(j) == '[') {
+						++bracketCount;
+					} else if (arrayListStripped.charAt(j) == ']') {
+						--bracketCount;
+					}
+				}
+				start = i + 1;
+				bracketCount = 0;
+				equippedInventory.items = items;
+				break;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		
+		bracketCount = 0;
+		for (int i = start; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				ArrayList<Slot> slots = new ArrayList<Slot>();
+				int start2 = 0;
+				String arrayListStripped = stripped.substring(start + 1, i - 1);
+				for (int j = 0; j < arrayListStripped.length(); ++j) {
+					if (bracketCount == 0 && arrayListStripped.charAt(j) == ',') {
+						Slot slot = Slot.fromString(arrayListStripped.substring(start2, j));
+						slots.add(slot);
+						start2 = j + 2;
+					} else if (arrayListStripped.charAt(j) == '[') {
+						++bracketCount;
+					} else if (arrayListStripped.charAt(j) == ']') {
+						--bracketCount;
+					}
+				}
+				start = i + 1;
+				equippedInventory.slots = slots;
+				break;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		
+		equippedInventory.capacity = Integer.parseInt(stripped.substring(start, stripped.length()));
+		return equippedInventory;
+	}
 
 }

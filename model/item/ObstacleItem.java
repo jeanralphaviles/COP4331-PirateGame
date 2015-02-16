@@ -49,7 +49,8 @@ public class ObstacleItem extends Item{
     // --------------------------------------------
  /** makes tile impassible.
      */
-    public void triggerProximity(Entity entity){
+    @Override
+	public void triggerProximity(Entity entity){
 
         // Todo-Code
     }

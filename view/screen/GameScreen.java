@@ -12,7 +12,8 @@ public class GameScreen extends Screen {
         super(model);
     }
 
-    public void init() {
+    @Override
+	public void init() {
         viewPort = new GameScreenViewport();
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new ScreenController(model, icms);

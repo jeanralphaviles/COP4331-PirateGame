@@ -1,16 +1,15 @@
 package utility;
 
 import model.Model;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import model.GameObject;
 
 public class LoadSave {
@@ -25,16 +24,18 @@ public class LoadSave {
 
     /*Methods*/
     
-    public Model loadModel(String filename) {
+    public Model loadModel(String filename) throws IOException {
         String fileString = getFileString(filename);
+        System.out.print(fileString);
 
-        Model model = (Model)deserialize(fileString, Model.class);
+        // Model model = (Model)deserialize(fileString, Model.class);
+        Model model = Model.fromString(fileString);
 
         return model;
     }
 
     public void saveModel(Model model, String filename) {
-        String fileContent = serialize(model);
+        String fileContent = model.toString();
 
         writeToFile(fileContent, filename);
     }

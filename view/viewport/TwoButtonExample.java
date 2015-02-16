@@ -49,7 +49,8 @@ public class TwoButtonExample extends JFrame {
 
         SwingUtilities.invokeLater(new Runnable() {
 
-            public void run() {
+            @Override
+			public void run() {
                 TwoButtonExample ex = new TwoButtonExample();
                 ex.setVisible(true);
             }

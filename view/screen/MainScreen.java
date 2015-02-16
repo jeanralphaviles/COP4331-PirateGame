@@ -12,7 +12,8 @@ public class MainScreen extends Screen {
         super(model);
     }
 
-    public void init() {
+    @Override
+	public void init() {
         viewPort = new MainScreenViewport();
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new ScreenController(model, icms);

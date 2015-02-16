@@ -1,10 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-
+import java.io.IOException;
 import model.entity.Avatar;
-import model.entity.Entity;
-import model.map.Map;
 /**
  * GameObject saves state of game.
  * Little to no logic needed
@@ -44,5 +41,17 @@ public class GameObject {
     public void setLevel(Level level) {
         this.level = level;
     }
+    
+    @Override
+	public String toString() {
+    	return "[" + avatar.toString() + "]";
+    }
+
+	public static GameObject fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		GameObject obj = new GameObject();
+		obj.avatar = Avatar.fromString(stripped);
+		return obj;
+	}
     
 }

@@ -5,8 +5,6 @@
  */
 package view.viewport;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import view.screen.Screen;
 
@@ -40,7 +38,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void addViewport(ViewPort view) {
-        this.getContentPane().add((JPanel)view);
+        this.getContentPane().add(view);
         view.updateUI();
     }
     
@@ -57,7 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
 //    }
     
     public void setSize(ViewPort view) {
-        JPanel panel = (JPanel)view;
+        JPanel panel = view;
         int width = this.getWidth();
         int height = this.getHeight();
         panel.setBounds(0, 0, width, height); //x,y top right coordinate, then width, height
@@ -119,7 +117,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 new MainWindow().setVisible(true);
             }
         });
