@@ -6,29 +6,29 @@ import utility.decal.Decal;
 import utility.decal.ItemDefaultDecal;
 
 
-public class InteractableItem extends Item{
+public class InteractiveItem extends Item{
 
     // Atrributes
 
     // Default Constructor
-    public InteractableItem(){
+    public InteractiveItem(){
 
         super( new ItemDefaultDecal(), Category.INTERACTIVE_ITEM);
 
     }
     // Constructor I
-    public InteractableItem(Decal decal ){
+    public InteractiveItem(Decal decal ){
 
         super( decal, Category.INTERACTIVE_ITEM);
 
     }
     // Constructor II
-    public InteractableItem(Decal decal, String name){
+    public InteractiveItem(Decal decal, String name){
 
         super( decal, Category.INTERACTIVE_ITEM, name);
     }
     // Constructor III
-    public InteractableItem(Decal decal, String name, Statistics statistics){
+    public InteractiveItem(Decal decal, String name, Statistics statistics){
 
 
         super( decal, Category.INTERACTIVE_ITEM, name, statistics);
@@ -42,7 +42,11 @@ public class InteractableItem extends Item{
     // Mutator Methods:
     // Abstract Methods:
     // --------------------------------------------
-	@Override
+/**
+	 * trigger proximity activates when entity tries to step into tile with item
+	 * the entity can interact with it
+	 * */	
+@Override
 	public void triggerProximity(Entity entity) {
 		// TODO Auto-generated method stub
 		

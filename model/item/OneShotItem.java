@@ -5,7 +5,8 @@ import model.entity.Statistics;
 import utility.decal.Decal;
 import utility.decal.ItemDefaultDecal;
 
-
+   /* Dissapears off map after activation. Does something one time.
+     */
 public class OneShotItem extends Item{
 
     // Atrributes

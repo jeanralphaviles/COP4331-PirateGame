@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Date: 2/14/2015
  * Date: 2/15/2015
  *
- *
+ *Holds items entity owns/took
  *
  */
 
@@ -61,6 +61,10 @@ public class Inventory{
         return capacity;
     }
     // --------------------------------------------------------
+    /**
+     * @param item - checks for this item
+     * @return - true if inventory contains an item
+     */
     public boolean hasItem(Item item){
 
         return items.contains(item);
@@ -78,7 +82,12 @@ public class Inventory{
     public void setCapacity(int capacity){ this.capacity = capacity; }
 
     //-------------------------------------------------------
-    public boolean storeItem(Item item){
+    
+    /**
+     * @param item - to store in inventory
+     * @return - returns true if stored
+     */
+    public boolean storeItem(Item item){ 
 
 
         if ( items.size() < capacity ) {
@@ -91,6 +100,10 @@ public class Inventory{
     }
 
     //-------------------------------------------------------
+    /**
+     * @param item - remove specified item from list
+     * @return - true if removed
+     */
     public boolean removeItem(Item item){
 
         if ( items.contains(item) ){

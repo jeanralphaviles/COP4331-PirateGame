@@ -23,7 +23,9 @@ public abstract class Controller extends Thread {
     }
     
     /*Methods*/
-    
+     /** print; prints out content. Test method.
+     * @param content - content to print out
+     */
     protected void print(String content) {
         System.out.println(content);
     }

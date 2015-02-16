@@ -26,18 +26,22 @@ public class Map {
 
     public Map(Maptile[][] grid) {
         this.grid = grid;
-        this.height = grid.length;
-        this.width = grid[0].length;
+        this.height = grid[0].length;
+        this.width = grid.length;
 
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                tileLocations.put(grid[i][j].hashCode(), new GridLocation(i, j));
+        for (int y = 0; y < this.height; ++y) {
+            for (int x = 0; x < this.width; ++x) {
+                tileLocations.put(this.grid[x][y].hashCode(), new GridLocation(x, y));
             }
         }
     }
     
     /*Methods*/
-    
+     /** returns maptile based on x and y coordinate of maptile
+     * @param x - x coordinate
+     * @param y - y coordinate
+     * @return - returns maptile
+     */
     public Maptile getMapTile(int x, int y) {
         if (x < 0 || x >= width) {
             return null;
@@ -47,7 +51,11 @@ public class Map {
         }
         return grid[x][y];
     }
-    
+    /** depending on course passed in and starting point the map tile you will end up on will be returned
+     * @param start - the starting postion of entity
+     * @param course - the course/displacement the entity wishes to move
+     * @return - the map tile they will end up on
+     */
     public Maptile getDestination(Maptile start, Course course) {
         int xOffset = course.getRelativeXDisplacement();
         int yOffset = course.getRelativeYDisplacement();
@@ -61,7 +69,10 @@ public class Map {
 
         return getMapTile(destX, destY);
     }
-    
+     /** get location of given maptile
+     * @param maptile - maptile you want location of
+     * @return - location on map
+     */
     public GridLocation getGridLocation(Maptile maptile) {
         return tileLocations.get(maptile.hashCode());
     }

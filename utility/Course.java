@@ -1,5 +1,10 @@
 package utility;
 
+/**
+ * 
+ * how far does entity want to move? x positions to the right and y positions upward?
+ *course takes the course the enity wants to take and encapsulates it into an object.
+ */
 public class Course {
 
 	private int relativeYDisplacement;

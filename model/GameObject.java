@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import model.entity.Avatar;
 import model.entity.Entity;
 import model.map.Map;
-
+/**
+ * GameObject saves state of game.
+ * Little to no logic needed
+ * (state = Avatar and Level.
+ */
 public class GameObject {
 
     /*Properties*/

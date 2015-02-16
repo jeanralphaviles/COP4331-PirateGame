@@ -46,14 +46,18 @@ public class Statistics implements Cloneable {
         return new Statistics(livesLeft, strength, agility, intellect,
                 hardiness, experience, maxHealth, currentHealth, currentMana);
     }
-
+/**
+     * Kill decrements livesLeft and resets health
+     */
     public void kill() {
         --livesLeft;
         if (livesLeft > 0) {
             currentHealth = maxHealth;
         }
     }
-
+  /**
+     * update health remaining durring current game play due to game events
+     */
     public void changeCurrentHealth(int difference) {
         currentHealth += difference;
         if (isDead()) {
@@ -63,39 +67,51 @@ public class Statistics implements Cloneable {
             currentHealth = maxHealth;
         }
     }
-
+ /**
+     * @return - true if the entity is dead
+     */
     public boolean isDead() {
         return currentHealth <= 0;
     }
-
+ /**
+     * @param difference - the amount you want to change the number of livesLeft
+     */
     public void changeLivesLeft(int difference) {
         livesLeft += difference;
         if (livesLeft < 0) {
             livesLeft = 0;
         }
     }
-
+ /**
+     * @param difference - the amount you want to change the strength (wearing armor)
+     */
     public void changeStrength(int difference) {
         strength += difference;
         if (strength < 0) {
             strength = 0;
         }
     }
-
+   /**
+     * @param difference - the amount you want to change the entity's agility (heavy armor slows down, winged boots speed up)
+     */
     public void changeAgility(int difference) {
         agility += difference;
         if (agility < 0) {
             agility = 0;
         }
     }
-
+ /**
+     * @param difference - the amount you want to change intelect
+     */
     public void changeIntellect(int difference) {
         intellect += difference;
         if (intellect < 0) {
             intellect = 0;
         }
     }
-
+/**
+ * @param difference - amount you want to change entity's max health by
+ * */
     public void changeMaxHealth(int difference) {
         maxHealth += difference;
         if (maxHealth < 0) {
@@ -103,7 +119,9 @@ public class Statistics implements Cloneable {
             kill();
         }
     }
-
+   /**
+     * @param difference - amount you want to change the hardiness by
+     */
     public void changeHardiness(int difference) {
         hardiness += difference;
         if (hardiness < 0) {
@@ -111,6 +129,10 @@ public class Statistics implements Cloneable {
         }
     }
 
+    /**
+     * @param difference - amount you want to change the amount of manna left by
+     * (when you use some to 'cast a spell' it goes down by difference)
+     */
     public void changeCurrentMana(int difference) {
         currentMana += difference;
         if (currentMana > getMaxMana()) {
