@@ -18,7 +18,9 @@ public class GameObject {
     
     public GameObject( ) {
         this.avatar = new Avatar(); //still making sure this serializes
+        // this.level = new Level();
         this.level = new Level();
+        avatar.move(this.level.getMap().getMapTile(1, 1));
     }
 
     /*Methods*/

@@ -17,7 +17,7 @@ public class NumpadController extends Controller implements KeyListener {
     }
 
     @Override
-	public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_1) {
             print("you pressed 1");

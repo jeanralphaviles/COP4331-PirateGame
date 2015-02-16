@@ -1,5 +1,6 @@
 package model;
 
+import controller.NumpadController;
 import model.entity.occupation.Occupation;
 
 import java.io.File;
@@ -29,13 +30,14 @@ public class Model extends Thread {
     private LoadSave loadsave;
     private Screen currentScreen;
     private int updatesPerSecond;
+    private NumpadController auxController;
     //
     private MainWindow mainWindow;
 
     /*Constructors*/
     public Model() {
         this.gameObject = new GameObject();
-        loadFirstLevel();
+        //loadFirstLevel();
         this.setUtilityData(new UtilityData());
     }
 
@@ -134,6 +136,7 @@ public class Model extends Thread {
      */
     private void launchFirstScreen() {
         mainWindow = new MainWindow();
+        mainWindow.addKeyListener(auxController);
         launchScreen(new MainScreen(this));
     }
 
@@ -177,6 +180,16 @@ public class Model extends Thread {
         }
     }
     /*Get-Sets*/
+
+    public NumpadController getAuxController() {
+        return auxController;
+    }
+
+    public void setAuxController(NumpadController auxController) {
+        this.auxController = auxController;
+    }
+    
+    
 
     public UtilityData getUtilityData() {
         return utilityData;
