@@ -240,14 +240,17 @@ public class Statistics implements Cloneable {
     }
 
     public void addExperience(int expGain) {
+        int prevLvl = getLevel();
         if (expGain > 100 - (experience % 100)) {
-            levelUp();
+            experience += expGain;
+            levelUp(prevLvl);
+        } else {
+            experience += expGain;
         }
-        experience += expGain;
     }
 
-    public void levelUp() {
-        System.out.println("You leveled up!");
+    public void levelUp(int previousLevel) {
+        System.out.println("You leveled up from " + previousLevel + " to " + getLevel() + "!");
     }
 
     public int getMaxHealth() {
