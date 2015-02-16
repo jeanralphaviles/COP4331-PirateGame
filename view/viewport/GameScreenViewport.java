@@ -46,13 +46,14 @@ public class GameScreenViewport extends ViewPort {
         interiorViewports.add(new AreaViewport());
         //interiorViewports.add(new InventoryViewport());
         /*interiorViewports.get(0)*/
-        northernPanel.add(interiorViewports.get(0), BorderLayout.NORTH);
-        northernPanel.add(new MainInventoryPanel( new Avatar() ), BorderLayout.SOUTH);
-        
-        //southernPanel.add(new "DialogueViewPort", BorderLayout.NORTH);
-        //southernPanel.add(new "StatusViewPort", BorderLayout.SOUTH);
-         
-        this.add( northernPanel, BorderLayout.NORTH );
+        add(interiorViewports.get(0));
+//        add(interiorViewports.get(0), BorderLayout.NORTH);
+//        northernPanel.add(new MainInventoryPanel( new Avatar() ), BorderLayout.SOUTH);
+//        
+//        //southernPanel.add(new "DialogueViewPort", BorderLayout.NORTH);
+//        //southernPanel.add(new "StatusViewPort", BorderLayout.SOUTH);
+//         
+//        this.add( northernPanel, BorderLayout.SOUTH );
         //this.add(southernPanel, BorderLayout.SOUTH);
 
     }
@@ -88,11 +89,11 @@ public class GameScreenViewport extends ViewPort {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 801, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 411, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

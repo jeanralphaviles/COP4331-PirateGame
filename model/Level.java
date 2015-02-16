@@ -24,7 +24,7 @@ public class Level {
         initDialogueStrings();
     }
     
-    private void initDialogueStrings() {
+    public void initDialogueStrings() {
         dialogueStrings.add("Ugh, my head...");
         dialogueStrings.add("I must have been knocked out...");
         dialogueStrings.add("I have no idea how long it's been since I've had my last drink...");

@@ -15,7 +15,7 @@ import javax.swing.*;
 public class InventoryViewPort {
 
     public static void main(String[] args){
-
+        
         Avatar avatar  = new Avatar();
         Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol",  5, 5);
         Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5);
@@ -37,9 +37,6 @@ public class InventoryViewPort {
 
         inventory.setVisible(true);
         inventory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
 
     }
 }

@@ -33,6 +33,7 @@ public class Model extends Thread {
     /*Constructors*/
     public Model() {
         this.gameObject = new GameObject();
+        loadFirstLevel();
         this.setUtilityData(new UtilityData());
     }
 
@@ -166,6 +167,7 @@ public class Model extends Thread {
             ItemGenerator.generateItems(new File("Levels/Items" + levelNum + ".csv"), map);
             Maptile avatarMapTile = map.getMapTile(map.getWidth() / 2, map.getHeight() / 2);
             Level level = new Level(new ArrayList<Entity>(), map);
+            level.initDialogueStrings(); //for dialogue
             this.gameObject.setLevel(level);
             this.gameObject.getAvatar().move(avatarMapTile);
         } catch (Exception e) {

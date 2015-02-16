@@ -4,6 +4,7 @@ import controller.ScreenController;
 import java.util.ArrayList;
 import model.Model;
 import utility.IntentComponentMap;
+import view.viewport.AreaViewport;
 import view.viewport.GameScreenViewport;
 
 public class GameScreen extends Screen {
@@ -13,6 +14,7 @@ public class GameScreen extends Screen {
     }
 
     public void init() {
+        //new AreaViewport();
         viewPort = new GameScreenViewport();
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new ScreenController(model, icms);
