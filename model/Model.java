@@ -1,7 +1,12 @@
 package model;
 
-import model.entity.Entity;
 import model.entity.occupation.Occupation;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import model.entity.Entity;
 import model.map.Map;
 import model.map.Maptile;
 import utility.ItemGenerator;
@@ -11,9 +16,6 @@ import utility.UtilityData;
 import view.screen.MainScreen;
 import view.screen.Screen;
 import view.viewport.MainWindow;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class Model extends Thread {
 
@@ -180,7 +182,23 @@ public class Model extends Thread {
         return utilityData;
     }
 
-    public void setUtilityData(UtilityData utilityData) {
-        this.utilityData = utilityData;
-    }
+	public void setUtilityData(UtilityData utilityData) {
+		this.utilityData = utilityData;
+	}    
+	
+	@Override
+	public String toString() {
+		return "[" + gameObject.toString() + "]";
+	}
+	
+	public static Model fromString(String string) throws IOException {
+		System.out.print(string);
+		if (string.length() == 0) {
+			return new Model();
+		}
+		String stripped = string.substring(1, string.length() - 1);
+		Model model = new Model();
+		model.gameObject = GameObject.fromString(stripped);
+		return model;
+	}
 }

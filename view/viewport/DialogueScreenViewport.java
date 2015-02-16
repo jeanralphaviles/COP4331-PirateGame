@@ -6,12 +6,7 @@
 package view.viewport;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import model.GameObject;
 import utility.IntentComponentMap;

@@ -5,11 +5,7 @@
  */
 package view.viewport;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import model.GameObject;
 import utility.IntentComponentMap;
 
@@ -51,7 +47,8 @@ public class PausePopupViewport extends ViewPort {
 
         resumeButton.setText("Resume");
         resumeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resumeButtonActionPerformed(evt);
             }
         });

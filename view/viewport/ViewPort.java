@@ -26,7 +26,7 @@ public abstract class ViewPort extends JPanel {
     }
     
     private void setSize(ViewPort view) {
-        JPanel panel = (JPanel)view;
+        JPanel panel = view;
         int width = this.getWidth();
         int height = this.getHeight();
         panel.setBounds(0, 0, width, height); //x,y top right coordinate, then width, height

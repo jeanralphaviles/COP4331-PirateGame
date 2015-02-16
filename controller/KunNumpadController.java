@@ -3,7 +3,6 @@ package controller;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Scanner;
 
 
 public class KunNumpadController extends JFrame implements KeyListener{
@@ -26,6 +25,7 @@ KunNumpadController() {
 
 	
 
+	@Override
 	public void keyTyped (KeyEvent e) {
 
 	}
@@ -37,6 +37,7 @@ KunNumpadController() {
 	//http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html replace VK_codes with 
 	//VK_NUMPADX where x denotes the number pressed on the number pad VK_X denotes number pressed any
 	//where on the keyboard
+	@Override
 	public void keyPressed (KeyEvent e){
 		int keyCode = e.getKeyCode();
 		if (keyCode == KeyEvent.VK_1)
@@ -69,6 +70,7 @@ KunNumpadController() {
 
 
 	}
+	@Override
 	public void keyReleased (KeyEvent txt){
 
 

@@ -47,7 +47,8 @@ public class OneShotItem extends Item{
 
     // Abstract Methods:
     // --------------------------------------------
-    public void triggerProximity(Entity entity){
+    @Override
+	public void triggerProximity(Entity entity){
 
         // Todo-Code
     }

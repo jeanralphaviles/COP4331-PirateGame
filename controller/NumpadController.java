@@ -3,7 +3,6 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
-import utility.Course;
 import model.Model;
 
 public class NumpadController extends Controller implements KeyListener {
@@ -12,11 +11,13 @@ public class NumpadController extends Controller implements KeyListener {
         super(model);
     }
 
-    public void keyTyped(KeyEvent e) {
+    @Override
+	public void keyTyped(KeyEvent e) {
 
     }
 
-    public void keyPressed(KeyEvent e) {
+    @Override
+	public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_1) {
             print("you pressed 1");
@@ -47,7 +48,8 @@ public class NumpadController extends Controller implements KeyListener {
 
     }
 
-    public void keyReleased(KeyEvent txt) {
+    @Override
+	public void keyReleased(KeyEvent txt) {
 
     }
     

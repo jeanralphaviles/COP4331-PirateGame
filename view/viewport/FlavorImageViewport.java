@@ -6,8 +6,6 @@
 package view.viewport;
 
 import java.util.ArrayList;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import model.GameObject;
 import utility.IntentComponentMap;
 

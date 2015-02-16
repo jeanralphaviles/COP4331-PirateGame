@@ -1,5 +1,7 @@
 package model.item;
 
+import java.io.IOException;
+
 import model.entity.Entity;
 import model.entity.Statistics;
 import model.inventory.SlotCategory;
@@ -71,9 +73,54 @@ public class TakeableItem extends Item{
 
     // Abstract Methods:
     // --------------------------------------------
-    public void triggerProximity(Entity entity){
+    @Override
+	public void triggerProximity(Entity entity){
 
         // Todo-Code
     }
 
+    @Override
+	public String toString() {
+    	return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + slotCategory +  "]";
+    }
+
+    public static TakeableItem fromString(String string) throws IOException {
+    	String stripped = string.substring(1, string.length() - 1);
+    	int bracketCount = 0;
+    	int start = 0;
+    	int itemCount = 0;
+    	TakeableItem item = new TakeableItem();
+    	for (int j = 0; j < stripped.length(); ++j) {
+    		if (stripped.charAt(j) == ',') {
+    			item.category = Category.valueOf(stripped.substring(start, j));
+    			
+    			start = j + 1;
+    			break;
+    		}
+    	}
+    	
+    	for (int i = start; i < stripped.length(); ++i) {
+    		if (bracketCount == 0 && stripped.charAt(i) == ',') {
+    			if (itemCount == 0) {
+    				Decal decal = Decal.fromString(stripped.substring(start, i));
+    				item.decal = decal;
+    			} else if (itemCount == 1) {
+    				Statistics statistics = Statistics.fromString(stripped.substring(start, i));
+    				item.statistics = statistics;
+    				break;
+    			} 
+    			++itemCount;
+    			start = i + 1;
+    		} else if (stripped.charAt(i) == '[') {
+    			++bracketCount;
+    		} else if (stripped.charAt(i) == ']') {
+    			--bracketCount;
+    		}
+    	}
+    	String[] rest = stripped.substring(start, stripped.length()).split(",");
+		item.name = rest[0];
+		item.slotCategory = SlotCategory.valueOf(rest[1]);
+    
+    	return item;
+    }
 }

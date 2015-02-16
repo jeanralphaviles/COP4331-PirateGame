@@ -11,7 +11,8 @@ public abstract class Popup extends Screen {
         super(model);
     }
 
-    public abstract void init();
+    @Override
+	public abstract void init();
 
     public Screen getParentScreen() {
         return parentScreen;

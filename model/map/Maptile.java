@@ -1,11 +1,11 @@
 package model.map;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import model.entity.Entity;
 import model.inventory.Slot;
 import model.inventory.SlotCategory;
-import model.item.Category;
 import model.item.Item;
 import model.item.ObstacleItem;
 import model.map.areaeffect.AreaEffect;
@@ -126,4 +126,44 @@ public class Maptile {
     public void setAreaEffect(AreaEffect areaEffect) {
         this.areaEffect = areaEffect;
     }
+
+    @Override
+	public String toString() {
+    	return "[" + itemSlot.toString() + "," + entity.toString() + "," + terrain.toString() + "," + areaEffect.toString() + "]";
+    }
+    
+	public static Maptile fromString(String string) throws IOException {
+		String stripped = string.substring(1, string.length() - 1);
+		int bracketCount = 0;
+		int start = 0;
+		int itemCount = 0;
+		Maptile mapTile = new Maptile();
+		
+		for (int i = 0; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				if (itemCount == 0) {
+					Slot itemSlot = Slot.fromString(stripped.substring(start, i));
+					mapTile.itemSlot = itemSlot;
+				} else if (itemCount == 1) {
+					Entity entity = Entity.fromString(stripped.substring(start, i));
+					mapTile.entity = entity;
+				} else if (itemCount == 2) {
+					Terrain terrain = Terrain.fromString(stripped.substring(start, i));
+					mapTile.terrain = terrain;
+				} else if (itemCount == 3) {
+					AreaEffect areaEffect = AreaEffect.fromString(stripped.substring(start, i));
+					mapTile.areaEffect = areaEffect;
+					break;
+				} 
+				++itemCount;
+				start = i + 1;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		
+		return null;
+	}
 }
