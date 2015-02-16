@@ -33,7 +33,7 @@ public class MainWindow extends javax.swing.JFrame {
         setSize(view);
         this.getContentPane().removeAll();
         addViewport(view);
-        addInteriorViewports(view);
+        //addInteriorViewports(view);
         
         pack();
         setVisible(true);
@@ -44,17 +44,17 @@ public class MainWindow extends javax.swing.JFrame {
         view.updateUI();
     }
     
-    public void addInteriorViewports(ViewPort view) {
-        ArrayList<ViewPort> interiorViewports = view.getInteriorViewports();
-        if (interiorViewports != null) {
-            int numInteriorViewports = interiorViewports.size();
-            ViewPort interiorViewport;
-            for (int i=0; i<numInteriorViewports; i++) {
-                interiorViewport = interiorViewports.get(i);
-                addViewport(interiorViewport);
-            }
-        }
-    }
+//    public void addInteriorViewports(ViewPort view) {
+//        ArrayList<ViewPort> interiorViewports = view.getInteriorViewports();
+//        if (interiorViewports != null) {
+//            int numInteriorViewports = interiorViewports.size();
+//            ViewPort interiorViewport;
+//            for (int i=0; i<numInteriorViewports; i++) {
+//                interiorViewport = interiorViewports.get(i);
+//                addViewport(interiorViewport);
+//            }
+//        }
+//    }
     
     public void setSize(ViewPort view) {
         JPanel panel = (JPanel)view;

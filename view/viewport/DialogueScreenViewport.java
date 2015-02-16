@@ -23,37 +23,12 @@ import utility.IntentComponentMap;
 public class DialogueScreenViewport extends ViewPort {
 
     /*Properites*/
-    
-    private JPanel fvp;
-    private JPanel dvp;
-    
-    /*Constructors*/
-    
+
     public DialogueScreenViewport() {
-        initComponents();
-//        initInteriorViewports();
-//        addInteriorViewports();
-        fvp = new FlavorImageViewport();
-        dvp = new DialogueViewport();
-        add(fvp, BorderLayout.NORTH);
-        add(dvp, BorderLayout.SOUTH);
-        //components should be text and button in panel
-
-    }
-
-    private void initInteriorViewports() {
         interiorViewports.add(new FlavorImageViewport());
-    }
-
-    private void addInteriorViewports() {
-        int numInteriorViewports = interiorViewports.size();
-        ViewPort view;
-        JPanel panel;
-        for (int i = 0; i < numInteriorViewports; i++) {
-            view = interiorViewports.get(i);
-            panel = (JPanel) view;
-            add(panel);
-        }
+        interiorViewports.add(new DialogueViewport());
+        add(interiorViewports.get(0), BorderLayout.NORTH);
+        add(interiorViewports.get(1), BorderLayout.SOUTH);
     }
 
     @Override
@@ -63,11 +38,28 @@ public class DialogueScreenViewport extends ViewPort {
 
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        // subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        //icms.add(new IntentComponentMap(continuePastDialogueButton, IntentComponentMap.Intent.GOTO_GAME));
         return icms;
     }
+
+//    private void initInteriorViewports() {
+//        interiorViewports.add(new FlavorImageViewport());
+//        interiorViewports.add(new DialogueViewport());
+//    }
+//
+//    private void addInteriorViewports() {
+//        int numInteriorViewports = interiorViewports.size();
+//        ViewPort view;
+//        JPanel panel;
+//        for (int i = 0; i < numInteriorViewports; i++) {
+//            view = interiorViewports.get(i);
+//            panel = (JPanel) view;
+//            int y = this.getHeight() - this.getHeight()/(i+1);
+//            int height = this.getHeight()/numInteriorViewports;
+//            panel.setBounds(0, y, getWidth(), height);
+//            add(panel);
+//        }
+//    }
 
     /* Inner classes */
     /**
@@ -95,3 +87,4 @@ public class DialogueScreenViewport extends ViewPort {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
+
