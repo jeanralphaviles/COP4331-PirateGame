@@ -33,11 +33,11 @@ public class MapGenerator {
 					Maptile tile = new Maptile();
 
 
-                    if ( row[i] == "Water"){
+                if ( row[i].equals("Water")){
 
                         tile.setTerrain(new Water());
                     }
-                    else if ( row[i] == "Mountain") {
+                    else if ( row[i].equals("Mountain")) {
 
                         tile.setTerrain(new Mountain());
                     }

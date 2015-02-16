@@ -6,6 +6,7 @@
 package view.viewport;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -15,6 +16,7 @@ import model.map.GridLocation;
 import model.map.Map;
 import model.map.Maptile;
 import utility.IntentComponentMap;
+import utility.decal.BlankDecal;
 import utility.decal.Decal;
 
 /**
@@ -45,18 +47,25 @@ public class AreaViewport extends ViewPort {
         Maptile avatarMaptile = gameObject.getAvatar().getMaptile();
         Map map = gameObject.getLevel().getMap();
         GridLocation gridLocation = map.getGridLocation(avatarMaptile);
+        GridBagConstraints c = new GridBagConstraints();
+        c.ipadx = 0;
+        c.ipady = 0;
         int avatarX = gridLocation.getX();
         int avatarY = gridLocation.getY();
 
         Maptile maptile;
         Tile tile;
         numTilesWide = map.getWidth();
-        numTilesHigh = map.getHeight();
-        for (int x = 0; x < numTilesWide/*((avatarX - numTilesWide) / 2)*/; x++) {
+        numTilesHigh = map.getHeight(); 
+        for (int x = numTilesWide - 1; x > -1/*((avatarX - numTilesWide) / 2)*/; --x) {
             for (int y = 0; y < numTilesHigh/*((avatarY - numTileHigh) / 2)*/; y++) {
-                maptile = map.getMapTile(x, y);
-                tile = new Tile(maptile);
-                add(tile.getImage());
+                maptile = map.getMapTile(y, x);
+                if (maptile != null) {
+                    tile = new Tile(maptile);
+                } else {
+                    tile = new Tile(); //BlankDecal
+                }
+                add(tile.getImage(), c);
             }
         }
         
@@ -78,6 +87,11 @@ public class AreaViewport extends ViewPort {
         /*Constructors*/
         public Tile(Maptile maptile) {
             Decal decal = getLastDecal(maptile);
+            imageIcon = new ImageIcon(decal.getImage());
+        }
+        
+        public Tile() {
+            Decal decal = new BlankDecal();
             imageIcon = new ImageIcon(decal.getImage());
         }
 

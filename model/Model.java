@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import model.entity.Entity;
 import model.map.Map;
 import model.map.Maptile;
+import utility.Course;
 import utility.ItemGenerator;
 import utility.LoadSave;
 import utility.MapGenerator;
@@ -37,7 +38,7 @@ public class Model extends Thread {
     /*Constructors*/
     public Model() {
         this.gameObject = new GameObject();
-        //loadFirstLevel();
+        loadFirstLevel();
         this.setUtilityData(new UtilityData());
     }
 
@@ -148,6 +149,12 @@ public class Model extends Thread {
     public void launchScreen(Screen screen) {
         mainWindow.displayScreen(screen);
         this.currentScreen = screen;
+    }
+    
+    public void move(Course course) {
+        Maptile avatarTile = this.gameObject.getAvatar().getMaptile();
+        Maptile dest = this.gameObject.getLevel().getMap().getDestination(avatarTile, course);
+        this.gameObject.getAvatar().move(dest);
     }
 
     private void loadLevel() {

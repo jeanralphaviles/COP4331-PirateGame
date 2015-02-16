@@ -80,7 +80,7 @@ public class Maptile {
      * of importance
      */
     public ArrayList<Decal> getDecals() {
-        ArrayList<Decal> decals = new ArrayList<Decal>();
+        ArrayList<Decal> decals = new ArrayList<Decal>(1);
         if (entity != null) {
             decals.add(entity.getDecal());
         }
@@ -88,7 +88,7 @@ public class Maptile {
             decals.add(itemSlot.getItem().getDecal());
         }
         if (areaEffect != null) {
-            decals.add(areaEffect.getDecal());
+            //decals.add(areaEffect.getDecal());
         }
         if (terrain != null) {
             decals.add(terrain.getDecal());
