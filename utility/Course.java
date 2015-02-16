@@ -12,7 +12,7 @@ public class Course {
 	
 	public Course(int xDisplacement, int yDisplacement) {
 		setRelativeXDisplacement(xDisplacement);
-		setRelativeYDisplacement(yDisplacement);
+		setRelativeYDisplacement(-yDisplacement);
 	}
 
 	public int getRelativeYDisplacement() {

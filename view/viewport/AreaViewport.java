@@ -6,8 +6,12 @@
 package view.viewport;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -40,7 +44,7 @@ public class AreaViewport extends ViewPort {
     public void updateView(GameObject gameObject) {
         //setBackground(Color.RED);
         this.removeAll();
-        
+
         GridLayout grid = new GridLayout(numTilesWide, numTilesHigh, 0, 0);
         setLayout(grid);
 
@@ -56,9 +60,10 @@ public class AreaViewport extends ViewPort {
         Maptile maptile;
         Tile tile;
         numTilesWide = map.getWidth();
-        numTilesHigh = map.getHeight(); 
-        for (int x = numTilesWide - 1; x > -1/*((avatarX - numTilesWide) / 2)*/; --x) {
-            for (int y = 0; y < numTilesHigh/*((avatarY - numTileHigh) / 2)*/; y++) {
+        numTilesHigh = map.getHeight();
+
+        for (int x = 0; x < numTilesWide; x++) {
+            for (int y = 0; y < numTilesHigh; y++) {
                 maptile = map.getMapTile(y, x);
                 if (maptile != null) {
                     tile = new Tile(maptile);
@@ -68,7 +73,7 @@ public class AreaViewport extends ViewPort {
                 add(tile.getImage(), c);
             }
         }
-        
+
         this.updateUI();
     }
 
@@ -87,12 +92,12 @@ public class AreaViewport extends ViewPort {
         /*Constructors*/
         public Tile(Maptile maptile) {
             Decal decal = getLastDecal(maptile);
-            imageIcon = new ImageIcon(decal.getImage());
+            imageIcon = decalToImage(decal);
         }
-        
+
         public Tile() {
             Decal decal = new BlankDecal();
-            imageIcon = new ImageIcon(decal.getImage());
+            imageIcon = decalToImage(decal);
         }
 
         public Tile(Maptile maptile, boolean tag) {
@@ -109,6 +114,24 @@ public class AreaViewport extends ViewPort {
         public JLabel getImage() {
             JLabel label = new JLabel(imageIcon);
             return label;
+        }
+
+        public ImageIcon decalToImage(Decal decal) {
+            BufferedImage image = decal.getImage();
+            Image i = (Image)image;
+            i = getScaledImage(i, 30, 30);
+            image = (BufferedImage)i;
+            ImageIcon icon = new ImageIcon(image);
+            return icon;
+        }
+
+        private Image getScaledImage(Image srcImg, int w, int h) {
+            BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2 = resizedImg.createGraphics();
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2.drawImage(srcImg, 0, 0, w, h, null);
+            g2.dispose();
+            return resizedImg;
         }
 
     }
