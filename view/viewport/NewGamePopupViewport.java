@@ -30,12 +30,14 @@ public class NewGamePopupViewport extends ViewPort {
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(beginAdventureButton, IntentComponentMap.Intent.BEGIN));
         
+        icms.add(new IntentComponentMap(beginAdventureButton, IntentComponentMap.Intent.BEGIN));
+        //
         icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, nicknameTextField, select_nickname));
         icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, parrotmancerRadioButton, select_parrotmancer));
         icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, gangplankerRadioButton, select_gankplanker));
         icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, turnhatRadioButton, select_turnhat));
+        
         return icms;
     }
 

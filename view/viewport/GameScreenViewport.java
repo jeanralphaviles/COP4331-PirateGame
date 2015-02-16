@@ -32,21 +32,13 @@ public class GameScreenViewport extends ViewPort {
     }
     
     public void generateView(){
-
-
         JPanel northernPanel = new JPanel();
         JPanel southernPanel = new JPanel();
-
-        // Replace these colorPanel's with appropriate panels.
-
-
-
-       
-        
-        interiorViewports.add(new AreaViewport());
+ 
+        addViewport(new AreaViewport(), BorderLayout.NORTH);
+        //addViewport(new StatusViewport(), BorderLayout.SOUTH);
         //interiorViewports.add(new InventoryViewport());
         /*interiorViewports.get(0)*/
-        add(interiorViewports.get(0));
 //        add(interiorViewports.get(0), BorderLayout.NORTH);
 //        northernPanel.add(new MainInventoryPanel( new Avatar() ), BorderLayout.SOUTH);
 //        
@@ -71,7 +63,6 @@ public class GameScreenViewport extends ViewPort {
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        //icms.add(new IntentComponentMap(pauseButton, IntentComponentMap.Intent.GOTO_PAUSE));
         return icms;
     }
     

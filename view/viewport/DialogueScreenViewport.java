@@ -20,10 +20,8 @@ public class DialogueScreenViewport extends ViewPort {
     /*Properites*/
 
     public DialogueScreenViewport() {
-        interiorViewports.add(new FlavorImageViewport());
-        interiorViewports.add(new DialogueViewport());
-        add(interiorViewports.get(0), BorderLayout.NORTH);
-        add(interiorViewports.get(1), BorderLayout.SOUTH);
+        addViewport(new FlavorImageViewport());
+        addViewport(new DialogueViewport());
     }
 
     @Override
@@ -35,46 +33,6 @@ public class DialogueScreenViewport extends ViewPort {
             viewport.updateView(gameObject);
         }
     }
-
-    @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        ArrayList<IntentComponentMap> temp_icms = new ArrayList<IntentComponentMap>(1);
-        int numInteriorViewports = interiorViewports.size();
-        ViewPort viewport;
-        for (int i=0; i<numInteriorViewports; i++) {
-            viewport = interiorViewports.get(i);
-            temp_icms = viewport.generateIntentComponentMapping();
-            aggregateICMs(icms, temp_icms);
-        }
-        return icms;
-    }
-    
-    private void aggregateICMs(ArrayList<IntentComponentMap> icms1, ArrayList<IntentComponentMap> icms2) {
-        int numICMs2 = icms2.size();
-        for (int i=0; i<numICMs2; i++) {
-            icms1.add(icms2.get(i));
-        }
-    }
-
-//    private void initInteriorViewports() {
-//        interiorViewports.add(new FlavorImageViewport());
-//        interiorViewports.add(new DialogueViewport());
-//    }
-//
-//    private void addInteriorViewports() {
-//        int numInteriorViewports = interiorViewports.size();
-//        ViewPort view;
-//        JPanel panel;
-//        for (int i = 0; i < numInteriorViewports; i++) {
-//            view = interiorViewports.get(i);
-//            panel = (JPanel) view;
-//            int y = this.getHeight() - this.getHeight()/(i+1);
-//            int height = this.getHeight()/numInteriorViewports;
-//            panel.setBounds(0, y, getWidth(), height);
-//            add(panel);
-//        }
-//    }
 
     /* Inner classes */
     /**

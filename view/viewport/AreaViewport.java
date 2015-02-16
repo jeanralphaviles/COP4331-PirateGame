@@ -77,11 +77,6 @@ public class AreaViewport extends ViewPort {
         this.updateUI();
     }
 
-    @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        return new ArrayList<IntentComponentMap>(1);
-    }
-
     /*Inner classes*/
     private class Tile {
 

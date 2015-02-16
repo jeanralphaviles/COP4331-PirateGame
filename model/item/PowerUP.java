@@ -71,7 +71,7 @@ public class PowerUP extends InteractiveItem{
     // --------------------------------------------
     @Override
     public void triggerProximity(Entity entity){
-    	if (entity.getEffectiveStatistics().getLevel() >= 2) {
+    	if (entity.getDerivedStatistics().getLevel() >= 2) {
     		entity.getStatistics().setAgility( getAgility() + this.agility );
     		entity.getStatistics().setIntellect( getIntellect() + this.intellect );
     		entity.getStatistics().setExperience( getExperience() + this.experience);

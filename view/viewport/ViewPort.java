@@ -14,27 +14,45 @@ public abstract class ViewPort extends JPanel {
         // TODO Auto-generated constructor stub
     }
     
-    public void addViewport(ViewPort view) {
-        //setSize(view);
-        this.add(view);
-
-//        setVisible(true);
-//        view.updateUI();
-//        view.revalidate();
-//        view.repaint();
-//        this.updateUI();
+//    private void setSize(ViewPort view) {
+//        JPanel panel = view;
+//        int width = this.getWidth();
+//        int height = this.getHeight();
+//        panel.setBounds(0, 0, width, height); //x,y top right coordinate, then width, height
+//    }
+    
+    protected void addViewport(ViewPort viewport, String layout) {
+        interiorViewports.add(viewport);
+        add(viewport, layout);
     }
     
-    private void setSize(ViewPort view) {
-        JPanel panel = view;
-        int width = this.getWidth();
-        int height = this.getHeight();
-        panel.setBounds(0, 0, width, height); //x,y top right coordinate, then width, height
+    protected void addViewport(ViewPort viewport) {
+        interiorViewports.add(viewport);
+        add(viewport);
+    }
+    
+    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+        ArrayList<IntentComponentMap> temp_icms = new ArrayList<IntentComponentMap>(1);
+        int numInteriorViewports = interiorViewports.size();
+        ViewPort viewport;
+        for (int i=0; i<numInteriorViewports; i++) {
+            viewport = interiorViewports.get(i);
+            temp_icms = viewport.generateIntentComponentMapping();
+            aggregateICMs(icms, temp_icms);
+        }
+        return icms;
+    }
+    
+    private void aggregateICMs(ArrayList<IntentComponentMap> icms1, ArrayList<IntentComponentMap> icms2) {
+        int numICMs2 = icms2.size();
+        for (int i=0; i<numICMs2; i++) {
+            icms1.add(icms2.get(i));
+        }
     }
     
 
     public abstract void updateView(GameObject gameObject);
-    public abstract ArrayList<IntentComponentMap> generateIntentComponentMapping();
     
     /*Get-Sets*/
 

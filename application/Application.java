@@ -75,20 +75,19 @@ public class Application {
 }
 
 class EnterKeyListener implements KeyEventPostProcessor {
-    
+
     private Model model;
 
     public EnterKeyListener(Model model) {
         this.model = model;
     }
-    
+
     @Override
     public boolean postProcessKeyEvent(KeyEvent e) {
-
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_NUMPAD1) {
             System.out.println("you pressed 1");
-            model.move(new Course(-1,-1));
+            model.move(new Course(-1, -1));
         } else if (keyCode == KeyEvent.VK_NUMPAD2 || keyCode == KeyEvent.VK_DOWN) {
             System.out.println("pressed 2 move down");
             model.move(new Course(0, -1));
@@ -97,24 +96,23 @@ class EnterKeyListener implements KeyEventPostProcessor {
             model.move(new Course(1, -1));
         } else if (keyCode == KeyEvent.VK_NUMPAD4 || keyCode == KeyEvent.VK_LEFT) {
             System.out.println("you pressed 4 move left");
-            model.move(new Course(-1,0));
+            model.move(new Course(-1, 0));
         } else if (keyCode == KeyEvent.VK_NUMPAD6 || keyCode == KeyEvent.VK_RIGHT) {
             System.out.println("you pressed 6 move right");
             model.move(new Course(1, 0));
         } else if (keyCode == KeyEvent.VK_NUMPAD7) {
             System.out.println("you pressed 7 move top left");
-            model.move(new Course(-1,1));
+            model.move(new Course(-1, 1));
         } else if (keyCode == KeyEvent.VK_NUMPAD8 || keyCode == KeyEvent.VK_UP) {
             System.out.println("you pressed 8 move top");
-            model.move(new Course(0,1));
+            model.move(new Course(0, 1));
         } else if (keyCode == KeyEvent.VK_NUMPAD9) {
             System.out.println("you pressed 9 move top right");
-            model.move(new Course(1,1));
+            model.move(new Course(1, 1));
         } else if (keyCode == KeyEvent.VK_P) {
             JOptionPane.showMessageDialog(null, "You've Paused the Game!");
         } else {
             System.out.println("You pressed an invalid control");
-
         }
         return true;
     }

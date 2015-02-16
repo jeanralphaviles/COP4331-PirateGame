@@ -94,7 +94,7 @@ public class Entity {
      * equiped items, level, occupation, etc.
      */
 
-    public Statistics getEffectiveStatistics() {
+    public Statistics getDerivedStatistics() {
         Statistics effectiveStats = statistics.clone();
         equippedInventory.augmentStatistics(effectiveStats);
         occupation.augmentStatistics(statistics);

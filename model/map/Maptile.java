@@ -85,7 +85,7 @@ public class Maptile {
     		if (areaEffect != null) {
     			areaEffect.triggerProximityEffect(entity);
     		}
-    		if (!entity.getEffectiveStatistics().isDead()) {
+    		if (!entity.getDerivedStatistics().isDead()) {
     			Item item = itemSlot.getItem();
     			if (item != null && item.getCategory() == Category.TAKEABLE_ITEM) {
     				if (entity.storeItem(item)) {

@@ -21,15 +21,17 @@ public class PausePopupViewport extends ViewPort {
     
     @Override
     public void updateView(GameObject gameObject) {
-        
+        //
     }
 
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         //subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+        
         icms.add(new IntentComponentMap(resumeButton, IntentComponentMap.Intent.GOTO_GAME));
         icms.add(new IntentComponentMap(mainMenuButton, IntentComponentMap.Intent.GOTO_MAIN));
+        
         return icms;
     }
     /**
