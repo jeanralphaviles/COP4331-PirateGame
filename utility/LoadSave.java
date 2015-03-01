@@ -82,8 +82,6 @@ public class LoadSave {
             Logger.getLogger(LoadSave.class.getName()).log(Level.SEVERE, null, ex);
         } catch (URISyntaxException ex) {
             Logger.getLogger(LoadSave.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(LoadSave.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
         }

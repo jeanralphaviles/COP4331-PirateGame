@@ -1,5 +1,6 @@
 package model;
 
+import application.RunGame;
 import controller.NumpadController;
 import model.entity.occupation.Occupation;
 
@@ -36,8 +37,6 @@ public class Model extends Thread {
     private LoadSave loadsave;
     private Screen currentScreen;
     private int updatesPerSecond;
-    //
-    private MainWindow mainWindow;
 
     /*Constructors*/
     public Model() {
@@ -142,7 +141,6 @@ public class Model extends Thread {
      * launch main screen to start game
      */
     private void launchFirstScreen() {
-        mainWindow = new MainWindow();
         launchScreen(new MainScreen(this));
     }
 
@@ -152,7 +150,7 @@ public class Model extends Thread {
      * @param screen is the specific screen to launch
      */
     public void launchScreen(Screen screen) {
-        mainWindow.displayScreen(screen);
+        RunGame.mainWindow.displayScreen(screen);
         this.currentScreen = screen;
     }
 

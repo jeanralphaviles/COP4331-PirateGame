@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import model.Model;
 import utility.Course;
+import view.viewport.MainWindow;
 
 public class RunGame {
 
@@ -19,6 +20,7 @@ public class RunGame {
     private static LoadSave loadsave;
     private static KeyboardFocusManager auxController;
     private static final int updatesPerSecond = 3;
+    public static MainWindow mainWindow;
 
     /*Constructors*/
     /*Methods*/
@@ -28,6 +30,7 @@ public class RunGame {
         loadsave.saveModel(model, modelFilename); //for testing
 
         initAuxiliaryController();
+        initMainWindow();
 
         launchModel(updatesPerSecond); //execution goes to main game loop
     }
@@ -43,6 +46,10 @@ public class RunGame {
     public static void initAuxiliaryController() {
         auxController = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         auxController.addKeyEventPostProcessor(new EnterKeyListener(model));
+    }
+    
+    public static void initMainWindow() {
+        mainWindow = new MainWindow();
     }
 
     public static void launchModel(int updatesPerSecond) {
