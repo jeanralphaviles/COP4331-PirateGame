@@ -2,9 +2,9 @@ package view.viewport.InventoryViewPort;
 
 import model.entity.Avatar;
 import model.item.Weapon;
-import utility.decal.ItemDefaultDecal;
 
 import javax.swing.*;
+import utility.decal.Decal;
 
 /**
  * Created by Carlos and Nikita
@@ -17,10 +17,10 @@ public class InventoryViewPort {
     public static void main(String[] args){
         
         Avatar avatar  = new Avatar();
-        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol",  5, 5);
-        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5);
-        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5);
-        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5);
+        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol",  5, 5);
+        Weapon spade = new Weapon( new Decal(Decal.item_default), "Spade", 5, 5);
+        Weapon stick = new Weapon( new Decal(Decal.item_default), "Stick", 5, 5);
+        Weapon arch = new Weapon( new Decal(Decal.item_default), "Arch", 5, 5);
 
         avatar.storeItem( pistol );
         avatar.storeItem( spade );

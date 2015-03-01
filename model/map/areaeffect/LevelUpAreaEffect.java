@@ -2,7 +2,6 @@ package model.map.areaeffect;
 
 import model.entity.Entity;
 import utility.decal.Decal;
-import utility.decal.LevelUpAreaEffectDecal;
 
 /**
  * @author Jean-Ralph Aviles
@@ -10,7 +9,7 @@ import utility.decal.LevelUpAreaEffectDecal;
  */
 public final class LevelUpAreaEffect extends AreaEffect {
 	public LevelUpAreaEffect() {
-		super(new LevelUpAreaEffectDecal());
+		super(new Decal(Decal.level_up));
 	}
 
 	public LevelUpAreaEffect(Decal decal) {

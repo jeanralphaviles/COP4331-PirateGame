@@ -2,7 +2,6 @@ package model.map.areaeffect;
 
 import model.entity.Entity;
 import utility.decal.Decal;
-import utility.decal.TakeDamageAreaEffectDecal;
 
 /**
  * @author Jean-Ralph Aviles
@@ -12,7 +11,7 @@ public final class TakeDamageAreaEffect extends AreaEffect {
 	private int damageTaken = 3;
 	
 	public TakeDamageAreaEffect() {
-		super(new TakeDamageAreaEffectDecal());
+		super(new Decal(Decal.take_damage));
 	}
 	
 	public TakeDamageAreaEffect(Decal decal, int damageTaken) {

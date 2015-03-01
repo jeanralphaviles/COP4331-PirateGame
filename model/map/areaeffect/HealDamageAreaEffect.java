@@ -1,36 +1,35 @@
 package model.map.areaeffect;
 
 import utility.decal.Decal;
-import utility.decal.HealDamageAreaEffectDecal;
 import model.entity.Entity;
 
 /**
- * @author Jean-Ralph Aviles
-* Heal damage heals damage by 3 points
+ * @author Jean-Ralph Aviles Heal damage heals damage by 3 points
  */
 public final class HealDamageAreaEffect extends AreaEffect {
-	private int damageHealed = 3;
-	
-	public HealDamageAreaEffect() {
-		super(new HealDamageAreaEffectDecal());
-	}
-	
-	public HealDamageAreaEffect(Decal decal) {
-		super(decal);
-	}
 
-	public final int getDamageHealed() {
-		return damageHealed;
-	}
+    private int damageHealed = 3;
 
-	public final void setDamageHealed(int damageHealed) {
-		this.damageHealed = damageHealed;
-	}
+    public HealDamageAreaEffect() {
+        super(new Decal(Decal.heal_damage));
+    }
 
-	@Override
-	public void triggerProximityEffect(Entity entity) {
-		if (isActive()) {
-			entity.getStatistics().changeCurrentHealth(damageHealed);
-		}
-	}
+    public HealDamageAreaEffect(Decal decal) {
+        super(decal);
+    }
+
+    public final int getDamageHealed() {
+        return damageHealed;
+    }
+
+    public final void setDamageHealed(int damageHealed) {
+        this.damageHealed = damageHealed;
+    }
+
+    @Override
+    public void triggerProximityEffect(Entity entity) {
+        if (isActive()) {
+            entity.getStatistics().changeCurrentHealth(damageHealed);
+        }
+    }
 }

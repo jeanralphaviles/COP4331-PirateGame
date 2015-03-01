@@ -5,7 +5,6 @@ import java.io.IOException;
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;
-import utility.decal.ItemDefaultDecal;
 
 /**
  * Encapsulates all item types. Allows for easy handling by map/entity
@@ -23,7 +22,7 @@ public abstract class Item {
     // Default Constructor
     public Item() {
 
-        decal = new ItemDefaultDecal();
+        decal = new Decal(Decal.item_default);
         statistics = new Statistics();
         category = Category.ANY_ITEM;
         name = DEFAULT_NAME;

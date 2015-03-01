@@ -8,7 +8,6 @@ import model.inventory.Slot;
 import model.item.Item;
 import model.map.Maptile;
 import utility.decal.Decal;
-import utility.decal.DefaultEntityDecal;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class Entity {
     protected Decal decal;
 
     public Entity() {
-        this.decal = new DefaultEntityDecal();
+        this.decal = new Decal(Decal.default_entity);
         occupation = new Smasher();
         statistics = new Statistics();
         inventory = new Inventory( statistics.getInventoryCapacity() );

@@ -3,7 +3,6 @@ package model.item;
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;
-import utility.decal.ItemDefaultDecal;
 
    /* Dissapears off map after activation. Does something one time.
      */
@@ -14,7 +13,7 @@ public class OneShotItem extends Item{
     // Default Constructor
     public OneShotItem(){
 
-        super( new ItemDefaultDecal(), Category.ONE_SHOT_ITEM);
+        super( new Decal(Decal.item_default), Category.ONE_SHOT_ITEM);
 
     }
     // Constructor I

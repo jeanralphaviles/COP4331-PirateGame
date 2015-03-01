@@ -1,11 +1,10 @@
 package model.map.terrain;
 
 import utility.decal.Decal;
-import utility.decal.MountainDecal;
 
 public final class Mountain extends Terrain {
 	public Mountain() {
-		super(new MountainDecal());
+		super(new Decal(Decal.mountain));
 	}
 
 	public Mountain(Decal decal) {

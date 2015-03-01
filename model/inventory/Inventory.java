@@ -3,10 +3,10 @@ package model.inventory;
 
 import model.item.Item;
 import model.item.Weapon;
-import utility.decal.ItemDefaultDecal;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import utility.decal.Decal;
 
 /**
  * Author: Carlos Vizcaino
@@ -135,10 +135,10 @@ public class Inventory{
     private static void testingTakeableItems(Inventory inventory ){
 
         // Weapon List:
-        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol",  5, 5);
-        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5);
-        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5);
-        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5);
+        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol",  5, 5);
+        Weapon spade = new Weapon( new Decal(Decal.item_default), "Spade", 5, 5);
+        Weapon stick = new Weapon( new Decal(Decal.item_default), "Stick", 5, 5);
+        Weapon arch = new Weapon( new Decal(Decal.item_default), "Arch", 5, 5);
 
         // Full or not
         if ( inventory.isFull() )
@@ -267,7 +267,7 @@ public class Inventory{
 
         // Weapon List:
 
-        Weapon pistol = new Weapon( new ItemDefaultDecal(), "Pistol", 5, 5, 5);
+        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol", 5, 5, 5);
         /*
         Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
         Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);

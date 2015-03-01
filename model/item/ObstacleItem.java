@@ -2,9 +2,7 @@ package model.item;
 
 import model.entity.Entity;
 import utility.decal.Decal;
-import utility.decal.ItemDefaultDecal;
 import model.entity.Statistics;
-
 
 public class ObstacleItem extends Item{
 
@@ -13,7 +11,7 @@ public class ObstacleItem extends Item{
     // Default Constructor
     public ObstacleItem(){
 
-       super( new ItemDefaultDecal(), Category.OBSTACLE_ITEM );
+       super( new Decal(Decal.item_default), Category.OBSTACLE_ITEM );
 
     }
     // Constructor I

@@ -3,8 +3,6 @@ package model.item;
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;
-import utility.decal.ItemDefaultDecal;
-
 
 public class InteractiveItem extends Item{
 
@@ -13,7 +11,7 @@ public class InteractiveItem extends Item{
     // Default Constructor
     public InteractiveItem(){
 
-        super( new ItemDefaultDecal(), Category.INTERACTIVE_ITEM);
+        super( new Decal(Decal.item_default), Category.INTERACTIVE_ITEM);
 
     }
     // Constructor I
