@@ -2,6 +2,9 @@ package view.viewport;
 
 import java.util.ArrayList;
 import model.GameObject;
+import model.entity.occupation.Smasher;
+import model.entity.occupation.Sneak;
+import model.entity.occupation.Summoner;
 import utility.IntentComponentMap;
 
 public class NewGamePopupViewport extends ViewPort {
@@ -33,10 +36,11 @@ public class NewGamePopupViewport extends ViewPort {
         
         icms.add(new IntentComponentMap(beginAdventureButton, IntentComponentMap.Intent.BEGIN));
         //
-        icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, nicknameTextField, select_nickname));
-        icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, parrotmancerRadioButton, select_parrotmancer));
-        icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, gangplankerRadioButton, select_gankplanker));
-        icms.add(new IntentComponentMap(IntentComponentMap.Intent.USER_INPUT, turnhatRadioButton, select_turnhat));
+        icms.add(new IntentComponentMap(nicknameTextField, IntentComponentMap.Intent.SET_NICKNAME));
+            //
+        icms.add(new IntentComponentMap(parrotmancerRadioButton, new Summoner(), IntentComponentMap.Intent.SET_OCCUPATION));
+        icms.add(new IntentComponentMap(gangplankerRadioButton, new Smasher(), IntentComponentMap.Intent.SET_OCCUPATION));
+        icms.add(new IntentComponentMap(turnhatRadioButton, new Sneak(), IntentComponentMap.Intent.SET_OCCUPATION));
         
         return icms;
     }

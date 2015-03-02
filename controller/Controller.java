@@ -2,6 +2,7 @@ package controller;
 
 import utility.Course;
 import model.Model;
+import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
@@ -10,7 +11,7 @@ import view.screen.Screen;
 import view.screen.popup.NewGamePopup;
 import view.screen.popup.PausePopup;
 
-public abstract class Controller extends Thread {
+public abstract class Controller {
 
     /*Properties*/
     protected Model model;
@@ -28,10 +29,6 @@ public abstract class Controller extends Thread {
      */
     protected void print(String content) {
         System.out.println(content);
-    }
-
-    public void move(Course course) {
-
     }
 
     private void load() {
@@ -84,9 +81,14 @@ public abstract class Controller extends Thread {
             }
         }
     }
+    
+    protected void action(IntentComponentMap icm) {
+        Intent intent = icm.getIntent();
+        action(intent);
+    }
 
     protected void action(Intent intent) {
-        processUserInput(this.model);
+        //processUserInput(this.model);
         switch (intent) {
             case SHOW_DIALOGUE:
                 showNextDialogue();
@@ -124,10 +126,6 @@ public abstract class Controller extends Thread {
     }
 
     protected abstract void processUserInput(Model model);
-
-    protected void mapActionToComponent() {
-
-    }
 
     public Model getModel() {
         return model;

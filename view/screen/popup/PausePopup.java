@@ -11,10 +11,14 @@ public class PausePopup extends Popup {
     public PausePopup(Model model) {
         super(model);
     }
-
+    
     @Override
-    public void init() {
+    public void createView() {
         viewPort = new PausePopupViewport();
+    }
+    
+    @Override
+    public void createController() {
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new ScreenController(model, icms);
     }

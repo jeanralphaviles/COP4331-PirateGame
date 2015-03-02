@@ -25,6 +25,10 @@ public class Decal {
     //Constant Strings by category
         //Entity
     public static final String default_entity = "./Sprites/item/C_Hat02.png";
+        //Occupation
+    public static final String summoner = "./Sprites/item/S_Magic01.png";
+    public static final String smasher = "./Sprites/item/W_Sword006.png";
+    public static final String sneak = "./Sprites/item/Ac_Ring01.png";
         //Item
     public static final String item_default = "./Sprites/item/W_Mace010.png"; 
         //Terrain

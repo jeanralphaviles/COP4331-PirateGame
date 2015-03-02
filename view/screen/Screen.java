@@ -1,6 +1,7 @@
 package view.screen;
 
 import controller.Controller;
+import java.util.ArrayList;
 import model.GameObject;
 import model.Model;
 import view.viewport.ViewPort;
@@ -16,10 +17,29 @@ public abstract class Screen {
         init();
     }
 
-    public abstract void init();
+    private void init() {
+        createView();
+        createController();
+    }
+    
+    protected abstract void createView();
+    protected abstract void createController();
 
-    public final void updateView(GameObject gameObject) {
+    public void updateView(GameObject gameObject) {
         viewPort.updateView(gameObject);
+    }
+    
+    public void refreshController() {
+        ArrayList<ViewPort> viewports = viewPort.getInteriorViewports();
+        int size = viewports.size();
+        ViewPort v;
+        for (int i=0; i<size; i++) {
+            v = viewports.get(i);
+            if (v.isRefreshControllerNeeded()) {
+                createController();
+                return;
+            }
+        }
     }
     
     /*Get-Sets*/

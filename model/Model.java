@@ -123,9 +123,17 @@ public class Model extends Thread {
      * Updateview sends message to view n times per second as identified in
      * launch method
      */
-    public void updateView() {
+    private void updateView() {
         currentScreen.updateView(this.gameObject);
         System.out.println("Model updated view");
+    }
+    
+    /**
+     * refreshController sends message to screen after update view has been called
+     * to regenerate the controller in case UI elements have been changed
+     */
+    private void refreshController() {
+        currentScreen.refreshController();
     }
 
     /**
@@ -135,6 +143,7 @@ public class Model extends Thread {
     public void mainGameLoop() {
         //ultimately, more logic in here (e.g. paused)
         updateView();
+        refreshController();
     }
 
     /**

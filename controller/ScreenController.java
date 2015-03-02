@@ -8,6 +8,7 @@ import utility.IntentComponentMap.Intent;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 
 public class ScreenController extends Controller {
@@ -30,16 +31,25 @@ public class ScreenController extends Controller {
     }
 
     protected void setListenerForICM(IntentComponentMap icm) {
-        Component component = icm.getComponent();
-        final Intent intent = icm.getIntent();
-        ActionListener AL = new ActionListener() {
+        JComponent component = (JComponent)icm.getComponent();
+        //final Intent intent = icm.getIntent();
+        ActionListener al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                action(intent);
+                action(icm);
             }
         };
-        if (intent != Intent.USER_INPUT && component instanceof AbstractButton) {
-            ((AbstractButton)component).addActionListener(AL);
+        setActionListener(al, component);
+//        if (intent != Intent.USER_INPUT && component instanceof AbstractButton) {
+//            ((AbstractButton)component).addActionListener(AL);
+//        }
+    }
+    
+    private void setActionListener(ActionListener al, Component component) {
+        if (component instanceof AbstractButton) {
+            ((AbstractButton)component).addActionListener(al);
+        } else if (component instanceof JTextField) {
+            ((JTextField)component).addActionListener(al);
         }
     }
     

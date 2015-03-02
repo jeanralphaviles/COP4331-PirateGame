@@ -12,10 +12,14 @@ public class NewGamePopup extends Popup {
         super(model);
         // TODO Auto-generated constructor stub
     }
-
+    
     @Override
-    public void init() {
+    public void createView() {
         viewPort = new NewGamePopupViewport();
+    }
+    
+    @Override
+    public void createController() {
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new NewGamePopupController(model, icms);
     }

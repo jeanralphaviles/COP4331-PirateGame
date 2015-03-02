@@ -39,6 +39,23 @@ public class Avatar extends Entity {
         super(decal);
         this.occupation = occupation;
     }
+    
+    @Override
+    public void setOccupation(Occupation occupation) {
+        this.occupation = occupation;
+        String occ = occupation.getOccupationName();
+        switch(occ) {
+            case "Summoner":
+                this.decal = new Decal(Decal.summoner);
+                break;
+            case "Smasher":
+                this.decal = new Decal(Decal.smasher);
+                break;
+            case "Sneak":
+                this.decal = new Decal(Decal.sneak);
+                break;
+        }
+    }
 
     public String getName() {
         return name;

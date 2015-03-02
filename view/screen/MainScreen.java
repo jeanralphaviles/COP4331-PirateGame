@@ -11,10 +11,14 @@ public class MainScreen extends Screen {
     public MainScreen(Model model) {
         super(model);
     }
-
+        
     @Override
-	public void init() {
+    public void createView() {
         viewPort = new MainScreenViewport();
+    }
+    
+    @Override
+    public void createController() {
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new ScreenController(model, icms);
     }

@@ -5,10 +5,13 @@ import javax.swing.JPanel;
 import model.GameObject;
 
 import utility.IntentComponentMap;
+import view.screen.Screen;
 
 public abstract class ViewPort extends JPanel {
     
     protected ArrayList<ViewPort> interiorViewports = new ArrayList<ViewPort>(1);
+    //
+    protected boolean refreshControllerNeeded = false;
 
     public ViewPort() {
         // TODO Auto-generated constructor stub
@@ -62,6 +65,10 @@ public abstract class ViewPort extends JPanel {
 
     public void setInteriorViewports(ArrayList<ViewPort> interiorViewports) {
         this.interiorViewports = interiorViewports;
+    }
+    
+    public boolean isRefreshControllerNeeded() {
+        return refreshControllerNeeded;
     }
     
     

@@ -11,10 +11,14 @@ public class DialogueScreen extends Screen {
     public DialogueScreen(Model model) {
         super(model);
     }
-
+        
     @Override
-	public void init() {
+    public void createView() {
         viewPort = new DialogueScreenViewport();
+    }
+    
+    @Override
+    public void createController() {
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new ScreenController(model, icms);
     }
