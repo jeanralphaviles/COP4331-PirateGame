@@ -5,7 +5,9 @@
  */
 package view.viewport;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
+
 import model.GameObject;
 import model.entity.Statistics;
 import utility.IntentComponentMap;
@@ -26,47 +28,51 @@ public class StatusViewport extends ViewPort {
     @Override
     public void updateView(GameObject gameObject) {
         Statistics statistics = gameObject.getAvatar().getDerivedStatistics();
-        //
-        int livesLeft = statistics.getLivesLeft(); 
-        int hardiness = statistics.getHardiness();
-        int agility = statistics.getAgility();
-        int movement = statistics.getMovement();
-        int intellect = statistics.getIntellect();
-        int experience = statistics.getExperience();
-        int strength = statistics.getStrength();
-        //
-        int level = statistics.getLevel();
-        int life = statistics.getCurrentHealth();
+    
+        int health = statistics.getCurrentHealth();
         int mana = statistics.getCurrentMana();
+        int level = statistics.getLevel();
+        int livesLeft = statistics.getLivesLeft(); 
         int offense = statistics.getOffensiveRating();
         int defense = statistics.getDefensiveRating();
         int armor = statistics.getArmorRating();
+        int strength = statistics.getStrength();
+        int agility = statistics.getAgility();
+        int intellect = statistics.getIntellect();
+        int hardiness = statistics.getHardiness();
+        int experience = statistics.getExperience();
+        int movement = statistics.getMovement();
+
+        Dimension textFieldDim = new Dimension(50, 28);
+        healthField.setText(Integer.toString(health));
+        manaField.setText(Integer.toString(mana));
+        levelField.setText(Integer.toString(level));
+        livesField.setText(Integer.toString(livesLeft));
+        offensiveRatingField.setText(Integer.toString(offense));
+        defensiveRatingField.setText(Integer.toString(defense));
+        armorRatingField.setText(Integer.toString(armor));
+        strengthField.setText(Integer.toString(strength));
+        agilityField.setText(Integer.toString(agility));
+        intellectField.setText(Integer.toString(intellect));
+        hardinessField.setText(Integer.toString(hardiness));
+        experienceField.setText(Integer.toString(experience));
+        movementField.setText(Integer.toString(movement));
         
-        //Display primary stats
-        String HAMIES = hardiness + " ";
-        HAMIES += agility + " ";
-        HAMIES += movement + " ";
-        HAMIES += intellect + " ";
-        HAMIES += experience + " ";
-        HAMIES += strength + " ";
-        updateHAMIES(HAMIES);
-        
-        //Lives Left
-        livesLeftTextField.setText(livesLeft + "");
-        
-        //Derived stats
-        levelTextField.setText(level + "");
-        lifeTextField.setText(life + "");
-        manaTextField.setText(mana + "");
-        offenseTextView.setText(offense + "");
-        defenseTextView.setText(defense + "");
-        armorTextView.setText(armor + "");
+        healthField.setMinimumSize(textFieldDim);
+        manaField.setMinimumSize(textFieldDim);
+        levelField.setMinimumSize(textFieldDim);
+        livesField.setMinimumSize(textFieldDim);
+        offensiveRatingField.setMinimumSize(textFieldDim);
+        defensiveRatingField.setMinimumSize(textFieldDim);
+        armorRatingField.setMinimumSize(textFieldDim);
+        strengthField.setMinimumSize(textFieldDim);
+        agilityField.setMinimumSize(textFieldDim);
+        intellectField.setMinimumSize(textFieldDim);
+        hardinessField.setMinimumSize(textFieldDim);
+        experienceField.setMinimumSize(textFieldDim);
+        movementField.setMinimumSize(textFieldDim);
     }
 
-    private void updateHAMIES(String hamies) {
-        hamiesTextField.setText(hamies);
-    }
-    
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
@@ -81,364 +87,296 @@ public class StatusViewport extends ViewPort {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        livesLeftTextField = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        hamiesTextField = new javax.swing.JTextField();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        levelTextField = new javax.swing.JTextField();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        offenseTextView = new javax.swing.JTextField();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        lifeTextField = new javax.swing.JTextField();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        defenseTextView = new javax.swing.JTextField();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        manaTextField = new javax.swing.JTextField();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        armorTextView = new javax.swing.JTextField();
+        jFrame1 = new javax.swing.JFrame();
+        jFrame2 = new javax.swing.JFrame();
+        jFrame3 = new javax.swing.JFrame();
+        jFrame4 = new javax.swing.JFrame();
+        healthField = new javax.swing.JTextField();
+        manaField = new javax.swing.JTextField();
+        healthLabel = new javax.swing.JLabel();
+        manaLabel = new javax.swing.JLabel();
+        livesLabel = new javax.swing.JLabel();
+        offensiveRatingLabel = new javax.swing.JLabel();
+        defensiveRatingLabel = new javax.swing.JLabel();
+        armorRatingLabel = new javax.swing.JLabel();
+        strengthLabel = new javax.swing.JLabel();
+        agilityLabel = new javax.swing.JLabel();
+        intellectLabel = new javax.swing.JLabel();
+        hardinessLabel = new javax.swing.JLabel();
+        experienceLabel = new javax.swing.JLabel();
+        movementLabel = new javax.swing.JLabel();
+        livesField = new javax.swing.JTextField();
+        offensiveRatingField = new javax.swing.JTextField();
+        defensiveRatingField = new javax.swing.JTextField();
+        armorRatingField = new javax.swing.JTextField();
+        strengthField = new javax.swing.JTextField();
+        agilityField = new javax.swing.JTextField();
+        intellectField = new javax.swing.JTextField();
+        hardinessField = new javax.swing.JTextField();
+        experienceField = new javax.swing.JTextField();
+        movementField = new javax.swing.JTextField();
+        levelLabel = new javax.swing.JLabel();
+        levelField = new javax.swing.JTextField();
 
-        jLabel9.setText("LivesLeft:");
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
-        livesLeftTextField.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
+        jFrame2.getContentPane().setLayout(jFrame2Layout);
+        jFrame2Layout.setHorizontalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame2Layout.setVerticalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame3Layout = new javax.swing.GroupLayout(jFrame3.getContentPane());
+        jFrame3.getContentPane().setLayout(jFrame3Layout);
+        jFrame3Layout.setHorizontalGroup(
+            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame3Layout.setVerticalGroup(
+            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame4Layout = new javax.swing.GroupLayout(jFrame4.getContentPane());
+        jFrame4.getContentPane().setLayout(jFrame4Layout);
+        jFrame4Layout.setHorizontalGroup(
+            jFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame4Layout.setVerticalGroup(
+            jFrame4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        setSize(new java.awt.Dimension(250, 250));
+        setLayout(new java.awt.GridBagLayout());
+
+        healthField.setEditable(false);
+        healthField.setText("jTextField1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        add(healthField, gridBagConstraints);
+
+        manaField.setEditable(false);
+        manaField.setText("jTextField2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        add(manaField, gridBagConstraints);
+
+        healthLabel.setText("Health");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        add(healthLabel, gridBagConstraints);
+
+        manaLabel.setText("Mana");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        add(manaLabel, gridBagConstraints);
+
+        livesLabel.setText("Lives Left");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        add(livesLabel, gridBagConstraints);
+
+        offensiveRatingLabel.setText("Offensive Rating");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        add(offensiveRatingLabel, gridBagConstraints);
+
+        defensiveRatingLabel.setText("Defensive Rating");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        add(defensiveRatingLabel, gridBagConstraints);
+
+        armorRatingLabel.setText("Armor Rating");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        add(armorRatingLabel, gridBagConstraints);
+
+        strengthLabel.setText("Strength");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        add(strengthLabel, gridBagConstraints);
+
+        agilityLabel.setText("Agility");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        add(agilityLabel, gridBagConstraints);
+
+        intellectLabel.setText("Intellect");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        add(intellectLabel, gridBagConstraints);
+
+        hardinessLabel.setText("Hardiness");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        add(hardinessLabel, gridBagConstraints);
+
+        experienceLabel.setText("Experience");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        add(experienceLabel, gridBagConstraints);
+
+        movementLabel.setText("Movement");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        add(movementLabel, gridBagConstraints);
+
+        livesField.setEditable(false);
+        livesField.setText("jTextField3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        add(livesField, gridBagConstraints);
+
+        offensiveRatingField.setEditable(false);
+        offensiveRatingField.setText("jTextField4");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        add(offensiveRatingField, gridBagConstraints);
+
+        defensiveRatingField.setEditable(false);
+        defensiveRatingField.setText("jTextField5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        add(defensiveRatingField, gridBagConstraints);
+
+        armorRatingField.setEditable(false);
+        armorRatingField.setText("jTextField6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        add(armorRatingField, gridBagConstraints);
+
+        strengthField.setEditable(false);
+        strengthField.setText("jTextField7");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        add(strengthField, gridBagConstraints);
+
+        agilityField.setEditable(false);
+        agilityField.setText("Sample Text");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        add(agilityField, gridBagConstraints);
+
+        intellectField.setEditable(false);
+        intellectField.setText("jTextField9");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        add(intellectField, gridBagConstraints);
+
+        hardinessField.setEditable(false);
+        hardinessField.setText("jTextField10");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        add(hardinessField, gridBagConstraints);
+
+        experienceField.setEditable(false);
+        experienceField.setText("jTextField11");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        add(experienceField, gridBagConstraints);
+
+        movementField.setEditable(false);
+        movementField.setText("jTextField12");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        add(movementField, gridBagConstraints);
+
+        levelLabel.setText("Level");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        add(levelLabel, gridBagConstraints);
+
+        levelField.setEditable(false);
+        levelField.setText("jTextField1");
+        levelField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                livesLeftTextFieldActionPerformed(evt);
+                levelFieldActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(livesLeftTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(livesLeftTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel10.setText("H.A.M.I.E.S");
-
-        hamiesTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hamiesTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(hamiesTextField))
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hamiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        jLabel11.setText("Level:");
-
-        levelTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                levelTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(levelTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel12.setText("Offense:");
-
-        offenseTextView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                offenseTextViewActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(offenseTextView)
-                .addContainerGap())
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(offenseTextView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel13.setText("Life:");
-
-        lifeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lifeTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lifeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(lifeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel14.setText("Defense:");
-
-        defenseTextView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                defenseTextViewActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(defenseTextView, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(defenseTextView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel15.setText("Mana:");
-
-        manaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manaTextFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manaTextField)
-                .addContainerGap())
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(manaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel16.setText("Armor:");
-
-        armorTextView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                armorTextViewActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(armorTextView, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(armorTextView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        add(levelField, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void livesLeftTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_livesLeftTextFieldActionPerformed
+    private void levelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_livesLeftTextFieldActionPerformed
-
-    private void hamiesTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hamiesTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hamiesTextFieldActionPerformed
-
-    private void levelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_levelTextFieldActionPerformed
-
-    private void offenseTextViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offenseTextViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_offenseTextViewActionPerformed
-
-    private void lifeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lifeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lifeTextFieldActionPerformed
-
-    private void defenseTextViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defenseTextViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_defenseTextViewActionPerformed
-
-    private void manaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manaTextFieldActionPerformed
-
-    private void armorTextViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_armorTextViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_armorTextViewActionPerformed
+    }//GEN-LAST:event_levelFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField armorTextView;
-    private javax.swing.JTextField defenseTextView;
-    private javax.swing.JTextField hamiesTextField;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField levelTextField;
-    private javax.swing.JTextField lifeTextField;
-    private javax.swing.JTextField livesLeftTextField;
-    private javax.swing.JTextField manaTextField;
-    private javax.swing.JTextField offenseTextView;
+    private javax.swing.JTextField agilityField;
+    private javax.swing.JLabel agilityLabel;
+    private javax.swing.JTextField armorRatingField;
+    private javax.swing.JLabel armorRatingLabel;
+    private javax.swing.JTextField defensiveRatingField;
+    private javax.swing.JLabel defensiveRatingLabel;
+    private javax.swing.JTextField experienceField;
+    private javax.swing.JLabel experienceLabel;
+    private javax.swing.JTextField hardinessField;
+    private javax.swing.JLabel hardinessLabel;
+    private javax.swing.JTextField healthField;
+    private javax.swing.JLabel healthLabel;
+    private javax.swing.JTextField intellectField;
+    private javax.swing.JLabel intellectLabel;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame jFrame2;
+    private javax.swing.JFrame jFrame3;
+    private javax.swing.JFrame jFrame4;
+    private javax.swing.JTextField levelField;
+    private javax.swing.JLabel levelLabel;
+    private javax.swing.JTextField livesField;
+    private javax.swing.JLabel livesLabel;
+    private javax.swing.JTextField manaField;
+    private javax.swing.JLabel manaLabel;
+    private javax.swing.JTextField movementField;
+    private javax.swing.JLabel movementLabel;
+    private javax.swing.JTextField offensiveRatingField;
+    private javax.swing.JLabel offensiveRatingLabel;
+    private javax.swing.JTextField strengthField;
+    private javax.swing.JLabel strengthLabel;
     // End of variables declaration//GEN-END:variables
 }
