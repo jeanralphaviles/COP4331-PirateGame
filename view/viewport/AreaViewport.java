@@ -33,6 +33,8 @@ public class AreaViewport extends ViewPort {
     private int numTilesHigh = 7; //should be odd
     //
     private boolean followAvatar = true;
+    //
+    private GridLocation oldAvatarGridLocation = null;
 
     /**
      * Creates new form AreaViewport
@@ -44,46 +46,66 @@ public class AreaViewport extends ViewPort {
 
     @Override
     public void updateView(GameObject gameObject) {
-        //setBackground(Color.RED);
-        this.removeAll();
+        //Get AvatarLocation
+        GridLocation currentAvatarGridLocation = getCurrentAvatarGridLocation(gameObject);
+        int avatarX = currentAvatarGridLocation.getX();
+        int avatarY = currentAvatarGridLocation.getY();
+        
+        //Determine if Update is needed
+        boolean avatarMoved = !currentAvatarGridLocation.equals(oldAvatarGridLocation);
+        boolean firstRender = oldAvatarGridLocation == null;     
+        boolean updateNeeded = avatarMoved || firstRender;
+        oldAvatarGridLocation = currentAvatarGridLocation;
+        
+        //Update if necessary
+        if (updateNeeded) {
+            this.removeAll();
 
-        GridLayout grid = new GridLayout(numTilesWide, numTilesHigh, 0, 0);
-        setLayout(grid);
+    //        GridBagConstraints c = new GridBagConstraints();
+    //        c.ipadx = 0;
+    //        c.ipady = 0;
+            GridLayout grid = new GridLayout(numTilesWide, numTilesHigh, 0, 0);
+            setLayout(grid);
 
+            Map map = getMap(gameObject);
+            Maptile maptile;
+            Tile tile;
+            if (!followAvatar) {
+                numTilesWide = map.getWidth();
+                numTilesHigh = map.getHeight();
+
+                for (int x = 0; x < numTilesWide; x++) {
+                    for (int y = 0; y < numTilesHigh; y++) {
+                        displayTile(map, x, y);
+                    }
+                }
+            } else {
+                int[] minAndMaxXYs = getMinAndMaxXYs(numTilesWide, numTilesHigh, currentAvatarGridLocation);
+                int minX = minAndMaxXYs[0];
+                int maxX = minAndMaxXYs[1];
+                int minY = minAndMaxXYs[2];
+                int maxY = minAndMaxXYs[3];
+                for (int x = minY; x <= maxY; x++) {
+                    for (int y = minX; y <= maxX; y++) {
+                        displayTile(map, x, y);
+                    }
+                }
+            }
+
+            this.updateUI();
+        }
+    }
+    
+    private Map getMap(GameObject gameObject) {
+        Map map = gameObject.getLevel().getMap();
+        return map;
+    }
+    
+    private GridLocation getCurrentAvatarGridLocation(GameObject gameObject) {
         Maptile avatarMaptile = gameObject.getAvatar().getMaptile();
         Map map = gameObject.getLevel().getMap();
         GridLocation avatarGridLocation = map.getGridLocation(avatarMaptile);
-        GridBagConstraints c = new GridBagConstraints();
-        c.ipadx = 0;
-        c.ipady = 0;
-        int avatarX = avatarGridLocation.getX();
-        int avatarY = avatarGridLocation.getY();
-
-        Maptile maptile;
-        Tile tile;
-        if (!followAvatar) {
-            numTilesWide = map.getWidth();
-            numTilesHigh = map.getHeight();
-
-            for (int x = 0; x < numTilesWide; x++) {
-                for (int y = 0; y < numTilesHigh; y++) {
-                    displayTile(map, x, y);
-                }
-            }
-        } else {
-            int[] minAndMaxXYs = getMinAndMaxXYs(numTilesWide, numTilesHigh, avatarGridLocation);
-            int minX = minAndMaxXYs[0];
-            int maxX = minAndMaxXYs[1];
-            int minY = minAndMaxXYs[2];
-            int maxY = minAndMaxXYs[3];
-            for (int x = minY; x <= maxY; x++) {
-                for (int y = minX; y <= maxX; y++) {
-                    displayTile(map, x, y);
-                }
-            }
-        }
-
-        this.updateUI();
+        return avatarGridLocation;
     }
 
     private void displayTile(Map map, int x, int y) {
@@ -97,10 +119,10 @@ public class AreaViewport extends ViewPort {
         add(tile.getImage());
     }
 
-//    private GridLocation[] getCorners(int width, int height, GridLocation avatarGridLocation) {
+//    private GridLocation[] getCorners(int width, int height, GridLocation currentAvatarGridLocation) {
 //        GridLocation[] corners = new GridLocation[4];
 //        //
-//        int[] minAndMaxXYs = getMinAndMaxXYs(width, height, avatarGridLocation);
+//        int[] minAndMaxXYs = getMinAndMaxXYs(width, height, currentAvatarGridLocation);
 //        //
 //        int minX = minAndMaxXYs[0];
 //        int maxX = minAndMaxXYs[1];

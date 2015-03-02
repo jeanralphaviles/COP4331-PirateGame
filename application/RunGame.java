@@ -19,7 +19,7 @@ public class RunGame {
     private static final String modelFilename = "MODEL_FILE.txt";
     private static LoadSave loadsave;
     private static KeyboardFocusManager auxController;
-    private static final int updatesPerSecond = 3;
+    private static final int updatesPerSecond = 20;
     public static MainWindow mainWindow;
 
     /*Constructors*/

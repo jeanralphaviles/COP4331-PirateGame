@@ -19,4 +19,14 @@ public class GridLocation {
 	public int getY() {
 		return y;
 	}
+        
+        public boolean equals(GridLocation gridLocation) {
+            if (gridLocation == null) {
+                return false;
+            } else {
+                boolean sameX = this.x == gridLocation.getX();
+                boolean sameY = this.y == gridLocation.getY();
+                return sameX && sameY;
+            }
+        }
 }
