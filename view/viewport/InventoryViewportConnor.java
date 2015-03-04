@@ -33,30 +33,12 @@ public class InventoryViewportConnor extends ViewPort {
     }
 
     @Override
-    public void updateView(GameObject gameObject) {
-//        ArrayList<Item> equippedItems = gameObject.getAvatar().getEquippedInventoryItems();
-//        ArrayList<Item> inventoryItems = gameObject.getAvatar().getInventory().getItems();
-//        int newTotalItems = equippedItems.size() + inventoryItems.size();
-//        int index = 0;
-//        if (newTotalItems != numTotalItems) {
-//            numTotalItems = newTotalItems;
-//            removeAll(); //refresh
-//        }
-//        for (int i=0; i< equippedItems.size(); i++) {
-//            displayItem(equippedItems.get(i), true, index);
-//            index++;
-//        }
-//        for (int i=0; i< inventoryItems.size(); i++) {
-//            displayItem(inventoryItems.get(i), false, index);
-//            index++;
-//        }
-        
+    public void updateView(GameObject gameObject) {      
         Avatar avatar = gameObject.getAvatar();
         if (refreshNeeded(avatar)) {
             //Clear viewport
             removeAll(); //refresh screen
             clearButtonsAndICMs(); //clear existing state
-            
             
             //Display again the gameObject
             displayEquippedInventory(avatar);
@@ -64,6 +46,10 @@ public class InventoryViewportConnor extends ViewPort {
         }
     }
     
+    /*  Determine if items were added or taken away (numTotalItems has changed).
+        If so, then need to refresh the view AND controller (because new buttons were added).
+        Else, no point in updating. The listeners effectively update existing buttons.
+    */
     private boolean refreshNeeded(Avatar avatar) {
         int newTotalItems = calculateNumTotalItems(avatar);
         if (newTotalItems != numTotalItems) {
@@ -110,33 +96,6 @@ public class InventoryViewportConnor extends ViewPort {
         
         add(button);
     }
-
-//    public void displayItem(Item item, boolean equipped, int index) {
-////        String name = item.getName();
-////        ArrayList<String> buttonItemNames = new ArrayList<String>(1);
-////        for (int i=0; i< buttons.size(); i++) {
-////            buttonItemNames.add(buttons.get(i).getText());
-////        }
-////        !buttonItemNames.contains(name)
-//        if (buttons.size() < 5) {
-//            JButton button = new JButton(item.getName());
-//            buttons.add(button);
-//            if (equipped) {
-//                button.setBackground(Color.BLUE);
-//                icms.add(new IntentComponentMap(button, item, Intent.UNEQUIP_ITEM));
-//            } else {
-//                icms.add(new IntentComponentMap(button, item, Intent.EQUIP_ITEM));
-//            }
-//            add(button);
-//        }
-//        if (index < 5) {
-//            if (item.equipped) {
-//                buttons.get(index).setBackground(Color.BLUE);
-//            } else {
-//                buttons.get(index).setBackground(Color.GRAY);
-//            }
-//        }
-//    }
     
     private void clearButtonsAndICMs() {
         buttons = new ArrayList<JButton>(1);
@@ -145,6 +104,10 @@ public class InventoryViewportConnor extends ViewPort {
 
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+        /*  Because the only controls, buttons, directly represent items
+            it made sense in this case to assign icms as the buttons were
+            created. This method merely returns them.
+        */
         return icms;
     }
 
