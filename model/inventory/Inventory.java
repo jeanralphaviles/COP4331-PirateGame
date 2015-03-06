@@ -2,10 +2,12 @@ package model.inventory;
 
 
 import model.item.Item;
+import model.item.TakeableItem;
 import model.item.Weapon;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import utility.decal.Decal;
 
 /**
@@ -117,9 +119,23 @@ public class Inventory{
 
     // ------------------ TESTING INVENTORY ------------------------
     // ------------------                   ------------------------
-    public static void main(String[] args){
+    public static void main(String[] args) {
+    	Inventory orig = new Inventory(10);
+    	orig.storeItem(new TakeableItem());
+    	Inventory restored = Inventory.fromString(orig.toString());
+    	
+    	if (orig.toString().equals(restored.toString()) == false) {
+    		System.out.println("Serialized Strings are different");
+    	}
+    	if (orig.getCapacity() != restored.getCapacity()) {
+    		System.out.println("Capacities are different");
+    	}
+    	if (orig.getItems().get(0).toString().equals(restored.getItems().get(0).toString()) == false) {
+    		System.out.println("Items differ");
+    	}
 
-
+    	// Im highjacking this method for Load/Save Testing
+    	/*
         // Create Inventory:
         Inventory inventory = new Inventory();
 
@@ -129,10 +145,12 @@ public class Inventory{
         // When inventory size is 1
         inventory = new Inventory(5);
         testingTakeableItems( inventory );
+        */
     }
     // -------------------------------------------------------------
 
-    private static void testingTakeableItems(Inventory inventory ){
+    @SuppressWarnings("unused")
+	private static void testingTakeableItems(Inventory inventory ){
 
         // Weapon List:
         Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol",  5, 5);
@@ -230,7 +248,7 @@ public class Inventory{
     	return "[" + items.toString() + "," + capacity + "]";
     }
 
-	public static Inventory fromString(String string) throws IOException {
+	public static Inventory fromString(String string) {
 		String stripped = string.substring(1, string.length() - 1);
 		Inventory inventory = new Inventory();
 		int bracketCount = 0;
@@ -241,10 +259,19 @@ public class Inventory{
 				int start2 = 0;
 				String arrayListStripped = stripped.substring(start + 1, i - 1);
 				for (int j = 0; j < arrayListStripped.length(); ++j) {
-					if (bracketCount == 0 && arrayListStripped.charAt(j) == ',') {
-						Item item = Item.fromString(arrayListStripped.substring(start2, j));
+					if ((bracketCount == 0 && arrayListStripped.charAt(j) == ',') || j == arrayListStripped.length() - 1) {
+						Item item;
+						if (arrayListStripped.charAt(j) == ',') {
+							item = Item.fromString(arrayListStripped.substring(start2, j));
+						} else {
+							item = Item.fromString(arrayListStripped.substring(start2, j + 1));
+						}
 						items.add(item);
 						start2 = j + 1;
+					} else if (arrayListStripped.charAt(j) == '[') {
+						++bracketCount;
+					} else if (arrayListStripped.charAt(j) == ']') {
+						--bracketCount;
 					}
 				}
 				start = i + 1;
@@ -267,8 +294,8 @@ public class Inventory{
 
         // Weapon List:
 
-        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol", 5, 5, 5);
         /*
+        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol", 5, 5, 5);
         Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
         Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);
         Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5, 5);
@@ -276,8 +303,9 @@ public class Inventory{
         // Create Inventory:
         Inventory inventory = new Inventory();
 
-        if ( inventory.isFull() )
-            System.out.println("Inventory is Full");
+        if ( inventory.isFull() ) {
+            System.out.println("Inv.contains(item))entory is Full");
+        }
 
 
 

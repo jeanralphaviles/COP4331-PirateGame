@@ -5,9 +5,7 @@
  */
 package view.viewport;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -19,7 +17,6 @@ import model.GameObject;
 import model.map.GridLocation;
 import model.map.Map;
 import model.map.Maptile;
-import utility.IntentComponentMap;
 import utility.decal.BlankDecal;
 import utility.decal.Decal;
 
@@ -54,7 +51,7 @@ public class AreaViewport extends ViewPort {
         //Determine if Update is needed
         boolean avatarMoved = !currentAvatarGridLocation.equals(oldAvatarGridLocation);
         boolean firstRender = oldAvatarGridLocation == null;     
-        boolean updateNeeded = avatarMoved || firstRender;
+        boolean updateNeeded = true; // There are projectiles now avatarMoved || firstRender;
         oldAvatarGridLocation = currentAvatarGridLocation;
         
         //Update if necessary
@@ -76,7 +73,7 @@ public class AreaViewport extends ViewPort {
 
                 for (int x = 0; x < numTilesWide; x++) {
                     for (int y = 0; y < numTilesHigh; y++) {
-                        displayTile(map, x, y);
+                        displayTile(map, x, y, gameObject);
                     }
                 }
             } else {
@@ -87,7 +84,7 @@ public class AreaViewport extends ViewPort {
                 int maxY = minAndMaxXYs[3];
                 for (int x = minY; x <= maxY; x++) {
                     for (int y = minX; y <= maxX; y++) {
-                        displayTile(map, x, y);
+                        displayTile(map, x, y, gameObject);
                     }
                 }
             }
@@ -102,17 +99,18 @@ public class AreaViewport extends ViewPort {
     }
     
     private GridLocation getCurrentAvatarGridLocation(GameObject gameObject) {
-        Maptile avatarMaptile = gameObject.getAvatar().getMaptile();
-        Map map = gameObject.getLevel().getMap();
-        GridLocation avatarGridLocation = map.getGridLocation(avatarMaptile);
-        return avatarGridLocation;
+    	return gameObject.getAvatarLocation();
     }
 
-    private void displayTile(Map map, int x, int y) {
-        Maptile maptile = map.getMapTile(y, x);
+    private void displayTile(Map map, int x, int y, GameObject gameObject) {
+        Maptile maptile = map.getMaptile(new GridLocation(y, x));
         Tile tile;
         if (maptile != null) {
             tile = new Tile(maptile);
+            if (!gameObject.getDecals(new GridLocation(y, x)).isEmpty()) {
+            	tile.setDecal(gameObject.getDecals(new GridLocation(y, x)).get(0));
+            }
+            tile.autoScale();
         } else {
             tile = new Tile(); //BlankDecal
         }
@@ -161,7 +159,15 @@ public class AreaViewport extends ViewPort {
 
         /*Properties*/
         private ImageIcon imageIcon;// = new ImageIcon("images/grass_tile.jpg"); 
-        private Decal decal;
+        public Decal getDecal() {
+			return decal;
+		}
+
+		public void setDecal(Decal decal) {
+			this.decal = decal;
+		}
+
+		private Decal decal;
         private boolean tag;
 
         /*Constructors*/
@@ -210,7 +216,7 @@ public class AreaViewport extends ViewPort {
         
         public void scale(int width, int height) {
             BufferedImage image = decal.getImage();
-            Image i = (Image) image;
+            Image i = image;
             i = getScaledImage(i, width, height);
             image = (BufferedImage) i;
             imageIcon = new ImageIcon(image);

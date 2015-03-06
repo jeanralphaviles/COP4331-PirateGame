@@ -19,10 +19,24 @@ public abstract class AreaEffect {
 		setDecal(decal);
 	}
 
-	/**
-	 * @param entity Entity to be affected by AreaEffect
-	 */
 	public abstract void triggerProximityEffect(Entity entity);
+
+	@Override
+	public abstract String toString();
+	
+	public static AreaEffect fromString(String string) {
+		if (string.startsWith("[HealDamageAreaEffect")) {
+			return HealDamageAreaEffect.fromString(string);
+		} else if (string.startsWith("[InstantDeathAreaEffect")) {
+			return InstantDeathAreaEffect.fromString(string);
+		} else if (string.startsWith("[LevelUpAreaEffect")) {
+			return LevelUpAreaEffect.fromString(string);
+		} else if (string.startsWith("[TakeDamageAreaEffect")) {
+			return TakeDamageAreaEffect.fromString(string);
+		} else { 
+			return NullAreaEffect.fromString(string);
+		}
+	}
 
 	public final Decal getDecal() {
 		return decal;
@@ -40,13 +54,23 @@ public abstract class AreaEffect {
 		this.isActive = isActive;
 	}
 	
-	@Override
-	public String toString() {
-		return "[]";
-	}
-
-	public static AreaEffect fromString(String substring) {
-		// TODO Actually set the effect type
-		return null;
+	public static void main(String[] args) {
+		AreaEffect[] originals = {
+				new HealDamageAreaEffect(),
+				new InstantDeathAreaEffect(),
+				new LevelUpAreaEffect(),
+				new NullAreaEffect(),
+				new TakeDamageAreaEffect()
+		};
+		AreaEffect[] copies = new AreaEffect[originals.length];
+		for (int i = 0; i < originals.length; ++i) {
+			copies[i] = fromString(originals[i].toString());
+			if (copies[i].getDecal().toString().equals(originals[i].getDecal().toString()) == false) {
+				System.out.println("Decals don't match up");
+			}
+			if (copies[i].getClass() != originals[i].getClass()) {
+				System.out.println("Classes don't match up");
+			}
+		}
 	}
 }

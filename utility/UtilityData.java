@@ -28,4 +28,13 @@ public class UtilityData {
         this.gameObjectFilenames = gameObjectFilenames;
     }
     
+    @Override
+	public String toString() {
+    	return "[" + "]";
+    }
+
+	public static UtilityData fromString(String string) {
+		return new UtilityData();
+	}
+    
 }

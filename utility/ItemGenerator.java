@@ -2,14 +2,12 @@ package utility;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 import utility.decal.Decal;
 import model.map.Map;
-import model.map.Maptile;
 import model.entity.Statistics;
+import model.inventory.Slot;
 import model.inventory.SlotCategory;
 import model.item.InteractiveItem;
 import model.item.Item;
@@ -18,20 +16,20 @@ import model.item.ObstacleItem;
 import model.item.OneShotItem;
 import model.item.TakeableItem;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class ItemGenerator {
 
-	/**
-	 * @param file
-	 *            CSV containing items, one per line, with statistics and a grid
-	 *            location. Items placed onto the same tile as another item or
-	 *            out of bounds will be ignored items should be denoted like
-	 *            this... Category, Name, SlotCategory(if takeable), Decal (file
-	 *            name), Xcoord, Ycoord, Strength, Agility, Intellect, Hardiness
-	 * @param map
-	 *            * Map to place items
-	 * @throws Exception
-	 */
-	public static void generateItems(File file, Map map) throws Exception {
+	public static Slot[][] generateItems(File file, Map map) {
+		int width = map.getWidth();
+		int height = map.getHeight();
+		Slot[][] slots = new Slot[width][height];
+		for (int x = 0; x < width; ++x) {
+			for (int y = 0; y < height; ++y) {
+				slots[x][y] = new Slot(SlotCategory.ANY_SLOT);
+			}
+		}
 		BufferedReader reader = null;
 		String line = "";
 		String lineSplit = "\\r?\\n";
@@ -91,30 +89,28 @@ public class ItemGenerator {
 					Statistics stats = new Statistics(0, strength, agility,
 							intellect, hardiness, 0, 0, 0, 0);
 					item.setAugmentStatistics(stats); // Set Statistics
-					Maptile maptile = map.getMapTile(xCoord, yCoord);
-					if (maptile != null) { // Valid tile
-						maptile.getItemSlot().storeItem(item); // Add it, ignore
+					if (xCoord >= 0 && xCoord < width && yCoord >= 0 && yCoord < height) { // Valid tile
+						slots[xCoord][yCoord].storeItem(item);  // Add it, ignore
 																// errors
 					}
 				}
 			}
 			reader.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return slots;
 	}
 
 	public static void main(String[] args) {
 		Map map = MapGenerator.generateMap(new File("TestData/TestMap_1.csv"));
 		try {
-			generateItems(new File("TestData/TestItems_1.csv"), map);
+			Slot[][] slots = generateItems(new File("TestData/TestItems_1.csv"), map);
 			// Burrito
-			if (!map.getMapTile(2, 2).getItemSlot().isFull()) {
+			if (!slots[2][2].hasItem()) {
 				System.out.println("Burrito not there");
 			}
-			Item burrito = map.getMapTile(2, 2).getItemSlot().getItem();
+			Item burrito = slots[2][2].getItem();
 			if (!burrito.getName().equals("Burrito")) {
 				System.out.println("Burrito is not named correctly");
 				System.out.println("Burrito is named " + burrito.getName());
@@ -126,10 +122,10 @@ public class ItemGenerator {
 				System.out.println("Statistics for Burrito not set correctly");
 			}
 			// TheOneRing from the Lord of the Rings
-			if (!map.getMapTile(4, 4).getItemSlot().isFull()) {
+			if (!slots[4][4].hasItem()) {
 				System.out.println("TheOneRing is not placed");
 			}
-			Item theOneRing = map.getMapTile(4, 4).getItemSlot().getItem();
+			Item theOneRing = slots[4][4].getItem();
 			if (!theOneRing.getName().equals("TheOneRing")) {
 				System.out.println("The OneRing is named " + theOneRing.getName());
 			}

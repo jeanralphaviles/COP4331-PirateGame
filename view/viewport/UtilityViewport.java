@@ -6,7 +6,6 @@
 package view.viewport;
 
 import java.util.ArrayList;
-import javax.swing.JPanel;
 import model.GameObject;
 import utility.IntentComponentMap;
 

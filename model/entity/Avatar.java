@@ -1,19 +1,14 @@
 package model.entity;
 
-import java.io.IOException;
-
 import model.entity.occupation.Occupation;
+import model.entity.occupation.Smasher;
 import model.item.*;
-import model.map.Maptile;
-import model.map.areaeffect.*;
 import utility.decal.Decal;
 
 /**
- * @author Jean-Ralph Aviles
  * @author Carlos Vizcaino Date 2/14/2015
  */
 public class Avatar extends Entity {
-
     private String name;
     private String nickname;
 
@@ -31,11 +26,9 @@ public class Avatar extends Entity {
         this.storeItem(stick);
         this.storeItem(arch);
         this.equipItem(pistol);
-
     }
 
     public Avatar(Occupation occupation, Decal decal) {
-
         super(decal);
         this.occupation = occupation;
     }
@@ -55,6 +48,38 @@ public class Avatar extends Entity {
                 this.decal = new Decal(Decal.sneak);
                 break;
         }
+    }
+    
+    @Override
+	public String toString() {
+    	return "[avatar" + super.toString() + "," + name + "," + nickname + "]";
+    }
+    
+    public static Avatar fromString(String string) {
+    	String stripped = string.substring(7, string.length() - 1);
+    	Avatar avatar = new Avatar();
+    	int bracketCount = 0;
+    	int start = 0;
+    	for (int i = 0; i < stripped.length(); ++i) {
+    		if (bracketCount == 0 && stripped.charAt(i) == ',') {
+    			Entity entity = Entity.fromString(stripped.substring(start, i));
+    			avatar.decal = entity.decal;
+    			avatar.equippedInventory = entity.equippedInventory;
+    			avatar.inventory = entity.inventory;
+    			avatar.occupation = entity.occupation;
+    			avatar.statistics = entity.statistics;
+    			start = i + 1;
+    			break;
+    		} else if (stripped.charAt(i) == '[') {
+    			++bracketCount;
+    		} else if (stripped.charAt(i) == ']') {
+    			--bracketCount;
+    		}
+    	}
+    	String[] rest = stripped.substring(start, stripped.length()).split(",");
+    	avatar.setName(rest[0]);
+    	avatar.setNickname(rest[1]);
+    	return avatar;
     }
 
     public String getName() {
@@ -76,7 +101,23 @@ public class Avatar extends Entity {
     // ------------ TESTING AVATAR -----------------
     // ------------                -----------------
     public static void main(String[] args) {
+    	Avatar orig = new Avatar(new Smasher(), new Decal(Decal.water));
+    	orig.setName("Jean-Ralph");
+    	orig.setNickname("JR");
+    	Avatar restored = Avatar.fromString(orig.toString());
+    	
+    	if (orig.toString().equals(restored.toString()) == false) {
+    		System.out.println("Serialized strings are different");
+    	}
+    	if (orig.getName().equals(restored.getName()) == false) { 
+    		System.out.println("Name are different");
+    	}
+    	if (orig.getNickname().equals(restored.getNickname()) == false) {
+    		System.out.println("Nicknames are different");
+    	}
+    	
 
+/*
         System.out.println("Testing Avatar");
 
         // -------- TESTING AVATAR AND AREA OF EFFECT ---------
@@ -162,47 +203,6 @@ public class Avatar extends Entity {
         if (richard.getStatistics().getAgility() == richardAgility) {
             System.out.println("Error: interactible item is wrong");
         }
-
-        // -------- TESTING MapTile and Obstacle Item     ---------
-        // --------                                       ---------
-        Maptile tile = new Maptile();
-        tile.storeItem(new ObstacleItem(new Decal(Decal.item_default), "Palm Tree"));
-
-        if (tile.isPassable()) {
-            System.out.println("Error: obstacle item is wrong");
-        }
-
-    }
-
-    @Override
-    public String toString() {
-        return "[" + super.toString() + "," + name + "," + nickname + "]";
-    }
-
-    public static Avatar fromString(String string) throws IOException {
-        String stripped = string.substring(1, string.length() - 1);
-        Avatar avatar = new Avatar();
-        int bracketCount = 0;
-        int start = 0;
-        for (int i = 0; i < stripped.length(); ++i) {
-            if (bracketCount == 0 && stripped.charAt(i) == ',') {
-                Entity entity = Entity.fromString(stripped.substring(start, i));
-                avatar.decal = entity.decal;
-                avatar.equippedInventory = entity.equippedInventory;
-                avatar.maptile = entity.maptile;
-                avatar.occupation = entity.occupation;
-                avatar.statistics = entity.statistics;
-                start = i + 1;
-                break;
-            } else if (stripped.charAt(i) == '[') {
-                ++bracketCount;
-            } else if (stripped.charAt(i) == ']') {
-                --bracketCount;
-            }
-        }
-        String[] rest = stripped.substring(start, stripped.length()).split(",");
-        avatar.setName(rest[0]);
-        avatar.setNickname(rest[1]);
-        return avatar;
+        */
     }
 }

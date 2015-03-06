@@ -1,7 +1,6 @@
 package utility;
 
 import java.awt.Component;
-import javax.swing.JComponent;
 
 /**
  * @author Team Tiger

@@ -92,7 +92,7 @@ public class InventoryPanel extends JPanel{
 
         if (item != null){
 
-            avatar.unequipItem(item);
+            avatar.unEquipItem(item);
             return true;
         }
 

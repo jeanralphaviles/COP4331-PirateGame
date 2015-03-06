@@ -1,199 +1,83 @@
 package model.entity;
 
+import utility.decal.Decal;
 import model.entity.occupation.Occupation;
 import model.entity.occupation.Smasher;
+import model.entity.occupation.Summoner;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
-import model.inventory.Slot;
 import model.item.Item;
-import model.map.Maptile;
-import utility.decal.Decal;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
- * @author Jean-Ralph Aviles and Carlos Vizcaino
+ * @author Jean-Ralph Aviles
  */
 public class Entity {
+	protected Statistics statistics;
+	protected Occupation occupation;
+	protected Inventory inventory;
+	protected EquippedInventory equippedInventory;
+	protected Decal decal;
+	
+	public Entity() {
+		setStatistics(new Statistics());
+		setOccupation(new Smasher());
+		setInventory(new Inventory(statistics.getInventoryCapacity()));
+		setEquippedInventory(new EquippedInventory());
+		setDecal(new Decal(Decal.smasher));
+	}
+	
+	public Entity(Decal decal) {
+		this();
+		setDecal(decal);
+	}
+	
+	public Entity(Occupation occupation, Statistics statistics, Decal decal) {
+		this();
+		setOccupation(occupation);
+		setStatistics(statistics);
+		setDecal(decal);
+	}
+	
+	public boolean storeItem(Item item) {
+		return inventory.storeItem(item);
+	}
+	
+	public boolean equipItem(Item item) {
+		return equippedInventory.storeItem(item);
+	}
+	
+	public boolean unEquipItem(Item item) {
+		return equippedInventory.removeItem(item);
+	}
+	
+	public boolean hasItem(Item item) {
+		return inventory.hasItem(item) || equippedInventory.hasItem(item);
+	}
 
-    protected Inventory inventory;
-    protected EquippedInventory equippedInventory;
-    protected Occupation occupation;
-    protected Statistics statistics;
-    protected Maptile maptile;
-    protected Decal decal;
-
-    public Entity() {
-        this.decal = new Decal(Decal.default_entity);
-        occupation = new Smasher();
-        statistics = new Statistics();
-        inventory = new Inventory( statistics.getInventoryCapacity() );
-        equippedInventory = new EquippedInventory();
-    }
-
-    public Entity(Decal decal) {
-
-        this();
-        this.decal = decal;
-    }
-
-
-    public Entity( Decal decal, Statistics statistics ){
-
-        this.decal = decal;
-        this.statistics = statistics;
-    }
-
-    // Accessors:
-    // ----------------------------------------------------
-    public Inventory getInventory() {return inventory; }
-    
-    // ----------------------------------------------------
-    public EquippedInventory getEquippedInventory(){ return equippedInventory; }
-    
-    // ----------------------------------------------------
-    public ArrayList<Item> getEquippedInventoryItems() {
-
-        ArrayList<Item> items = new ArrayList<Item>();
-        ArrayList<Slot> slots = equippedInventory.getSlots();
-        for( Slot s : slots ){
-
-            // When the slot does actually have an item
-            if ( s.isFull() ){
-
-                items.add(s.getItem());
-            }
-        }
-
-        return items;
-    }
-
-    public int getMaxEquippedItems() {
-        return 15 + (statistics.getLevel() - 1) * 2;
-    }
-
-    public boolean storeItem(Item item) {
-        return inventory.storeItem(item);
-    }
-
-    public boolean equipItem(Item item) {
-        return equippedInventory.storeItem(item);
-    }
-    
-    public boolean hasItem(Item item) {
-        if (inventory != null && inventory.hasItem(item)) {
-            return true;
-        }
-        if (equippedInventory != null && equippedInventory.hasItem(item)) {
-            return true;
-        }
-        return false;
-    }
-    /**
-     * get effective stats returns statistics object.
-     * This stats has been modified depending on:
-     * equiped items, level, occupation, etc.
-     */
-
-    public Statistics getDerivedStatistics() {
-        Statistics effectiveStats = statistics.clone();
-        equippedInventory.augmentStatistics(effectiveStats);
-        occupation.augmentStatistics(statistics);
-        return effectiveStats;
-    }
- /**drop item stores item on map. removes item from inventory/equipped inventory depending on where it is.
-     * @param item - item to be removed from inventory/equiped item and placed on map.
-     * @return - returns true if item managed to drop
-     */
-   
-    public boolean dropItem(Item item) {
-        if (!hasItem(item)) {
-            return false;
-        }
-        if (maptile.getItemSlot().isItemAllowed()) {
-            if (maptile.getItemSlot().storeItem(item)) { /* Try to store item in maptile */
-                if (inventory != null && inventory.hasItem(item)) { /* Remove item from inventory if it has it */
-                    inventory.removeItem(item);
-                } else { /* Else item is in equippedInventory, remove it from there */
-                    equippedInventory.removeItem(item);
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param item - item is attempted to be placed in inventory
-     * @return - true if item is able to be placed in inventory
-     */
-    protected boolean putItemInInventory(Item item) {
-        return storeItem(item);
-    }
-
-    /** entity movement
-     * @param maptile - maptile they attempt to move onto
-     * @return - returns true if they were able to move onto tile.
-     */
-
-    public boolean move(Maptile maptile) {
-        if (maptile != null && maptile.isPassable()) {
-            if (maptile.addEntity(this)) {
-            	if (this.maptile != null) {
-                    this.maptile.removeEntity();
-                }
-                this.maptile = maptile;
-                return true;
-            }
-        }
-        return false;
-    }
-
-	public Maptile getMaptile() {
-        return maptile;
-    }
-
-    public void setMaptile(Maptile maptile) {
-        this.maptile = maptile;
-    }
-
-    public Decal getDecal() {
-        return decal;
-    }
-
-    public void setDecal(Decal decal) {
-        this.decal = decal;
-    }
-
-    public Statistics getStatistics() {
-        return statistics;
-    }
-    // ----------------------------------------------------
-    public boolean unequipItem(Item item ){
-
-        if ( equippedInventory.hasItem(item)){
-
-            equippedInventory.removeItem(item);
-            inventory.storeItem(item);
-            return true;
-        }
-        return false;
-    }
-    public Occupation getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(Occupation occupation) {
-        this.occupation = occupation;
-    }
-    
-    @Override
+	public Statistics getStatistics() {
+		return statistics;
+	}
+	
+	public Statistics getDerivedStatistics() {
+		Statistics statistics = this.statistics.clone();
+		occupation.augmentStatistics(statistics);
+		equippedInventory.augmentStatistics(statistics);
+		return statistics;
+	}
+	
+	@Override
 	public String toString() {
-    	return "[" + inventory.toString() + "," + equippedInventory.toString() + "," + (occupation != null ? occupation.toString() : "[WishWeHadGSON]") + "," + statistics.toString() + "," + (maptile != null ? maptile.toString() : "[WishWeHadGSON]") + "," + decal.toString() + "]";
-    }
-
-	public static Entity fromString(String string) throws IOException {
+		return "[" + statistics.toString() + "," + occupation.toString() + ","
+				+ inventory.toString() + "," + equippedInventory.toString()
+				+ "," + decal.toString() + "]";
+	}
+	
+	public static Entity fromString(String string) {
+		if (string.startsWith("[avatar")) {
+			return Avatar.fromString(string);
+		} else if (string.equals("[null]")) {
+			return null;
+		}
 		String stripped = string.substring(1, string.length() - 1);
 		int bracketCount = 0;
 		int start = 0;
@@ -202,31 +86,23 @@ public class Entity {
 		for (int i = 0; i < stripped.length(); ++i) {
 			if (bracketCount == 0 && stripped.charAt(i) == ',') {
 				if (itemCount == 0) {
-					Inventory inventory = Inventory.fromString(stripped.substring(start, i));
-					entity.inventory = inventory;
+					// Statistics
+					entity.statistics = Statistics.fromString(stripped.substring(start, i));
 				} else if (itemCount == 1) {
-					EquippedInventory equippedInventory = EquippedInventory.fromString(stripped.substring(start, i));
-					entity.equippedInventory = equippedInventory;
+					// Occupation
+					entity.occupation = Occupation.fromString(stripped.substring(start, i));
 				} else if (itemCount == 2) {
-					Occupation occupation = Occupation.fromString(stripped.substring(start, i));
-					entity.occupation = occupation;
+					// Inventory
+					entity.inventory = Inventory.fromString(stripped.substring(start, i));
 				} else if (itemCount == 3) {
-					Statistics statistics = Statistics.fromString(stripped.substring(start, i));
-					entity.statistics = statistics;
-				} else if (itemCount == 4) {
-					if (stripped.substring(start, i) != "WishWeHadGSON") {
-						Maptile maptile = Maptile.fromString(stripped.substring(start, i));
-						entity.maptile = maptile;
-					} else {
-						entity.maptile = null;
-					}
-				} else if (itemCount == 5) {
-					Decal decal = Decal.fromString(stripped.substring(start, i));
-					entity.decal = decal;
+					// EquippedInventory
+					entity.equippedInventory = EquippedInventory.fromString(stripped.substring(start, i));
+					// Decal
+					entity.decal = Decal.fromString(stripped.substring(i + 1, stripped.length()));
 					break;
 				}
-				++itemCount;
 				start = i + 1;
+				++itemCount;
 			} else if (stripped.charAt(i) == '[') {
 				++bracketCount;
 			} else if (stripped.charAt(i) == ']') {
@@ -236,5 +112,71 @@ public class Entity {
 		return entity;
 	}
 
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
+	}
 
+	public Occupation getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(Occupation occupation) {
+		this.occupation = occupation;
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
+	public EquippedInventory getEquippedInventory() {
+		return equippedInventory;
+	}
+
+	public void setEquippedInventory(EquippedInventory equippedInventory) {
+		this.equippedInventory = equippedInventory;
+	}
+
+	public Decal getDecal() {
+		return decal;
+	}
+
+	public void setDecal(Decal decal) {
+		this.decal = decal;
+	}
+	
+	public static void main(String[] args) {
+		Entity orig = new Entity(new Decal(Decal.summoner));
+		orig.setOccupation(new Summoner());
+		Entity restored = Entity.fromString(orig.toString());
+		
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized Strings differ");
+		}
+		if (orig.getDecal().toString().equals(restored.getDecal().toString()) == false) {
+			System.out.println("Decals differ");
+		}
+		if (orig.getStatistics().toString().equals(restored.getStatistics().toString()) == false) {
+			System.out.println("Statistics differ");
+		}
+		if (orig.getEquippedInventory().toString().equals(restored.getEquippedInventory().toString()) == false) {
+			System.out.println("EquippedInventories differ");
+		}
+		if (orig.getInventory().toString().equals(restored.getInventory().toString()) == false) {
+			System.out.println("Inventories differ");
+		}
+		if (orig.getOccupation().toString().equals(restored.getOccupation().toString()) == false) {
+			System.out.println("Occupation differ");	
+		}
+		
+		Entity avatar = new Avatar(new Summoner(), new Decal(Decal.summoner));
+		Entity restoredAvatar = Entity.fromString(avatar.toString());
+		
+		if (restoredAvatar.getClass().getSimpleName().equals("Avatar") == false) {
+			System.out.println("Avatar not correctly reconstructed");
+		}
+	}
 }

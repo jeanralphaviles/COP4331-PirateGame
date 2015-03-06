@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import model.GameObject;
 
 import utility.IntentComponentMap;
-import view.screen.Screen;
 
 public abstract class ViewPort extends JPanel {
     

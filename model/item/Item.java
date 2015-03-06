@@ -1,7 +1,5 @@
 package model.item;
 
-import java.io.IOException;
-
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;
@@ -139,8 +137,8 @@ public abstract class Item {
         return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "]";
     }
 
-    public static Item fromString(String string) throws IOException {
-        String stripped = string.substring(1, string.length() - 1);
+    public static Item fromString(String string) {
+        String stripped = string.trim().substring(1, string.length() - 1);
         int bracketCount = 0;
         int start = 0;
         int itemCount = 0;
@@ -149,10 +147,9 @@ public abstract class Item {
             if (stripped.charAt(j) == ',') {
                 Category category = Category.valueOf(stripped.substring(start, j));
                 switch (category) {
-                    case ANY_ITEM:
-                        break;
                     case INTERACTIVE_ITEM:
                         item = new InteractiveItem();
+                        break;
                     case OBSTACLE_ITEM:
                         item = new ObstacleItem();
                         break;
@@ -176,6 +173,7 @@ public abstract class Item {
                 } else if (itemCount == 1) {
                     Statistics statistics = Statistics.fromString(stripped.substring(start, i));
                     item.statistics = statistics;
+                    start = i + 1;
                     break;
                 }
                 ++itemCount;
@@ -186,8 +184,39 @@ public abstract class Item {
                 --bracketCount;
             }
         }
-
         item.name = stripped.substring(start, stripped.length());
         return item;
+    }
+    
+    public static void main(String[] args) {
+    	Item[] originals = {
+    			new InteractiveItem(),
+    			new ObstacleItem(),
+    			new OneShotItem(),
+    			new TakeableItem()
+    	};
+    	Item[] restored = new Item[originals.length];
+    	
+    	for (int i = 0; i < originals.length; ++i) {
+    		restored[i] = Item.fromString(originals[i].toString());
+    		if (restored[i].toString().equals(originals[i].toString()) == false) {
+    			System.out.println("Serialized strings differ");
+    		}
+    		if (restored[i].getClass() != originals[i].getClass()) {
+    			System.out.println("Classes differ");
+    		}
+    		if (restored[i].getCategory().equals(originals[i].getCategory()) == false) {
+    			System.out.println("Categories differ");
+    		}
+    		if (restored[i].getDecal().toString().equals(originals[i].getDecal().toString()) == false) {
+    			System.out.println("Decals Differ");
+    		}
+    		if (restored[i].getName().equals(originals[i].getName()) == false) {
+    			System.out.println("Names differ");
+    		}
+    		if (restored[i].getAugmentStatistics().toString().equals(originals[i].getAugmentStatistics().toString()) == false) {
+    			System.out.println("Statistics differ");
+    		}
+    	}
     }
 }

@@ -1,134 +1,151 @@
 package model.map;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
-import model.entity.Entity;
-import model.map.areaeffect.HealDamageAreaEffect;
-import model.map.areaeffect.InstantDeathAreaEffect;
-import model.map.areaeffect.LevelUpAreaEffect;
-import model.map.areaeffect.TakeDamageAreaEffect;
-import utility.Course;
+import model.map.terrain.Mountain;
+import utility.MapGenerator;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class Map {
-
-    /*Properties*/
-    
-    private int height = 3, width = 3;
-    private Maptile[][] grid = new Maptile[width][height];
-    private HashMap<Integer, GridLocation> tileLocations = new HashMap<Integer, GridLocation>(); /* Associates Maptiles with GridLocations */
-
-    /*Constructors*/
+    private int height = 5, width = 5;
+	private Maptile[][] grid = new Maptile[width][height];
     
     public Map() {
-        for (int i = 0; i < width; ++i) {
-            for (int j = 0; j < height; ++j) {
-                Maptile tile = new Maptile();
-                grid[i][j] = tile;
-                tileLocations.put(tile.hashCode(), new GridLocation(i, j));
-            }
-        }
-    }
-
-    public Map(Maptile[][] grid) {
-        this.grid = grid;
-        this.height = grid[0].length;
-        this.width = grid.length;
-
-        for (int y = 0; y < this.height; ++y) {
-            for (int x = 0; x < this.width; ++x) {
-                tileLocations.put(this.grid[x][y].hashCode(), new GridLocation(x, y));
-            }
-        }
-    }
-    
-    /*Methods*/
-     /** returns maptile based on x and y coordinate of maptile
-     * @param x - x coordinate
-     * @param y - y coordinate
-     * @return - returns maptile
-     */
-    public Maptile getMapTile(int x, int y) {
-        if (x < 0 || x >= width) {
-            return null;
-        }
-        if (y < 0 || y >= height) {
-            return null;
-        }
-        return grid[x][y];
-    }
-    /** depending on course passed in and starting point the map tile you will end up on will be returned
-     * @param start - the starting postion of entity
-     * @param course - the course/displacement the entity wishes to move
-     * @return - the map tile they will end up on
-     */
-    public Maptile getDestination(Maptile start, Course course) {
-        int xOffset = course.getRelativeXDisplacement();
-        int yOffset = course.getRelativeYDisplacement();
-        GridLocation startLocation = getGridLocation(start);
-
-        if (startLocation == null) {
-            return null;
-        }
-        int destX = startLocation.getX() + xOffset;
-        int destY = startLocation.getY() + yOffset;
-
-        return getMapTile(destX, destY);
-    }
-     /** get location of given maptile
-     * @param maptile - maptile you want location of
-     * @return - location on map
-     */
-    public GridLocation getGridLocation(Maptile maptile) {
-        return tileLocations.get(maptile.hashCode());
-    }
-    
-    /**
-     * @param entity Entity with set maptile to add to map. SHOULD NOT BE USED EXECEPT WHEN SERIALIZING
-     */
-    public boolean addEntity(Entity entity) {
-    	if (entity.getMaptile() != null) {
-    		if (getGridLocation(entity.getMaptile()) != null) {
-    			GridLocation gridLocation = getGridLocation(entity.getMaptile());
-    			return grid[gridLocation.getX()][gridLocation.getY()].addEntity(entity);
+    	for (int x = 0; x < width; ++x) {
+    		for (int y = 0; y < height; ++y) {
+    			grid[x][y] = new Maptile();
     		}
     	}
-    	return false;
     }
     
-    /*Get-Sets*/
+    public Map(Maptile[][] grid) {
+    	this.grid = grid;
+    	setHeight(grid[0].length);
+    	setWidth(grid.length);
+    }
+
+	public boolean isValidGridLocation(GridLocation gridLocation) {
+		return gridLocation != null && gridLocation.getX() >= 0
+				&& gridLocation.getX() < getWidth()
+				&& gridLocation.getY() >= 0
+				&& gridLocation.getY() < getHeight();
+	}
+    
+    public Maptile getMaptile(GridLocation gridLocation) {
+    	if (isValidGridLocation(gridLocation)) {
+    		return grid[gridLocation.getX()][gridLocation.getY()];
+    	} else {
+    		return null;
+    	}
+    }
+    
+    @Override
+	public String toString() {
+    	StringBuilder builder = new StringBuilder();
+    	builder.append("[");
+    	for (int y = 0; y < height; ++y) {
+    		builder.append("[");
+    		for (int x = 0; x < width; ++x) {
+    			builder.append(grid[x][y].toString());
+    			if (x < width - 1) {
+    				builder.append(",");
+    			}
+    		}
+    		builder.append("]");
+    		if (y < height - 1) {
+    			builder.append(",");
+    		}
+    	}
+    	builder.append("]");
+    	return builder.toString();
+    }
+    
+    public static Map fromString(String string) {
+    	String stripped = string.substring(1, string.length() - 1);
+    	ArrayList<ArrayList<Maptile>> grid = new ArrayList<ArrayList<Maptile>>();
+    	int bracketCount = 0;
+    	int start = 0;
+    	for (int i = 0; i < stripped.length(); ++i) {
+    		if ((bracketCount == 0 && stripped.charAt(i) == ',') || i == stripped.length() - 1) {
+    			// Found Row
+    			String rowStripped;
+    			if (stripped.charAt(i) == ',') {
+    				rowStripped = stripped.substring(start + 1, i);
+    			} else {
+    				rowStripped = stripped.substring(start + 1, i + 1);
+    			}
+    			int innerBracketCount = 0;
+    			int innerStart = 0;
+    			ArrayList<Maptile> tileRow = new ArrayList<Maptile>();
+    			for (int j = 0; j < rowStripped.length(); ++j) {
+    				if ((innerBracketCount == 0 && rowStripped.charAt(j) == ',') || j == rowStripped.length() - 1) {
+    					Maptile mapTile;
+    					if (rowStripped.charAt(j) == ',') {
+    						mapTile = Maptile.fromString(rowStripped.substring(innerStart, j));
+    					} else {
+    						mapTile = Maptile.fromString(rowStripped.substring(innerStart, j + 1));
+    					}
+    					tileRow.add(mapTile);
+    					innerStart = j + 1;
+    				} else if (rowStripped.charAt(j) == '[') {
+    					++innerBracketCount;
+    				} else if (rowStripped.charAt(j) == ']') {
+    					--innerBracketCount;
+    				}
+    			}
+    			grid.add(tileRow);
+    			start = i + 1;
+    		} else if (stripped.charAt(i) == '[') {
+    			++bracketCount;
+    		} else if (stripped.charAt(i) == ']') {
+    			--bracketCount;
+    		}
+    	}
+    	return new Map(MapGenerator.convertArrayListToArray(grid, grid.get(0).size()));
+    }
 
     public int getHeight() {
-        return height;
-    }
+		return height;
+	}
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
+	public void setHeight(int height) {
+		this.height = height;
+	}
 
-    public int getWidth() {
-        return width;
-    }
+	public int getWidth() {
+		return width;
+	}
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public static void main(String[] args) {
+		Maptile[][] maptiles = new Maptile[6][5];
+		for (int x = 0; x < 6; ++x) {
+			for (int y = 0; y < 5; ++y) {
+				maptiles[x][y] = new Maptile();
+			}
+		}
+		maptiles[0][1].setTerrain(new Mountain());
+		Map orig = new Map(maptiles);
+		Map restored = Map.fromString(orig.toString());
+		if (orig.getWidth() != restored.getWidth()) {
+			System.out.println("Failed case #1");
+		}
+		if (orig.getHeight() != restored.getHeight()) {
+			System.out.println("Failed case #2");
+		}
+		for (int x = 0; x < orig.getWidth(); ++x) {
+			for (int y = 0; y < orig.getHeight(); ++y) {
+				GridLocation gridLocation = new GridLocation(x, y);
+				if (orig.getMaptile(gridLocation).toString().equals(restored.getMaptile(gridLocation).toString()) == false) {
+					System.out.println("Tiles do not match up at (" + x + "," + y + ")");
+				}
+			}
+		}
+	}
 
-    public Maptile[][] getGrid() {
-        return grid;
-    }
-
-    public void setGrid(Maptile[][] grid) {
-        this.grid = grid;
-    }
-
-    public HashMap<Integer, GridLocation> getTileLocations() {
-        return tileLocations;
-    }
-
-    public void setTileLocations(HashMap<Integer, GridLocation> tileLocations) {
-        this.tileLocations = tileLocations;
-    }
-
-    
-    
 }

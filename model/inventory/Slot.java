@@ -1,9 +1,9 @@
 package model.inventory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import model.item.Item;
+import model.item.TakeableItem;
 
 
 /**
@@ -43,6 +43,10 @@ public class Slot extends Inventory {
 	public SlotCategory getSlotCategory() {
 
         return slotCategory;
+	}
+	
+	public boolean hasItem() {
+		return !items.isEmpty();
 	}
 
     // --------------------------------------------------------
@@ -110,7 +114,7 @@ public class Slot extends Inventory {
     	return "[" + items.toString() + "," + capacity + "," + slotCategory + "]";
     }
 
-	public static Slot fromString(String string) throws IOException {
+	public static Slot fromString(String string) {
 		String stripped = string.substring(1, string.length() - 1);
 		Slot slot = new Slot();
 		int bracketCount = 0;
@@ -142,6 +146,23 @@ public class Slot extends Inventory {
 		slot.slotCategory = SlotCategory.valueOf(rest[1]);
 				
 		return slot;
+	}
+	
+	public static void main(String[] args) {
+		Slot orig = new Slot(SlotCategory.RING);
+		Item item = new TakeableItem(SlotCategory.RING);
+		orig.storeItem(item);
+		Slot restored = Slot.fromString(orig.toString());
+		
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized Strings differ");
+		}
+		if (orig.hasItem() != restored.hasItem()) {
+			System.out.println("Items are different");
+		}
+		if (!orig.getSlotCategory().equals(restored.getSlotCategory())) {
+			System.out.println("Slot Categories Differ");
+		}
 	}
 
 } // End of class

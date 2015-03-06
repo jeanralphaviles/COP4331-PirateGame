@@ -1,244 +1,199 @@
 package model;
 
-import application.RunGame;
-import controller.NumpadController;
-import model.entity.occupation.Occupation;
-
-import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import model.entity.Entity;
+import application.RunGame;
+import model.entity.Avatar;
+import model.entity.occupation.Occupation;
+import model.inventory.Slot;
+import model.map.GridLocation;
 import model.map.Map;
-import model.map.Maptile;
-import model.map.areaeffect.HealDamageAreaEffect;
-import model.map.areaeffect.InstantDeathAreaEffect;
-import model.map.areaeffect.LevelUpAreaEffect;
-import model.map.areaeffect.TakeDamageAreaEffect;
 import utility.Course;
 import utility.ItemGenerator;
-import utility.LoadSave;
 import utility.MapGenerator;
 import utility.UtilityData;
 import view.screen.MainScreen;
 import view.screen.Screen;
-import view.viewport.MainWindow;
 
+/**
+ * @author Jean-Ralph Aviles
+ */
 public class Model extends Thread {
+	private GameObject gameObject;
+	private UtilityData utilityData;
+	private Screen currentScreen;
+	private int updatesPerSecond;
+	
+	public Model() {
+		Avatar avatar = new Avatar();
+		this.gameObject = new GameObject(avatar);
+		this.setUtilityData(new UtilityData());
+		loadLevels(1, avatar);
+	}
+	
+	public void launch(int updatesPerSecond, String saveName) {
+		this.updatesPerSecond = updatesPerSecond;
+		launchFirstScreen();
+		this.start();
+	}
+	
+	public void launchFirstScreen() {
+		launchScreen(new MainScreen(this));
+	}
 
-    /**
-     * Model runs main game loop. Holds all relevant game logic and state(via
-     * gameObject)
-     */
-    /*Properties*/
-    private GameObject gameObject;
-    private UtilityData utilityData;
-    private LoadSave loadsave;
-    private Screen currentScreen;
-    private int updatesPerSecond;
+	public void launchScreen(Screen screen) {
+		RunGame.mainWindow.displayScreen(screen);
+		this.currentScreen = screen;
+	}
+	
+	public void mainGameLoop() {
+		gameObject.gameStep();
+		updateView();
+		refreshController();
+	}
+	
+	public void updateView() {
+		currentScreen.updateView(this.gameObject);
+		System.out.println("Model updated view");
+	}
+	
+	public void refreshController() {
+		currentScreen.refreshController();
+	}
+	
+	public boolean moveAvatar(Course course) {
+		return this.gameObject.moveAvatar(course);
+	}
+	
+	public void loadLevels(int numLevels, Avatar avatar) {
+		if (numLevels< 1) {
+			return;
+		}
+		ArrayList<Level> levels = new ArrayList<Level>(numLevels);
+		Map map;
+		Level level;
+		for (int i = 1; i <= numLevels; ++i) {
+			map = MapGenerator.generateMap(new File("Levels/Map" + i + ".csv"));
+			Slot[][] slots = ItemGenerator.generateItems(new File("Levels/Items" + i + ".csv"), map);
+			level = new Level(map, slots);
+			levels.add(level);
+		}
+		GridLocation avatarLocation = new GridLocation(levels.get(0).getWidth() / 2, levels.get(0).getHeight() / 2);
+		levels.get(0).addEntity(avatar, avatarLocation);
+		setGameObject(new GameObject(levels));
+	}
+	
+	@Override
+	public void run() {
+		System.out.println("Model Started");
+		int sleepTime = 1000 / updatesPerSecond;
+		while(true) {
+			mainGameLoop();
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    /*Constructors*/
-    public Model() {
-        this.gameObject = new GameObject();
-        loadFirstLevel();
-        this.setUtilityData(new UtilityData());
-    }
+	@Override
+	public String toString() {
+		return "[" + gameObject.toString() + "," + utilityData.toString() + "," + updatesPerSecond + "]";
+	}
+	
+	public static Model fromString(String string) {
+		Model model = new Model();
+		if (string.isEmpty()) {
+			return model;
+		}
+		string = string.trim();
+		String stripped = string.substring(1, string.length() - 1);
+		int bracketCount = 0;
+		int start = 0;
+		int itemCount = 0;
+		for (int i = 0; i < stripped.length(); ++i) {
+			if (bracketCount == 0 && stripped.charAt(i) == ',') {
+				if (itemCount == 0) {
+					GameObject gameObject = GameObject.fromString(stripped.substring(start, i));
+					model.gameObject = gameObject;
+				} else if (itemCount == 1) {
+					UtilityData utilityData = UtilityData.fromString(stripped.substring(start, i));
+					model.utilityData = utilityData;
+					start = i + 1;
+					break;
+				}
+				start = i + 1;
+				++itemCount;
+			} else if (stripped.charAt(i) == '[') {
+				++bracketCount;
+			} else if (stripped.charAt(i) == ']') {
+				--bracketCount;
+			}
+		}
+		model.updatesPerSecond = Integer.parseInt(stripped.substring(start));
+		return model;
+	}
 
-    /*Methods*/
-    /**
-     * Launch launches the proram and starts it running
-     *
-     * @param updatesPerSecond - how many times per second it needs to update
-     * @param loadSave - load save object. pass file to load save and load game.
-     */
-    public void launch(int updatesPerSecond, LoadSave loadSave) {
-        this.updatesPerSecond = updatesPerSecond;
-        this.loadsave = loadSave;
+	public Screen getCurrentScreen() {
+		return currentScreen;
+	}
+	
+	public void setCurrentScreen(Screen currentScreen) {
+		this.currentScreen = currentScreen;
+	}
+	
+	public GameObject getGameObject() {
+		return gameObject;
+	}
 
-        launchFirstScreen();
-        this.start(); //automagically calls run (thread thing)
-    }
+	public void setGameObject(GameObject gameObject) {
+		this.gameObject = gameObject;
+	}
 
-    /**
-     * runs main game loop. Uses threads
-     */
-    @Override
-    public void run() {
-        System.out.println("Model Started ");
-        int sleepTime = 1000 / updatesPerSecond; //milliseconds to sleep
-        while (true) {
-            mainGameLoop();
-            try {
-                Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	public UtilityData getUtilityData() {
+		return utilityData;
+	}
 
-    /**
-     * Load old game
-     *
-     * @param gameObjectFilename - load from old class
-     */
-    public void load(String gameObjectFilename) {
-        loadsave.loadGameObject(gameObjectFilename);
-    }
+	public void setUtilityData(UtilityData utilityData) {
+		this.utilityData = utilityData;
+	}
 
-    /**
-     * save current game
-     *
-     * @param gameObject - get state from gameObject
-     * @param gameObjectFilename - create file name and save state in directory.
-     */
-    private void save(GameObject gameObject, String gameObjectFilename) {
-        loadsave.saveGameObject(gameObject, gameObjectFilename);
-    }
-
-    public void setAvatarNickname(String nickname) {
-        this.gameObject.getAvatar().setNickname(nickname);
-    }
-
-    public void setAvatarOccupation(Occupation occupation) {
-        this.gameObject.getAvatar().setOccupation(occupation);
-    }
-
-    public String getNextDialogue() {
-        return gameObject.getLevel().getNextDialogue();
-    }
-
-    public GameObject getGameObject() {
-        return gameObject;
-    }
-
-    public void setDialogue(String s) {
-        gameObject.getLevel().setCurrentDialogue(s);
-    }
-
-//    public void save() {
-//        save(gameObject);
-//    }
-    /**
-     * Updateview sends message to view n times per second as identified in
-     * launch method
-     */
-    private void updateView() {
-        currentScreen.updateView(this.gameObject);
-        System.out.println("Model updated view");
-    }
-    
-    /**
-     * refreshController sends message to screen after update view has been called
-     * to regenerate the controller in case UI elements have been changed
-     */
-    private void refreshController() {
-        currentScreen.refreshController();
-    }
-
-    /**
-     * Main game loop updates view with updated model state. If game is paused
-     * then state is put on hold, and view is (as a result) not updated.
-     */
-    public void mainGameLoop() {
-        //ultimately, more logic in here (e.g. paused)
-        updateView();
-        refreshController();
-    }
-
-    /**
-     * launch main screen to start game
-     */
-    private void launchFirstScreen() {
-        launchScreen(new MainScreen(this));
-    }
-
-    /**
-     * Launch a specific screen
-     *
-     * @param screen is the specific screen to launch
-     */
-    public void launchScreen(Screen screen) {
-        RunGame.mainWindow.displayScreen(screen);
-        this.currentScreen = screen;
-    }
-
-    public void move(Course course) {
-        Maptile avatarTile = this.gameObject.getAvatar().getMaptile();
-        Maptile dest = this.gameObject.getLevel().getMap().getDestination(avatarTile, course);
-        this.gameObject.getAvatar().move(dest);
-        dest.triggerProximityEffect(this.gameObject.getAvatar());
-        if (this.gameObject.getAvatar().getDerivedStatistics().getLivesLeft() <= 0) {
-        	launchScreen(new MainScreen(new Model()));
-        }
-    }
-
-    private void loadLevel() {
-        //
-    }
-
-    public void loadNextLevel() {
-        //
-    }
-
-    public void loadFirstLevel() {
-        loadLevel(1);
-    }
-
-    public void loadLevel(int levelNum) {
-        if (levelNum < 1) {
-            return;
-        }
-        Map map;
-        try {
-            map = MapGenerator.generateMap(new File("Levels/Map" + levelNum + ".csv"));
-            ItemGenerator.generateItems(new File("Levels/Items" + levelNum + ".csv"), map);
-            Maptile avatarMapTile = map.getMapTile(map.getWidth() / 2, map.getHeight() / 2);
-            Level level = new Level(new ArrayList<Entity>(), map);
-            level.initDialogueStrings(); //for dialogue
-            this.gameObject.setLevel(level);
-            this.gameObject.getAvatar().move(avatarMapTile);
-            map.getMapTile(10, 7).setAreaEffect(new HealDamageAreaEffect());
-            map.getMapTile(11, 6).setAreaEffect(new TakeDamageAreaEffect());
-            map.getMapTile(15, 5).setAreaEffect(new InstantDeathAreaEffect());
-            map.getMapTile(15, 6).setAreaEffect(new LevelUpAreaEffect());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    /*Get-Sets*/
-
-    public Screen getCurrentScreen() {
-        return currentScreen;
-    }
-
-    public void setCurrentScreen(Screen currentScreen) {
-        this.currentScreen = currentScreen;
-    }
-
-    
-    
-    public UtilityData getUtilityData() {
-        return utilityData;
-    }
-
-    public void setUtilityData(UtilityData utilityData) {
-        this.utilityData = utilityData;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + gameObject.toString() + "]";
-    }
-
-    public static Model fromString(String string) throws IOException {
-        System.out.print(string);
-        if (string.length() == 0) {
-            return new Model();
-        }
-        String stripped = string.substring(1, string.length() - 1);
-        Model model = new Model();
-        model.gameObject = GameObject.fromString(stripped);
-        return model;
-    }
+	// TODO(jraviles) figure out what to do with these legacy functions
+	public String getNextDialogue() {
+		return gameObject.getLevel().getNextDialogue();
+	}
+	
+	public void setDialogue(String dialogue) {
+		gameObject.getLevel().setCurrentDialogue(dialogue);
+	}
+	
+	public void setAvatarOccupation(Occupation occupation) {
+		this.gameObject.getAvatar().setOccupation(occupation);
+	}
+	
+	public void setAvatarNickname(String nickname) {
+		this.gameObject.getAvatar().setNickname(nickname);
+	}
+	
+	public static void main(String[] args) {
+		Model orig = new Model();
+		orig.loadLevels(1, new Avatar());
+		orig.updatesPerSecond = 15;
+		Model restored = Model.fromString(orig.toString());
+		
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized Strings are different");
+		}
+		if (orig.gameObject.toString().equals(restored.gameObject.toString()) == false) {
+			System.out.println("Game Objects Differ");
+		}
+		if (orig.utilityData.toString().equals(restored.utilityData.toString()) == false) {
+			System.out.println("Utility Data differs");
+		}
+		if (orig.updatesPerSecond != restored.updatesPerSecond) {
+			System.out.println("UpdatesPerSecond differs");
+		}
+	}
 }
