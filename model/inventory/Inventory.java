@@ -3,12 +3,8 @@ package model.inventory;
 
 import model.item.Item;
 import model.item.TakeableItem;
-import model.item.Weapon;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import utility.decal.Decal;
 
 /**
  * Author: Carlos Vizcaino
@@ -20,227 +16,59 @@ import utility.decal.Decal;
  *Holds items entity owns/took
  *
  */
-
-public class Inventory{
-
-    // Attributes
+public class Inventory {
     protected ArrayList<Item> items;
-    protected  int capacity;
+    protected int capacity;
 
-
-    // Default Constructor
-    public Inventory(){
-
-        items = new ArrayList<Item>();
+    public Inventory() {
+        items = new ArrayList<Item>(0);
         capacity = 0;
     }
-
-    // Constructor
-    public Inventory(int capacity){
-
-        items = new ArrayList<Item>();
+    
+    public Inventory(int capacity) {
+        items = new ArrayList<Item>(capacity);
         this.capacity = capacity;
     }
 
-    // ----------- METHODS IMPLEMENTATION -------------------
-    // -----------                        -------------------
+    public boolean storeItem(Item item) { 
+	    if (!isFull()) {
+	        items.add(item);
+	        return true;
+	    }
+	    return false;
+	}
 
-    // Accessors
-    // --------------------------------------------------------
-    public ArrayList<Item> getItems(){
+	public boolean removeItem(Item item) {
+	    if (items.contains(item)) {
+	        items.remove(item);
+	        return true;
+	    }
+	    return false;
+	}
 
+	public boolean hasItem(Item item) {
+	    return items.contains(item);
+	}
+
+	public boolean isFull() {
+		return items.size() >= capacity;
+	}
+
+	public ArrayList<Item> getItems() {
         return items;
     }
-    // --------------------------------------------
-    public int getTotalItems(){
-
+    
+    public int getItemCount() {
         return items.size();
     }
 
-    // --------------------------------------------------------
-    public int getCapacity(){
-
+    
+    public int getCapacity() {
         return capacity;
     }
-    // --------------------------------------------------------
-    /**
-     * @param item - checks for this item
-     * @return - true if inventory contains an item
-     */
-    public boolean hasItem(Item item){
 
-        return items.contains(item);
-    }
-    // --------------------------------------------------------
-    public boolean isFull(){
-
-        if ( items.size() >= capacity )
-            return true;
-
-        return false;
-    }
-    // Mutators
-    // --------------------------------------------------------
-    public void setCapacity(int capacity){ this.capacity = capacity; }
-
-    //-------------------------------------------------------
-    
-    /**
-     * @param item - to store in inventory
-     * @return - returns true if stored
-     */
-    public boolean storeItem(Item item){ 
-
-
-        if ( items.size() < capacity ) {
-
-            items.add(item);
-            return true;
-        }
-
-        return false;
-    }
-
-    //-------------------------------------------------------
-    /**
-     * @param item - remove specified item from list
-     * @return - true if removed
-     */
-    public boolean removeItem(Item item){
-
-        if ( items.contains(item) ){
-
-            this.items.remove(item);
-            return true;
-        }
-
-        return false;
-    }
-
-    // ------------------ TESTING INVENTORY ------------------------
-    // ------------------                   ------------------------
-    public static void main(String[] args) {
-    	Inventory orig = new Inventory(10);
-    	orig.storeItem(new TakeableItem());
-    	Inventory restored = Inventory.fromString(orig.toString());
-    	
-    	if (orig.toString().equals(restored.toString()) == false) {
-    		System.out.println("Serialized Strings are different");
-    	}
-    	if (orig.getCapacity() != restored.getCapacity()) {
-    		System.out.println("Capacities are different");
-    	}
-    	if (orig.getItems().get(0).toString().equals(restored.getItems().get(0).toString()) == false) {
-    		System.out.println("Items differ");
-    	}
-
-    	// Im highjacking this method for Load/Save Testing
-    	/*
-        // Create Inventory:
-        Inventory inventory = new Inventory();
-
-        // When inventory has size 0
-        testingTakeableItems( inventory );
-
-        // When inventory size is 1
-        inventory = new Inventory(5);
-        testingTakeableItems( inventory );
-        */
-    }
-    // -------------------------------------------------------------
-
-    @SuppressWarnings("unused")
-	private static void testingTakeableItems(Inventory inventory ){
-
-        // Weapon List:
-        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol",  5, 5);
-        Weapon spade = new Weapon( new Decal(Decal.item_default), "Spade", 5, 5);
-        Weapon stick = new Weapon( new Decal(Decal.item_default), "Stick", 5, 5);
-        Weapon arch = new Weapon( new Decal(Decal.item_default), "Arch", 5, 5);
-
-        // Full or not
-        if ( inventory.isFull() )
-            System.out.println("Inventory is Full");
-        else
-            System.out.println("Inventory is Full");
-
-        // When storing
-        if (inventory.storeItem(pistol))
-            System.out.println("Item was added successfully");
-        else
-            System.out.println("Item cannot be added");
-
-        if ( inventory.getCapacity() > 0){
-
-            // Equipped Inventory
-            EquippedInventory equippedInventory = new EquippedInventory();
-            inventory.storeItem(spade);
-            inventory.storeItem(stick);
-            inventory.storeItem(arch);
-
-            // Get item
-            ArrayList<Item> items = inventory.getItems();
-
-            // Add two items from inventory to equipped inventory
-            int half = inventory.getTotalItems()/2;
-            for ( int i = 0 ; i < half; i++ ){
-
-                // Add to Equipped Inventory
-               boolean itemSuccessfullyEquipped = equippedInventory.storeItem( items.get(0) );
-
-
-                // Remove from inventory
-                if (itemSuccessfullyEquipped )
-                    inventory.removeItem( items.get(0) );
-            }
-            // Print result
-            printInventory(inventory);
-            printEquippedInventory(equippedInventory);
-        }
-    }
-    // ------------------------------------------------------------
-    private static void printInventory(Inventory inventory){
-
-        // Printing items
-        System.out.println("Printing Inventory...");
-        ArrayList<Item> items = inventory.getItems();
-        for ( Item i : items){
-
-            System.out.println( i.getName() );
-        }
-    }
-    // ------------------------------------------------------------
-    private static void printEquippedInventory(EquippedInventory inventory){
-
-        // Printing items
-        System.out.println("Printing EquipedIventory Inventory...");
-        ArrayList<Slot> slots = inventory.getSlots();
-      try{
-          for (Slot s : slots) {
-
-              if ( s == null )
-                  throw new IOException("Something went wrong!");
-
-              try {
-
-                  if (s.isFull()) {
-
-                      if ( s.getItem() == null)
-                          throw new IOException("Item is null");
-
-                      System.out.println(s.getItem().getName());
-                  }
-              }
-              catch (IOException e){
-
-                  System.out.println(e.getMessage() );
-              }
-          }
-      }
-      catch (IOException e ){
-
-          System.out.print(e.getMessage());
-      }
+    public void setCapacity(int capacity) {
+    	this.capacity = capacity;
     }
     
     @Override
@@ -287,29 +115,19 @@ public class Inventory{
 		return inventory;
 	}
 
-
-
-    // -------------------------------------------------------------
-    public static void testingTakeableItems(){
-
-        // Weapon List:
-
-        /*
-        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol", 5, 5, 5);
-        Weapon spade = new Weapon( new ItemDefaultDecal(), "Spade", 5, 5, 5);
-        Weapon stick = new Weapon( new ItemDefaultDecal(), "Stick", 5, 5, 5);
-        Weapon arch = new Weapon( new ItemDefaultDecal(), "Arch", 5, 5, 5);
-        */
-        // Create Inventory:
-        Inventory inventory = new Inventory();
-
-        if ( inventory.isFull() ) {
-            System.out.println("Inv.contains(item))entory is Full");
-        }
-
-
-
-    }
-
-
-} // End of Inventory class
+    public static void main(String[] args) {
+		Inventory orig = new Inventory(10);
+		orig.storeItem(new TakeableItem());
+		Inventory restored = Inventory.fromString(orig.toString());
+		
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized Strings are different");
+		}
+		if (orig.getCapacity() != restored.getCapacity()) {
+			System.out.println("Capacities are different");
+		}
+		if (orig.getItems().get(0).toString().equals(restored.getItems().get(0).toString()) == false) {
+			System.out.println("Items differ");
+		}
+	}
+}

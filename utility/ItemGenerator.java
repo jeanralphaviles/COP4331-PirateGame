@@ -88,7 +88,7 @@ public class ItemGenerator {
 
 					Statistics stats = new Statistics(0, strength, agility,
 							intellect, hardiness, 0, 0, 0, 0);
-					item.setAugmentStatistics(stats); // Set Statistics
+					item.setStatistics(stats); // Set Statistics
 					if (xCoord >= 0 && xCoord < width && yCoord >= 0 && yCoord < height) { // Valid tile
 						slots[xCoord][yCoord].storeItem(item);  // Add it, ignore
 																// errors
@@ -115,10 +115,10 @@ public class ItemGenerator {
 				System.out.println("Burrito is not named correctly");
 				System.out.println("Burrito is named " + burrito.getName());
 			}
-			if (burrito.getAugmentStatistics().getStrength() != 10
-					|| burrito.getAugmentStatistics().getAgility() != 10
-					|| burrito.getAugmentStatistics().getIntellect() != 10
-					|| burrito.getAugmentStatistics().getHardiness() != 10) {
+			if (burrito.getStatistics().getStrength() != 10
+					|| burrito.getStatistics().getAgility() != 10
+					|| burrito.getStatistics().getIntellect() != 10
+					|| burrito.getStatistics().getHardiness() != 10) {
 				System.out.println("Statistics for Burrito not set correctly");
 			}
 			// TheOneRing from the Lord of the Rings
@@ -129,10 +129,10 @@ public class ItemGenerator {
 			if (!theOneRing.getName().equals("TheOneRing")) {
 				System.out.println("The OneRing is named " + theOneRing.getName());
 			}
-			if (theOneRing.getAugmentStatistics().getStrength() != 4
-					|| theOneRing.getAugmentStatistics().getAgility() != 4 
-					|| theOneRing.getAugmentStatistics().getIntellect() != 4 
-					|| theOneRing.getAugmentStatistics().getHardiness() != 4) {
+			if (theOneRing.getStatistics().getStrength() != 4
+					|| theOneRing.getStatistics().getAgility() != 4 
+					|| theOneRing.getStatistics().getIntellect() != 4 
+					|| theOneRing.getStatistics().getHardiness() != 4) {
 				System.out.println("Statistics for TheOneRing not set correctly");
 			}
 		} catch (Exception e) {

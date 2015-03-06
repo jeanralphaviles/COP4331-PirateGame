@@ -11,69 +11,43 @@ import utility.decal.Decal;
 public class TakeableItem extends Item {
     protected SlotCategory slotCategory;
 
-    // Default Constructor
     public TakeableItem() {
         super();
         this.category = Category.TAKEABLE_ITEM;
         slotCategory = SlotCategory.ANY_SLOT;
     }
 
-    // Constructor II
     public TakeableItem(Decal decal) {
         super(decal, Category.TAKEABLE_ITEM);
         this.slotCategory = SlotCategory.ANY_SLOT;
     }
 
-    // Constructor III
     public TakeableItem(Decal decal, String name) {
         super(decal, Category.TAKEABLE_ITEM, name);
         this.slotCategory = SlotCategory.ANY_SLOT;
     }
 
-    // Constructor III
     public TakeableItem(SlotCategory slotCategory) {
         super(new Decal(Decal.item_default), Category.TAKEABLE_ITEM);
         this.slotCategory = slotCategory;
     }
 
-    // Constructor IV
     public TakeableItem(SlotCategory slotCategory, Decal decal) {
         super(decal, Category.TAKEABLE_ITEM);
         this.slotCategory = slotCategory;
     }
 
-    // Constructor V
     public TakeableItem(SlotCategory slotCategory, Decal decal, String name, Statistics statistics) {
         super(decal, Category.TAKEABLE_ITEM, name, statistics);
         this.slotCategory = slotCategory;
-
     }
-
-    // ---------- METHODS IMPLEMENTATION ---------
-    // ----------                         ---------
-    // Accessor Methods:
-    // --------------------------------------------
-    public SlotCategory getSlotCategory() {
-
-        return slotCategory;
-    }
-
-    // Mutator Methods:
-    // --------------------------------------------
-    public void setSlotCategory(SlotCategory slotCategory) {
-
-        this.slotCategory = slotCategory;
-    }
-
-    // Abstract Methods:
-    // --------------------------------------------
+    
     @Override
-    public void triggerProximity(Entity entity) {
+	public void triggerProximity(Entity entity) {
+	
+	}
 
-        // Todo-Code
-    }
-
-    @Override
+	@Override
     public String toString() {
         return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + slotCategory.ordinal() + "]";
     }
@@ -119,13 +93,21 @@ public class TakeableItem extends Item {
         return item;
     }
     
-    public static void main(String[] args) {
+    public SlotCategory getSlotCategory() {
+	    return slotCategory;
+	}
+
+	public void setSlotCategory(SlotCategory slotCategory) {
+	    this.slotCategory = slotCategory;
+	}
+
+	public static void main(String[] args) {
     	TakeableItem orig = new TakeableItem(SlotCategory.EYEPATCH, new Decal(Decal.item_default), "Eyepatch", new Statistics());
     	TakeableItem restored = fromString(orig.toString());
     	if (orig.toString().equals(restored.toString()) == false) {
     		System.out.println("Serialized Strings are different");
     	}
-    	if (orig.getAugmentStatistics().toString().equals(restored.getAugmentStatistics().toString()) == false) {
+    	if (orig.getStatistics().toString().equals(restored.getStatistics().toString()) == false) {
     		System.out.println("Statistics diff");
     	}
     	if (!orig.getCategory().equals(restored.getCategory()) || !restored.getCategory().equals(Category.TAKEABLE_ITEM)) {
