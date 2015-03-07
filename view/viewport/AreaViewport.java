@@ -26,8 +26,8 @@ import utility.decal.Decal;
  */
 public class AreaViewport extends ViewPort {
 
-    private int numTilesWide = 7; //should be odd
-    private int numTilesHigh = 7; //should be odd
+    private int numTilesWide = 19; //should be odd 19 @ 32,32 scale was good
+    private int numTilesHigh = 7; //should be odd 7 @ 32,32 scale was good
     //
     private boolean followAvatar = true;
     //
@@ -51,7 +51,7 @@ public class AreaViewport extends ViewPort {
         //Determine if Update is needed
         boolean avatarMoved = !currentAvatarGridLocation.equals(oldAvatarGridLocation);
         boolean firstRender = oldAvatarGridLocation == null;     
-        boolean updateNeeded = true; // There are projectiles now avatarMoved || firstRender;
+        boolean updateNeeded = avatarMoved || firstRender; // There are projectiles now avatarMoved || firstRender;
         oldAvatarGridLocation = currentAvatarGridLocation;
         
         //Update if necessary
@@ -61,7 +61,7 @@ public class AreaViewport extends ViewPort {
     //        GridBagConstraints c = new GridBagConstraints();
     //        c.ipadx = 0;
     //        c.ipady = 0;
-            GridLayout grid = new GridLayout(numTilesWide, numTilesHigh, 0, 0);
+            GridLayout grid = new GridLayout(numTilesHigh, numTilesWide, 0, 0);
             setLayout(grid);
 
             Map map = getMap(gameObject);
@@ -88,7 +88,7 @@ public class AreaViewport extends ViewPort {
                     }
                 }
             }
-
+            System.out.println("View updated");
             this.updateUI();
         }
     }
@@ -208,7 +208,11 @@ public class AreaViewport extends ViewPort {
         
         private void autoScale() {
             if (followAvatar) {
-                scale(110, 110);
+            	if (decal.getImage().getHeight() != 32 || decal.getImage().getWidth() != 32) {
+            		scale(32, 32);
+            	} else {
+            		imageIcon = new ImageIcon(decal.getImage());
+            	}
             } else {
                 scale(30, 30);
             }

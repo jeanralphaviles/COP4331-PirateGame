@@ -17,10 +17,10 @@ public class InventoryViewPort {
     public static void main(String[] args){
         
         Avatar avatar  = new Avatar();
-        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol",  5, 5);
-        Weapon spade = new Weapon( new Decal(Decal.item_default), "Spade", 5, 5);
-        Weapon stick = new Weapon( new Decal(Decal.item_default), "Stick", 5, 5);
-        Weapon arch = new Weapon( new Decal(Decal.item_default), "Arch", 5, 5);
+        Weapon pistol = new Weapon( new Decal(Decal.item_default), "Pistol");
+        Weapon spade = new Weapon( new Decal(Decal.item_default), "Spade");
+        Weapon stick = new Weapon( new Decal(Decal.item_default), "Stick");
+        Weapon arch = new Weapon( new Decal(Decal.item_default), "Arch");
 
         avatar.storeItem( pistol );
         avatar.storeItem( spade );

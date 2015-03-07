@@ -55,7 +55,6 @@ public class Model extends Thread {
 	
 	public void updateView() {
 		currentScreen.updateView(this.gameObject);
-		System.out.println("Model updated view");
 	}
 	
 	public void refreshController() {

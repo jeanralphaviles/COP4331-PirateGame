@@ -21,7 +21,7 @@ public class GridLocation {
 
 	public boolean equals(GridLocation gridLocation) {
 		if (gridLocation != null) {
-			return gridLocation.getX() == getX() && gridLocation.getY() == getY();
+			return (gridLocation.getX() == getX()) && (gridLocation.getY() == getY());
 		}
 		return false;
 	}
