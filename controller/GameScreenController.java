@@ -45,32 +45,4 @@ public final class GameScreenController extends ScreenController {
         }
     }
 
-//    @Override
-//    protected void processUserInput(Model model) {
-//        int numICMs = icms.size();
-//        IntentComponentMap icm;
-//        for (int i = 0; i < numICMs; i++) {
-//            icm = icms.get(i);
-//            processUserInput(icm, model);
-//        }
-//    }
-//
-//    private void processUserInput(IntentComponentMap icm, Model model) {
-//        Intent intent = icm.getIntent();
-//        String details = icm.getDetails();
-//        
-//        if (intent == Intent.EQUIP_ITEM) {
-//            Item item = (Item)icm.getObject();
-//            
-//            System.out.println( model.getGameObject().getAvatar().getEquippedInventory().getTotalItems() );
-//            model.getGameObject().getAvatar().equipItem(item);
-//            item.equipped = true;
-//            
-//        } else if (intent == Intent.UNEQUIP_ITEM) {
-//            Item item = (Item)icm.getObject();
-//            model.getGameObject().getAvatar().unequipItem(item);
-//            item.equipped = false;
-//        }
-//    }
-
 }

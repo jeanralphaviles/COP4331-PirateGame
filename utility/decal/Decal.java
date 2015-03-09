@@ -41,6 +41,8 @@ public class Decal {
     public static final String instant_death = "./Sprites/item/S_Death01.png"; 
     public static final String level_up = "./Sprites/item/S_Magic04.png"; 
     public static final String take_damage = "./Sprites/item/S_Fire02.png"; 
+        //Misc
+    public static final String blank = "blank"; 
 
     /*Constructors*/
     
@@ -88,6 +90,9 @@ public class Decal {
             case "mountain":
                 img = extractImage(terrain);
                 img = img.getSubimage(spriteWidthpx * 11, spriteHeightpx * 4, spriteWidthpx, spriteHeightpx);
+                break;
+            case "blank":
+                img = new BufferedImage(spriteWidthpx, spriteHeightpx, BufferedImage.TYPE_INT_RGB);
                 break;
             default:
                 File file = openFile(filename);

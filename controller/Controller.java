@@ -117,15 +117,10 @@ public abstract class Controller {
             case BEGIN:
                 begin();
                 break;
-            case EQUIP_ITEM:
-                //
-                break;
             default:
                 break;
         }
     }
-
-    protected abstract void processUserInput(Model model);
 
     public Model getModel() {
         return model;

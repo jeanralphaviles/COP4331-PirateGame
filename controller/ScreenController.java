@@ -13,15 +13,18 @@ import java.util.ArrayList;
 
 public class ScreenController extends Controller {
 
+    /*Properties*/
     protected ArrayList<IntentComponentMap> icms;
 
+    /*Constructors*/
     public ScreenController(Model model, ArrayList<IntentComponentMap> icms) {
         super(model);
         this.icms = icms;
         setListenersForICMs();
     }
 
-    public void setListenersForICMs() {
+    /*Methods*/
+    private final void setListenersForICMs() {
         int numICMs = icms.size();
         IntentComponentMap icm;
         for (int i=0; i<numICMs ; i++) {
@@ -30,9 +33,8 @@ public class ScreenController extends Controller {
         }
     }
 
-    protected void setListenerForICM(IntentComponentMap icm) {
+    private void setListenerForICM(IntentComponentMap icm) {
         JComponent component = (JComponent)icm.getComponent();
-        //final Intent intent = icm.getIntent();
         ActionListener al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,9 +42,6 @@ public class ScreenController extends Controller {
             }
         };
         setActionListener(al, component);
-//        if (intent != Intent.USER_INPUT && component instanceof AbstractButton) {
-//            ((AbstractButton)component).addActionListener(AL);
-//        }
     }
     
     private void setActionListener(ActionListener al, Component component) {
@@ -51,12 +50,6 @@ public class ScreenController extends Controller {
         } else if (component instanceof JTextField) {
             ((JTextField)component).addActionListener(al);
         }
-    }
-    
-    @Override
-    protected void processUserInput(Model model) {
-        //empty default implementation
-        System.out.println();
     }
 
 }

@@ -20,7 +20,6 @@ import model.map.GridLocation;
 import model.map.Map;
 import model.map.Maptile;
 import utility.IntentComponentMap;
-import utility.decal.BlankDecal;
 import utility.decal.Decal;
 
 /**
@@ -171,7 +170,7 @@ public class AreaViewport extends ViewPort {
         }
 
         public Tile() {
-            decal = new BlankDecal();
+            decal = new Decal(Decal.blank);
             autoScale();
         }
 

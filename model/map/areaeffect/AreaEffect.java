@@ -1,7 +1,6 @@
 package model.map.areaeffect;
 
 import model.entity.Entity;
-import utility.decal.BlankDecal;
 import utility.decal.Decal;
 
 /**
@@ -12,7 +11,7 @@ public abstract class AreaEffect {
 	private boolean isActive = true;
 
 	public AreaEffect() {
-		setDecal(new BlankDecal());
+		setDecal(new Decal(Decal.blank));
 	}
 
 	public AreaEffect(Decal decal) {
