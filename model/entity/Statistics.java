@@ -4,8 +4,6 @@ package model.entity;
  * @author Jean-Ralph Aviles
  */
 public class Statistics implements Cloneable {
-
-    /*Properties*/
     protected int livesLeft;
     protected int strength;
     protected int agility;
@@ -16,19 +14,23 @@ public class Statistics implements Cloneable {
     protected int currentHealth;
     protected int currentMana;
 
-
-    /*Constructors*/
     public Statistics() {
-
-        // Set values
-        livesLeft = 3; strength = 10; agility = 10; intellect = 10;
-        agility = 10; intellect = 10; hardiness = 10; experience = 10;
-        maxHealth = 10; currentHealth = 10; currentMana = 10;
+        livesLeft = 3;
+        strength = 10;
+        agility = 10;
+        intellect = 10;
+        agility = 10;
+        intellect = 10;
+        hardiness = 10;
+        experience = 10;
+        maxHealth = 10;
+        currentHealth = 10;
+        currentMana = 10;
     }
 
-    public Statistics(int livesLeft, int strength, int agility, int intellect,
-            int hardiness, int experience, int maxHealth, int currentHealth,
-            int currentMana) {
+	public Statistics(int livesLeft, int strength, int agility, int intellect,
+			int hardiness, int experience, int maxHealth, int currentHealth,
+			int currentMana) {
         super();
         this.livesLeft = livesLeft;
         this.strength = strength;
@@ -41,24 +43,19 @@ public class Statistics implements Cloneable {
         this.currentMana = currentMana;
     }
 
-    /*Methods*/
     @Override
 	public Statistics clone() {
         return new Statistics(livesLeft, strength, agility, intellect,
                 hardiness, experience, maxHealth, currentHealth, currentMana);
     }
-/**
-     * Kill decrements livesLeft and resets health
-     */
+
     public void kill() {
         --livesLeft;
         if (livesLeft > 0) {
             currentHealth = maxHealth;
         }
     }
-  /**
-     * update health remaining during current game play due to game events
-     */
+
     public void changeCurrentHealth(int difference) {
         currentHealth += difference;
         if (isDead()) {
@@ -68,51 +65,39 @@ public class Statistics implements Cloneable {
             currentHealth = maxHealth;
         }
     }
- /**
-     * @return - true if the entity is dead
-     */
+     
     public boolean isDead() {
         return currentHealth <= 0;
     }
- /**
-     * @param difference - the amount you want to change the number of livesLeft
-     */
+     
     public void changeLivesLeft(int difference) {
         livesLeft += difference;
         if (livesLeft < 0) {
             livesLeft = 0;
         }
     }
- /**
-     * @param difference - the amount you want to change the strength (wearing armor)
-     */
+
     public void changeStrength(int difference) {
         strength += difference;
         if (strength < 0) {
             strength = 0;
         }
     }
-   /**
-     * @param difference - the amount you want to change the entity's agility (heavy armor slows down, winged boots speed up)
-     */
+     
     public void changeAgility(int difference) {
         agility += difference;
         if (agility < 0) {
             agility = 0;
         }
     }
- /**
-     * @param difference - the amount you want to change intelect
-     */
+ 
     public void changeIntellect(int difference) {
         intellect += difference;
         if (intellect < 0) {
             intellect = 0;
         }
     }
-/**
- * @param difference - amount you want to change entity's max health by
- * */
+
     public void changeMaxHealth(int difference) {
         maxHealth += difference;
         if (maxHealth < 0) {
@@ -120,9 +105,7 @@ public class Statistics implements Cloneable {
             kill();
         }
     }
-   /**
-     * @param difference - amount you want to change the hardiness by
-     */
+
     public void changeHardiness(int difference) {
         hardiness += difference;
         if (hardiness < 0) {
@@ -130,24 +113,15 @@ public class Statistics implements Cloneable {
         }
     }
 
-    /**
-     * @param difference - amount you want to change the amount of manna left by
-     * (when you use some to 'cast a spell' it goes down by difference)
-     * @return - If there is not enough mana to cast the spell, the boolean returns
-     * false, otherwise returns true.
-     */
-    public boolean changeCurrentMana(int difference) {
-        if (difference > currentMana) {
-            return false; //not enough mana to cast the spell
-        }
+    public void changeCurrentMana(int difference) {
         currentMana += difference;
         if (currentMana > getMaxMana()) {
             currentMana = getMaxMana();
+        } else if (currentMana < 0) {
+        	currentMana = 0;
         }
-        return true;
     }
 
-    /*Get-Sets*/
     public int getLevel() {
         return experience / 100 + 1;
     }
@@ -240,17 +214,7 @@ public class Statistics implements Cloneable {
     }
 
     public void addExperience(int expGain) {
-        int prevLvl = getLevel();
-        if (expGain > 100 - (experience % 100)) {
-            experience += expGain;
-            levelUp(prevLvl);
-        } else {
-            experience += expGain;
-        }
-    }
-
-    public void levelUp(int previousLevel) {
-        System.out.println("You leveled up from " + previousLevel + " to " + getLevel() + "!");
+    	experience += expGain;
     }
 
     public int getMaxHealth() {
@@ -293,14 +257,14 @@ public class Statistics implements Cloneable {
     }
 
     public int getInventoryCapacity(){
-
-        // Increases 2 by level
-        return 15 + getLevel()*2;
+        return 15;
     }
     
     @Override
 	public String toString() {
-    	return "[" + livesLeft + "," + strength + "," + agility + "," + intellect + "," + hardiness + "," + experience + "," + maxHealth + "," + currentHealth + "," + currentMana + "]";
+		return "[" + livesLeft + "," + strength + "," + agility + ","
+				+ intellect + "," + hardiness + "," + experience + ","
+				+ maxHealth + "," + currentHealth + "," + currentMana + "]";
     }
 
 	public static Statistics fromString(String string) {
@@ -317,6 +281,53 @@ public class Statistics implements Cloneable {
 		statistics.currentHealth = Integer.parseInt(components[7]);
 		statistics.currentMana = Integer.parseInt(components[8]);
 		return statistics;
+	}
+
+	public void clear() {
+		setLivesLeft(0);
+		setStrength(0);
+		setAgility(0);
+		setIntellect(0);
+		setHardiness(0);
+		setExperience(0);
+		setMaxHealth(0);
+		setCurrentHealth(0);
+		setCurrentMana(0);
+	}
+	
+	public static void main(String[] args) {
+		Statistics orig = new Statistics(1, 2, 3, 4, 5, 6, 7, 8, 9);
+		Statistics restored = Statistics.fromString(orig.toString());
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized Strings don't match");
+		}
+		if (orig.agility != restored.agility) {
+			System.out.println("Agility is wrong");
+		}
+		if (orig.currentHealth != restored.currentHealth) {
+			System.out.println("CurrentHealth is wrong");
+		}
+		if (orig.currentMana != restored.currentMana) {
+			System.out.println("CurrentMana is wrong");
+		}
+		if (orig.experience != restored.experience) {
+			System.out.println("Experience is wrong");
+		}
+		if (orig.hardiness != restored.hardiness) {
+			System.out.println("Hardiness is wrong");
+		}
+		if (orig.intellect != restored.intellect) {
+			System.out.println("Intellect is wrong");
+		}
+		if (orig.livesLeft != restored.livesLeft) {
+			System.out.println("LivesLeft is wrong");
+		}
+		if (orig.maxHealth != restored.maxHealth) {
+			System.out.println("MaxHealth is wrong");
+		}
+		if (orig.strength != restored.strength) {
+			System.out.println("Strength is wrong");
+		}
 	}
 
 }

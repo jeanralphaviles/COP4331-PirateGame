@@ -1,6 +1,5 @@
 package controller;
 
-import utility.Course;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;

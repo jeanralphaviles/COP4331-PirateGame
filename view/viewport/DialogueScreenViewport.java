@@ -5,11 +5,7 @@
  */
 package view.viewport;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-
 import model.GameObject;
-import utility.IntentComponentMap;
 
 /**
  *

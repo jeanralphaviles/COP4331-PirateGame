@@ -5,16 +5,9 @@
  */
 package view.viewport;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import javax.swing.JPanel;
 import model.GameObject;
 import model.Model;
-import model.entity.Avatar;
-import utility.IntentComponentMap;
-import view.viewport.InventoryViewPort.MainInventoryPanel;
-
-import java.util.ArrayList;
 
 /**
  *

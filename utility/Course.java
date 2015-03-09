@@ -1,33 +1,58 @@
 package utility;
 
 /**
- * 
- * how far does entity want to move? x positions to the right and y positions upward?
- *course takes the course the enity wants to take and encapsulates it into an object.
+ * @author Jean-Ralph Aviles
  */
 public class Course {
-
-	private int relativeYDisplacement;
-	private int relativeXDisplacement;
+	private int xDisplacement;
+	private int yDisplacement;
 	
 	public Course(int xDisplacement, int yDisplacement) {
-		setRelativeXDisplacement(xDisplacement);
-		setRelativeYDisplacement(-yDisplacement);
+		setXDisplacement(xDisplacement);
+		setYDisplacement(yDisplacement);
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + xDisplacement + "," + yDisplacement + "]";
+	}
+	
+	public static Course fromString(String string) {
+		String stripped = string.substring(1, string.length() - 1);
+		String[] parts = stripped.split(",");
+		int xDisplacement = Integer.parseInt(parts[0]);
+		int yDisplacement = Integer.parseInt(parts[1]);
+		return new Course(xDisplacement, yDisplacement);
 	}
 
-	public int getRelativeYDisplacement() {
-		return relativeYDisplacement;
+	public int getYDisplacement() {
+		return yDisplacement;
 	}
 
-	public void setRelativeYDisplacement(int relativeYDisplacement) {
-		this.relativeYDisplacement = relativeYDisplacement;
+	public void setYDisplacement(int yDisplacement) {
+		this.yDisplacement = yDisplacement;
 	}
 
-	public int getRelativeXDisplacement() {
-		return relativeXDisplacement;
+	public int getXDisplacement() {
+		return xDisplacement;
 	}
 
-	public void setRelativeXDisplacement(int relativeXDisplacement) {
-		this.relativeXDisplacement = relativeXDisplacement;
+	public void setXDisplacement(int xDisplacement) {
+		this.xDisplacement = xDisplacement;
+	}
+	
+	public static void main(String[] args) {
+		Course orig = new Course(5, 5);
+		orig.setYDisplacement(6);
+		Course restored = Course.fromString(orig.toString());
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized strings differ");
+		}
+		if (orig.getXDisplacement() != restored.getXDisplacement()) {
+			System.out.println("X displacements differ");
+		}
+		if (orig.getYDisplacement() != restored.getYDisplacement()) {
+			System.out.println("Y displacements differ");
+		}
 	}
 }

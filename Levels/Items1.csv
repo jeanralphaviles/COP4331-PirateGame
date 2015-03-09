@@ -1,1 +1,1 @@
-ONE_SHOT_ITEM,Burrito,./Sprites/item/S_Buff01.png,10,8,10,10,10,10,TAKEABLE_ITEM,TheOneRing,RING,./Sprites/item/Ac_Ring02.png,15,12,4,4,4,4OBSTACLE_ITEM,Rocks,./Sprites/item/S_Fire02.png,15,11,0,0,0,0,
+ONE_SHOT_ITEM,Burrito,./Sprites/item/S_Buff01.png,10,8,10,10,10,10,TAKEABLE_ITEM,TheOneRing,RING,./Sprites/item/Ac_Ring02.png,15,12,4,4,4,4OBSTACLE_ITEM,Rocks,./Sprites/item/W_Mace010.png,15,11,0,0,0,0,

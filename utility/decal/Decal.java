@@ -5,38 +5,32 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringBufferInputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Decal {
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
-    /*Properties*/
-    
+public class Decal {
     private BufferedImage image;
-    //Constant Strings by category
-        //Entity
+
     public static final String default_entity = "./Sprites/item/C_Hat02.png";
-        //Occupation
     public static final String summoner = "./Sprites/item/S_Magic01.png";
     public static final String smasher = "./Sprites/item/W_Sword006.png";
     public static final String sneak = "./Sprites/item/Ac_Ring01.png";
-        //Item
     public static final String item_default = "./Sprites/item/W_Mace010.png"; 
-        //Terrain
     private static final String terrain = "./Sprites/map.png";
     public static final String grass = "grass";
     public static final String mountain = "mountain"; 
     public static final String water = "water"; 
-        //Area Effect
     public static final String heal_damage = "./Sprites/item/S_Holy03.png";
     public static final String instant_death = "./Sprites/item/S_Death01.png"; 
     public static final String level_up = "./Sprites/item/S_Magic04.png"; 
@@ -44,8 +38,6 @@ public class Decal {
         //Misc
     public static final String blank = "blank"; 
 
-    /*Constructors*/
-    
     public Decal() {
         
     }
@@ -57,15 +49,16 @@ public class Decal {
     public Decal(String filename) {
         this(extractImage(filename));
     }
+    
+    public Decal(File decalFile) {
+    	this();
+    	BufferedImage image = extractImage(decalFile);
+    	if (image != null) {
+    		setImage(image);
+    	}
+	}
 
-    //deprecated
-    public Decal(File file) {
-        this(extractImage(file));
-    }
-    
-    /*Methods*/
-    
-    public static final BufferedImage extractImage(File file) {
+	public static final BufferedImage extractImage(File file) {
         try {
             return ImageIO.read(file);
         } catch (IOException e) {
@@ -102,7 +95,6 @@ public class Decal {
         return img;
     }
     
-    //should be in loadsave
     private static final File openFile(String filename) {
         return new File(filename);
     }
@@ -116,29 +108,34 @@ public class Decal {
     public String toString() {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         if (getImage() == null) {
-            return "[nullolol]";
+            return "[null]";
         }
         try {
-            ImageIO.write(getImage(), ".png", byteStream);
+            ImageIO.write(getImage(), "png", byteStream);
+            byteStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "[" + byteStream.toString() + "]";
+        BASE64Encoder b64enc = new BASE64Encoder();
+        String imageString = b64enc.encodeBuffer(byteStream.toByteArray());
+        return "[" + imageString + "]";
     }
 
-    public static Decal fromString(String string) throws IOException {
+    public static Decal fromString(String string) {
         String stripped = string.substring(1, string.length() - 1);
-        if (stripped.equals("nullolol")) {
+        if (stripped.equals("null")) {
             return new Decal();
         }
-        @SuppressWarnings("deprecation")
-        StringBufferInputStream sstream = new StringBufferInputStream(stripped);
         Decal decal = new Decal();
-        decal.image = ImageIO.read(sstream);
+        try {
+        	BASE64Decoder b64dec = new BASE64Decoder();
+        	ByteArrayInputStream bstream = new ByteArrayInputStream(b64dec.decodeBuffer(stripped));
+			decal.image = ImageIO.read(bstream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         return decal;
     }
-    
-    /*Get-Sets*/
     
     public BufferedImage getImage() {
         return image;
@@ -148,10 +145,15 @@ public class Decal {
         this.image = image;
     }
     
-    /*Testing*/
-    
-    public static void main(String[] args){
-        
+    public static void main(String[] args) {
+    	Decal orig = new Decal(Decal.grass);
+    	Decal restored = Decal.fromString(orig.toString());
+    	
+    	if (orig.toString().equals(restored.toString()) == false) {
+    		System.out.println("Failed cased #1");
+    	}
+    	
+    	// This is dumb, why is it here? jraviles
         // Create JFrame
         JFrame window = new JFrame("Decal Test Window");
         window.setVisible(true);
@@ -181,15 +183,15 @@ public class Decal {
         window.setExtendedState(Frame.MAXIMIZED_BOTH); //fullscreen
     } 
     
-    //may or may not belong here
+    
     public static BufferedImage scale(Decal decal, int width, int height) {
             BufferedImage image = decal.getImage();
-            Image i = (Image) image;
+            Image i = image;
             i = getScaledImage(i, width, height);
             return (BufferedImage) i;
         }
     
-    //may or may not belong here
+    
     private static Image getScaledImage(Image srcImg, int w, int h) {
             BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2 = resizedImg.createGraphics();

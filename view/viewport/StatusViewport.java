@@ -332,7 +332,8 @@ public class StatusViewport extends ViewPort {
         levelField.setEditable(false);
         levelField.setText("jTextField1");
         levelField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 levelFieldActionPerformed(evt);
             }
         });

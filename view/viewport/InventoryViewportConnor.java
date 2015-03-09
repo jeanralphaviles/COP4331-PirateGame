@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import model.GameObject;
 import model.entity.Avatar;
-import model.entity.Statistics;
 import model.item.Item;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
@@ -62,13 +61,13 @@ public class InventoryViewportConnor extends ViewPort {
     }
     
     private int calculateNumTotalItems(Avatar avatar) {
-        ArrayList<Item> equippedItems = avatar.getEquippedInventoryItems();
+        ArrayList<Item> equippedItems = avatar.getEquippedInventory().getItems();
         ArrayList<Item> inventoryItems = avatar.getInventory().getItems();
         return equippedItems.size() + inventoryItems.size();
     }
 
     private void displayEquippedInventory(Avatar avatar) {
-        ArrayList<Item> equippedItems = avatar.getEquippedInventoryItems();
+        ArrayList<Item> equippedItems = avatar.getEquippedInventory().getItems();
         for (int i = 0; i < equippedItems.size(); i++) {
             displayItem(equippedItems.get(i), true);
         }

@@ -1,9 +1,10 @@
 package model.inventory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
+import model.item.Category;
 import model.item.Item;
+import model.item.TakeableItem;
 
 
 /**
@@ -14,103 +15,60 @@ import model.item.Item;
  *Single slot in inventory for a single item
  *
  */
-
 public class Slot extends Inventory {
-
-    // Attributes
     private SlotCategory slotCategory;
 
-    // Default Constructor
     public Slot() {
-
-        super();
+        super(1);
         setSlotCategory(SlotCategory.ANY_SLOT);
-        setCapacity(1);
     }
-    // Constructor I
+
 	public Slot(SlotCategory slotCategory) {
-        super();
-        setSlotCategory( slotCategory );
-        setCapacity(1);
+        super(1);
+        setSlotCategory(slotCategory);
+	}
+	
+	public boolean hasItem() {
+		return !items.isEmpty();
 	}
 
-
-    // ----------- METHODS IMPLEMENTATION -------------------
-    // -----------                        -------------------
-
-    // Accessors
-    // --------------------------------------------------------
-	public SlotCategory getSlotCategory() {
-
-        return slotCategory;
-	}
-
-    // --------------------------------------------------------
-    public boolean isItemAllowed(){
-
-        // Again: ONLY one item is allowed per slot
-        if ( items.isEmpty() )
-            return true;
-
-        return false;
+    public boolean isItemAllowed(Item item) {
+		return items.size() <= capacity
+				&& item.getCategory().equals(Category.TAKEABLE_ITEM)
+				&& ((TakeableItem) item).getSlotCategory().equals(slotCategory);
     }
 
-    // --------------------------------------------------------
-    public Item getItem() {
-
-        // If this slot has an item
-        if (!items.isEmpty() ){
-
-            return  items.get(0);
-        }
-
-        return null;
-    }
-    
     public boolean equipItem(Item item) {
-        if (items.isEmpty()) {
+        if (isItemAllowed(item)) {
             items.add(item);
             return true;
         }
         return false;
     }
 
-    // --------------------------------------------------------
 	public boolean removeItem() {
-
-        if ( !items.isEmpty() ) {
-
-            items.clear();
+        if (!items.isEmpty()) {
+            items.remove(0);
 			return true;
 		}
 		return false;
 	}
 
-
-    // Mutators Methods:
-    // --------------------------------------------------------
-	public void setSlotCategory(SlotCategory slotCategory ) {
-
-        this.slotCategory = slotCategory;
-	}
-    // --------------------------------------------------------
-    public Item unquippedItem() {
-
-        // Remove it and return it
-        if ( !items.isEmpty() ){
-            Item temp = items.get(0);
-            items.clear();
-            return temp;
+    public Item unequipItem() {
+        if (!items.isEmpty()) {
+            Item item = getItem();
+            removeItem();
+            return item;
         }
         return null;
     }
     
     @Override
 	public String toString() {
-    	return "[" + items.toString() + "," + capacity + "," + slotCategory + "]";
+    	return "[" + items.toString() + "," + slotCategory + "]";
     }
 
-	public static Slot fromString(String string) throws IOException {
+	public static Slot fromString(String string) {
 		String stripped = string.substring(1, string.length() - 1);
 		Slot slot = new Slot();
 		int bracketCount = 0;
@@ -137,11 +95,45 @@ public class Slot extends Inventory {
 				break;
 			}
 		}
-		String[] rest = stripped.substring(start, stripped.length()).split(",");
-		slot.capacity = Integer.parseInt(rest[0]);
-		slot.slotCategory = SlotCategory.valueOf(rest[1]);
+		String rest = stripped.substring(start, stripped.length());
+		slot.slotCategory = SlotCategory.valueOf(rest);
 				
 		return slot;
 	}
 
-} // End of class
+	public void setSlotCategory(SlotCategory slotCategory ) {
+        this.slotCategory = slotCategory;
+	}
+
+	public SlotCategory getSlotCategory() {
+        return slotCategory;
+	}
+
+    public Item getItem() {
+        if (!items.isEmpty()) {
+            return items.get(0);
+        }
+        return null;
+    }
+	
+	public static void main(String[] args) {
+		Slot orig = new Slot(SlotCategory.RING);
+		Item item = new TakeableItem(SlotCategory.RING);
+		orig.storeItem(item);
+		Slot restored = Slot.fromString(orig.toString());
+		
+		if (orig.toString().equals(restored.toString()) == false) {
+			System.out.println("Serialized Strings differ");
+		}
+		if (orig.hasItem() != restored.hasItem()) {
+			System.out.println("Items are different");
+		}
+		if (!orig.getSlotCategory().equals(restored.getSlotCategory())) {
+			System.out.println("Slot Categories Differ");
+		}
+		if (orig.getCapacity() != restored.getCapacity() || orig.getCapacity() != 1) {
+			System.out.println("Capacities are different");
+		}
+	}
+
+}

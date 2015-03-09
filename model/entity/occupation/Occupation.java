@@ -16,6 +16,25 @@ public abstract class Occupation {
 	 * @param statistics - the occupation augments statistics depending on which occupation it is.
 	 */
 	public abstract void augmentStatistics(Statistics statistics);
+	
+	@Override
+	public String toString() {
+		return "[" + occupationName + "]";
+	}
+
+	public static Occupation fromString(String string) {
+		String stripped = string.substring(1, string.length() - 1);
+		Occupation occupation;
+		
+		if (stripped.equals("Smasher")) {
+			occupation = new Smasher();
+		} else if (stripped.equals("Sneak")) {
+			occupation = new Sneak();
+		} else {
+			occupation = new Summoner();
+		}
+		return occupation;
+	}
 
 	public String getOccupationName() {
 		return occupationName;
@@ -25,25 +44,22 @@ public abstract class Occupation {
 		this.occupationName = occupationName;
 	}
 	
-	@Override
-	public String toString() {
-		return "[" + occupationName + "]";
-	}
-
-	public static Occupation fromString(String string) {
-		String stripped = string.substring(1, string.length() - 1);
-		
-		Occupation occupation = null;
-		
-		if (stripped.equals("Smasher")) {
-			occupation = new Smasher();
-		} else if (stripped.equals("Sneak")) {
-			occupation = new Sneak();
-		} else if (stripped.equals("Summoner")) {
-			occupation = new Summoner();
+	public static void main(String[] args) {
+		Occupation[] originals = {
+				new Smasher(),
+				new Sneak(),
+				new Summoner()
+		};
+		Occupation[] restored = new Occupation[originals.length];
+		for (int i = 0; i < originals.length; ++i) {
+			restored[i] = Occupation.fromString(originals[i].toString());
+			if (restored[i].toString().equals(originals[i].toString()) == false) {
+				System.out.println("Serialized Strings differ");
+			}
+			if (restored[i].getClass() != originals[i].getClass()) {
+				System.out.println("Classes differ");
+			}
 		}
-		
-		return occupation;
 	}
 	
 }

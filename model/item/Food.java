@@ -1,74 +1,54 @@
 package model.item;
 
 import model.entity.Entity;
+import model.entity.Statistics;
 import utility.decal.Decal;
 
 /**
  * Created by Carlos Vizcaino
  * Date 2/14/2015
-<<<<<<< Updated upstream
- * A Food Item is an item which is eaten, does it's thing, and hence is no longer on the map (deleted off map) 
-=======
->>>>>>> Stashed changes
  */
-
 
 public class Food extends OneShotItem {
 
-    // Atrributes
-    protected int health;
-
-    // Deafult Constructor
-    public Food(){
-
+    public Food() {
         super();
-        health = 0;
+        Statistics statistics = new Statistics();
+        statistics.clear();
+        statistics.setCurrentHealth(10);
     }
-    // Constructor I
-    public Food(Decal decal){
-
-        super(decal);
-        health = 0;
+    
+    public Food(Decal decal) {
+    	this();
+    	this.decal = decal;
     }
-    // Constructor II
-    public Food(Decal decal, String name){
-
-        super(decal,name);
-        health = 0;
+    
+    public Food(Decal decal, String name) {
+    	this(decal);
+    	this.name = name;
     }
-    // Constructor III
-    public Food(Decal decal, String name, int health){
-
-        super(decal,name);
-        this.health = health;
-    }
-
-    // ----------- METHODS IMPLEMENTATION -------------------
-    // -----------                        -------------------
-    public Food(Decal decal, int health){
-
-        super(decal);
-        this.health = health;
-    }
-    // Accessors:
-    // --------------------------------------------------
-    public int getHealth(){
-
-        return health;
+    
+    public Food(Decal decal, String name, int health) {
+        this(decal,name);
+        getStatistics().setCurrentHealth(health);
     }
 
-    // Mutators:
-    // --------------------------------------------------
-    public void setHealth( int health){
-
-        this.health = health;
+    public Food(Decal decal, int health) {
+        this(decal);
+        getStatistics().setCurrentHealth(health);
     }
-    // --------------------------------------------------
+
     @Override
-    public void triggerProximity(Entity entity){
+	public void triggerProximity(Entity entity) {
+	    entity.getStatistics().changeCurrentHealth(getStatistics().getCurrentHealth());
+	}
 
-        int entityHealth = entity.getStatistics().getCurrentHealth();
-        entity.getStatistics().setCurrentHealth( entityHealth + this.health );
+	public int getHealth() {
+        return getStatistics().getCurrentHealth();
+    }
+
+    public void setHealth(int health) {
+        getStatistics().setCurrentHealth(health);
     }
 
 }

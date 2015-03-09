@@ -6,7 +6,6 @@
 package view.viewport;
 
 import java.util.ArrayList;
-import javax.swing.JPanel;
 import model.GameObject;
 import utility.IntentComponentMap;
 
@@ -51,7 +50,8 @@ public class DialogueViewport extends ViewPort {
 
         dialogueTextView.setText("Dialogue");
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });

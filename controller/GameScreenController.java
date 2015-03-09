@@ -2,14 +2,8 @@ package controller;
 
 import java.awt.Color;
 import model.Model;
-import model.entity.occupation.Occupation;
-import model.entity.occupation.Smasher;
-import model.entity.occupation.Sneak;
-import model.entity.occupation.Summoner;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
-import view.viewport.NewGamePopupViewport;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import model.entity.Avatar;
@@ -36,7 +30,7 @@ public final class GameScreenController extends ScreenController {
         Item item = (Item)icm.getObject();
         Avatar avatar = model.getGameObject().getAvatar();
         JButton button = (JButton)icm.getComponent();
-        boolean equipped = avatar.unequipItem(item); //unequips if possible
+        boolean equipped = avatar.unEquipItem(item); //unequips if possible
         if (!equipped) { //if it couldn't be uneqipped, then need to equip it
             avatar.equipItem(item);
             button.setBackground(Color.BLUE);

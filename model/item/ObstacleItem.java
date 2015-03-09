@@ -4,50 +4,25 @@ import model.entity.Entity;
 import utility.decal.Decal;
 import model.entity.Statistics;
 
-public class ObstacleItem extends Item{
-
-    // Atrributes
-
-    // Default Constructor
-    public ObstacleItem(){
-
-       super( new Decal(Decal.item_default), Category.OBSTACLE_ITEM );
-
+public class ObstacleItem extends Item {
+    public ObstacleItem() {
+       super(new Decal(Decal.item_default), Category.OBSTACLE_ITEM);
     }
-    // Constructor I
-     public ObstacleItem( Decal decal){
+    
+    public ObstacleItem(Decal decal) {
+      super(decal, Category.OBSTACLE_ITEM);
+    }
+   
+    public ObstacleItem(Decal decal, String name) {
+      super(decal, Category.OBSTACLE_ITEM, name);
+    }
+    
+    public ObstacleItem(Decal decal, String name, Statistics statistics) {
+      super(decal, Category.OBSTACLE_ITEM, name, statistics);
+    }
 
-       super( decal, Category.OBSTACLE_ITEM);
-
-     }
-     // Constructor II
-     public ObstacleItem( Decal decal, String name){
-
-       super( decal, Category.OBSTACLE_ITEM, name);
-
-     }
-    // Constructor II
-    public ObstacleItem( Decal decal, String name, Statistics statistic){
-
-        super( decal, Category.OBSTACLE_ITEM, name, statistic);
-
-     }
-
-    // ---------- METHODS IMPLEMENTATION ---------
-    // ----------                         ---------
-
-    // Accessor Methods:
-    // --------------------------------------------
-
-    // Mutator Methods:
-    // --------------------------------------------
-
-
-    // Abstract Methods:
-    // --------------------------------------------
- /** makes tile impassible.
-     */
     @Override
-	public void triggerProximity(Entity entity){}
-
+	public void triggerProximity(Entity entity) {
+    	
+    }
 }

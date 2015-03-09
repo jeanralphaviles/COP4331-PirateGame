@@ -81,7 +81,7 @@ public class InventoryItemsPanel extends JPanel{
 
         }else{
 
-            items= avatar.getEquippedInventoryItems();
+            items= avatar.getEquippedInventory().getItems();
         }
 
         // Add the items to the panel

@@ -2,13 +2,8 @@ package controller;
 
 import model.Model;
 import model.entity.occupation.Occupation;
-import model.entity.occupation.Smasher;
-import model.entity.occupation.Sneak;
-import model.entity.occupation.Summoner;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
-import view.viewport.NewGamePopupViewport;
-
 import javax.swing.*;
 import java.util.ArrayList;
 
