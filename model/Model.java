@@ -131,7 +131,7 @@ public class Model extends Thread {
 				--bracketCount;
 			}
 		}
-		model.updatesPerSecond = Integer.parseInt(stripped.substring(start));
+		//model.updatesPerSecond = Integer.parseInt(stripped.substring(start));
 		return model;
 	}
 
