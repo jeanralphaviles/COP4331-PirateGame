@@ -132,11 +132,16 @@ public class Level {
     	return null;
     }
     
+    public boolean moveEntity(Entity entity, Course course) {
+    	GridLocation entityLocation = getEntityLocation(entity);
+    	GridLocation destination = entityLocation.nextGridLocation(course);
+    	entity.setDirectionFacing(course);
+    	return moveEntity(entity, destination);
+    }
+    
     public boolean moveAvatar(Course course) {
     	Avatar avatar = getAvatar();
-    	GridLocation avatarLocation = getAvatarLocation();
-    	GridLocation destination = avatarLocation.nextGridLocation(course);
-    	return moveEntity(avatar, destination);
+    	return moveEntity(avatar, course);
     }
     
     public void advanceEntity(Entity entity) {
