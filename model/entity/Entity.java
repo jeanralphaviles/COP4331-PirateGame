@@ -1,5 +1,6 @@
 package model.entity;
 
+import utility.Course;
 import utility.decal.Decal;
 import model.entity.occupation.Occupation;
 import model.entity.occupation.Smasher;
@@ -17,6 +18,7 @@ public class Entity {
 	protected Inventory inventory;
 	protected EquippedInventory equippedInventory;
 	protected Decal decal;
+	protected Course directionFacing;
 	
 	public Entity() {
 		setStatistics(new Statistics());
@@ -63,6 +65,14 @@ public class Entity {
 		occupation.augmentStatistics(statistics);
 		equippedInventory.augmentStatistics(statistics);
 		return statistics;
+	}
+	
+	public void setDirectionFacing(Course course) {
+		this.directionFacing = course.getUnitCourse();
+	}
+	
+	public Course getDirectionFacing() {
+		return directionFacing;
 	}
 	
 	@Override

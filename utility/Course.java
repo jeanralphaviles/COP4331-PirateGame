@@ -12,6 +12,25 @@ public class Course {
 		setYDisplacement(yDisplacement);
 	}
 	
+	public Course getUnitCourse() {
+		int unitX = 0;
+		int unitY = 0;
+
+		if (xDisplacement > 0) {
+			unitX = 1;
+		} else if (xDisplacement < 0) {
+			unitX = -1;
+		}
+		
+		if (yDisplacement > 0) {
+			unitY = 1;
+		} else if (yDisplacement < 0) {
+			unitY = -1;
+		}
+
+		return new Course(unitX, unitY);
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + xDisplacement + "," + yDisplacement + "]";
