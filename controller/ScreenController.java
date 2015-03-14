@@ -32,10 +32,11 @@ public class ScreenController extends Controller {
 
     private void setListenerForICM(IntentComponentMap icm) {
         JComponent component = (JComponent)icm.getComponent();
+        final IntentComponentMap icm2 = icm;
         ActionListener al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                action(icm);
+                action(icm2);
             }
         };
         setActionListener(al, component);

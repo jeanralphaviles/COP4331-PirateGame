@@ -17,22 +17,29 @@ import utility.IntentComponentMap.Intent;
 /**
  *
  * @author comcc_000
+ *  and Carlos Vizcaino
  */
 public class InventoryViewportConnor extends ViewPort {
 
+    // Attributes
     private ArrayList<JButton> buttons = new ArrayList<JButton>(1);
-    //
     private ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-    //
-    private int numTotalItems;
+    private int totalEquippedItems;
+    private int totalInventoryItems;
+    
+    JButton equipButton;
+    JButton unequipButton;
+    JButton dropButton;
+    
+    
 
     public InventoryViewportConnor() {
-        //initComponents();
-
+       
     }
 
     @Override
     public void updateView(GameObject gameObject) {      
+        
         Avatar avatar = gameObject.getAvatar();
         if (refreshNeeded(avatar)) {
             //Clear viewport
@@ -50,13 +57,26 @@ public class InventoryViewportConnor extends ViewPort {
         Else, no point in updating. The listeners effectively update existing buttons.
     */
     private boolean refreshNeeded(Avatar avatar) {
-        int newTotalItems = calculateNumTotalItems(avatar);
-        if (newTotalItems != numTotalItems) {
-            numTotalItems = newTotalItems;
+       
+        
+        int newTotalEquippedItems = avatar.getEquippedInventory().getItems().size();
+        int newTotalInventoryItems = avatar.getInventory().getItems().size();
+        
+        if ( newTotalEquippedItems != totalEquippedItems) {
+            
+            totalEquippedItems = newTotalEquippedItems;
             refreshControllerNeeded = true;
-        } else {
+        } 
+        else if ( newTotalInventoryItems != totalInventoryItems ){
+               
+            totalInventoryItems = newTotalInventoryItems;
+            refreshControllerNeeded =  true;
+        }
+        else {
+
             refreshControllerNeeded = false;
         }
+        
         return refreshControllerNeeded;
     }
     
@@ -67,6 +87,11 @@ public class InventoryViewportConnor extends ViewPort {
     }
 
     private void displayEquippedInventory(Avatar avatar) {
+        
+        // Testing
+        addCommandButtons();
+        
+        
         ArrayList<Item> equippedItems = avatar.getEquippedInventory().getItems();
         for (int i = 0; i < equippedItems.size(); i++) {
             displayItem(equippedItems.get(i), true);
@@ -88,12 +113,33 @@ public class InventoryViewportConnor extends ViewPort {
         
         if (equipped) {
             button.setBackground(Color.BLUE);
+            icms.add(new IntentComponentMap(button, item, Intent.TOGGLE_EQUIPPED));
+            
         } else {
             button.setBackground(Color.GRAY);
+            icms.add(new IntentComponentMap(button, item, Intent.INVENTORY_ITEM));
         }
-        icms.add(new IntentComponentMap(button, item, Intent.TOGGLE_EQUIPPED));
         
         add(button);
+    }
+    
+    private void addCommandButtons(){
+        
+        equipButton = new JButton("Equip");
+        equipButton.setBackground(Color.RED);
+        icms.add(new IntentComponentMap(equipButton, Intent.EQUIP_ITEM));
+        
+        unequipButton = new JButton("Unequip");
+        unequipButton.setBackground(Color.RED);
+        icms.add(new IntentComponentMap(unequipButton, Intent.UNEQUIP_ITEM));
+    
+        dropButton = new JButton("Drop");
+        dropButton.setBackground(Color.RED);
+        icms.add(new IntentComponentMap(dropButton, Intent.DROP_ITEM));
+        
+        this.add(equipButton);
+        this.add(unequipButton);
+        this.add(dropButton);
     }
     
     private void clearButtonsAndICMs() {

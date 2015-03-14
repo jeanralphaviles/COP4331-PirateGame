@@ -85,6 +85,8 @@ public class IntentComponentMap {
         SHOW_DIALOGUE,
         EQUIP_ITEM,
         UNEQUIP_ITEM,
+        DROP_ITEM,
+        INVENTORY_ITEM,
         SET_OCCUPATION,
         SET_NICKNAME,
         TOGGLE_EQUIPPED

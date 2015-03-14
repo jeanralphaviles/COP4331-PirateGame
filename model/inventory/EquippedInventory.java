@@ -28,11 +28,11 @@ public class EquippedInventory extends Inventory {
             TakeableItem takeableItem = (TakeableItem)item;
             for (Slot slot: slots) {
                 if (slot.isItemAllowed(item)) {
-                    slot.storeItem(takeableItem);
-                    return true;
+                    return slot.storeItem(takeableItem);
                 }
             }
         }
+        System.out.println("Item is not allowed");
         return false;
     }
     

@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
@@ -14,10 +15,12 @@ public abstract class Controller {
 
     /*Properties*/
     protected Model model;
+    Color SELECTED_COLOR;
 
     /*Constructors*/
     public Controller(Model model) {
         this.model = model;
+        SELECTED_COLOR = Color.BLUE;
     }
 
     /*Methods*/

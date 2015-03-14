@@ -23,6 +23,7 @@ public class GameScreen extends Screen {
     public void createController() {
         ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
         controller = new GameScreenController(model, icms);
+        
     }
     
 }
