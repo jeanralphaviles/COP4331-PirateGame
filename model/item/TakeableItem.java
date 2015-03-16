@@ -8,7 +8,7 @@ import utility.decal.Decal;
 /**
  * Takeable item goes into inventory upon activation
  */
-public class TakeableItem extends Item {
+public class TakeableItem extends Item implements Cloneable {
     protected SlotCategory slotCategory;
 
     public TakeableItem() {
@@ -49,7 +49,8 @@ public class TakeableItem extends Item {
 
 	@Override
     public String toString() {
-        return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + slotCategory.ordinal() + "]";
+		int visibility = isVisibile ? 1 : 0;
+        return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + slotCategory.ordinal() + "," + visibility + "]";
     }
 
     public static TakeableItem fromString(String string) {
@@ -89,6 +90,7 @@ public class TakeableItem extends Item {
         String[] rest = stripped.substring(start, stripped.length()).split(",");
         item.name = rest[0];
         item.slotCategory = SlotCategory.values()[Integer.parseInt(rest[1])];
+        item.isVisibile = Integer.parseInt(rest[2]) == 1;
 
         return item;
     }
@@ -103,6 +105,7 @@ public class TakeableItem extends Item {
 
 	public static void main(String[] args) {
     	TakeableItem orig = new TakeableItem(SlotCategory.EYEPATCH, new Decal(Decal.item_default), "Eyepatch", new Statistics());
+    	orig.setVisbility(false);
     	TakeableItem restored = fromString(orig.toString());
     	if (orig.toString().equals(restored.toString()) == false) {
     		System.out.println("Serialized Strings are different");
@@ -119,5 +122,20 @@ public class TakeableItem extends Item {
     	if (orig.getName().equals(restored.getName()) == false) {
     		System.out.println("Names are different");	
     	}
+    	if (orig.isVisibile != restored.isVisibile) {
+    		System.out.println("Visibilities differ");
+    	}
     }
+
+	@Override
+	public TakeableItem clone() {
+		TakeableItem item = new TakeableItem();
+		item.category = this.category;
+		item.decal = this.decal;
+		item.isVisibile = this.isVisibile;
+		item.name = this.name;
+		item.statistics = this.statistics;
+		item.slotCategory = this.slotCategory;
+		return item;
+	}
 }

@@ -1,10 +1,8 @@
 package controller;
 
-import java.awt.Color;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
-import javax.swing.*;
 import java.util.ArrayList;
 import model.entity.Avatar;
 import model.item.Item;

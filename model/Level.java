@@ -60,6 +60,7 @@ public class Level {
     		if (entity != avatar) {
     			advanceEntity(entity);
     		}
+    		entity.gameStep(this);
     	}
     	for (Projectile projectile : projectiles) {
     		advanceProjectile(projectile);
@@ -161,7 +162,23 @@ public class Level {
     	return false;
     }
     
-    public boolean isPassable(Entity entity, GridLocation gridLocation) {
+    public void faceEntity(Entity entity, GridLocation target) {
+		GridLocation entityLocation = getEntityLocation(entity);
+		int x = 0, y = 0;
+		if (target.getX() > entityLocation.getX()) {
+			x = 1;
+		} else if (target.getX() < entityLocation.getX()) {
+			x = -1;
+		}
+		if (target.getY() > entityLocation.getY()) {
+			y = 1;
+		} else if (target.getY() < entityLocation.getY()) {
+			y = -1;
+		}
+		entity.setDirectionFacing(new Course(x, y));
+	}
+
+	public boolean isPassable(Entity entity, GridLocation gridLocation) {
     	if (isValidGridLocation(gridLocation)) {
     		if (getEntity(gridLocation) != null) {
     			return false;
@@ -367,7 +384,7 @@ public class Level {
     	if (getProjectile(gridLocation) != null) {
     		decals.add(getProjectile(gridLocation).getDecal());
     	}
-    	if (getItem(gridLocation) != null) {
+    	if (getItem(gridLocation) != null && getItem(gridLocation).getDecal() != null) {
     		decals.add(getItem(gridLocation).getDecal());
     	}
     	decals.addAll(map.getMaptile(gridLocation).getDecals());

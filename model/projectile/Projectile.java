@@ -7,7 +7,7 @@ import utility.decal.Decal;
 /**
  * @author Jean-Ralph Aviles
  */
-public class Projectile {
+public class Projectile implements Cloneable {
 	Course course;
 	CollisionEffect collisionEffect;
 	Decal decal;
@@ -26,6 +26,11 @@ public class Projectile {
 	
 	public void triggerEffect(Entity entity, int distance) {
 		collisionEffect.triggerEffect(entity, distance);
+	}
+	
+	@Override
+	public Projectile clone() {
+		return new Projectile(this.course, this.collisionEffect, this.decal);
 	}
 	
 	@Override

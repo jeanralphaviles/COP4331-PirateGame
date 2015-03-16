@@ -1,22 +1,29 @@
 package model.entity.occupation;
 
+import java.util.ArrayList;
+
 import model.entity.Statistics;
+import model.entity.occupation.ability.Ability;
+import model.entity.occupation.ability.instantAbility.Melee;
 
 /**
  * @author Jean-Ralph Aviles
  */
 public abstract class Occupation {
 	private String occupationName;
+	private ArrayList<Ability> abilities;
 	
 	public Occupation(String occupationName) {
 		this.occupationName = occupationName;
+		this.abilities = new ArrayList<Ability>(1);
+		this.abilities.add(new Melee());
 	}
 	
 	/**
 	 * @param statistics - the occupation augments statistics depending on which occupation it is.
 	 */
 	public abstract void augmentStatistics(Statistics statistics);
-	
+
 	@Override
 	public String toString() {
 		return "[" + occupationName + "]";
@@ -42,6 +49,14 @@ public abstract class Occupation {
 
 	public void setOccupationName(String occupationName) {
 		this.occupationName = occupationName;
+	}
+	
+	public ArrayList<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(ArrayList<Ability> abilities) {
+		this.abilities = abilities;
 	}
 	
 	public static void main(String[] args) {

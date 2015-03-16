@@ -35,6 +35,7 @@ public class Decal {
     public static final String instant_death = "./Sprites/item/S_Death01.png"; 
     public static final String level_up = "./Sprites/item/S_Magic04.png"; 
     public static final String take_damage = "./Sprites/item/S_Fire02.png"; 
+    public static final String fire = "./Sprites/item/S_Fire02.png";
         //Misc
     public static final String blank = "blank"; 
 
