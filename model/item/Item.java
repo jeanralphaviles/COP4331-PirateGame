@@ -7,12 +7,13 @@ import utility.decal.Decal;
 /**
  * Encapsulates all item types. Allows for easy handling by map/entity
  */
-public abstract class Item {
+public abstract class Item implements Cloneable {
     protected Decal decal;
     protected Statistics statistics;
     protected Category category;
     protected String name;
     protected final String DEFAULT_NAME = "Default Name";
+    protected boolean isVisibile = true;
 
     public Item() {
         decal = new Decal(Decal.item_default);
@@ -50,13 +51,17 @@ public abstract class Item {
 	    statistics.changeMaxHealth(statistics.getMaxHealth());
 	    statistics.changeStrength(statistics.getStrength());
 	}
+	
+	@Override
+	public abstract Item clone();
 
 	@Override
 	public String toString() {
 	    if (this.category == Category.TAKEABLE_ITEM) {
 	        return ((TakeableItem) this).toString();
 	    }
-	    return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "]";
+	    int visibility = this.isVisibile ? 1 : 0;
+	    return "[" + category.toString() + "," + decal.toString() + "," + statistics.toString() + "," + name + "," + visibility + "]";
 	}
 
 	public static Item fromString(String string) {
@@ -106,12 +111,17 @@ public abstract class Item {
 	            --bracketCount;
 	        }
 	    }
-	    item.name = stripped.substring(start, stripped.length());
+	    item.name = stripped.substring(start, stripped.length()).split(",")[0];
+	    item.isVisibile = Integer.parseInt(stripped.substring(start, stripped.length()).split(",")[1]) == 1;
 	    return item;
 	}
 
 	public Decal getDecal() {
-        return decal;
+		if (isVisibile) {
+			return decal;
+		} else {
+			return null;
+		}
     }
 
     public Category getCategory() {
@@ -141,6 +151,14 @@ public abstract class Item {
     public final void setStatistics(Statistics statistics) {
         this.statistics = statistics;
     }
+ 
+	public void setVisbility(boolean visibility) {
+		this.isVisibile = visibility;
+	}
+	
+	public boolean getVisibility() {
+		return isVisibile;
+	}
 
     public static void main(String[] args) {
     	Item[] originals = {
@@ -171,6 +189,10 @@ public abstract class Item {
     		if (restored[i].getStatistics().toString().equals(originals[i].getStatistics().toString()) == false) {
     			System.out.println("Statistics differ");
     		}
+    		if (restored[i].isVisibile != originals[i].isVisibile) {
+    			System.out.println("Visibilities differ");
+    		}
     	}
     }
+
 }

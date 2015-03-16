@@ -9,13 +9,8 @@ package view.viewport;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -328,13 +323,16 @@ public class InventoryViewPort extends ViewPort {
         Equip_Inv_Item1.setMinimumSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item1.setPreferredSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item1MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item1MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item1MouseEntered(evt);
             }
         });
@@ -343,13 +341,16 @@ public class InventoryViewPort extends ViewPort {
         Equip_Inv_Item2.setMinimumSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item2.setPreferredSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item2MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item2MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item2MouseEntered(evt);
             }
         });
@@ -358,13 +359,16 @@ public class InventoryViewPort extends ViewPort {
         Equip_Inv_Item4.setMinimumSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item4.setPreferredSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item4MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item4MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item4MouseEntered(evt);
             }
         });
@@ -373,13 +377,16 @@ public class InventoryViewPort extends ViewPort {
         Equip_Inv_Item3.setMinimumSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item3.setPreferredSize(new java.awt.Dimension(72, 55));
         Equip_Inv_Item3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item3MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item3MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Equip_Inv_Item3MouseEntered(evt);
             }
         });
@@ -419,7 +426,8 @@ public class InventoryViewPort extends ViewPort {
         dropButton.setMinimumSize(new java.awt.Dimension(88, 30));
         dropButton.setPreferredSize(new java.awt.Dimension(88, 30));
         dropButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dropButtonMouseClicked(evt);
             }
         });
@@ -429,7 +437,8 @@ public class InventoryViewPort extends ViewPort {
         equipButton.setMinimumSize(new java.awt.Dimension(88, 30));
         equipButton.setPreferredSize(new java.awt.Dimension(88, 30));
         equipButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 equipButtonMouseClicked(evt);
             }
         });
@@ -439,7 +448,8 @@ public class InventoryViewPort extends ViewPort {
         unequipButton.setMinimumSize(new java.awt.Dimension(88, 30));
         unequipButton.setPreferredSize(new java.awt.Dimension(88, 30));
         unequipButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 unequipButtonMouseClicked(evt);
             }
         });
@@ -482,13 +492,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item1.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item1.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item1MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item1MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item1MouseEntered(evt);
             }
         });
@@ -497,13 +510,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item2.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item2.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item2MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item2MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item2MouseEntered(evt);
             }
         });
@@ -512,13 +528,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item3.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item3.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item3MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item3MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item3MouseEntered(evt);
             }
         });
@@ -527,13 +546,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item4.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item4.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item4MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item4MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item4MouseEntered(evt);
             }
         });
@@ -544,13 +566,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item5.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item5.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item5MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item5MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item5MouseEntered(evt);
             }
         });
@@ -559,13 +584,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item6.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item6.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item6MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item6MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item6MouseEntered(evt);
             }
         });
@@ -574,13 +602,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item7.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item7.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item7MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item7MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item7MouseEntered(evt);
             }
         });
@@ -589,13 +620,16 @@ public class InventoryViewPort extends ViewPort {
         Inv_Item8.setMinimumSize(new java.awt.Dimension(72, 55));
         Inv_Item8.setPreferredSize(new java.awt.Dimension(72, 55));
         Inv_Item8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Inv_Item8MouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
                 Inv_Item8MouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            @Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Inv_Item8MouseEntered(evt);
             }
         });

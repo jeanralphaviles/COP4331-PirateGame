@@ -43,6 +43,10 @@ public class Course {
 		int yDisplacement = Integer.parseInt(parts[1]);
 		return new Course(xDisplacement, yDisplacement);
 	}
+	
+	public boolean equals(Course course) {
+		return course.getXDisplacement() == xDisplacement && course.getYDisplacement() == yDisplacement;
+	}
 
 	public int getYDisplacement() {
 		return yDisplacement;

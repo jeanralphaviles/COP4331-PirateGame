@@ -1,10 +1,15 @@
 package model.entity;
 
+import java.util.ArrayList;
+
 import utility.Course;
 import utility.decal.Decal;
+import model.Level;
 import model.entity.occupation.Occupation;
 import model.entity.occupation.Smasher;
 import model.entity.occupation.Summoner;
+import model.entity.occupation.ability.Ability;
+import model.entity.occupation.ability.toggleAbility.ToggleAbility;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
 import model.item.Item;
@@ -26,6 +31,7 @@ public class Entity {
 		setInventory(new Inventory(statistics.getInventoryCapacity()));
 		setEquippedInventory(new EquippedInventory());
 		setDecal(new Decal(Decal.smasher));
+		setDirectionFacing(new Course(1, 1));
 	}
 	
 	public Entity(Decal decal) {
@@ -38,6 +44,16 @@ public class Entity {
 		setOccupation(occupation);
 		setStatistics(statistics);
 		setDecal(decal);
+	}
+	
+	public void activateAbility(Ability ability, Level level) {
+		if (hasAbility(ability)) {
+			ability.activate(this, level);
+		}
+	}
+	
+	public boolean hasAbility(Ability ability) {
+		return getAbilities().contains(ability);
 	}
 	
 	public boolean storeItem(Item item) {
@@ -54,6 +70,15 @@ public class Entity {
 	
 	public boolean hasItem(Item item) {
 		return inventory.hasItem(item) || equippedInventory.hasItem(item);
+	}
+	
+	public void gameStep(Level level) {
+		ArrayList<Ability> abilities = getAbilities();
+		for (Ability ability : abilities) {
+			if (ability instanceof ToggleAbility) {
+				((ToggleAbility)ability).tick(this, level);
+			}
+		}
 	}
 
 	public Statistics getStatistics() {
@@ -75,11 +100,15 @@ public class Entity {
 		return directionFacing;
 	}
 	
+	public ArrayList<Ability> getAbilities() {
+		return this.occupation.getAbilities();
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + statistics.toString() + "," + occupation.toString() + ","
 				+ inventory.toString() + "," + equippedInventory.toString()
-				+ "," + decal.toString() + "]";
+				+ "," + decal.toString() + "," + directionFacing.toString() + "]";
 	}
 	
 	public static Entity fromString(String string) {
@@ -107,8 +136,11 @@ public class Entity {
 				} else if (itemCount == 3) {
 					// EquippedInventory
 					entity.equippedInventory = EquippedInventory.fromString(stripped.substring(start, i));
+				} else if (itemCount == 4) {
 					// Decal
-					entity.decal = Decal.fromString(stripped.substring(i + 1, stripped.length()));
+					entity.decal = Decal.fromString(stripped.substring(start, i));
+					// Direction Facing
+					entity.directionFacing = Course.fromString(stripped.substring(i + 1, stripped.length()));
 					break;
 				}
 				start = i + 1;
@@ -180,6 +212,9 @@ public class Entity {
 		}
 		if (orig.getOccupation().toString().equals(restored.getOccupation().toString()) == false) {
 			System.out.println("Occupation differ");	
+		}
+		if (orig.getDirectionFacing().equals(restored.getDirectionFacing()) == false) {
+			System.out.println("Courses differ");
 		}
 		
 		Entity avatar = new Avatar(new Summoner(), new Decal(Decal.summoner));

@@ -6,10 +6,7 @@
 package view.viewport;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import model.GameObject;
 import model.Model;
 

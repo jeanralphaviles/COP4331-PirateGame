@@ -8,7 +8,7 @@ import model.entity.Entity;
 public class CollisionEffect {
 	int damage;
 	int radius;
-	double damageDistanceScaler;
+	double damageDistanceScaler; // scaler <= 1
 	
 	public CollisionEffect() {
 		damage = 10;
