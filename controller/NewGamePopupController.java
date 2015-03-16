@@ -6,6 +6,8 @@ import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
 import javax.swing.*;
 import java.util.ArrayList;
+import view.screen.DialogueScreen;
+import view.screen.Screen;
 
 public final class NewGamePopupController extends ScreenController {
 
@@ -24,6 +26,9 @@ public final class NewGamePopupController extends ScreenController {
             case SET_NICKNAME:
                 setNickname(icm);
                 break;
+            case BEGIN:
+                begin();
+                break;
         }
         super.action(icm);
     }
@@ -39,7 +44,23 @@ public final class NewGamePopupController extends ScreenController {
     }
     
     private void setNickname(String nickname) {
+        
         model.setAvatarNickname(nickname);
+    }
+    
+    private void begin() {
+        
+        for (IntentComponentMap i : icms){
+            
+           if ( i.getIntent() == Intent.SET_NICKNAME ){
+                    
+                this.setNickname(i);
+                break;
+            }
+        }
+        Screen screen = new DialogueScreen(model);
+        model.launchScreen(screen);
+        
     }
 
 }

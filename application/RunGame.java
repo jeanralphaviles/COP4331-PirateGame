@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import model.Model;
 import model.entity.Avatar;
 import utility.Course;
+import view.screen.Screen;
+import view.screen.popup.LoadSavePopup;
 import view.viewport.MainWindow;
 
 public class RunGame {
@@ -119,11 +121,17 @@ class EnterKeyListener implements KeyEventPostProcessor {
                 JOptionPane.showMessageDialog(null, "You've Paused the Game!");
             } else if (keyCode == KeyEvent.VK_BACK_SLASH) {
                 System.out.println("Saving Model");
-                saveModel();
+                model.save();
             } else if (keyCode == KeyEvent.VK_ENTER) {
                 System.out.println("Loading Model");
-                loadModel();
-            } else {
+                model.load("This is obviously wrong");
+            }
+            else if (keyCode == KeyEvent.VK_L) {
+                
+                Screen screen = new LoadSavePopup(model);
+                model.launchScreen(screen);
+                
+            }else {
                 System.out.println("You pressed an invalid control");
             }
         }
@@ -133,6 +141,7 @@ class EnterKeyListener implements KeyEventPostProcessor {
     public void saveModel() {
         if (model != null) {
             try {
+               
                 File file = new File(modelFilename);
                 if (file.exists() == false) {
                     file.createNewFile();

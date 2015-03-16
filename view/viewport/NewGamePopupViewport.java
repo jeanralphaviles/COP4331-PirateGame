@@ -68,12 +68,6 @@ public class NewGamePopupViewport extends ViewPort {
         jLabel1.setText("Choose NickName:");
 
         nicknameTextField.setText("Woodman");
-        nicknameTextField.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nicknameTextFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,7 +77,7 @@ public class NewGamePopupViewport extends ViewPort {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(nicknameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nicknameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,8 +95,7 @@ public class NewGamePopupViewport extends ViewPort {
         occupationButtonGroup.add(parrotmancerRadioButton);
         parrotmancerRadioButton.setText("ParrotMancer");
         parrotmancerRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 parrotmancerRadioButtonActionPerformed(evt);
             }
         });
@@ -124,7 +117,7 @@ public class NewGamePopupViewport extends ViewPort {
                     .addComponent(jLabel2)
                     .addComponent(gangplankerRadioButton)
                     .addComponent(turnhatRadioButton))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +151,7 @@ public class NewGamePopupViewport extends ViewPort {
                                 .addGap(10, 10, 10)
                                 .addComponent(beginAdventureButton))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,10 +169,6 @@ public class NewGamePopupViewport extends ViewPort {
     private void parrotmancerRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parrotmancerRadioButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_parrotmancerRadioButtonActionPerformed
-
-    private void nicknameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nicknameTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

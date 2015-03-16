@@ -8,6 +8,7 @@ import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
 import view.screen.Screen;
+import view.screen.popup.LoadSavePopup;
 import view.screen.popup.NewGamePopup;
 import view.screen.popup.PausePopup;
 
@@ -35,6 +36,7 @@ public abstract class Controller {
 
     private void load() {
         //
+        
     }
 
     private void save() {
@@ -44,9 +46,15 @@ public abstract class Controller {
     private void exit() {
         System.exit(0);
     }
-
+    
     private void gotoNewGameMenu() {
         Screen screen = new NewGamePopup(model);
+        model.launchScreen(screen);
+    }
+    
+    private void goToLoadSaveScreen(){
+        
+        Screen screen = new LoadSavePopup(model);
         model.launchScreen(screen);
     }
 
@@ -91,6 +99,7 @@ public abstract class Controller {
 
     protected void action(Intent intent) {
         //processUserInput(this.model);
+        System.out.println("Action is being called");
         switch (intent) {
             case SHOW_DIALOGUE:
                 showNextDialogue();
@@ -107,8 +116,8 @@ public abstract class Controller {
             case NEW:
                 gotoNewGameMenu();
                 break;
-            case LOAD:
-                load();
+            case GOTO_LOADSAVE:
+                goToLoadSaveScreen();
                 break;
             case SAVE:
                 save();

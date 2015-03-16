@@ -25,12 +25,12 @@ public class MainScreenViewport extends ViewPort {
     }
 
     /*Methods*/
-
+    
     @Override
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
         icms.add(new IntentComponentMap(newGameButton, Intent.NEW));
-        icms.add(new IntentComponentMap(loadButton, Intent.LOAD));
+        icms.add(new IntentComponentMap(loadButton, Intent.GOTO_LOADSAVE));
         icms.add(new IntentComponentMap(exitButton, Intent.EXIT));
         return icms;
     }
