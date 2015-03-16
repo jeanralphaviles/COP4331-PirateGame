@@ -5,26 +5,52 @@
  */
 package view.viewport;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import model.GameObject;
 
 /**
  *
  * @author comcc_000
  */
-public class DialogueScreenViewport extends ViewPort {
+public class
+        DialogueScreenViewport extends ViewPort {
 
     /*Properites*/
+    private FlavorImageViewport fiv;
+    private DialogueViewport dv;
 
     public DialogueScreenViewport() {
-        addViewport(new FlavorImageViewport());
-        addViewport(new DialogueViewport());
+        initComponents();
+        fiv = new FlavorImageViewport();
+        dv = new DialogueViewport();
+        addViewport(fiv);
+        addViewport(dv);
+        generateView();
+    }
+    
+    public void generateView() {     
+        FlavorImagePanel.setLayout(new BorderLayout());
+        FlavorImagePanel.add(fiv , BorderLayout.CENTER);
+        
+        DialoguePanel.setLayout(new BorderLayout());
+        DialoguePanel.add(dv , BorderLayout.CENTER);
+        
+        FlavorImagePanel.revalidate();
+        FlavorImagePanel.repaint();
+        
+        DialoguePanel.revalidate();
+        DialoguePanel.repaint();
+        
+        this.revalidate();
+        this.repaint();
     }
 
     @Override
     public void updateView(GameObject gameObject) {
         int numInteriorViewports = interiorViewports.size();
         ViewPort viewport;
-        for (int i=0; i<numInteriorViewports; i++) {
+        for (int i=0; i < numInteriorViewports; i++) {
             viewport = interiorViewports.get(i);
             viewport.updateView(gameObject);
         }
@@ -41,19 +67,77 @@ public class DialogueScreenViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        DialoguePanel = new javax.swing.JPanel();
+        FlavorImagePanel = new javax.swing.JPanel();
+
+        DialoguePanel.setBackground(new java.awt.Color(255, 255, 255));
+        DialoguePanel.setForeground(new java.awt.Color(255, 255, 255));
+        DialoguePanel.setToolTipText("");
+        DialoguePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        DialoguePanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+        javax.swing.GroupLayout DialoguePanelLayout = new javax.swing.GroupLayout(DialoguePanel);
+        DialoguePanel.setLayout(DialoguePanelLayout);
+        DialoguePanelLayout.setHorizontalGroup(
+            DialoguePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 509, Short.MAX_VALUE)
+        );
+        DialoguePanelLayout.setVerticalGroup(
+            DialoguePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 372, Short.MAX_VALUE)
+        );
+
+        FlavorImagePanel.setBackground(new java.awt.Color(0, 51, 51));
+
+        javax.swing.GroupLayout FlavorImagePanelLayout = new javax.swing.GroupLayout(FlavorImagePanel);
+        FlavorImagePanel.setLayout(FlavorImagePanelLayout);
+        FlavorImagePanelLayout.setHorizontalGroup(
+            FlavorImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 509, Short.MAX_VALUE)
+        );
+        FlavorImagePanelLayout.setVerticalGroup(
+            FlavorImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 372, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 509, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(DialoguePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(FlavorImagePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 372, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(DialoguePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(FlavorImagePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jLayeredPane1.setLayer(DialoguePanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(FlavorImagePanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel DialoguePanel;
+    private javax.swing.JPanel FlavorImagePanel;
+    private javax.swing.JLayeredPane jLayeredPane1;
     // End of variables declaration//GEN-END:variables
 }
 

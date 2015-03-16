@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import model.GameObject;
 import utility.IntentComponentMap;
@@ -45,38 +46,50 @@ public class DialogueViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dialogueTextView = new javax.swing.JTextField();
         continueButton = new javax.swing.JButton();
+        dialogueTextView = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(0, 51, 51));
+        setAlignmentX(Component.CENTER_ALIGNMENT);
+        setAlignmentY(Component.CENTER_ALIGNMENT);
+        setPreferredSize(new java.awt.Dimension(689, 35));
+
+        continueButton.setText("Continue");
+        continueButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        continueButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        continueButton.setBorder(null);
+        continueButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        continueButton.setPreferredSize(new java.awt.Dimension(75, 20));
+
+        dialogueTextView.setBackground(new java.awt.Color(0, 51, 51));
+        dialogueTextView.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        dialogueTextView.setForeground(new java.awt.Color(255, 255, 255));
+        dialogueTextView.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         dialogueTextView.setText("Dialogue");
+        dialogueTextView.setAlignmentX(Component.LEFT_ALIGNMENT);
+        dialogueTextView.setAlignmentY(Component.CENTER_ALIGNMENT);
+        dialogueTextView.setBorder(null);
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });
-
-        continueButton.setText("Continue");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(continueButton)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(600, Short.MAX_VALUE)
+                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(dialogueTextView)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(continueButton))
-                .addContainerGap(103, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
