@@ -267,17 +267,12 @@ public class StatusViewport extends ViewPort {
                     .addComponent(agilityLabel)
                     .addComponent(intellectLabel)
                     .addComponent(hardinessLabel))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(mainStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainStatsPanelLayout.createSequentialGroup()
-                        .addComponent(hardinessLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainStatsPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(mainStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(intellectLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(agilityLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(strengthLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(intellectLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(agilityLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(strengthLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hardinessLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         mainStatsPanelLayout.setVerticalGroup(
@@ -301,7 +296,7 @@ public class StatusViewport extends ViewPort {
                     .addComponent(hardinessLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        add(mainStatsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 190));
+        add(mainStatsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 180, 190));
 
         healthManaPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -353,7 +348,7 @@ public class StatusViewport extends ViewPort {
                         .addComponent(manaBar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(healthManaPanelLayout.createSequentialGroup()
                         .addComponent(healthLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addComponent(healthBar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(healthManaPanelLayout.createSequentialGroup()
                         .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +375,7 @@ public class StatusViewport extends ViewPort {
                                 .addGap(18, 18, 18)
                                 .addComponent(lifeFiveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         healthManaPanelLayout.setVerticalGroup(
             healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,7 +410,7 @@ public class StatusViewport extends ViewPort {
                 .addGap(9, 9, 9))
         );
 
-        add(healthManaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 380, 170));
+        add(healthManaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 430, 170));
 
         otherStatsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -454,7 +449,7 @@ public class StatusViewport extends ViewPort {
                     .addComponent(armorRatingLabel)
                     .addComponent(movementLabel)
                     .addComponent(defensiveRatingLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(otherStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(armorRatingLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(movementLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -483,7 +478,7 @@ public class StatusViewport extends ViewPort {
                     .addComponent(movementLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        add(otherStatsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 210, 190));
+        add(otherStatsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 250, 190));
     }// </editor-fold>//GEN-END:initComponents
 
 
