@@ -82,6 +82,7 @@ public class IntentComponentMap {
         GOTO_GAME,
         GOTO_PAUSE,
         GOTO_MAIN,
+        GOTO_LOADSAVE,
         SHOW_DIALOGUE,
         EQUIP_ITEM,
         UNEQUIP_ITEM,
@@ -89,6 +90,8 @@ public class IntentComponentMap {
         INVENTORY_ITEM,
         SET_OCCUPATION,
         SET_NICKNAME,
-        TOGGLE_EQUIPPED
+        TOGGLE_EQUIPPED,
+        LABEL,
+        TREE_PANEL
     }
 }

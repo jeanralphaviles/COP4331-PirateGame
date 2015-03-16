@@ -1,6 +1,12 @@
 package view.screen.popup;
 
+import controller.LoadSaveController;
+import controller.NewGamePopupController;
+import controller.ScreenController;
+import java.util.ArrayList;
 import model.Model;
+import utility.IntentComponentMap;
+import view.viewport.LoadSavePopUpViewport;
 
 public class LoadSavePopup extends Popup {
 
@@ -11,12 +17,34 @@ public class LoadSavePopup extends Popup {
 
     @Override
     protected void createView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        viewPort = new LoadSavePopUpViewport();
     }
 
     @Override
     protected void createController() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
+        controller = new LoadSaveController(model, icms);
+    }
+}
+
+/*
+public class NewGamePopup extends Popup {
+
+    public NewGamePopup(Model model) {
+        super(model);
+        // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    public void createView() {
+        viewPort = new NewGamePopupViewport();
+    }
+    
+    @Override
+    public void createController() {
+        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
+        controller = new NewGamePopupController(model, icms);
     }
 
 }
+*/

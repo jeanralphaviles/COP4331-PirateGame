@@ -15,7 +15,7 @@ public final class GameScreenController extends ScreenController {
     
     @Override
     protected void action(IntentComponentMap icm) {
-        System.out.println("Action");
+       
         Intent intent = icm.getIntent();
         switch(intent) {
             case TOGGLE_EQUIPPED:
@@ -38,36 +38,7 @@ public final class GameScreenController extends ScreenController {
         super.action(icm);
     }
     
-    /*
-    private void toggleEquipped(IntentComponentMap icm) {
-        
-        Item item = (Item)icm.getObject();
-        Avatar avatar = model.getGameObject().getAvatar();
-        JButton button = (JButton)icm.getComponent();
-        boolean equipped = avatar.unEquipItem(item); //unequips if possible
-        if (!equipped) { //if it couldn't be uneqipped, then need to equip it
-            avatar.equipItem(item);
-            button.setBackground(Color.BLUE);
-        } else {
-            button.setBackground(Color.GRAY);
-        }
-    }
-    */
-    private void selectItem(IntentComponentMap icm){
-        
-        /*
-        if ( icm.getComponent().getBackground() != Color.BLUE ){
-               
-              System.out.println("Selecting the item");
-              icm.getComponent().setBackground(Color.BLUE);
-        }
-        else{
-              
-            icm.getComponent().setBackground( new JButton().getBackground() );      
-        }
-        */
-      
-    }
+    private void selectItem(IntentComponentMap icm){}
     
     private void toggleEquip(){
         

@@ -1,5 +1,10 @@
 *.class
+<<<<<<< Updated upstream
 MODEL_FILE.txt
+=======
+MODEL_FILE*.txt
+LoadSave/
+>>>>>>> Stashed changes
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

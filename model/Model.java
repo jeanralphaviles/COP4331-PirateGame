@@ -4,6 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 import application.RunGame;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 import model.entity.Avatar;
 import model.entity.occupation.Occupation;
 import model.inventory.Slot;
@@ -17,13 +24,14 @@ import view.screen.MainScreen;
 import view.screen.Screen;
 
 /**
- * @author Jean-Ralph Aviles
+ * @author Jean-Ralph Aviles and Carlos Vizcaino
  */
 public class Model extends Thread {
 	private GameObject gameObject;
 	private UtilityData utilityData;
 	private Screen currentScreen;
 	private int updatesPerSecond;
+        public static String loadSaveDirectory = "LoadSave/";
 	
 	public Model() {
 		Avatar avatar = new Avatar();
@@ -31,6 +39,88 @@ public class Model extends Thread {
 		this.setUtilityData(new UtilityData());
 		loadLevels(1, avatar);
 	}
+        
+        public void save() {
+            
+            try {
+               
+                Avatar avatar = this.getGameObject().getAvatar();
+                
+                if ( avatar.getNickname() != null && !avatar.getNickname().isEmpty()){
+                    
+
+                    File file = new File(loadSaveDirectory + avatar.getNickname() + "/");
+                    
+                    System.out.println("Address: " + loadSaveDirectory + avatar.getNickname());
+                    if (file.exists() == false) {
+
+                        System.out.println(loadSaveDirectory + avatar.getNickname() + "/");
+                        file.mkdir();
+                    }
+
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+                    Date date = new Date();
+                    String fileName = avatar.getOccupation().toString() + "_" + this.getGameObject().getAvatarLevel() + "_" + dateFormat.format(date);
+                    System.out.println("File name: " + fileName);
+                    file = new File(loadSaveDirectory + avatar.getNickname() + "/" + fileName);
+
+                    if (file.exists() == false) {
+
+                        file.createNewFile();
+                    }
+
+
+                    String savedModel = this.toString();
+                    FileOutputStream fstream = new FileOutputStream(file, false);
+                    fstream.write(savedModel.getBytes());
+                    fstream.flush();
+                    fstream.close();
+                
+                } // End of if-statement
+                
+            } 
+            catch (IOException e) {
+                e.printStackTrace();
+            }  
+    }
+
+        public void load(String fileName) {
+        
+            try {
+            
+            System.out.println("Loading... From Model");
+            Avatar avatar = this.getGameObject().getAvatar();
+            
+             if ( avatar.getNickname() != null && !avatar.getNickname().isEmpty()){
+                 
+                File file = new File(loadSaveDirectory + avatar.getNickname() + "/" + fileName);
+                
+                if (file != null && file.exists()) {
+                    StringBuilder fileContents = new StringBuilder((int) file.length());
+                    Scanner scanner = new Scanner(file);
+                    String lineSeparator = System.getProperty("line.separator");
+                    while (scanner.hasNextLine()) {
+                        fileContents.append(scanner.nextLine() + lineSeparator);
+                    }
+                    scanner.close();
+                    Model newModel;
+
+                    if (fileContents.toString().trim().length() != 0) {
+                        System.out.println("Loading Model from DISK");
+                        newModel = Model.fromString(fileContents.toString());
+                    } else {
+                        newModel = new Model();
+                        newModel.loadLevels(1, new Avatar());
+                    }
+                    this.setGameObject(newModel.getGameObject());
+                    this.setUtilityData(newModel.getUtilityData());
+                }
+                
+             }
+        } catch (FileNotFoundException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public void launch(int updatesPerSecond, String saveName) {
 		this.updatesPerSecond = updatesPerSecond;

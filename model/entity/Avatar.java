@@ -15,6 +15,7 @@ public class Avatar extends Entity {
     public Avatar() {
         super();
         this.name = "Richard Bonehard";
+        this.nickname = "TestNickName";
         
         Weapon bazzuca = new Weapon(new Decal(Decal.item_default), "Bazzuca");
         Weapon pistol = new Weapon(new Decal(Decal.item_default), "Pistol");

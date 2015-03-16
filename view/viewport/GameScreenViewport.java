@@ -13,7 +13,7 @@ import model.Model;
 
 /**
  *
- * @author comcc_000
+ * @author Carlos Vizcaino
  */
 public class GameScreenViewport extends ViewPort {
     
@@ -32,6 +32,7 @@ public class GameScreenViewport extends ViewPort {
     
     // Attributes:
     InventoryViewPort inventoryViewport;
+    AreaViewport areaViewport;
     
     // Default Constructor
     public GameScreenViewport() {
@@ -49,8 +50,12 @@ public class GameScreenViewport extends ViewPort {
     
     public void generateView(){
         
+        areaViewport = new AreaViewport();
         inventoryViewport = new InventoryViewPort();
         
+        this.addViewport(areaViewport);
+        GamePanel.setLayout( new BorderLayout() );
+        GamePanel.add( areaViewport , BorderLayout.CENTER );
         
         StatisticsPanel.setLayout( new BorderLayout() );
         StatisticsPanel.add( new StatusViewport() , BorderLayout.CENTER);

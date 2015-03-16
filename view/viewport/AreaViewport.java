@@ -21,7 +21,7 @@ import utility.decal.Decal;
 public class AreaViewport extends ViewPort {
 
     private int numTilesWide = 19; //should be odd 19 @ 32,32 scale was good
-    private int numTilesHigh = 7; //should be odd 7 @ 32,32 scale was good
+    private int numTilesHigh = 29; //should be odd 7 @ 32,32 scale was good
     //
     private boolean followAvatar = true;
     //
