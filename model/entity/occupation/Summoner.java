@@ -1,6 +1,7 @@
 package model.entity.occupation;
 
 import model.entity.Statistics;
+import model.entity.occupation.ability.instantAbility.itemAbility.ConjureShoes;
 import model.entity.occupation.ability.instantAbility.projectile.Firebolt;
 import model.entity.occupation.ability.instantAbility.status.Boon;
 
@@ -13,6 +14,7 @@ public class Summoner extends Occupation {
         super("Summoner");
         this.getAbilities().add(new Firebolt());
         this.getAbilities().add(new Boon());
+        this.getAbilities().add(new ConjureShoes());
     }
 
     @Override
