@@ -1,11 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import utility.Course;
 import utility.decal.Decal;
 import model.entity.Avatar;
 import model.entity.Entity;
+import model.entity.occupation.ability.Ability;
 import model.inventory.Slot;
 import model.inventory.SlotCategory;
 import model.item.Category;
@@ -146,7 +148,18 @@ public class Level {
     }
     
     public void advanceEntity(Entity entity) {
-    	// TODO(jraviles) Figure out how we're going to advance entities
+    	Random rand = new Random();
+    	if (rand.nextDouble() < 0.3) { // Entities have 30% chance to take an action
+    		if (rand.nextDouble() < 0.5) { // 50% Chance to move towards avatar
+    			faceEntity(entity, getAvatarLocation());
+    			moveEntity(entity, entity.getDirectionFacing());
+    		} else { // 50% Chance to use an Ability
+    			int randomAbilityIndex = rand.nextInt(entity.getAbilities().size());
+    			Ability ability = entity.getAbilities().get(randomAbilityIndex);
+    			entity.getStatistics().changeCurrentMana(100); // Ensure entities always have mana
+    			entity.activateAbility(ability, this);
+    		}
+    	}
     }
     
     public boolean moveEntity(Entity entity, GridLocation destination) {
