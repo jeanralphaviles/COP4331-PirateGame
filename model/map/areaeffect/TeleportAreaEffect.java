@@ -20,7 +20,9 @@ public final class TeleportAreaEffect extends AreaEffect {
 
 	@Override
 	public void triggerProximityEffect(Entity entity, Level level) {
-		level.moveEntity(entity, getDestination());
+		if (isActive()) {
+			level.moveEntity(entity, getDestination());
+		}
 	}
 
 	@Override

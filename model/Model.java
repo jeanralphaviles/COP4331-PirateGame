@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import application.RunGame;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,11 +12,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+
 import model.entity.Avatar;
 import model.entity.occupation.Occupation;
 import model.inventory.Slot;
 import model.map.GridLocation;
 import model.map.Map;
+import model.map.areaeffect.HealDamageAreaEffect;
+import model.map.areaeffect.InstantDeathAreaEffect;
+import model.map.areaeffect.LevelUpAreaEffect;
+import model.map.areaeffect.TakeDamageAreaEffect;
+import model.map.areaeffect.TeleportAreaEffect;
 import utility.Course;
 import utility.ItemGenerator;
 import utility.MapGenerator;
@@ -164,6 +171,12 @@ public class Model extends Thread {
 		Level level;
 		for (int i = 1; i <= numLevels; ++i) {
 			map = MapGenerator.generateMap(new File("Levels/Map" + i + ".csv"));
+			map.getMaptile(new GridLocation(10, 5)).setAreaEffect(new TeleportAreaEffect(new GridLocation(25, 5)));
+			map.getMaptile(new GridLocation(27, 5)).setAreaEffect(new TeleportAreaEffect(new GridLocation(17, 8)));
+			map.getMaptile(new GridLocation(14, 5)).setAreaEffect(new InstantDeathAreaEffect());
+			map.getMaptile(new GridLocation(10, 12)).setAreaEffect(new LevelUpAreaEffect());
+			map.getMaptile(new GridLocation(11, 13)).setAreaEffect(new HealDamageAreaEffect());
+			map.getMaptile(new GridLocation(14, 6)).setAreaEffect(new TakeDamageAreaEffect());
 			Slot[][] slots = ItemGenerator.generateItems(new File("Levels/Items" + i + ".csv"), map);
 			level = new Level(map, slots);
 			levels.add(level);
@@ -221,7 +234,7 @@ public class Model extends Thread {
 				--bracketCount;
 			}
 		}
-		//model.updatesPerSecond = Integer.parseInt(stripped.substring(start));
+		model.updatesPerSecond = Integer.parseInt(stripped.substring(start));
 		return model;
 	}
 
