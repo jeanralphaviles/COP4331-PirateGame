@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+import utility.Course;
 
 public class Decal {
     private BufferedImage image;
@@ -94,6 +95,35 @@ public class Decal {
                 break;
         }
         return img;
+    }
+    
+    public Decal getRotatedDecal(Course course) {
+    	int x = course.getXDisplacement();
+    	int y = course.getYDisplacement();
+    	double theta; // Angle to rotate image
+    	if (x == -1 && y == 1) { // Facing Down-Left, Rotate pi/4 radians
+    		theta = Math.PI/4;
+    	} else if (x == 1 && y == 0) { // Facing Left, Rotate pi/2 radians
+    		theta = Math.PI/2;
+    	} else if (x == -1 && y == -1) { // Facing Up-Left, Rotate 3*pi/4 radians
+    		theta = 3*Math.PI/4;
+    	} else if (x == 0 && y == -1) { // Facing Up, Rotate pi radians
+    		theta = Math.PI;
+    	} else if (x == 1 && y == -1) { // Facing Up-Right, Rotate 5*pi/4 radians
+    		theta = 5*Math.PI/4;
+    	} else if (x == -1 && y == 0) { // Facing Right, Rotate 3*pi/2 radians
+    		theta = 3*Math.PI/2;
+    	} else if (x == 1 && y == 1) { // Facing Down-Right, Rotate 7*pi/4 radians
+    		theta = 7*Math.PI/4;
+    	} else { // Facing Down, do not rotate
+    		theta = 0;
+    	}
+    	BufferedImage rotatedImg = new BufferedImage(getImage().getWidth(), getImage().getHeight(), getImage().getType());
+    	Graphics2D g2d = rotatedImg.createGraphics();
+    	g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    	g2d.rotate(theta, getImage().getHeight()/2, getImage().getHeight()/2);
+    	g2d.drawImage(getImage(), null, 0, 0);
+    	return new Decal(rotatedImg);
     }
     
     private static final File openFile(String filename) {
@@ -190,7 +220,7 @@ public class Decal {
             Image i = image;
             i = getScaledImage(i, width, height);
             return (BufferedImage) i;
-        }
+    }
     
     
     private static Image getScaledImage(Image srcImg, int w, int h) {
@@ -200,5 +230,5 @@ public class Decal {
             g2.drawImage(srcImg, 0, 0, w, h, null);
             g2.dispose();
             return resizedImg;
-        }
+    } 
 }
