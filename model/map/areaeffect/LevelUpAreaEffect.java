@@ -1,5 +1,6 @@
 package model.map.areaeffect;
 
+import model.Level;
 import model.entity.Entity;
 import utility.decal.Decal;
 
@@ -16,7 +17,7 @@ public final class LevelUpAreaEffect extends AreaEffect {
 	}
 
 	@Override
-	public void triggerProximityEffect(Entity entity) {
+	public void triggerProximityEffect(Entity entity, Level level) {
 		if (isActive()) {
 			int expToNextLevel = 100 - entity.getStatistics().getExperience() % 100;
 			entity.getStatistics().addExperience(expToNextLevel);

@@ -1,5 +1,6 @@
 package model.map.areaeffect;
 
+import model.Level;
 import model.entity.Entity;
 
 public final class NullAreaEffect extends AreaEffect {
@@ -10,7 +11,7 @@ public final class NullAreaEffect extends AreaEffect {
 	}
 
 	@Override
-	public void triggerProximityEffect(Entity entity) {
+	public void triggerProximityEffect(Entity entity, Level level) {
 
 	}
 	

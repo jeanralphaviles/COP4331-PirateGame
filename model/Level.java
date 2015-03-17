@@ -216,7 +216,7 @@ public class Level {
     				removeItem(new GridLocation(x, y));
     			}
     		}
-    		map.getMaptile(entityLocation).triggerProximityEffect(entity);
+    		map.getMaptile(entityLocation).triggerProximityEffect(entity, this);
     	}
     }
     

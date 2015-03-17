@@ -3,6 +3,7 @@ package model.map;
 import java.util.ArrayList;
 
 import utility.decal.Decal;
+import model.Level;
 import model.entity.Entity;
 import model.map.areaeffect.AreaEffect;
 import model.map.areaeffect.NullAreaEffect;
@@ -58,8 +59,8 @@ public class Maptile {
 		return maptile;
 	}
 	
-	public void triggerProximityEffect(Entity entity) {
-		areaEffect.triggerProximityEffect(entity);
+	public void triggerProximityEffect(Entity entity, Level level) {
+		areaEffect.triggerProximityEffect(entity, level);
 	}
 	
 	public boolean isPassable(Entity entity) {
