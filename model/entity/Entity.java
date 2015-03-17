@@ -183,7 +183,7 @@ public class Entity {
 	}
 
 	public Decal getDecal() {
-		return decal;
+		return decal.getRotatedDecal(getDirectionFacing());
 	}
 
 	public void setDecal(Decal decal) {
