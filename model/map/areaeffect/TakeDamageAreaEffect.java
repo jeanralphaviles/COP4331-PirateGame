@@ -1,5 +1,6 @@
 package model.map.areaeffect;
 
+import model.Level;
 import model.entity.Entity;
 import utility.decal.Decal;
 
@@ -27,7 +28,7 @@ public final class TakeDamageAreaEffect extends AreaEffect {
 	}
 
 	@Override
-	public void triggerProximityEffect(Entity entity) {
+	public void triggerProximityEffect(Entity entity, Level level) {
 		if (isActive()) {
 			entity.getStatistics().changeCurrentHealth(-1*damageTaken);
 		}

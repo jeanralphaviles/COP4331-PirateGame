@@ -1,5 +1,6 @@
 package model.map.areaeffect;
 
+import model.Level;
 import model.entity.Entity;
 import utility.decal.Decal;
 
@@ -18,7 +19,7 @@ public abstract class AreaEffect {
 		setDecal(decal);
 	}
 
-	public abstract void triggerProximityEffect(Entity entity);
+	public abstract void triggerProximityEffect(Entity entity, Level level);
 
 	@Override
 	public abstract String toString();
@@ -32,6 +33,8 @@ public abstract class AreaEffect {
 			return LevelUpAreaEffect.fromString(string);
 		} else if (string.startsWith("[TakeDamageAreaEffect")) {
 			return TakeDamageAreaEffect.fromString(string);
+		} else if (string.startsWith("[TeleportAreaEffect")) {
+			return TeleportAreaEffect.fromString(string);
 		} else { 
 			return NullAreaEffect.fromString(string);
 		}
@@ -59,7 +62,8 @@ public abstract class AreaEffect {
 				new InstantDeathAreaEffect(),
 				new LevelUpAreaEffect(),
 				new NullAreaEffect(),
-				new TakeDamageAreaEffect()
+				new TakeDamageAreaEffect(),
+				new TeleportAreaEffect()
 		};
 		AreaEffect[] copies = new AreaEffect[originals.length];
 		for (int i = 0; i < originals.length; ++i) {

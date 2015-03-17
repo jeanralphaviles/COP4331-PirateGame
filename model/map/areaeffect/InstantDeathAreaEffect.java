@@ -1,6 +1,7 @@
 package model.map.areaeffect;
 
 import utility.decal.Decal;
+import model.Level;
 import model.entity.Entity;
 
 /**
@@ -16,7 +17,7 @@ public final class InstantDeathAreaEffect extends AreaEffect {
 	}
 
 	@Override
-	public void triggerProximityEffect(Entity entity) {
+	public void triggerProximityEffect(Entity entity, Level level) {
 		if (isActive()) {
 			entity.getStatistics().kill();
 		}
