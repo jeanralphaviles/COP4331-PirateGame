@@ -33,6 +33,7 @@ public class GameScreenViewport extends ViewPort {
     // Attributes:
     InventoryViewPort inventoryViewport;
     AreaViewport areaViewport;
+    StatusViewport statusViewport;
     
     // Default Constructor
     public GameScreenViewport() {
@@ -52,13 +53,15 @@ public class GameScreenViewport extends ViewPort {
         
         areaViewport = new AreaViewport();
         inventoryViewport = new InventoryViewPort();
+        statusViewport = new StatusViewport();
         
         this.addViewport(areaViewport);
         GamePanel.setLayout( new BorderLayout() );
         GamePanel.add( areaViewport , BorderLayout.CENTER );
         
+        this.addViewport(statusViewport);
         StatisticsPanel.setLayout( new BorderLayout() );
-        StatisticsPanel.add( new StatusViewport() , BorderLayout.CENTER);
+        StatisticsPanel.add( statusViewport, BorderLayout.CENTER);
         
         this.addViewport( inventoryViewport );
         InventoryMainPanel.setLayout( new BorderLayout() );

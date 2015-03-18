@@ -25,7 +25,7 @@ public class StatusViewport extends ViewPort {
     public StatusViewport() {
         initComponents();
         initPanels();
-        initProgressBars(100, 100);
+        initProgressBars(10, 10);
         
         lifeOneLabel.setVisible(false);
         lifeTwoLabel.setVisible(false);
@@ -45,7 +45,7 @@ public class StatusViewport extends ViewPort {
         Statistics statistics = gameObject.getAvatar().getDerivedStatistics();
     
         int health = statistics.getCurrentHealth();
-        int maxHealth = 100;
+        int maxHealth = statistics.getMaxHealth();
         int mana = statistics.getCurrentMana();
         int maxMana = 100;
         int level = statistics.getLevel();
@@ -58,9 +58,9 @@ public class StatusViewport extends ViewPort {
         int intellect = statistics.getIntellect();
         int hardiness = statistics.getHardiness();
         int experience = statistics.getExperience();
-        int experienceNeeded = 1000;
+        int experienceNeeded = 100 * level;
         int movement = statistics.getMovement();
-
+        
         strengthLabel1.setText(Integer.toString(strength));
         agilityLabel1.setText(Integer.toString(agility));
         intellectLabel1.setText(Integer.toString(intellect));
@@ -71,7 +71,7 @@ public class StatusViewport extends ViewPort {
         armorRatingLabel1.setText(Integer.toString(armor));
         movementLabel1.setText(Integer.toString(movement));
         
-        updateProgressBars(health, mana);
+        updateProgressBars(health, mana, maxHealth, maxMana);
         
         String experienceString = Integer.toString(experience) + " / " + Integer.toString(experienceNeeded);
         experienceValueLabel.setText(experienceString);
@@ -101,7 +101,9 @@ public class StatusViewport extends ViewPort {
         manaBar.setBackground(Color.red);
     }
     
-    public void updateProgressBars (int health, int mana) {
+    public void updateProgressBars (int health, int mana, int maxHealth, int maxMana) {
+        healthBar.setMaximum(maxHealth);
+        manaBar.setMaximum(maxMana);
         healthBar.setValue(health);
         manaBar.setValue(mana);
     }

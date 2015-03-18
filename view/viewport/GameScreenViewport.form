@@ -38,8 +38,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="InventoryMainPanel" pref="995" max="32767" attributes="0"/>
-                  <Component id="StatisticsPanel" pref="995" max="32767" attributes="0"/>
+                  <Component id="InventoryMainPanel" pref="1007" max="32767" attributes="0"/>
+                  <Component id="StatisticsPanel" pref="1007" max="32767" attributes="0"/>
                   <Component id="AbilitiesPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
                   <Group type="102" attributes="0">
                       <Component id="StatisticsPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="InventoryMainPanel" pref="1865" max="32767" attributes="0"/>
+                      <Component id="InventoryMainPanel" pref="1877" max="32767" attributes="0"/>
                   </Group>
                   <Component id="GamePanel" max="32767" attributes="0"/>
               </Group>
