@@ -98,7 +98,7 @@ class EnterKeyListener implements KeyEventPostProcessor {
                 model.moveAvatar(new Course(-1, -1));
             } else if (keyCode == KeyEvent.VK_NUMPAD2 || keyCode == KeyEvent.VK_DOWN) {
                 System.out.println("pressed 2 move down");
-                model.moveAvatar(new Course(0, -1));
+                model.moveAvatar(new Course(0, 1));
             } else if (keyCode == KeyEvent.VK_NUMPAD3) {
                 System.out.println("pressed 3 move left down");
                 model.moveAvatar(new Course(1, -1));
@@ -113,7 +113,7 @@ class EnterKeyListener implements KeyEventPostProcessor {
                 model.moveAvatar(new Course(-1, 1));
             } else if (keyCode == KeyEvent.VK_NUMPAD8 || keyCode == KeyEvent.VK_UP) {
                 System.out.println("you pressed 8 move top");
-                model.moveAvatar(new Course(0, 1));
+                model.moveAvatar(new Course(0, -1));
             } else if (keyCode == KeyEvent.VK_NUMPAD9) {
                 System.out.println("you pressed 9 move top right");
                 model.moveAvatar(new Course(1, 1));

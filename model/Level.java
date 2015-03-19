@@ -149,7 +149,7 @@ public class Level {
     
     public void advanceEntity(Entity entity) {
     	Random rand = new Random();
-    	if (rand.nextDouble() < 0.3) { // Entities have 30% chance to take an action
+    	if (rand.nextDouble() < 0.3 || entity.isFriendly() == false) { // Entities have 30% chance to take an action or if they're angry
     		if (rand.nextDouble() < 0.5 || entity.isFriendly()) { // 50% Chance to move, or 100% if friendly
     			if (rand.nextDouble() < 0.5 || !entity.isFriendly()) { // 50% towards Avatar, or if unfriendly
     				faceEntity(entity, getAvatarLocation());

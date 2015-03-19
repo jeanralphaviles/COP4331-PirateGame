@@ -20,7 +20,7 @@ public class GridLocation {
 	
 	public GridLocation nextGridLocation(Course course) {
 		int x = this.getX() + course.getXDisplacement();
-		int y = this.getY() + -1 * course.getYDisplacement();
+		int y = this.getY() + course.getYDisplacement();
 		return new GridLocation(x, y);
 	}
 

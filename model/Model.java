@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import model.entity.Avatar;
+import model.entity.Entity;
 import model.entity.occupation.Occupation;
 import model.inventory.Slot;
 import model.map.GridLocation;
@@ -179,6 +180,9 @@ public class Model extends Thread {
 			map.getMaptile(new GridLocation(14, 6)).setAreaEffect(new TakeDamageAreaEffect());
 			Slot[][] slots = ItemGenerator.generateItems(new File("Levels/Items" + i + ".csv"), map);
 			level = new Level(map, slots);
+			Entity newEntity = new Entity();
+			newEntity.setFriendly(false);
+			level.addEntity(newEntity, new GridLocation(28, 5));
 			levels.add(level);
 		}
 		GridLocation avatarLocation = new GridLocation(levels.get(0).getWidth() / 2, levels.get(0).getHeight() / 2);
