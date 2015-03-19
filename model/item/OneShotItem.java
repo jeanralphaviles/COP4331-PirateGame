@@ -1,5 +1,6 @@
 package model.item;
 
+import model.Level;
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;
@@ -22,7 +23,7 @@ public class OneShotItem extends Item implements Cloneable {
     }
 
     @Override
-	public void triggerProximity(Entity entity) {
+	public void triggerProximity(Entity entity, Level level) {
     	entity.getStatistics().changeCurrentHealth(100);
     }
 
