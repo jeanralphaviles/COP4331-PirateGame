@@ -24,6 +24,7 @@ public class Entity {
 	protected EquippedInventory equippedInventory;
 	protected Decal decal;
 	protected Course directionFacing;
+	protected boolean friendly = true;
 	
 	public Entity() {
 		setStatistics(new Statistics());
@@ -106,9 +107,10 @@ public class Entity {
 	
 	@Override
 	public String toString() {
+		int friendly = this.friendly ? 1 : 0;
 		return "[" + statistics.toString() + "," + occupation.toString() + ","
 				+ inventory.toString() + "," + equippedInventory.toString()
-				+ "," + decal.toString() + "," + directionFacing.toString() + "]";
+				+ "," + decal.toString() + "," + directionFacing.toString() + "," + friendly + "]";
 	}
 	
 	public static Entity fromString(String string) {
@@ -139,8 +141,10 @@ public class Entity {
 				} else if (itemCount == 4) {
 					// Decal
 					entity.decal = Decal.fromString(stripped.substring(start, i));
+				} else if (itemCount == 5) {
 					// Direction Facing
-					entity.directionFacing = Course.fromString(stripped.substring(i + 1, stripped.length()));
+					entity.directionFacing = Course.fromString((stripped.substring(start, i)));
+					entity.friendly = Integer.parseInt((stripped.substring(i + 1))) == 1;
 					break;
 				}
 				start = i + 1;
@@ -190,9 +194,18 @@ public class Entity {
 		this.decal = decal;
 	}
 	
+	public boolean isFriendly() {
+		return friendly;
+	}
+
+	public void setFriendly(boolean friendly) {
+		this.friendly = friendly;
+	}
+
 	public static void main(String[] args) {
 		Entity orig = new Entity(new Decal(Decal.summoner));
 		orig.setOccupation(new Summoner());
+		orig.setFriendly(false);
 		Entity restored = Entity.fromString(orig.toString());
 		
 		if (orig.toString().equals(restored.toString()) == false) {
@@ -215,6 +228,9 @@ public class Entity {
 		}
 		if (orig.getDirectionFacing().equals(restored.getDirectionFacing()) == false) {
 			System.out.println("Courses differ");
+		}
+		if (orig.isFriendly() != restored.isFriendly()) {
+			System.out.println("Friendliness differs");
 		}
 		
 		Entity avatar = new Avatar(new Summoner(), new Decal(Decal.summoner));

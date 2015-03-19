@@ -22,6 +22,7 @@ public final class Melee extends InstantAbility {
 		if (enemy != null) {
 			int damage = caster.getDerivedStatistics().getOffensiveRating();
 			enemy.getStatistics().changeCurrentHealth(-1 * damage);
+			enemy.setFriendly(false);
 		}
 	}
 
