@@ -24,6 +24,7 @@ public final class PickPocket extends InstantAbility {
 			if (rand.nextDouble() < 0.5 || !enemy.getDirectionFacing().equals(caster.getDirectionFacing())) {
 				level.faceEntity(enemy, casterLocation);
 				caster.getStatistics().changeCurrentHealth(-99);
+				enemy.setFriendly(false);
 			} else {
 				int randomItemIndex = rand.nextInt(enemy.getInventory().getItems().size());
 				TakeableItem item = (TakeableItem) enemy.getInventory().getItems().get(randomItemIndex);
