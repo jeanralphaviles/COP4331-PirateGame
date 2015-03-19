@@ -58,18 +58,61 @@ public class Model extends Thread {
                     
 
                     File file = new File(loadSaveDirectory + avatar.getNickname() + "/");
-                    
-                    System.out.println("Address: " + loadSaveDirectory + avatar.getNickname());
                     if (file.exists() == false) {
-
-                        System.out.println(loadSaveDirectory + avatar.getNickname() + "/");
+                        
                         file.mkdir();
                     }
-
+           
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                     Date date = new Date();
                     String fileName = avatar.getOccupation().toString() + "_" + this.getGameObject().getAvatarLevel() + "_" + dateFormat.format(date);
-                    System.out.println("File name: " + fileName);
+                    File newFile = new File(loadSaveDirectory + avatar.getNickname() + "/" + fileName + "_*$%");
+                    
+                    File[] listOfFiles = file.listFiles();
+                    for (File i : listOfFiles){
+                            
+                            if (i.getName().contains("*$%")){
+                                
+                                i.delete();
+                                break;
+                            }
+                    }
+
+                    if (newFile.exists() == false) {
+
+                        file.createNewFile();
+                    }
+
+
+                    String savedModel = this.toString();
+                    FileOutputStream fstream = new FileOutputStream(newFile, false);
+                    fstream.write(savedModel.getBytes());
+                    fstream.flush();
+                    fstream.close();
+                
+                } // End of if-statement
+                
+            } 
+            catch (IOException e) {
+                e.printStackTrace();
+            }  
+    }
+        
+        public void save(String fileName) {
+            
+            try {
+               
+                Avatar avatar = this.getGameObject().getAvatar();
+                
+                if ( avatar.getNickname() != null && !avatar.getNickname().isEmpty()){
+                    
+
+                    File file = new File(loadSaveDirectory + avatar.getNickname() + "/");
+                    if (file.exists() == false) {
+
+                        file.mkdir();
+                    }
+                    
                     file = new File(loadSaveDirectory + avatar.getNickname() + "/" + fileName);
 
                     if (file.exists() == false) {

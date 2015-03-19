@@ -24,11 +24,13 @@ public abstract class ViewPort extends JPanel {
 //    }
     
     protected void addViewport(ViewPort viewport, String layout) {
+        setProperties();
         interiorViewports.add(viewport);
         add(viewport, layout);
     }
     
     protected void addViewport(ViewPort viewport) {
+        setProperties();
         interiorViewports.add(viewport);
         add(viewport);
     }
@@ -68,6 +70,11 @@ public abstract class ViewPort extends JPanel {
     
     public boolean isRefreshControllerNeeded() {
         return refreshControllerNeeded;
+    }
+    
+    protected void setProperties(){
+        
+        this.setSize( 1500, 1500);
     }
     
     
