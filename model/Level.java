@@ -215,7 +215,7 @@ public class Level {
     		int x = entityLocation.getX();
     		int y = entityLocation.getY();
     		if (slots[x][y] != null && slots[x][y].hasItem()) {
-    			slots[x][y].getItem().triggerProximity(entity);
+    			slots[x][y].getItem().triggerProximity(entity, this);
     			if (slots[x][y].getItem().getCategory() == Category.ONE_SHOT_ITEM) {
     				removeItem(new GridLocation(x, y));
     			}

@@ -1,5 +1,6 @@
 package model.item;
 
+import model.Level;
 import model.entity.Entity;
 import model.entity.Statistics;
 import utility.decal.Decal;
@@ -42,7 +43,7 @@ public abstract class Item implements Cloneable {
         this.statistics = statistics;
     }
 
-    public abstract void triggerProximity(Entity entity);
+    public abstract void triggerProximity(Entity entity, Level level);
 
 	public void augmentStatistics(Statistics statistics) {
 	    statistics.changeAgility(statistics.getAgility());
