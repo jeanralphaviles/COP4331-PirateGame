@@ -54,7 +54,7 @@ public class Model extends Thread {
                
                 Avatar avatar = this.getGameObject().getAvatar();
                 
-                if ( avatar.getNickname() != null && !avatar.getNickname().isEmpty()){
+                if ( avatar.getNickname() != null && !avatar.getNickname().isEmpty() ){
                     
 
                     File file = new File(loadSaveDirectory + avatar.getNickname() + "/");

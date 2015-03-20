@@ -9,6 +9,7 @@ import utility.IntentComponentMap;
 public abstract class ViewPort extends JPanel {
     
     protected ArrayList<ViewPort> interiorViewports = new ArrayList<>(1);
+    ErrorMessageFrame errorMessageFrame;
     //
     protected boolean refreshControllerNeeded = false;
 

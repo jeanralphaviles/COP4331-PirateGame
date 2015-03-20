@@ -288,11 +288,14 @@ public class InventoryViewPort extends ViewPort {
     public void performActionOnButton( JButton button ){
         
        
-        //if ( button.getIcon() != null ){
-            
-            if ( button.getBackground() == BUTTONS_COLOR ){
+            // If decal ok and selected
+            if ( button.getIcon() != null && button.getBackground().equals(SELECTED_BUTTON_COLOR)){
 
-                button.setBackground( SELECTED_BUTTON_COLOR ) ;
+                button.setBackground( BUTTONS_COLOR) ;
+            }
+            else if (button.getIcon() != null){
+                
+                button.setBackground( SELECTED_BUTTON_COLOR) ;
             }
             else{
 

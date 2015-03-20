@@ -7,6 +7,7 @@ import utility.decal.Decal;
 /**
  * @author Jean-Ralph Aviles
  */
+
 public abstract class AreaEffect {
 	private Decal decal;
 	private boolean isActive = true;

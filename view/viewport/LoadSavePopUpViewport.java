@@ -8,10 +8,13 @@ package view.viewport;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +28,7 @@ import model.GameObject;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
+import utility.decal.Decal;
 import view.viewport.ViewPort;
 
 /**
@@ -39,22 +43,40 @@ public class LoadSavePopUpViewport extends ViewPort {
     Model model;
     private ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
     boolean savePanelActivated;
+    LoadSaveCategory category;
+    
+ 
     
     public LoadSavePopUpViewport() {
+       
+        category = LoadSaveCategory.LOAD_SAVE_MODE;
         initComponents();
         createTreePanelGUI();
         savePanelActivated = false;
         hideSavePanel();
+        this.repaint();
     }
     
     public LoadSavePopUpViewport(Model model){
         
-       
+           category = LoadSaveCategory.LOAD_SAVE_MODE;
            this.model = model;
            initComponents();
            createTreePanelGUI(); 
            savePanelActivated = false;
            hideSavePanel();
+           this.repaint();
+    }
+    
+     public LoadSavePopUpViewport(Model model, LoadSaveCategory category){
+        
+           this.category = category;
+           this.model = model;
+           initComponents();
+           createTreePanelGUI(); 
+           savePanelActivated = false;
+           hideSavePanel();
+           this.repaint();
     }
     
     public static void main(String[] args){
@@ -66,6 +88,14 @@ public class LoadSavePopUpViewport extends ViewPort {
         
         frame.setVisible(true);
         
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g){
+        
+        super.paintComponent(g);
+        ImageIcon image = new ImageIcon( new Decal("./Sprites/backgrounds/rockPirateBig.jpg").getImage());
+        g.drawImage( image.getImage() , 0, 0, this.getWidth(), this.getHeight(), this);
     }
     
     /*
@@ -82,8 +112,12 @@ public class LoadSavePopUpViewport extends ViewPort {
     
     @Override
     public void updateView(GameObject gameObject) {
-    
-        //createTreePanelGUI();
+        
+       if (errorMessageFrame != null){ 
+           
+           errorMessageFrame.setVisible(true);
+           errorMessageFrame = null;
+       }
     }
     
     @Override
@@ -92,7 +126,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         System.out.println("Intent Componenet is being called");
         icms.add ( new IntentComponentMap(loadButton, Intent.LOAD) );
         icms.add ( new IntentComponentMap(userInstructionLabel, Intent.LABEL));
-        //icms.add ( new IntentComponentMap(playerRecordsTreePanel, Intent.TREE_PANEL));
+        icms.add ( new IntentComponentMap(playerRecordsTreePanel, Intent.TREE_PANEL));
         icms.add ( new IntentComponentMap(continueAdventureButton, Intent.GOTO_GAME));
         icms.add ( new IntentComponentMap(backButton, Intent.GOTO_MAIN));
        
@@ -100,46 +134,56 @@ public class LoadSavePopUpViewport extends ViewPort {
     }
 
     private void createTreePanelGUI(){
+    
         
-        // This is the root of the tree
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Avatars");
-        
-        File folder = new File("LoadSave/");
-        File[] listOfFiles = folder.listFiles();
-
-        for (File file : listOfFiles) {
+        try {
+            // This is the root of the tree
+            File folder = new File("LoadSave/");
+            if ( folder.exists() == false){
+                
+                throw new FileNotFoundException("LoadSave file was not found.");
+            }
+            File[] listOfFiles = folder.listFiles();
             
-            if (file.isDirectory()) {
-               
-                // Create Directory Node
-                DefaultMutableTreeNode directoryName = new DefaultMutableTreeNode(file.getName());
-                top.add(directoryName);
+            DefaultMutableTreeNode top = new DefaultMutableTreeNode("Avatars");
+            for (File file : listOfFiles) {
 
-                File avatarFiles = new File( "LoadSave/" + file.getName() + "/" );
-                File [] listOfAvatarFiles = avatarFiles.listFiles();
-                System.out.println( listOfAvatarFiles.length );
-                
-                if ( avatarFiles != null && avatarFiles.exists()){
-                
-                    for ( File i : listOfAvatarFiles){
+                if (file.isDirectory()) {
 
-                        if (i.isFile() ){
+                    // Create Directory Node
+                    DefaultMutableTreeNode directoryName = new DefaultMutableTreeNode(file.getName());
+                    top.add(directoryName);
 
-                            // Create File Nodes
-                            System.out.println( i.getName() );
-                            DefaultMutableTreeNode fileName = new DefaultMutableTreeNode(i.getName());
-                            directoryName.add(fileName);
-                        } 
+                    File avatarFiles = new File( "LoadSave/" + file.getName() + "/" );
+                    File [] listOfAvatarFiles = avatarFiles.listFiles();
+                    System.out.println( listOfAvatarFiles.length );
+
+                    if ( avatarFiles != null && avatarFiles.exists()){
+
+                        for ( File i : listOfAvatarFiles){
+
+                            if (i.isFile() ){
+
+                                // Create File Nodes
+                                System.out.println( i.getName() );
+                                DefaultMutableTreeNode fileName = new DefaultMutableTreeNode(i.getName());
+                                directoryName.add(fileName);
+                            } 
+                        }
+
                     }
-                
                 }
             }
+
+           playerRecordsTreePanel = new JTree( top );
+           playerRecordsTreePanel.setBackground( new Color (123,38,38));
+           playerRecordsTreePanel.setModel(new javax.swing.tree.DefaultTreeModel(top));
+           jScrollPane3.setViewportView(playerRecordsTreePanel);
         }
-       
-       playerRecordsTreePanel = new JTree( top );
-       playerRecordsTreePanel.setBackground( new Color (123,38,38));
-       playerRecordsTreePanel.setModel(new javax.swing.tree.DefaultTreeModel(top));
-       jScrollPane3.setViewportView(playerRecordsTreePanel);
+        catch (FileNotFoundException e){
+            
+            errorMessageFrame = new ErrorMessageFrame(e.getMessage());
+        }
     }
     
     private class Sliding implements ActionListener{
@@ -184,6 +228,30 @@ public class LoadSavePopUpViewport extends ViewPort {
         } // End of-actionPerfomed
         
     }
+    
+    
+    // ------------- PRIVATE CLASS ------------------
+    // -------------               ------------------
+    
+   public enum LoadSaveCategory {
+	
+        LOAD_MODE(1),
+	LOAD_SAVE_MODE(2);
+
+	private int value;
+
+	private LoadSaveCategory(int value) {
+		this.setValue(value);
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+    };
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -210,9 +278,9 @@ public class LoadSavePopUpViewport extends ViewPort {
 
         setBackground(new java.awt.Color(148, 61, 78));
         setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 1, 1, new java.awt.Color(0, 0, 0)));
-        setMaximumSize(new java.awt.Dimension(1000, 1000));
-        setMinimumSize(new java.awt.Dimension(1000, 1000));
-        setPreferredSize(new java.awt.Dimension(1000, 1000));
+        setMaximumSize(new java.awt.Dimension(1500, 1000));
+        setMinimumSize(new java.awt.Dimension(1500, 1000));
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
         setVerifyInputWhenFocusTarget(false);
 
         loadSavePanel.setBackground(new java.awt.Color(70, 52, 35));
@@ -223,13 +291,34 @@ public class LoadSavePopUpViewport extends ViewPort {
         loadSaveFunctionalitiesPanel.setMinimumSize(new java.awt.Dimension(572, 101));
         loadSaveFunctionalitiesPanel.setPreferredSize(new java.awt.Dimension(572, 101));
 
+        loadButton.setBackground(new java.awt.Color(151, 99, 47));
+        loadButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         loadButton.setText("Load");
+        loadButton.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
+        loadButton.setMaximumSize(new java.awt.Dimension(87, 23));
+        loadButton.setMinimumSize(new java.awt.Dimension(87, 23));
+        loadButton.setPreferredSize(new java.awt.Dimension(87, 23));
 
+        continueAdventureButton.setBackground(new java.awt.Color(151, 99, 47));
+        continueAdventureButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         continueAdventureButton.setText("Continue Adventure");
+        continueAdventureButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
 
+        backButton.setBackground(new java.awt.Color(151, 99, 47));
+        backButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
+        backButton.setMaximumSize(new java.awt.Dimension(87, 23));
+        backButton.setMinimumSize(new java.awt.Dimension(87, 23));
+        backButton.setPreferredSize(new java.awt.Dimension(87, 23));
 
+        saveButton.setBackground(new java.awt.Color(151, 99, 47));
+        saveButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         saveButton.setText("Save");
+        saveButton.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
+        saveButton.setMaximumSize(new java.awt.Dimension(87, 23));
+        saveButton.setMinimumSize(new java.awt.Dimension(87, 23));
+        saveButton.setPreferredSize(new java.awt.Dimension(87, 23));
         saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 saveButtonMouseClicked(evt);
@@ -242,26 +331,28 @@ public class LoadSavePopUpViewport extends ViewPort {
             loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loadSaveFunctionalitiesPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(continueAdventureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(continueAdventureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         loadSaveFunctionalitiesPanelLayout.setVerticalGroup(
             loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loadSaveFunctionalitiesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loadButton)
-                    .addComponent(continueAdventureButton)
-                    .addComponent(backButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveButton)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(continueAdventureButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                    .addGroup(loadSaveFunctionalitiesPanelLayout.createSequentialGroup()
+                        .addGroup(loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                            .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         columnNamesPanel.setBackground(new java.awt.Color(226, 177, 127));
@@ -297,10 +388,10 @@ public class LoadSavePopUpViewport extends ViewPort {
         savePanel.setMinimumSize(new java.awt.Dimension(572, 101));
         savePanel.setPreferredSize(new java.awt.Dimension(572, 101));
 
-        saveNameLabel.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        saveNameLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         saveNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         saveNameLabel.setText("Save Name:");
-        saveNameLabel.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 1, 1, new java.awt.Color(0, 0, 0)));
+        saveNameLabel.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
 
         saveNameTextField.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         saveNameTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -324,10 +415,12 @@ public class LoadSavePopUpViewport extends ViewPort {
                 .addGroup(savePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        playerRecordsTreePanel.setBackground(new java.awt.Color(116, 24, 24));
+        playerRecordsTreePanel.setBackground(new java.awt.Color(127, 75, 53));
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Avatar");
+        playerRecordsTreePanel.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane3.setViewportView(playerRecordsTreePanel);
 
         javax.swing.GroupLayout loadSavePanelLayout = new javax.swing.GroupLayout(loadSavePanel);
@@ -362,7 +455,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(layout.createSequentialGroup()
                 .addGap(407, 407, 407)
                 .addComponent(loadSavePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(491, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

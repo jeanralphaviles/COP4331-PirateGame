@@ -16,12 +16,11 @@ public abstract class Controller {
 
     /*Properties*/
     protected Model model;
-    Color SELECTED_COLOR;
+   
 
     /*Constructors*/
     public Controller(Model model) {
         this.model = model;
-        SELECTED_COLOR = Color.BLUE;
     }
 
     /*Methods*/

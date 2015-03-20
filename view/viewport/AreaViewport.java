@@ -153,7 +153,7 @@ public class AreaViewport extends ViewPort {
 
         /*Properties*/
         private ImageIcon imageIcon;// = new ImageIcon("images/grass_tile.jpg"); 
-        private Decal decal;
+        private Decal decal = new Decal( Decal.blank );
         private boolean tag;
         
         public Decal getDecal() {
@@ -167,6 +167,9 @@ public class AreaViewport extends ViewPort {
         /*Constructors*/
         public Tile(Maptile maptile) {
             decal = getLastDecal(maptile);
+            if (decal == null) {
+                decal = new Decal(Decal.blank);
+            }
             autoScale();
         }
 

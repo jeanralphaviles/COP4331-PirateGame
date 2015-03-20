@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import model.Model;
 import utility.IntentComponentMap;
 import utility.IntentComponentMap.Intent;
@@ -8,9 +9,15 @@ import model.entity.Avatar;
 import model.item.Item;
 
 public final class GameScreenController extends ScreenController {
-
+    
+     Color SELECTED_COLOR;
+     Color UNSELECTED_COLOR;
+     
     public GameScreenController(Model model, ArrayList<IntentComponentMap> icms) {
         super(model, icms);
+        // This color is equivalent to the InventoryPanel Background Color
+        SELECTED_COLOR = new Color(101,79,57);
+        UNSELECTED_COLOR = new Color(186,163,132);
     }
     
     @Override
@@ -42,12 +49,12 @@ public final class GameScreenController extends ScreenController {
     
     private void toggleEquip(){
         
-        System.out.println("Attemp to equip");
-         Item item;
+       
+        Item item;
         for ( IntentComponentMap i : this.icms ){
             
             // When the item is selected and belongs only to the inventory
-            if ( i.getComponent().getBackground() == SELECTED_COLOR && i.getIntent() == Intent.INVENTORY_ITEM ){
+            if ( i.getComponent().getBackground().equals( SELECTED_COLOR ) && i.getIntent().equals(Intent.INVENTORY_ITEM) ){
                  
                 
                  item = (Item)i.getObject();
@@ -55,26 +62,11 @@ public final class GameScreenController extends ScreenController {
                  
                  if ( avatar.getEquippedInventory().storeItem(item)){
                      
-                     System.out.println("Category: " + item.getCategory());
                      avatar.getInventory().removeItem(item);
+                    i.getComponent().setBackground( UNSELECTED_COLOR );
                  }
              
             }
-        }
-       
-        System.out.println("Avatar's Iventory: ");
-        
-        for (Item i : model.getGameObject().getAvatar().getInventory().getItems()){
-            
-             System.out.println( i.getName() );
-        }
-        
-        
-        System.out.println("Avatar's  Equipped Iventory: ");
-        
-        for (Item i : model.getGameObject().getAvatar().getEquippedInventory().getItems()){
-            
-             System.out.println( i.getName() );
         }
     }
     
@@ -85,7 +77,7 @@ public final class GameScreenController extends ScreenController {
         for ( IntentComponentMap i : this.icms ){
             
             // When the item is selected and belongs only to the inventory
-            if ( i.getComponent().getBackground() == SELECTED_COLOR && i.getIntent() == Intent.TOGGLE_EQUIPPED ){
+            if ( i.getComponent().getBackground().equals( SELECTED_COLOR) && i.getIntent().equals(Intent.TOGGLE_EQUIPPED) ){
                  
                 
                  item = (Item)i.getObject();
@@ -97,52 +89,30 @@ public final class GameScreenController extends ScreenController {
                        System.out.println("Here");
                        if ( avatar.getInventory().storeItem(item) ){
                            
-                           System.out.println("Removing from equip inventory: " + item.getName());
+                           i.getComponent().setBackground( UNSELECTED_COLOR );
                            avatar.getEquippedInventory().removeItem(item);
                        }
                        
                  }
             }
         }
-       
-        System.out.println("Avatar's  Iventory: ");
-        
-        for (Item i : model.getGameObject().getAvatar().getInventory().getItems()){
-            
-             System.out.println( i.getName() );
-        }
-        
-        System.out.println("Avatar's  Equipped Iventory: ");
-        
-        for (Item i : model.getGameObject().getAvatar().getEquippedInventory().getItems()){
-            
-             System.out.println( i.getName() );
-        }
         
     }
     
     private void toggleDrop(){
         
-        System.out.println("Attemp to drop");
         Item item;
         for ( IntentComponentMap i : this.icms ){
             
             // When the item is selected and belongs only to the inventory
-            if ( i.getComponent().getBackground() == SELECTED_COLOR && i.getIntent() == Intent.INVENTORY_ITEM ){
+            if ( i.getComponent().getBackground().equals( SELECTED_COLOR) && i.getIntent().equals( Intent.INVENTORY_ITEM ) ){
                  
                 
                  item = (Item)i.getObject();
-                 System.out.println("Droping Item: " + item.getName() );
                  Avatar avatar = model.getGameObject().getAvatar();
                  avatar.getInventory().removeItem(item);
+                 i.getComponent().setBackground( UNSELECTED_COLOR );
             }
-        }
-       
-        System.out.println("Avatar's Iventory: ");
-        
-        for (Item i : model.getGameObject().getAvatar().getInventory().getItems()){
-            
-             System.out.println( i.getName() );
         }
     }
 
