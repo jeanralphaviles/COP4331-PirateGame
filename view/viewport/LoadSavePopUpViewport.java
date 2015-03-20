@@ -24,7 +24,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.GameObject;
 import model.Model;
 import controller.controllerMap.IntentComponentMap;
-import controller.controllerMap.IntentComponentMap.Intent;
+import controller.Intent;
 import view.viewport.ViewPort;
 
 /**
@@ -261,7 +261,7 @@ public class LoadSavePopUpViewport extends ViewPort {
                     .addComponent(backButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(saveButton)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         columnNamesPanel.setBackground(new java.awt.Color(226, 177, 127));
@@ -324,7 +324,7 @@ public class LoadSavePopUpViewport extends ViewPort {
                 .addGroup(savePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         playerRecordsTreePanel.setBackground(new java.awt.Color(116, 24, 24));
@@ -334,7 +334,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         loadSavePanel.setLayout(loadSavePanelLayout);
         loadSavePanelLayout.setHorizontalGroup(
             loadSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loadSaveFunctionalitiesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(loadSaveFunctionalitiesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
             .addGroup(loadSavePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loadSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

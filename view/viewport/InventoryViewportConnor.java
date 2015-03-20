@@ -12,7 +12,7 @@ import model.GameObject;
 import model.entity.Avatar;
 import model.item.Item;
 import controller.controllerMap.IntentComponentMap;
-import controller.controllerMap.IntentComponentMap.Intent;
+import controller.Intent;
 
 /**
  *

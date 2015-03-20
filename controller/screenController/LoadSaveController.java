@@ -11,7 +11,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.Model;
 import controller.controllerMap.IntentComponentMap;
-import controller.controllerMap.IntentComponentMap.Intent;
+import controller.Intent;
 
 /**
  *

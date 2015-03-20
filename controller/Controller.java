@@ -3,7 +3,7 @@ package controller;
 import java.awt.Color;
 import model.Model;
 import controller.controllerMap.IntentComponentMap;
-import controller.controllerMap.IntentComponentMap.Intent;
+import controller.Intent;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;

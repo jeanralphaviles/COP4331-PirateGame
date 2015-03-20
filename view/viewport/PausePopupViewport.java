@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import controller.Intent;
 import java.util.ArrayList;
 import model.GameObject;
 import controller.controllerMap.IntentComponentMap;
@@ -29,8 +30,8 @@ public class PausePopupViewport extends ViewPort {
         //subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
         
-        icms.add(new IntentComponentMap(resumeButton, IntentComponentMap.Intent.GOTO_GAME));
-        icms.add(new IntentComponentMap(mainMenuButton, IntentComponentMap.Intent.GOTO_MAIN));
+        icms.add(new IntentComponentMap(resumeButton, Intent.GOTO_GAME));
+        icms.add(new IntentComponentMap(mainMenuButton, Intent.GOTO_MAIN));
         
         return icms;
     }

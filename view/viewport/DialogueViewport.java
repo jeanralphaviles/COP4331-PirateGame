@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import controller.Intent;
 import java.awt.Component;
 import java.util.ArrayList;
 import model.GameObject;
@@ -33,7 +34,7 @@ public class DialogueViewport extends ViewPort {
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         // subviewports have all the components...
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(continueButton, IntentComponentMap.Intent.SHOW_DIALOGUE));
+        icms.add(new IntentComponentMap(continueButton, Intent.SHOW_DIALOGUE));
         return icms;
     }
 

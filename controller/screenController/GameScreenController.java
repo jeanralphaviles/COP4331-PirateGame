@@ -2,7 +2,7 @@ package controller.screenController;
 
 import model.Model;
 import controller.controllerMap.IntentComponentMap;
-import controller.controllerMap.IntentComponentMap.Intent;
+import controller.Intent;
 import java.util.ArrayList;
 import model.entity.Avatar;
 import model.item.Item;

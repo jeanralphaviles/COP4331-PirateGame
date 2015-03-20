@@ -3,7 +3,7 @@ package controller.screenController;
 import model.Model;
 import model.entity.occupation.Occupation;
 import controller.controllerMap.IntentComponentMap;
-import controller.controllerMap.IntentComponentMap.Intent;
+import controller.Intent;
 import javax.swing.*;
 import java.util.ArrayList;
 import view.screen.DialogueScreen;
