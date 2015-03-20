@@ -209,20 +209,27 @@ public class InventoryViewPort extends ViewPort {
         // Reset Equipped Inventory
         for (Component i : EquippedInventoryPanel.getComponents() ){
             
-            JButton tempButton = (JButton)i;
-            if ( tempButton.getIcon() != null ){
+            if ( i instanceof JButton ){
                 
-                tempButton.setIcon(null);
+                JButton tempButton = (JButton)i;
+                if (tempButton.getIcon() != null ){
+                
+                    tempButton.setIcon(null);
+                }
             }
         }
         
         // Reset Inventory
         for (Component i : InventoryPanel.getComponents() ){
             
-            JButton tempButton = (JButton)i;
-            if ( tempButton.getIcon() != null ){
+            
+            if ( i instanceof JButton ){
                 
-                tempButton.setIcon(null);
+                JButton tempButton = (JButton)i;
+                if (tempButton.getIcon() != null ){
+                
+                    tempButton.setIcon(null);
+                }
             }
         }
     }
