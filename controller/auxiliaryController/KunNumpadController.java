@@ -1,4 +1,4 @@
-package controller;
+package controller.auxiliaryController;
 
 import java.awt.*;
 import javax.swing.*;

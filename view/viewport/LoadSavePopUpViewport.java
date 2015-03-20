@@ -23,8 +23,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.GameObject;
 import model.Model;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap.Intent;
 import view.viewport.ViewPort;
 
 /**

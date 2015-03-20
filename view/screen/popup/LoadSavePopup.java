@@ -1,11 +1,11 @@
 package view.screen.popup;
 
-import controller.LoadSaveController;
-import controller.NewGamePopupController;
-import controller.ScreenController;
+import controller.screenController.LoadSaveController;
+import controller.screenController.NewGamePopupController;
+import controller.screenController.ScreenController;
 import java.util.ArrayList;
 import model.Model;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import view.viewport.LoadSavePopUpViewport;
 
 public class LoadSavePopup extends Popup {

@@ -1,9 +1,9 @@
 package view.screen;
 
-import controller.ScreenController;
+import controller.screenController.ScreenController;
 import java.util.ArrayList;
 import model.Model;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import view.viewport.DialogueScreenViewport;
 
 public class DialogueScreen extends Screen {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import model.GameObject;
 import model.entity.Statistics;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 
 /**
  *

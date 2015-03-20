@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import model.GameObject;
 import model.entity.Avatar;
 import model.item.Item;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import view.viewport.ViewPort;
 
 /**

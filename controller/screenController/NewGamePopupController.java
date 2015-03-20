@@ -1,9 +1,9 @@
-package controller;
+package controller.screenController;
 
 import model.Model;
 import model.entity.occupation.Occupation;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap.Intent;
 import javax.swing.*;
 import java.util.ArrayList;
 import view.screen.DialogueScreen;

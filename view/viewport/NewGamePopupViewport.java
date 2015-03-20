@@ -5,7 +5,7 @@ import model.GameObject;
 import model.entity.occupation.Smasher;
 import model.entity.occupation.Sneak;
 import model.entity.occupation.Summoner;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 
 public class NewGamePopupViewport extends ViewPort {
 

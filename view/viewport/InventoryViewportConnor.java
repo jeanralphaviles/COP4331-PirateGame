@@ -11,8 +11,8 @@ import javax.swing.JButton;
 import model.GameObject;
 import model.entity.Avatar;
 import model.item.Item;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap.Intent;
 
 /**
  *

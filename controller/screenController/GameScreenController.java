@@ -1,8 +1,8 @@
-package controller;
+package controller.screenController;
 
 import model.Model;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap.Intent;
 import java.util.ArrayList;
 import model.entity.Avatar;
 import model.item.Item;

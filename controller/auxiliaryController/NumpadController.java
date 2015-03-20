@@ -1,5 +1,6 @@
-package controller;
+package controller.auxiliaryController;
 
+import controller.Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
