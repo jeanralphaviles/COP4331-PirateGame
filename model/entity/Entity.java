@@ -24,6 +24,7 @@ public class Entity {
 	protected EquippedInventory equippedInventory;
 	protected Decal decal;
 	protected Course directionFacing;
+	protected static String[] dialog = {"Arrrg! Friend or foe?", "Arrg, pleasure to speak to ya", "ARRRRGGG!!!1"};
 	protected boolean friendly = true;
 	
 	public Entity() {
@@ -103,6 +104,18 @@ public class Entity {
 	
 	public ArrayList<Ability> getAbilities() {
 		return this.occupation.getAbilities();
+	}
+	
+	public String getGreeting() {
+		return dialog[0];
+	}
+	
+	public String getAffirmative() {
+		return dialog[1];
+	}
+	
+	public String getNegative() {
+		return dialog[2];
 	}
 	
 	@Override
