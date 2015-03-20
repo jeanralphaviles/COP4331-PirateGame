@@ -45,7 +45,7 @@ public class Model extends Thread {
     private static final int sleepTime = 10; //ms, polling time of thread
     private static final int second = 1000; //ms
     private static final int environmentsStepUpdatesPerSecond = 3; //stuff like projectiles
-    private static final int gameStepUpdatesPerSecond = 1; //stuff like npc AI
+    private static final int gameStepUpdatesPerSecond = 3; //stuff like npc AI
 
     public Model() {
         Avatar avatar = new Avatar();
@@ -136,9 +136,7 @@ public class Model extends Thread {
     }
 
     public void load(String fileName) {
-
         try {
-
             System.out.println("Loading... From Model");
             Avatar avatar = this.getGameObject().getAvatar();
 
@@ -278,11 +276,11 @@ public class Model extends Thread {
                 }
                 
                 if (environmentRemainder > 0 && environmentRemainder < tolerance) {
-                    //do stuff
+                	this.gameObject.environmentGameStep();
                 }
                 
                 if (gameStepRemainder > 0 && gameStepRemainder < tolerance) {
-                    gameObject.gameStep();
+                    this.gameObject.gameStep();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

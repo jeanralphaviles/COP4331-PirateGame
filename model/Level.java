@@ -55,21 +55,24 @@ public class Level {
     }
     
     public void gameStep() {
-    	ArrayList<Entity> entities = getEntities();
-    	ArrayList<Projectile> projectiles = getProjectiles();
     	Avatar avatar = getAvatar();
+    	ArrayList<Entity> entities = getEntities();
     	for (Entity entity : entities) {
     		if (entity != avatar) {
     			advanceEntity(entity);
     		}
     		entity.gameStep(this);
     	}
+    }
+    
+    public void environmentGameStep() {
+    	ArrayList<Projectile> projectiles = getProjectiles();
     	for (Projectile projectile : projectiles) {
     		advanceProjectile(projectile);
     	}
-    }
-    
-    public boolean isValidGridLocation(GridLocation gridLocation) {
+	}
+
+	public boolean isValidGridLocation(GridLocation gridLocation) {
     	return map.isValidGridLocation(gridLocation);
     }
     
