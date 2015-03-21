@@ -6,11 +6,25 @@ package utility;
 public class Course {
 	private int xDisplacement;
 	private int yDisplacement;
+        //
+        public static int[] right = { 1, 0 };
+        public static int[] left = { -1, 0 };
+        public static int[] up = { 0, -1 };
+        public static int[] down = { 0, 1 };
+        public static int[] right_up = { 1, 1 };
+        public static int[] right_down = { 1,-1 };
+        public static int[] left_up = { -1,1 };
+        public static int[] left_down = { -1, -1};
 	
 	public Course(int xDisplacement, int yDisplacement) {
 		setXDisplacement(xDisplacement);
 		setYDisplacement(yDisplacement);
 	}
+        
+        public Course(int[] xy) {
+            setXDisplacement(xy[0]);
+            setYDisplacement(xy[1]);
+        }
 	
 	public Course getUnitCourse() {
 		int unitX = 0;

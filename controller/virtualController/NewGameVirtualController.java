@@ -1,22 +1,22 @@
-package controller.screenController;
+package controller.virtualController;
 
 import model.Model;
 import model.entity.occupation.Occupation;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import controller.Intent;
 import javax.swing.*;
 import java.util.ArrayList;
 import view.screen.DialogueScreen;
 import view.screen.Screen;
 
-public final class NewGamePopupController extends ScreenController {
+public final class NewGameVirtualController extends VirtualController {
 
-    public NewGamePopupController(Model model, ArrayList<IntentComponentMap> icms) {
-        super(model, icms);
+    public NewGameVirtualController(Model model, ArrayList<IntentMap> ims) {
+        super(model, ims);
     }
     
     @Override
-    protected void action(IntentComponentMap icm) {
+    protected void action(IntentMap icm) {
         Intent intent = icm.getIntent();
         switch(intent) {
             case SET_OCCUPATION:
@@ -37,7 +37,7 @@ public final class NewGamePopupController extends ScreenController {
         model.setAvatarOccupation(occupation);
     }
     
-    private void setNickname(IntentComponentMap icm) {
+    private void setNickname(IntentMap icm) {
         JTextField field = (JTextField)icm.getComponent();
         String nickname = field.getText();
         setNickname(nickname);
@@ -50,7 +50,7 @@ public final class NewGamePopupController extends ScreenController {
     
     private void begin() {
         
-        for (IntentComponentMap i : icms){
+        for (IntentMap i : ims){
             
            if ( i.getIntent() == Intent.SET_NICKNAME ){
                     

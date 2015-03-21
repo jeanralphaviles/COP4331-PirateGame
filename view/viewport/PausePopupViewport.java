@@ -8,7 +8,7 @@ package view.viewport;
 import controller.Intent;
 import java.util.ArrayList;
 import model.GameObject;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 /**
  *
@@ -26,14 +26,14 @@ public class PausePopupViewport extends ViewPort {
     }
 
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+    public ArrayList<IntentMap> generateIntentMapping() {
         //subviewports have all the components...
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
         
-        icms.add(new IntentComponentMap(resumeButton, Intent.GOTO_GAME));
-        icms.add(new IntentComponentMap(mainMenuButton, Intent.GOTO_MAIN));
+        ims.add(new IntentMap(resumeButton, Intent.GOTO_GAME));
+        ims.add(new IntentMap(mainMenuButton, Intent.GOTO_MAIN));
         
-        return icms;
+        return ims;
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -1,25 +1,22 @@
-package controller.auxiliaryController;
+package controller.physicalController;
 
 import controller.control.KeyboardControl;
-import controller.controllerMap.IntentControlMap;
+import controller.IntentMap.IntentMap;
+import controller.virtualController.VirtualController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Model;
-import utility.Course;
-import view.screen.Screen;
-import view.screen.popup.LoadSavePopup;
 
-public class KeyboardController extends AuxiliaryController {
+public class KeyboardController extends PhysicalController {
 
     /*Properties*/
     private KeyboardFocusManager keyboardManager;
 
     /*Constructors*/
-    public KeyboardController(Model model, ArrayList<IntentControlMap> icms) {
-        super(model, icms);
+    public KeyboardController(Model model) {
+        super(model);
 
         initKeyboardManager();
     }
@@ -31,10 +28,13 @@ public class KeyboardController extends AuxiliaryController {
     }
 
     /*Get-Sets*/
+    
+    
     /*Inner Classes*/
     class EnterKeyListener implements KeyEventPostProcessor {
 
         private Model model;
+        private boolean captureMode = false;
 
         public EnterKeyListener(Model model) {
             this.model = model;
@@ -44,21 +44,21 @@ public class KeyboardController extends AuxiliaryController {
         public boolean postProcessKeyEvent(KeyEvent e) {
             int keyCode = e.getKeyCode();
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                IntentControlMap icm = getICM(keyCode);
-                action(icm.getIntent());
+                IntentMap im = getIM(keyCode);
+                virtualController.executeAction(im);
             }
             return true;
         }
         
-        private IntentControlMap getICM(int keyCode) {
+        private IntentMap getIM(int keyCode) {
             KeyboardControl control;
             int currentKey;
-            IntentControlMap icm;
-            for (int i=0; i<icms.size(); i++) {
-                icm = icms.get(i);
-                control = (KeyboardControl)icm.getControl();
+            IntentMap im;
+            for (int i=0; i<intentMaps.size(); i++) {
+                im = intentMaps.get(i);
+                control = (KeyboardControl)im.getControl();
                 if (control.representsKey(keyCode)) {
-                    return icm;
+                    return im;
                 }
             }
             return null;
@@ -111,6 +111,6 @@ public class KeyboardController extends AuxiliaryController {
 //            }
 //            return true;
 //        }
-
+        
     }
 }

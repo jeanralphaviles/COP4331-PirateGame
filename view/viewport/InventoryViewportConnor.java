@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import model.GameObject;
 import model.entity.Avatar;
 import model.item.Item;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import controller.Intent;
 
 /**
@@ -23,7 +23,7 @@ public class InventoryViewportConnor extends ViewPort {
 
     // Attributes
     private ArrayList<JButton> buttons = new ArrayList<JButton>(1);
-    private ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
     private int totalEquippedItems;
     private int totalInventoryItems;
     
@@ -44,7 +44,7 @@ public class InventoryViewportConnor extends ViewPort {
         if (refreshNeeded(avatar)) {
             //Clear viewport
             removeAll(); //refresh screen
-            clearButtonsAndICMs(); //clear existing state
+            clearButtonsAndims(); //clear existing state
             
             //Display again the gameObject
             displayEquippedInventory(avatar);
@@ -113,11 +113,11 @@ public class InventoryViewportConnor extends ViewPort {
         
         if (equipped) {
             button.setBackground(Color.BLUE);
-            icms.add(new IntentComponentMap(button, item, Intent.TOGGLE_EQUIPPED));
+            ims.add(new IntentMap(button, item, Intent.TOGGLE_EQUIPPED));
             
         } else {
             button.setBackground(Color.GRAY);
-            icms.add(new IntentComponentMap(button, item, Intent.INVENTORY_ITEM));
+            ims.add(new IntentMap(button, item, Intent.INVENTORY_ITEM));
         }
         
         add(button);
@@ -127,33 +127,33 @@ public class InventoryViewportConnor extends ViewPort {
         
         equipButton = new JButton("Equip");
         equipButton.setBackground(Color.RED);
-        icms.add(new IntentComponentMap(equipButton, Intent.EQUIP_ITEM));
+        ims.add(new IntentMap(equipButton, Intent.EQUIP_ITEM));
         
         unequipButton = new JButton("Unequip");
         unequipButton.setBackground(Color.RED);
-        icms.add(new IntentComponentMap(unequipButton, Intent.UNEQUIP_ITEM));
+        ims.add(new IntentMap(unequipButton, Intent.UNEQUIP_ITEM));
     
         dropButton = new JButton("Drop");
         dropButton.setBackground(Color.RED);
-        icms.add(new IntentComponentMap(dropButton, Intent.DROP_ITEM));
+        ims.add(new IntentMap(dropButton, Intent.DROP_ITEM));
         
         this.add(equipButton);
         this.add(unequipButton);
         this.add(dropButton);
     }
     
-    private void clearButtonsAndICMs() {
+    private void clearButtonsAndims() {
         buttons = new ArrayList<JButton>(1);
-        icms = new ArrayList<IntentComponentMap>(1); 
+        ims = new ArrayList<IntentMap>(1); 
     }
 
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+    public ArrayList<IntentMap> generateIntentMapping() {
         /*  Because the only controls, buttons, directly represent items
-            it made sense in this case to assign icms as the buttons were
+            it made sense in this case to assign ims as the buttons were
             created. This method merely returns them.
         */
-        return icms;
+        return ims;
     }
 
     /**

@@ -8,7 +8,7 @@ package view.viewport;
 import controller.Intent;
 import java.util.ArrayList;
 import model.GameObject;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 /**
  *
@@ -29,11 +29,11 @@ public class UtilityViewport extends ViewPort {
     }
 
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+    public ArrayList<IntentMap> generateIntentMapping() {
         // subviewports have all the components...
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(pauseButton, Intent.GOTO_PAUSE));
-        return icms;
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        ims.add(new IntentMap(pauseButton, Intent.GOTO_PAUSE));
+        return ims;
     }
 
     /**

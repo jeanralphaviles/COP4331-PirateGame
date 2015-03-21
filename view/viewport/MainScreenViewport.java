@@ -7,7 +7,7 @@ package view.viewport;
 
 import java.util.ArrayList;
 import model.GameObject;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import controller.Intent;
 import java.io.IOException;
 import java.net.URL;
@@ -36,12 +36,12 @@ public class MainScreenViewport extends ViewPort {
    
     
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(newGameButton, Intent.NEW));
-        icms.add(new IntentComponentMap(loadButton, Intent.GOTO_LOADSAVE));
-        icms.add(new IntentComponentMap(exitButton, Intent.EXIT));
-        return icms;
+    public ArrayList<IntentMap> generateIntentMapping() {
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        ims.add(new IntentMap(newGameButton, Intent.NEW));
+        ims.add(new IntentMap(loadButton, Intent.GOTO_LOADSAVE));
+        ims.add(new IntentMap(exitButton, Intent.EXIT));
+        return ims;
     }
 
     @Override

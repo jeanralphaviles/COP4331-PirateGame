@@ -36,6 +36,7 @@ import view.screen.Screen;
  */
 public class Model extends Thread {
 
+
     private GameObject gameObject;
     private UtilityData utilityData;
     private Screen currentScreen;
@@ -273,6 +274,7 @@ public class Model extends Thread {
                 
                 if (viewRemainder > 0 && viewRemainder < tolerance) {
                     updateView();
+                    refreshController();
                 }
                 
                 if (environmentRemainder > 0 && environmentRemainder < tolerance) {

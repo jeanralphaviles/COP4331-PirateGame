@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.screenController;
+package controller.virtualController;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.Model;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import controller.Intent;
 
 /**
  *
  * @author darien
  */
-public class LoadSaveController extends ScreenController {
+public class LoadSaveVirtualController extends VirtualController {
     
-    public LoadSaveController(Model model, ArrayList<IntentComponentMap> icms) {
-        super(model, icms);
+    public LoadSaveVirtualController(Model model, ArrayList<IntentMap> ims) {
+        super(model, ims);
     }
     
     @Override
-    protected void action(IntentComponentMap icm) {
+    protected void action(IntentMap icm) {
         
         Intent intent = icm.getIntent();
         switch(intent) {
@@ -39,7 +39,7 @@ public class LoadSaveController extends ScreenController {
     private void load(){
         
         // Get label
-        for (IntentComponentMap i : icms){
+        for (IntentMap i : ims){
             
             // Change label text
             if ( i.getIntent() == Intent.TREE_PANEL ){

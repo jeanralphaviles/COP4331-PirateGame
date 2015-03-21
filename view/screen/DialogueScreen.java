@@ -1,9 +1,9 @@
 package view.screen;
 
-import controller.screenController.ScreenController;
+import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import view.viewport.DialogueScreenViewport;
 
 public class DialogueScreen extends Screen {
@@ -19,8 +19,8 @@ public class DialogueScreen extends Screen {
     
     @Override
     public void createController() {
-        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
-        controller = new ScreenController(model, icms);
+        ArrayList<IntentMap> ims = viewPort.generateIntentMapping();
+        virtualController = new VirtualController(model, ims);
     }
 
 }
