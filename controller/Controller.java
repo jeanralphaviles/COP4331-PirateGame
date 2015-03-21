@@ -89,6 +89,10 @@ public abstract class Controller {
         Screen screen = new DialogueScreen(model);
         model.launchScreen(screen);
     }
+    
+    private void resetControlsToDefault() {
+        //
+    }
 
     private void showNextDialogue() {
         String dialogue = model.getNextDialogue();
@@ -135,6 +139,8 @@ public abstract class Controller {
                 break;
             case GOTO_LOAD:
                 goToLoadScreen();
+            case RESET_DEFAULT_CONTROLS:
+                resetControlsToDefault();
                 break;
             case SAVE:
                 save();

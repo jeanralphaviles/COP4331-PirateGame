@@ -31,13 +31,21 @@ public class GameScreen extends Screen {
         virtualController = new GameVirtualController(model, virtualIMs);
         
         //Physical Controller
-        ArrayList<IntentMap> physicalIMs = this.generateIntentMapping();
+        physicalControlIMs = this.generateIntentMapping();
         physicalController = RunGame.getAuxController();
-        physicalController.adaptForScreen(physicalIMs, virtualController);
+        physicalController.adaptForScreen(physicalControlIMs, virtualController);
     }
     
     @Override
     protected ArrayList<IntentMap> generateIntentMapping() {
+        if (physicalControlIMs == null) {
+            return generateDefaultIntentMapping();
+        } else {
+            return physicalControlIMs;
+        }
+    }
+    
+    private ArrayList<IntentMap> generateDefaultIntentMapping() {
         ArrayList<IntentMap> physicalIMs = new ArrayList<IntentMap>(1);
         
         //Move
@@ -59,7 +67,9 @@ public class GameScreen extends Screen {
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_L), null, null, Intent.GOTO_LOADSAVE, ""));
         
         //Pause
-        
+
+        //Options
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_O), null, null, Intent.GOTO_OPTIONS, ""));
         
         return physicalIMs;
     }

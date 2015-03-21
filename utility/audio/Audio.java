@@ -83,5 +83,10 @@ public class Audio {
      public void stopMusic(){
         clip.stop();
      }
+     
+     public static void main(String[] args) {
+         Audio a = new Audio();
+         a.playMusic();
+     }
    
 }

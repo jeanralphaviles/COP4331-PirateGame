@@ -27,6 +27,4 @@ public class RebindInfo {
         this.object = object;
         this.component = component;
     }
-    
-    
 }

@@ -7,11 +7,14 @@ import controller.IntentMap.IntentMap;
 import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
+import view.screen.GameScreen;
+import view.screen.Screen;
 
 public class PhysicalController extends Controller {
 
     /*Properties*/
     protected VirtualController virtualController;
+    protected boolean enabled = true;
     
     /*Constructors*/
     
@@ -22,28 +25,36 @@ public class PhysicalController extends Controller {
     /*Methods*/
     
     public void adaptForScreen(ArrayList<IntentMap> ims, VirtualController screenController) {
-        this.intentMaps = ims;
+        if (ims == null) {
+            enabled = false; //Disable          
+        } else {
+            enabled = true;
+            this.intentMaps = ims;
+        }
         this.virtualController = screenController;
     }
     
     public void reassignControlWithIntent(Control control, Object object, Intent intent) {
+        //get screen of interest
+        ArrayList<IntentMap> ims = GameScreen.getPhysicalControlIMs();
+        
         //remove any old ims with that control
-        removeICMForControl(control);
+        removeICMForControl(ims, control);
         
         //add icm
         IntentMap im = new IntentMap(control, null, object, intent, "");
-        intentMaps.add(im);
+        ims.add(im);
     }
     
-    private void removeICMForControl(Control control) {
-        if (intentMaps == null) {
+    private void removeICMForControl(ArrayList<IntentMap> ims, Control control) {
+        if (ims == null) {
             return;
         }
         IntentMap im;
-        for (int i=0; i<intentMaps.size(); i++) {
-            im = intentMaps.get(i);
+        for (int i=0; i<ims.size(); i++) {
+            im = ims.get(i);
             if (im.hasControl(control)) {
-                intentMaps.remove(im);
+                ims.remove(im);
             }
         }
     }

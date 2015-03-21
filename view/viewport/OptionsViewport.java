@@ -28,7 +28,7 @@ public class OptionsViewport extends ViewPort {
         ArrayList<IntentMap> ims = new ArrayList<>(1);     
         
         //Back button
-        ims.add(new IntentMap(backButton, Intent.GOTO_PAUSE));
+        ims.add(new IntentMap(backButton, Intent.GOTO_GAME));
         ims.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
         
         //test reassign key

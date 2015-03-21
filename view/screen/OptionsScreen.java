@@ -36,7 +36,7 @@ public class OptionsScreen extends Screen {
         
         //Physical Controller
         physicalController = RunGame.getAuxController();
-        physicalController.adaptForScreen(new ArrayList<IntentMap>(1), virtualController);
+        physicalController.adaptForScreen(null, virtualController);
     }
     
 }

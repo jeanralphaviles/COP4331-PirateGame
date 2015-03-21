@@ -11,7 +11,7 @@ public class MainScreen extends Screen {
 
     public MainScreen(Model model) {
         super(model);
-        Audio a= new Audio();
+        Audio a = new Audio();
         a.playMusic();
     }
         

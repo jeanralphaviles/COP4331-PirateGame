@@ -6,6 +6,7 @@ import controller.virtualController.OptionsVirtualController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import model.Model;
 
@@ -14,8 +15,7 @@ public class KeyboardController extends PhysicalController {
     /*Properties*/
     private KeyboardFocusManager keyboardManager;
     //
-    private boolean rebindMode = false;    
-
+    private boolean rebindMode = false;  
 
     /*Constructors*/
     public KeyboardController(Model model) {
@@ -52,14 +52,18 @@ public class KeyboardController extends PhysicalController {
             int keyCode = e.getKeyCode();
             if (e.getID() == KeyEvent.KEY_PRESSED) {
                 if (rebindMode) { //if you want to handle listening for the rebinding key
-                    RebindInfo ri = ((OptionsVirtualController)virtualController).getRebindInfo();
+                    OptionsVirtualController ovc = ((OptionsVirtualController)virtualController);
+                    RebindInfo ri = ovc.getRebindInfo();
                     reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
                     //label key appropriately
                     JButton button = (JButton)ri.component;
                     button.setText(e.getKeyChar() + "");
+                    rebindMode = false; //remember to do this /*Derpy face*/
                 } else { //process key press as usual
-                    IntentMap im = getIM(keyCode);
-                    virtualController.executeAction(im);
+                    if (enabled) {
+                        IntentMap im = getIM(keyCode);
+                        virtualController.executeAction(im);
+                    }
                 }
             }
             return true;

@@ -47,7 +47,8 @@ public final class GameVirtualController extends VirtualController {
             case DROP_ITEM:
                 toggleDrop();
                 break;
-            
+            default:
+                break;
         }
         super.action(im);
     }

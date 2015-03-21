@@ -15,6 +15,8 @@ public abstract class Screen {
     //
     protected ViewPort viewPort;
     protected Model model;
+    //
+    protected static ArrayList<IntentMap> physicalControlIMs = null;
 
     public Screen(Model model) {
         this.model = model;
@@ -60,4 +62,8 @@ public abstract class Screen {
         this.viewPort = viewPort;
     }
 
+    public static ArrayList<IntentMap> getPhysicalControlIMs() {
+        return physicalControlIMs;
+    }
+    
 }
