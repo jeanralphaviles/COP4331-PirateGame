@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import model.GameObject;
 
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 
 public abstract class ViewPort extends JPanel {
     

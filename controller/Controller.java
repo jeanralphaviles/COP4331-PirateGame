@@ -2,8 +2,8 @@ package controller;
 
 import java.awt.Color;
 import model.Model;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.Intent;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
@@ -16,7 +16,6 @@ public abstract class Controller {
 
     /*Properties*/
     protected Model model;
-   
 
     /*Constructors*/
     public Controller(Model model) {
@@ -97,8 +96,7 @@ public abstract class Controller {
     }
 
     protected void action(Intent intent) {
-        //processUserInput(this.model);
-        System.out.println("Action is being called");
+        
         switch (intent) {
             case SHOW_DIALOGUE:
                 showNextDialogue();

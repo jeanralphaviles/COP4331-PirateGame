@@ -57,6 +57,10 @@ public class GameObject {
 		levels.get(currentLevel()).gameStep();
 	}
 	
+	public void environmentGameStep() {
+		levels.get(currentLevel()).environmentGameStep();
+	}
+
 	public GridLocation avatarStartLocation() {
 		// TODO(jraviles) Figure this out
 		int startX = levels.get(currentLevel()).getWidth() / 2;

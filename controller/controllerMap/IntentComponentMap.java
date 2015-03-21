@@ -1,5 +1,6 @@
-package utility;
+package controller.controllerMap;
 
+import controller.Intent;
 import java.awt.Component;
 
 /**
@@ -9,13 +10,14 @@ import java.awt.Component;
  *Allows view and controller to be decoupled
  */
 
-public class IntentComponentMap {
+public class IntentComponentMap extends ControllerMap {
 
+    /*Properties*/
+    
     private Component component;
-    private Object object;
-    private Intent intent;
-    private String details;
 
+    /*Constructors*/
+    
     public IntentComponentMap(Component component, Intent intent) {
         this.setComponent(component);
         this.setIntent(intent);
@@ -38,14 +40,11 @@ public class IntentComponentMap {
         this.object = object;
         this.intent = intent;
     }
-
-    public Intent getIntent() {
-        return intent;
-    }
-
-    public void setIntent(Intent intent) {
-        this.intent = intent;
-    }
+    
+    /*Methods*/
+    
+    
+    /*Get-Sets*/
 
     public Component getComponent() {
         return component;
@@ -55,43 +54,6 @@ public class IntentComponentMap {
         this.component = component;
     }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    public Object getObject() {
-        return object;
-    }
-
-    public void setObject(Object object) {
-        this.object = object;
-    }
-
     /*Inner classes*/
-    public enum Intent {
-        LOAD,
-        SAVE,
-        EXIT,
-        NEW,
-        USER_INPUT,
-        BEGIN,
-        GOTO_GAME,
-        GOTO_PAUSE,
-        GOTO_MAIN,
-        GOTO_LOADSAVE,
-        SHOW_DIALOGUE,
-        EQUIP_ITEM,
-        UNEQUIP_ITEM,
-        DROP_ITEM,
-        INVENTORY_ITEM,
-        SET_OCCUPATION,
-        SET_NICKNAME,
-        TOGGLE_EQUIPPED,
-        LABEL,
-        TREE_PANEL
-    }
+    
 }

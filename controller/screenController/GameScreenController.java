@@ -1,10 +1,11 @@
-package controller;
+package controller.screenController;
 
 import java.awt.Color;
 import model.Model;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.Intent;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import model.entity.Avatar;
 import model.item.Item;
 
@@ -63,7 +64,7 @@ public final class GameScreenController extends ScreenController {
                  if ( avatar.getEquippedInventory().storeItem(item)){
                      
                      avatar.getInventory().removeItem(item);
-                    i.getComponent().setBackground( UNSELECTED_COLOR );
+                     i.getComponent().setBackground( UNSELECTED_COLOR );
                  }
              
             }
@@ -71,8 +72,7 @@ public final class GameScreenController extends ScreenController {
     }
     
     private void toggleUnequip(){
-        
-        System.out.println("Attemp to unequip");
+         
         Item item;
         for ( IntentComponentMap i : this.icms ){
             
@@ -86,7 +86,7 @@ public final class GameScreenController extends ScreenController {
                  // Attemp to store item in inventory
                  if ( !avatar.getInventory().hasItem(item) ){
                        
-                       System.out.println("Here");
+                      
                        if ( avatar.getInventory().storeItem(item) ){
                            
                            i.getComponent().setBackground( UNSELECTED_COLOR );
@@ -104,6 +104,7 @@ public final class GameScreenController extends ScreenController {
         Item item;
         for ( IntentComponentMap i : this.icms ){
             
+            
             // When the item is selected and belongs only to the inventory
             if ( i.getComponent().getBackground().equals( SELECTED_COLOR) && i.getIntent().equals( Intent.INVENTORY_ITEM ) ){
                  
@@ -113,7 +114,10 @@ public final class GameScreenController extends ScreenController {
                  avatar.getInventory().removeItem(item);
                  i.getComponent().setBackground( UNSELECTED_COLOR );
             }
+            
+            
         }
+        
     }
 
 }

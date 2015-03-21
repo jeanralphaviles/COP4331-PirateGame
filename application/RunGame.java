@@ -26,7 +26,7 @@ public class RunGame {
     private static Model model;
     private static final String modelFilename = "MODEL_FILE.txt";
     private static KeyboardFocusManager auxController;
-    private static final int updatesPerSecond = 10;
+    private static final int viewUpdatesPerSecond = 10;
     public static MainWindow mainWindow;
 
     /*Constructors*/
@@ -37,7 +37,7 @@ public class RunGame {
         initAuxiliaryController();
         initMainWindow();
 
-        launchModel(updatesPerSecond); //execution goes to main game loop
+        launchModel(viewUpdatesPerSecond); //execution goes to main game loop
     }
 
     public static Model initModel(String modelFilename) {

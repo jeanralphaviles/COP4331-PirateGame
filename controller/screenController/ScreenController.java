@@ -1,8 +1,10 @@
-package controller;
+package controller.screenController;
 
+import controller.Controller;
+import java.awt.Color;
 import java.awt.Component;
 import model.Model;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,7 @@ public class ScreenController extends Controller {
 
     /*Properties*/
     protected ArrayList<IntentComponentMap> icms;
+    protected Color SELECTED_COLOR = Color.BLUE;    
 
     /*Constructors*/
     public ScreenController(Model model, ArrayList<IntentComponentMap> icms) {

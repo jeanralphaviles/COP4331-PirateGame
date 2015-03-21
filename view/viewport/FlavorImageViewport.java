@@ -7,7 +7,7 @@ package view.viewport;
 
 import java.util.ArrayList;
 import model.GameObject;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 
 /**
  *

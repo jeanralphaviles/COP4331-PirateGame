@@ -6,6 +6,7 @@
 package view.viewport;
 
 
+import controller.Intent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 import model.GameObject;
 import model.entity.Avatar;
 import model.item.Item;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import view.viewport.ViewPort;
 
 /**
@@ -64,8 +65,7 @@ public class InventoryViewPort extends ViewPort {
         Avatar avatar = gameObject.getAvatar();
          
         if (refreshNeeded(avatar)) {
-            //Clear viewport
-            System.out.println("Updating the view");
+            
             clearAllItems();
             clearButtonsAndICMs(); 
             
@@ -132,7 +132,7 @@ public class InventoryViewPort extends ViewPort {
                 if ( tempButton.getIcon() == null ){
 
                     tempButton.setIcon( new ImageIcon ( item.getDecal().getImage()) );
-                    icms.add(new IntentComponentMap(tempButton, item, IntentComponentMap.Intent.TOGGLE_EQUIPPED));
+                    icms.add(new IntentComponentMap(tempButton, item, Intent.TOGGLE_EQUIPPED));
                     buttons.add(tempButton);
                     return;
                 }
@@ -148,7 +148,7 @@ public class InventoryViewPort extends ViewPort {
                 if ( tempButton.getIcon() == null ){
 
                     tempButton.setIcon( new ImageIcon ( item.getDecal().getImage()) );
-                    icms.add(new IntentComponentMap(tempButton, item, IntentComponentMap.Intent.INVENTORY_ITEM));
+                    icms.add(new IntentComponentMap(tempButton, item, Intent.INVENTORY_ITEM));
                     buttons.add(tempButton);
                     return;
                 }
@@ -160,9 +160,9 @@ public class InventoryViewPort extends ViewPort {
     // -----------------------------------------------------
     private void addCommandButtonsToICMs(){
         
-        icms.add(new IntentComponentMap(equipButton, IntentComponentMap.Intent.EQUIP_ITEM));
-        icms.add(new IntentComponentMap(unequipButton, IntentComponentMap.Intent.UNEQUIP_ITEM));
-        icms.add(new IntentComponentMap(dropButton, IntentComponentMap.Intent.DROP_ITEM)); 
+        icms.add(new IntentComponentMap(equipButton, Intent.EQUIP_ITEM));
+        icms.add(new IntentComponentMap(unequipButton, Intent.UNEQUIP_ITEM));
+        icms.add(new IntentComponentMap(dropButton, Intent.DROP_ITEM)); 
     }
     // -----------------------------------------------------
     private void incrementButtonDimension(JButton button, boolean rightSideOfThePanel){
@@ -282,6 +282,7 @@ public class InventoryViewPort extends ViewPort {
             it made sense in this case to assign icms as the buttons were
             created. This method merely returns them.
         */
+        System.out.print("Intent componenets: " + icms.size() );
         return icms;
     }
     // -----------------------------------------------------

@@ -1,9 +1,9 @@
 package view.screen;
 
-import controller.GameScreenController;
+import controller.screenController.GameScreenController;
 import java.util.ArrayList;
 import model.Model;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import view.viewport.GameScreenViewport;
 
 public class GameScreen extends Screen {

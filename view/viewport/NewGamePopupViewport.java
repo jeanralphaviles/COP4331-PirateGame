@@ -1,11 +1,12 @@
 package view.viewport;
 
+import controller.Intent;
 import java.util.ArrayList;
 import model.GameObject;
 import model.entity.occupation.Smasher;
 import model.entity.occupation.Sneak;
 import model.entity.occupation.Summoner;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 
 public class NewGamePopupViewport extends ViewPort {
 
@@ -34,13 +35,13 @@ public class NewGamePopupViewport extends ViewPort {
     public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
         ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
         
-        icms.add(new IntentComponentMap(beginAdventureButton, IntentComponentMap.Intent.BEGIN));
+        icms.add(new IntentComponentMap(beginAdventureButton, Intent.BEGIN));
         //
-        icms.add(new IntentComponentMap(nicknameTextField, IntentComponentMap.Intent.SET_NICKNAME));
+        icms.add(new IntentComponentMap(nicknameTextField, Intent.SET_NICKNAME));
             //
-        icms.add(new IntentComponentMap(parrotmancerRadioButton, new Summoner(), IntentComponentMap.Intent.SET_OCCUPATION));
-        icms.add(new IntentComponentMap(gangplankerRadioButton, new Smasher(), IntentComponentMap.Intent.SET_OCCUPATION));
-        icms.add(new IntentComponentMap(turnhatRadioButton, new Sneak(), IntentComponentMap.Intent.SET_OCCUPATION));
+        icms.add(new IntentComponentMap(parrotmancerRadioButton, new Summoner(), Intent.SET_OCCUPATION));
+        icms.add(new IntentComponentMap(gangplankerRadioButton, new Smasher(), Intent.SET_OCCUPATION));
+        icms.add(new IntentComponentMap(turnhatRadioButton, new Sneak(), Intent.SET_OCCUPATION));
         
         return icms;
     }

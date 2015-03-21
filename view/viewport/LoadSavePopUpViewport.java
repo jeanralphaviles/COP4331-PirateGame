@@ -26,9 +26,11 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.GameObject;
 import model.Model;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
 import utility.decal.Decal;
+
+import controller.controllerMap.IntentComponentMap;
+import controller.Intent;
+
 import view.viewport.ViewPort;
 
 /**
@@ -427,7 +429,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         loadSavePanel.setLayout(loadSavePanelLayout);
         loadSavePanelLayout.setHorizontalGroup(
             loadSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loadSaveFunctionalitiesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(loadSaveFunctionalitiesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
             .addGroup(loadSavePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loadSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

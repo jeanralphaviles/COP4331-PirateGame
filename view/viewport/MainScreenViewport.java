@@ -7,8 +7,8 @@ package view.viewport;
 
 import java.util.ArrayList;
 import model.GameObject;
-import utility.IntentComponentMap;
-import utility.IntentComponentMap.Intent;
+import controller.controllerMap.IntentComponentMap;
+import controller.Intent;
 
 /**
  *

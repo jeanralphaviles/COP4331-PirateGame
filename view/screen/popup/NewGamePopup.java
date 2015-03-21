@@ -1,9 +1,9 @@
 package view.screen.popup;
 
-import controller.NewGamePopupController;
+import controller.screenController.NewGamePopupController;
 import java.util.ArrayList;
 import model.Model;
-import utility.IntentComponentMap;
+import controller.controllerMap.IntentComponentMap;
 import view.viewport.NewGamePopupViewport;
 
 public class NewGamePopup extends Popup {
