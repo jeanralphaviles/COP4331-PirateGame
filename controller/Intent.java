@@ -12,6 +12,7 @@ public enum Intent {
     GOTO_PAUSE,
     GOTO_MAIN,
     GOTO_LOADSAVE,
+    GOTO_OPTIONS,
     SHOW_DIALOGUE,
     EQUIP_ITEM,
     UNEQUIP_ITEM,
@@ -23,5 +24,5 @@ public enum Intent {
     LABEL,
     TREE_PANEL,
     LISTEN,
-    RESET_DEFAULT_CONTROLS
+    RESET_DEFAULT_CONTROLS,
 }

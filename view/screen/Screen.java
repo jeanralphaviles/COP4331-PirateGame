@@ -1,6 +1,5 @@
 package view.screen;
 
-import controller.Controller;
 import controller.IntentMap.IntentMap;
 import controller.physicalController.PhysicalController;
 import controller.virtualController.VirtualController;

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
+import view.screen.OptionsScreen;
 import view.screen.Screen;
 import view.screen.popup.LoadSavePopup;
 import view.screen.popup.NewGamePopup;
@@ -73,6 +74,11 @@ public abstract class Controller {
         Screen screen = new MainScreen(model);
         model.launchScreen(screen);
     }
+    
+    private void gotoOptionsScreen() {
+        Screen screen = new OptionsScreen(model);
+        model.launchScreen(screen);
+    }
 
     private void begin() {
         Screen screen = new DialogueScreen(model);
@@ -112,6 +118,9 @@ public abstract class Controller {
                 break;
             case GOTO_GAME:
                 gotoGameScreen();
+                break;
+            case GOTO_OPTIONS:
+                gotoOptionsScreen();
                 break;
             case NEW:
                 gotoNewGameMenu();

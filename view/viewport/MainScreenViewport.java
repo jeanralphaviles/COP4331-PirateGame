@@ -9,14 +9,6 @@ import java.util.ArrayList;
 import model.GameObject;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
-import java.io.IOException;
-import java.net.URL;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import utility.audio.audio;
 
 /**
  *
@@ -41,6 +33,7 @@ public class MainScreenViewport extends ViewPort {
         ims.add(new IntentMap(newGameButton, Intent.NEW));
         ims.add(new IntentMap(loadButton, Intent.GOTO_LOADSAVE));
         ims.add(new IntentMap(exitButton, Intent.EXIT));
+        ims.add(new IntentMap(optionsButton, Intent.GOTO_OPTIONS));
         return ims;
     }
 
@@ -66,6 +59,7 @@ public class MainScreenViewport extends ViewPort {
         exitButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
+        optionsButton = new javax.swing.JButton();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sprites/introAnimation/animated-pirate-image-0020.gif"))); // NOI18N
 
@@ -75,6 +69,8 @@ public class MainScreenViewport extends ViewPort {
 
         newGameButton.setText("New Game");
 
+        optionsButton.setText("Options");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,15 +78,18 @@ public class MainScreenViewport extends ViewPort {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(newGameButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(optionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(newGameButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,7 +102,9 @@ public class MainScreenViewport extends ViewPort {
                     .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(126, 126, 126))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,5 +114,6 @@ public class MainScreenViewport extends ViewPort {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton newGameButton;
+    private javax.swing.JButton optionsButton;
     // End of variables declaration//GEN-END:variables
 }
