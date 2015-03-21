@@ -41,9 +41,9 @@ public class StatusViewport extends ViewPort {
     }
     
     public void initPanels() {    
-        mainStatsPanel.setBackground(new Color(189, 183, 107));
-        otherStatsPanel.setBackground(new Color(189, 183, 107));
-        healthManaPanel.setBackground(new Color(189, 183, 107));
+        mainStatsPanel.setBackground(new Color(204, 204, 153));
+        otherStatsPanel.setBackground(new Color(204, 204, 153));
+        healthManaPanel.setBackground(new Color(204, 204, 153));
     }
     
     @Override
@@ -237,7 +237,7 @@ public class StatusViewport extends ViewPort {
 
         setSize(new Dimension(443, 375));
 
-        mainStatsPanel.setBorder(new MatteBorder(4, 4, 1, 1, (Color) new Color(220, 20, 60)));
+        mainStatsPanel.setBorder(new MatteBorder(4, 4, 1, 1, (Color) new Color(153, 51, 0)));
 
         strengthLabel.setFont(new java.awt.Font("Luminari", 1, 20)); // NOI18N
         strengthLabel.setText("Strength");
@@ -303,7 +303,7 @@ public class StatusViewport extends ViewPort {
                     .addComponent(hardinessLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        healthManaPanel.setBorder(new MatteBorder(1, 4, 4, 4, (Color) new Color(220, 20, 60)));
+        healthManaPanel.setBorder(new MatteBorder(1, 4, 4, 4, (Color) new Color(153, 51, 0)));
 
         healthLabel.setFont(new java.awt.Font("Luminari", 3, 22)); // NOI18N
         healthLabel.setText("Health : ");
@@ -415,7 +415,7 @@ public class StatusViewport extends ViewPort {
         );
         healthManaPanel.setLayout(healthManaPanelLayout);
 
-        otherStatsPanel.setBorder(new MatteBorder(4, 1, 1, 4, (Color) new Color(220, 20, 60)));
+        otherStatsPanel.setBorder(new MatteBorder(4, 1, 1, 4, (Color) new Color(153, 51, 0)));
 
         offensiveRatingLabel.setFont(new java.awt.Font("Luminari", 1, 18)); // NOI18N
         offensiveRatingLabel.setText("Offensive Rating");
