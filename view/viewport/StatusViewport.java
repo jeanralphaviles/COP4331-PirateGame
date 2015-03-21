@@ -15,6 +15,8 @@ import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.MatteBorder;
 
 /**
  *
@@ -26,6 +28,7 @@ public class StatusViewport extends ViewPort {
      * Creates new form StatusViewport
      */
     public StatusViewport() {
+    	setBackground(Color.BLACK);
         initComponents();
         initPanels();
         initProgressBars(10, 10);
@@ -38,9 +41,9 @@ public class StatusViewport extends ViewPort {
     }
     
     public void initPanels() {    
-        mainStatsPanel.setBackground(Color.LIGHT_GRAY);
-        otherStatsPanel.setBackground(Color.LIGHT_GRAY);
-        healthManaPanel.setBackground(Color.LIGHT_GRAY);
+        mainStatsPanel.setBackground(new Color(189, 183, 107));
+        otherStatsPanel.setBackground(new Color(189, 183, 107));
+        healthManaPanel.setBackground(new Color(189, 183, 107));
     }
     
     @Override
@@ -234,7 +237,7 @@ public class StatusViewport extends ViewPort {
 
         setSize(new Dimension(443, 375));
 
-        mainStatsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mainStatsPanel.setBorder(new MatteBorder(4, 4, 1, 1, (Color) new Color(220, 20, 60)));
 
         strengthLabel.setFont(new java.awt.Font("Luminari", 1, 20)); // NOI18N
         strengthLabel.setText("Strength");
@@ -300,7 +303,7 @@ public class StatusViewport extends ViewPort {
                     .addComponent(hardinessLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        healthManaPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        healthManaPanel.setBorder(new MatteBorder(1, 4, 4, 4, (Color) new Color(220, 20, 60)));
 
         healthLabel.setFont(new java.awt.Font("Luminari", 3, 22)); // NOI18N
         healthLabel.setText("Health : ");
@@ -412,7 +415,7 @@ public class StatusViewport extends ViewPort {
         );
         healthManaPanel.setLayout(healthManaPanelLayout);
 
-        otherStatsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        otherStatsPanel.setBorder(new MatteBorder(4, 1, 1, 4, (Color) new Color(220, 20, 60)));
 
         offensiveRatingLabel.setFont(new java.awt.Font("Luminari", 1, 18)); // NOI18N
         offensiveRatingLabel.setText("Offensive Rating");
@@ -486,7 +489,7 @@ public class StatusViewport extends ViewPort {
         					.addComponent(mainStatsPanel, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(otherStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        				.addComponent(healthManaPanel, GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+        				.addComponent(healthManaPanel, GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
         			.addGap(1))
         );
         groupLayout.setVerticalGroup(
@@ -494,8 +497,8 @@ public class StatusViewport extends ViewPort {
         		.addGroup(groupLayout.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(otherStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        				.addComponent(mainStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        				.addComponent(mainStatsPanel, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+        				.addComponent(otherStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(healthManaPanel, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         			.addGap(3))
