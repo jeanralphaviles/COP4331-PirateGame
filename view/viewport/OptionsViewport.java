@@ -3,7 +3,7 @@ package view.viewport;
 import java.util.ArrayList;
 import model.GameObject;
 import controller.Intent;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 /**
  *
@@ -23,15 +23,15 @@ public class OptionsViewport extends ViewPort {
     
     
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        ArrayList<IntentComponentMap> icms = new ArrayList<>(1);     
+    public ArrayList<IntentMap> generateIntentMapping() {
+        ArrayList<IntentMap> ims = new ArrayList<>(1);     
         
         //Back button
-        icms.add(new IntentComponentMap(backButton, Intent.GOTO_PAUSE));
-        icms.add(new IntentComponentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
-        //icms.add(new IntentComponentMap());
+        ims.add(new IntentMap(backButton, Intent.GOTO_PAUSE));
+        ims.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
+        //ims.add(new IntentMap());
         
-        return icms;
+        return ims;
     }
     
     //TO GO IN OPTIONS CONTROLLER for icm handles:

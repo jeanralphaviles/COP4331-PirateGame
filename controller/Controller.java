@@ -2,8 +2,9 @@ package controller;
 
 import java.awt.Color;
 import model.Model;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import controller.Intent;
+import java.util.ArrayList;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
@@ -16,6 +17,8 @@ public abstract class Controller {
 
     /*Properties*/
     protected Model model;
+    //
+    protected ArrayList<IntentMap> intentMaps = new ArrayList<IntentMap>(1);
 
     /*Constructors*/
     public Controller(Model model) {
@@ -90,7 +93,7 @@ public abstract class Controller {
         }
     }
     
-    protected void action(IntentComponentMap icm) {
+    protected void action(IntentMap icm) {
         Intent intent = icm.getIntent();
         action(intent);
     }

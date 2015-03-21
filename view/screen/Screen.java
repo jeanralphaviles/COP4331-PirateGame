@@ -1,6 +1,9 @@
 package view.screen;
 
 import controller.Controller;
+import controller.IntentMap.IntentMap;
+import controller.physicalController.PhysicalController;
+import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.GameObject;
 import model.Model;
@@ -8,7 +11,9 @@ import view.viewport.ViewPort;
 
 public abstract class Screen {
 
-    protected Controller controller;
+    protected VirtualController virtualController;
+    protected PhysicalController physicalController;
+    //
     protected ViewPort viewPort;
     protected Model model;
 
@@ -24,6 +29,10 @@ public abstract class Screen {
     
     protected abstract void createView();
     protected abstract void createController();
+    
+    protected ArrayList<IntentMap> generateIntentMapping() {
+        return null;
+    }
 
     public void updateView(GameObject gameObject) {
         viewPort.updateView(gameObject);

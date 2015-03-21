@@ -1,11 +1,11 @@
 package view.screen.popup;
 
-import controller.screenController.LoadSaveController;
-import controller.screenController.NewGamePopupController;
-import controller.screenController.ScreenController;
+import controller.virtualController.LoadSaveVirtualController;
+import controller.virtualController.NewGameVirtualController;
+import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import view.viewport.LoadSavePopUpViewport;
 
 public class LoadSavePopup extends Popup {
@@ -22,8 +22,8 @@ public class LoadSavePopup extends Popup {
 
     @Override
     protected void createController() {
-        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
-        controller = new LoadSaveController(model, icms);
+        ArrayList<IntentMap> ims = viewPort.generateIntentMapping();
+        virtualController = new LoadSaveVirtualController(model, ims);
     }
 }
 
@@ -42,8 +42,8 @@ public class NewGamePopup extends Popup {
     
     @Override
     public void createController() {
-        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
-        controller = new NewGamePopupController(model, icms);
+        ArrayList<IntentComponentMap> ims = viewPort.generateIntentMapping();
+        virtualController = new NewGameVirtualController(model, ims);
     }
 
 }

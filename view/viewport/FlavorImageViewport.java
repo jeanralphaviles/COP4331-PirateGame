@@ -7,7 +7,7 @@ package view.viewport;
 
 import java.util.ArrayList;
 import model.GameObject;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 /**
  *
@@ -28,8 +28,8 @@ public class FlavorImageViewport extends ViewPort {
     }
 
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        return new ArrayList<IntentComponentMap>(1);
+    public ArrayList<IntentMap> generateIntentMapping() {
+        return new ArrayList<IntentMap>(1);
     }
     /**
      * This method is called from within the constructor to initialize the form.

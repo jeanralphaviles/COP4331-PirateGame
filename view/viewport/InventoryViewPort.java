@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import model.GameObject;
 import model.entity.Avatar;
 import model.item.Item;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import view.viewport.ViewPort;
 
 /**
@@ -31,7 +31,7 @@ public class InventoryViewPort extends ViewPort {
     // Attributes
      // Attributes
     private ArrayList<JButton> buttons = new ArrayList<JButton>(1);
-    private ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
     private int totalEquippedItems;
     private int totalInventoryItems;
     Color SELECTED_BUTTON_COLOR;
@@ -67,12 +67,12 @@ public class InventoryViewPort extends ViewPort {
         if (refreshNeeded(avatar)) {
             
             clearAllItems();
-            clearButtonsAndICMs(); 
+            clearButtonsAndims(); 
             
             //Display again the gameObject
             displayEquippedInventory(avatar);
             displayInventory(avatar);
-            addCommandButtonsToICMs();
+            addCommandButtonsToims();
         }
     }
    
@@ -132,7 +132,7 @@ public class InventoryViewPort extends ViewPort {
                 if ( tempButton.getIcon() == null ){
 
                     tempButton.setIcon( new ImageIcon ( item.getDecal().getImage()) );
-                    icms.add(new IntentComponentMap(tempButton, item, Intent.TOGGLE_EQUIPPED));
+                    ims.add(new IntentMap(tempButton, item, Intent.TOGGLE_EQUIPPED));
                     buttons.add(tempButton);
                     return;
                 }
@@ -148,7 +148,7 @@ public class InventoryViewPort extends ViewPort {
                 if ( tempButton.getIcon() == null ){
 
                     tempButton.setIcon( new ImageIcon ( item.getDecal().getImage()) );
-                    icms.add(new IntentComponentMap(tempButton, item, Intent.INVENTORY_ITEM));
+                    ims.add(new IntentMap(tempButton, item, Intent.INVENTORY_ITEM));
                     buttons.add(tempButton);
                     return;
                 }
@@ -158,11 +158,11 @@ public class InventoryViewPort extends ViewPort {
         
     }
     // -----------------------------------------------------
-    private void addCommandButtonsToICMs(){
+    private void addCommandButtonsToims(){
         
-        icms.add(new IntentComponentMap(equipButton, Intent.EQUIP_ITEM));
-        icms.add(new IntentComponentMap(unequipButton, Intent.UNEQUIP_ITEM));
-        icms.add(new IntentComponentMap(dropButton, Intent.DROP_ITEM)); 
+        ims.add(new IntentMap(equipButton, Intent.EQUIP_ITEM));
+        ims.add(new IntentMap(unequipButton, Intent.UNEQUIP_ITEM));
+        ims.add(new IntentMap(dropButton, Intent.DROP_ITEM)); 
     }
     // -----------------------------------------------------
     private void incrementButtonDimension(JButton button, boolean rightSideOfThePanel){
@@ -234,9 +234,9 @@ public class InventoryViewPort extends ViewPort {
         }
     }
     // -----------------------------------------------------
-    private void clearButtonsAndICMs() {
+    private void clearButtonsAndims() {
         buttons = new ArrayList<JButton>(1);
-        icms = new ArrayList<IntentComponentMap>(1); 
+        ims = new ArrayList<IntentMap>(1); 
     }
     // -----------------------------------------------------
     /*
@@ -277,13 +277,13 @@ public class InventoryViewPort extends ViewPort {
         this.repaint();
     }
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+    public ArrayList<IntentMap> generateIntentMapping() {
         /*  Because the only controls, buttons, directly represent items
-            it made sense in this case to assign icms as the buttons were
+            it made sense in this case to assign ims as the buttons were
             created. This method merely returns them.
         */
-        System.out.print("Intent componenets: " + icms.size() );
-        return icms;
+        System.out.print("Intent componenets: " + ims.size() );
+        return ims;
     }
     // -----------------------------------------------------
     public void performActionOnButton( JButton button ){

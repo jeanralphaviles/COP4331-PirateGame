@@ -1,9 +1,9 @@
 package view.screen.popup;
 
-import controller.screenController.ScreenController;
+import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import view.viewport.PausePopupViewport;
 
 public class PausePopup extends Popup {
@@ -19,8 +19,8 @@ public class PausePopup extends Popup {
     
     @Override
     public void createController() {
-        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
-        controller = new ScreenController(model, icms);
+        ArrayList<IntentMap> ims = viewPort.generateIntentMapping();
+        virtualController = new VirtualController(model, ims);
     }
 
 }

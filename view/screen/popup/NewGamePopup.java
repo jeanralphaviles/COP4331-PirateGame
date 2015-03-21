@@ -1,9 +1,9 @@
 package view.screen.popup;
 
-import controller.screenController.NewGamePopupController;
+import controller.virtualController.NewGameVirtualController;
 import java.util.ArrayList;
 import model.Model;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import view.viewport.NewGamePopupViewport;
 
 public class NewGamePopup extends Popup {
@@ -20,8 +20,8 @@ public class NewGamePopup extends Popup {
     
     @Override
     public void createController() {
-        ArrayList<IntentComponentMap> icms = viewPort.generateIntentComponentMapping();
-        controller = new NewGamePopupController(model, icms);
+        ArrayList<IntentMap> ims = viewPort.generateIntentMapping();
+        virtualController = new NewGameVirtualController(model, ims);
     }
 
 }

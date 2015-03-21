@@ -1,7 +1,7 @@
 package application;
 
-import controller.auxiliaryController.AuxiliaryController;
-import controller.auxiliaryController.KeyboardController;
+import controller.physicalController.PhysicalController;
+import controller.physicalController.KeyboardController;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +28,7 @@ public class RunGame {
     
     private static Model model;
     private static final String modelFilename = "MODEL_FILE.txt";
-    private static AuxiliaryController auxController;
+    private static PhysicalController auxController;
     private static final int viewUpdatesPerSecond = 10;
     public static MainWindow mainWindow;
 
@@ -84,7 +84,7 @@ public class RunGame {
     
     /*Get-Sets*/
 
-    public static AuxiliaryController getAuxController() {
+    public static PhysicalController getAuxController() {
         return auxController;
     }
     

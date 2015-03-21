@@ -9,7 +9,7 @@ import controller.Intent;
 import java.awt.Component;
 import java.util.ArrayList;
 import model.GameObject;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 /**
  *
@@ -31,11 +31,11 @@ public class DialogueViewport extends ViewPort {
     }
 
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+    public ArrayList<IntentMap> generateIntentMapping() {
         // subviewports have all the components...
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        icms.add(new IntentComponentMap(continueButton, Intent.SHOW_DIALOGUE));
-        return icms;
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        ims.add(new IntentMap(continueButton, Intent.SHOW_DIALOGUE));
+        return ims;
     }
 
     /**

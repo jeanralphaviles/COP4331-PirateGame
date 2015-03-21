@@ -28,7 +28,7 @@ import model.GameObject;
 import model.Model;
 import utility.decal.Decal;
 
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 import controller.Intent;
 
 import view.viewport.ViewPort;
@@ -43,7 +43,7 @@ public class LoadSavePopUpViewport extends ViewPort {
      * Creates new form LoadSavePopUpViewport
      */
     Model model;
-    private ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
+    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
     boolean savePanelActivated;
     LoadSaveCategory category;
     
@@ -123,16 +123,16 @@ public class LoadSavePopUpViewport extends ViewPort {
     }
     
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
+    public ArrayList<IntentMap> generateIntentMapping() {
         
         System.out.println("Intent Componenet is being called");
-        icms.add ( new IntentComponentMap(loadButton, Intent.LOAD) );
-        icms.add ( new IntentComponentMap(userInstructionLabel, Intent.LABEL));
-        icms.add ( new IntentComponentMap(playerRecordsTreePanel, Intent.TREE_PANEL));
-        icms.add ( new IntentComponentMap(continueAdventureButton, Intent.GOTO_GAME));
-        icms.add ( new IntentComponentMap(backButton, Intent.GOTO_MAIN));
+        ims.add (new IntentMap(loadButton, Intent.LOAD) );
+        ims.add (new IntentMap(userInstructionLabel, Intent.LABEL));
+        ims.add (new IntentMap(playerRecordsTreePanel, Intent.TREE_PANEL));
+        ims.add (new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
+        ims.add (new IntentMap(backButton, Intent.GOTO_MAIN));
        
-        return icms;
+        return ims;
     }
 
     private void createTreePanelGUI(){

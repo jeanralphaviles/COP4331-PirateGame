@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import model.GameObject;
 
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 public abstract class ViewPort extends JPanel {
     
@@ -36,23 +36,23 @@ public abstract class ViewPort extends JPanel {
         add(viewport);
     }
     
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        ArrayList<IntentComponentMap> temp_icms = new ArrayList<IntentComponentMap>(1);
+    public ArrayList<IntentMap> generateIntentMapping() {
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        ArrayList<IntentMap> temp_ims = new ArrayList<IntentMap>(1);
         int numInteriorViewports = interiorViewports.size();
         ViewPort viewport;
         for (int i=0; i<numInteriorViewports; i++) {
             viewport = interiorViewports.get(i);
-            temp_icms = viewport.generateIntentComponentMapping();
-            aggregateICMs(icms, temp_icms);
+            temp_ims = viewport.generateIntentMapping();
+            aggregateims(ims, temp_ims);
         }
-        return icms;
+        return ims;
     }
     
-    private void aggregateICMs(ArrayList<IntentComponentMap> icms1, ArrayList<IntentComponentMap> icms2) {
-        int numICMs2 = icms2.size();
-        for (int i=0; i<numICMs2; i++) {
-            icms1.add(icms2.get(i));
+    private void aggregateims(ArrayList<IntentMap> ims1, ArrayList<IntentMap> ims2) {
+        int numims2 = ims2.size();
+        for (int i=0; i<numims2; i++) {
+            ims1.add(ims2.get(i));
         }
     }
     

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import model.GameObject;
 import model.entity.Statistics;
-import controller.controllerMap.IntentComponentMap;
+import controller.IntentMap.IntentMap;
 
 /**
  *
@@ -81,9 +81,9 @@ public class StatusViewport extends ViewPort {
     }
 
     @Override
-    public ArrayList<IntentComponentMap> generateIntentComponentMapping() {
-        ArrayList<IntentComponentMap> icms = new ArrayList<IntentComponentMap>(1);
-        return icms;
+    public ArrayList<IntentMap> generateIntentMapping() {
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        return ims;
     }
     
     public void initProgressBars(int maxHealth, int maxMana) {
