@@ -16,6 +16,7 @@ import java.util.Scanner;
 import model.entity.Avatar;
 import model.entity.Entity;
 import model.entity.occupation.Occupation;
+import model.entity.occupation.ability.Ability;
 import model.inventory.Slot;
 import model.map.GridLocation;
 import model.map.Map;
@@ -248,6 +249,14 @@ public class Model extends Thread {
         GridLocation avatarLocation = new GridLocation(levels.get(0).getWidth() / 2, levels.get(0).getHeight() / 2);
         levels.get(0).addEntity(avatar, avatarLocation);
         setGameObject(new GameObject(levels));
+    }
+    
+    public void activateAbility(Ability ability) {
+    	this.gameObject.activateAvatarAbility(ability);
+    }
+    
+    public ArrayList<Ability> getAvatarAbilities() {
+    	return this.gameObject.getAvatar().getAbilities();
     }
 
     @Override
