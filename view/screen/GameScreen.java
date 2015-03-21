@@ -49,6 +49,10 @@ public class GameScreen extends Screen {
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_NUMPAD7), null, new Course(Course.left_up), Intent.MOVE, ""));
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_NUMPAD8), null, new Course(Course.up), Intent.MOVE, ""));
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_NUMPAD9), null, new Course(Course.right_up), Intent.MOVE, ""));
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_UP), null, new Course(Course.up), Intent.MOVE, ""));
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_DOWN), null, new Course(Course.down), Intent.MOVE, ""));
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_LEFT), null, new Course(Course.left), Intent.MOVE, ""));
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_RIGHT), null, new Course(Course.right), Intent.MOVE, ""));
         
         //Load and Save
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_BACK_SLASH), null, null, Intent.SAVE, ""));
