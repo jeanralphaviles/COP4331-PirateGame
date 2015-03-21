@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import model.GameObject;
 import controller.Intent;
 import controller.IntentMap.IntentMap;
+import controller.control.KeyboardControl;
+import controller.physicalController.RebindInfo;
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import utility.Course;
 
 /**
  *
@@ -21,7 +26,6 @@ public class OptionsViewport extends ViewPort {
         
     }
     
-    
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
         ArrayList<IntentMap> ims = new ArrayList<>(1);     
@@ -29,13 +33,13 @@ public class OptionsViewport extends ViewPort {
         //Back button
         ims.add(new IntentMap(backButton, Intent.GOTO_PAUSE));
         ims.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
-        //ims.add(new IntentMap());
+        
+        //test reassign key
+        RebindInfo ri = new RebindInfo(Intent.MOVE, new Course(Course.up), upButton);
+        ims.add(new IntentMap(new KeyboardControl(KeyEvent.VK_NUMPAD8), null, ri , Intent.MOVE, ""));
         
         return ims;
     }
-    
-    //TO GO IN OPTIONS CONTROLLER for icm handles:
-    //RunGame.getAuxillaryController().activateListenMode();
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,9 +51,9 @@ public class OptionsViewport extends ViewPort {
 
         jButton1 = new javax.swing.JButton();
         upLabel = new javax.swing.JLabel();
-        downLabel = new javax.swing.JLabel();
+        upLeftLabel = new javax.swing.JLabel();
         leftLabel = new javax.swing.JLabel();
-        rightLabel = new javax.swing.JLabel();
+        leftDownLabel = new javax.swing.JLabel();
         talkLabel = new javax.swing.JLabel();
         meleeLabel = new javax.swing.JLabel();
         macro1Label = new javax.swing.JLabel();
@@ -61,9 +65,23 @@ public class OptionsViewport extends ViewPort {
         backButton = new javax.swing.JButton();
         resetDefaultsButton = new javax.swing.JButton();
         upButton = new javax.swing.JButton();
-        downButton = new javax.swing.JButton();
-        rightButton = new javax.swing.JButton();
+        upLeftButton = new javax.swing.JButton();
+        leftDownButton = new javax.swing.JButton();
         leftButton = new javax.swing.JButton();
+        downLabel = new javax.swing.JLabel();
+        downRightLabel = new javax.swing.JLabel();
+        rightLabel = new javax.swing.JLabel();
+        rightUpLabel = new javax.swing.JLabel();
+        downButton = new javax.swing.JButton();
+        downRightButton = new javax.swing.JButton();
+        rightUpButton = new javax.swing.JButton();
+        rightButton = new javax.swing.JButton();
+        meleeButton = new javax.swing.JButton();
+        talkButton = new javax.swing.JButton();
+        macro1Button = new javax.swing.JButton();
+        macro2Button = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        macro3Button = new javax.swing.JButton();
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Up Arrow");
@@ -79,13 +97,13 @@ public class OptionsViewport extends ViewPort {
         upLabel.setOpaque(true);
         upLabel.setPreferredSize(new java.awt.Dimension(150, 35));
 
-        downLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        downLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        downLabel.setText("Down");
-        downLabel.setBorder(new javax.swing.border.MatteBorder(null));
-        downLabel.setName("downLabel"); // NOI18N
-        downLabel.setOpaque(true);
-        downLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+        upLeftLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        upLeftLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        upLeftLabel.setText("Up-Left");
+        upLeftLabel.setBorder(new javax.swing.border.MatteBorder(null));
+        upLeftLabel.setName("upLeftLabel"); // NOI18N
+        upLeftLabel.setOpaque(true);
+        upLeftLabel.setPreferredSize(new java.awt.Dimension(150, 35));
 
         leftLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         leftLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -95,13 +113,13 @@ public class OptionsViewport extends ViewPort {
         leftLabel.setOpaque(true);
         leftLabel.setPreferredSize(new java.awt.Dimension(150, 35));
 
-        rightLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        rightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rightLabel.setText("Right");
-        rightLabel.setBorder(new javax.swing.border.MatteBorder(null));
-        rightLabel.setName("rightLabel"); // NOI18N
-        rightLabel.setOpaque(true);
-        rightLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+        leftDownLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        leftDownLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        leftDownLabel.setText("Left-Down");
+        leftDownLabel.setBorder(new javax.swing.border.MatteBorder(null));
+        leftDownLabel.setName("leftDownLabel"); // NOI18N
+        leftDownLabel.setOpaque(true);
+        leftDownLabel.setPreferredSize(new java.awt.Dimension(150, 35));
 
         talkLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         talkLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -186,7 +204,7 @@ public class OptionsViewport extends ViewPort {
         });
 
         upButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        upButton.setText("Up Arrow");
+        upButton.setText("Num-Pad 8");
         upButton.setPreferredSize(new java.awt.Dimension(150, 35));
         upButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,26 +212,26 @@ public class OptionsViewport extends ViewPort {
             }
         });
 
-        downButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        downButton.setText("Down Arrow");
-        downButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        downButton.addActionListener(new java.awt.event.ActionListener() {
+        upLeftButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        upLeftButton.setText("Num-Pad 7");
+        upLeftButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        upLeftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                downButtonActionPerformed(evt);
+                upLeftButtonActionPerformed(evt);
             }
         });
 
-        rightButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        rightButton.setText("Right Arrow");
-        rightButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        rightButton.addActionListener(new java.awt.event.ActionListener() {
+        leftDownButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        leftDownButton.setText("Num-Pad 1");
+        leftDownButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        leftDownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rightButtonActionPerformed(evt);
+                leftDownButtonActionPerformed(evt);
             }
         });
 
         leftButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        leftButton.setText("Left Arrow");
+        leftButton.setText("Num-Pad 4");
         leftButton.setPreferredSize(new java.awt.Dimension(150, 35));
         leftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,85 +239,255 @@ public class OptionsViewport extends ViewPort {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+        downLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        downLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        downLabel.setText("Down");
+        downLabel.setBorder(new javax.swing.border.MatteBorder(null));
+        downLabel.setName("downLabel"); // NOI18N
+        downLabel.setOpaque(true);
+        downLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        downRightLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        downRightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        downRightLabel.setText("Down-Right");
+        downRightLabel.setBorder(new javax.swing.border.MatteBorder(null));
+        downRightLabel.setName("downRightLabel"); // NOI18N
+        downRightLabel.setOpaque(true);
+        downRightLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        rightLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rightLabel.setText("Right");
+        rightLabel.setBorder(new javax.swing.border.MatteBorder(null));
+        rightLabel.setName("rightLabel"); // NOI18N
+        rightLabel.setOpaque(true);
+        rightLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        rightUpLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rightUpLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rightUpLabel.setText("Right-Up");
+        rightUpLabel.setToolTipText("");
+        rightUpLabel.setBorder(new javax.swing.border.MatteBorder(null));
+        rightUpLabel.setName("rightUpLabel"); // NOI18N
+        rightUpLabel.setOpaque(true);
+        rightUpLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        downButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        downButton.setText("Num-Pad 2");
+        downButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        downButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downButtonActionPerformed(evt);
+            }
+        });
+
+        downRightButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        downRightButton.setText("Num-Pad 3");
+        downRightButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        downRightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downRightButtonActionPerformed(evt);
+            }
+        });
+
+        rightUpButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rightUpButton.setText("Num-Pad 9");
+        rightUpButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        rightUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rightUpButtonActionPerformed(evt);
+            }
+        });
+
+        rightButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rightButton.setText("Num-Pad 6");
+        rightButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        rightButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rightButtonActionPerformed(evt);
+            }
+        });
+
+        meleeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        meleeButton.setText("Q");
+        meleeButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        meleeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meleeButtonActionPerformed(evt);
+            }
+        });
+
+        talkButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        talkButton.setText("Space");
+        talkButton.setPreferredSize(new java.awt.Dimension(150, 35));
+        talkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                talkButtonActionPerformed(evt);
+            }
+        });
+
+        macro1Button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        macro1Button.setText("1");
+        macro1Button.setPreferredSize(new java.awt.Dimension(150, 35));
+        macro1Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                macro1ButtonActionPerformed(evt);
+            }
+        });
+
+        macro2Button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        macro2Button.setText("2");
+        macro2Button.setPreferredSize(new java.awt.Dimension(150, 35));
+        macro2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                macro2ButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        saveButton.setText("\\");
+            saveButton.setPreferredSize(new java.awt.Dimension(150, 35));
+            saveButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    saveButtonActionPerformed(evt);
+                }
+            });
+
+            macro3Button.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+            macro3Button.setText("3");
+            macro3Button.setPreferredSize(new java.awt.Dimension(150, 35));
+            macro3Button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    macro3ButtonActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+            this.setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(downLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rightUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(downRightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(leftDownLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(upLeftLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(leftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(saveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(macro3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(macro2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(macro1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(meleeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(talkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(downLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(leftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(upLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(upButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(saveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(macro3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(macro2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(macro1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(meleeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(talkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(100, 100, 100)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(upButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(upLeftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(leftDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(leftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(downButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(downRightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rightUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(meleeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(talkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(macro1Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(macro2Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(macro3Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(63, Short.MAX_VALUE)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(75, 75, 75)
+                    .addComponent(resetDefaultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(62, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(8, 8, 8)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(upLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(upButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(43, 43, 43)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(upLeftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(leftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(leftDownLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(downLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(downRightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(rightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(rightUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(talkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(meleeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(macro1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(macro2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(macro3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(saveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(upLeftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(leftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(leftDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(downButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(downRightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(rightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(leftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(resetDefaultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(upLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(upButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(downLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(downButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(leftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(leftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(talkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(meleeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(macro1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(macro2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(macro3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resetDefaultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(rightUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(talkButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(meleeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(macro1Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(macro2Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(macro3Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(resetDefaultsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+        }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         
@@ -309,42 +497,95 @@ public class OptionsViewport extends ViewPort {
         // TODO add your handling code here:
     }//GEN-LAST:event_upButtonActionPerformed
 
-    private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
+    private void upLeftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upLeftButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_downButtonActionPerformed
+    }//GEN-LAST:event_upLeftButtonActionPerformed
 
     private void resetDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDefaultsButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_resetDefaultsButtonActionPerformed
 
-    private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
+    private void leftDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDownButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rightButtonActionPerformed
+    }//GEN-LAST:event_leftDownButtonActionPerformed
 
     private void leftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_leftButtonActionPerformed
 
+    private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_downButtonActionPerformed
+
+    private void downRightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downRightButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_downRightButtonActionPerformed
+
+    private void rightUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightUpButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rightUpButtonActionPerformed
+
+    private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rightButtonActionPerformed
+
+    private void meleeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meleeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_meleeButtonActionPerformed
+
+    private void talkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_talkButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_talkButtonActionPerformed
+
+    private void macro1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro1ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_macro1ButtonActionPerformed
+
+    private void macro2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro2ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_macro2ButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void macro3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro3ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_macro3ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton downButton;
     private javax.swing.JLabel downLabel;
+    private javax.swing.JButton downRightButton;
+    private javax.swing.JLabel downRightLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JButton leftButton;
+    private javax.swing.JButton leftDownButton;
+    private javax.swing.JLabel leftDownLabel;
     private javax.swing.JLabel leftLabel;
+    private javax.swing.JButton macro1Button;
     private javax.swing.JLabel macro1Label;
+    private javax.swing.JButton macro2Button;
     private javax.swing.JLabel macro2Label;
+    private javax.swing.JButton macro3Button;
     private javax.swing.JLabel macro3Label;
+    private javax.swing.JButton meleeButton;
     private javax.swing.JLabel meleeLabel;
     private javax.swing.JButton resetDefaultsButton;
     private javax.swing.JButton rightButton;
     private javax.swing.JLabel rightLabel;
+    private javax.swing.JButton rightUpButton;
+    private javax.swing.JLabel rightUpLabel;
+    private javax.swing.JButton saveButton;
     private javax.swing.JLabel saveLabel;
+    private javax.swing.JButton talkButton;
     private javax.swing.JLabel talkLabel;
     private javax.swing.JButton upButton;
     private javax.swing.JLabel upLabel;
+    private javax.swing.JButton upLeftButton;
+    private javax.swing.JLabel upLeftLabel;
     // End of variables declaration//GEN-END:variables
 }

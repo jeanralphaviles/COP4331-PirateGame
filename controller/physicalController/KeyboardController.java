@@ -2,11 +2,9 @@ package controller.physicalController;
 
 import controller.control.KeyboardControl;
 import controller.IntentMap.IntentMap;
-import controller.virtualController.VirtualController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import model.Model;
 
 public class KeyboardController extends PhysicalController {

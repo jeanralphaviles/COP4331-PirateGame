@@ -6,11 +6,8 @@ import controller.virtualController.GameVirtualController;
 import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
-import controller.control.Control;
 import controller.control.KeyboardControl;
-import java.awt.Component;
 import java.awt.event.KeyEvent;
-import javafx.application.Application;
 import utility.Course;
 import view.viewport.GameScreenViewport;
 
