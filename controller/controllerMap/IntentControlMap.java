@@ -28,6 +28,9 @@ public class IntentControlMap extends ControllerMap {
     
     /*Methods*/
     
+    public boolean hasControl(Control control) {
+        return this.control.equals(control);
+    }
     
     /*Get-Sets*/
 
