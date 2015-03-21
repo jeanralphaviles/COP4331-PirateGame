@@ -7,7 +7,6 @@ package view.screen;
 
 import application.RunGame;
 import controller.IntentMap.IntentMap;
-import controller.virtualController.GameVirtualController;
 import controller.virtualController.OptionsVirtualController;
 import java.util.ArrayList;
 import model.Model;

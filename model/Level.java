@@ -394,6 +394,10 @@ public class Level {
     	return null;
     }
     
+    public void activateAvatarAbility(Ability ability) {
+    	this.getAvatar().activateAbility(ability, this);
+	}
+
     public ArrayList<Decal> getDecals(GridLocation gridLocation) {
     	ArrayList<Decal> decals = new ArrayList<Decal>();
     	if (!isValidGridLocation(gridLocation)) {

@@ -4,22 +4,12 @@ import controller.physicalController.PhysicalController;
 import controller.physicalController.KeyboardController;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Scanner;
-import java.awt.KeyEventPostProcessor;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JOptionPane;
-
 import model.Model;
 import model.entity.Avatar;
-import utility.Course;
-import view.screen.Screen;
-import view.screen.popup.LoadSavePopup;
 import view.viewport.MainWindow;
 
 public class RunGame {

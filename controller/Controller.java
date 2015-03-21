@@ -92,14 +92,14 @@ public abstract class Controller {
 
     private void showNextDialogue() {
         String dialogue = model.getNextDialogue();
-        if (dialogue != null) {
+        if (dialogue != null) { //there is more dialogue to display
             model.setDialogue(dialogue);
-        } else {
+        } else { //no more dialogue to display
             Screen screen = model.getCurrentScreen();
-            if (screen instanceof DialogueScreen) {
+            if (screen instanceof DialogueScreen) { //done with intro
                 gotoGameScreen();
-            } else if (screen instanceof GameScreen) {
-                gotoMainScreen();
+            } else { //clear dialogue field
+                model.setDialogue("");
             }
         }
     }

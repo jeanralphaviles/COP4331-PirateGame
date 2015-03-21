@@ -1,6 +1,5 @@
 package controller.physicalController;
 
-import controller.Intent;
 import controller.control.KeyboardControl;
 import controller.IntentMap.IntentMap;
 import controller.virtualController.OptionsVirtualController;
@@ -54,9 +53,9 @@ public class KeyboardController extends PhysicalController {
             if (e.getID() == KeyEvent.KEY_PRESSED) {
                 if (rebindMode) { //if you want to handle listening for the rebinding key
                     RebindInfo ri = ((OptionsVirtualController)virtualController).getRebindInfo();
-                    reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
+                    reassignControlWithIntent(new KeyboardControl(keyCode), RebindInfo.object, RebindInfo.intent);
                     //label key appropriately
-                    JButton button = (JButton)ri.component;
+                    JButton button = (JButton)RebindInfo.component;
                     button.setText(e.getKeyChar() + "");
                 } else { //process key press as usual
                     IntentMap im = getIM(keyCode);

@@ -23,9 +23,9 @@ public class RebindInfo {
     /*Constructor*/
 
     public RebindInfo(Intent intent, Object object, Component component) {
-        this.intent = intent;
-        this.object = object;
-        this.component = component;
+        RebindInfo.intent = intent;
+        RebindInfo.object = object;
+        RebindInfo.component = component;
     }
     
     

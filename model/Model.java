@@ -16,6 +16,7 @@ import java.util.Scanner;
 import model.entity.Avatar;
 import model.entity.Entity;
 import model.entity.occupation.Occupation;
+import model.entity.occupation.ability.Ability;
 import model.inventory.Slot;
 import model.map.GridLocation;
 import model.map.Map;
@@ -36,7 +37,8 @@ import view.screen.Screen;
  */
 public class Model extends Thread {
 
-
+    /*Properties*/
+    
     private GameObject gameObject;
     private UtilityData utilityData;
     private Screen currentScreen;
@@ -48,6 +50,8 @@ public class Model extends Thread {
     private static final int environmentsStepUpdatesPerSecond = 3; //stuff like projectiles
     private static final int gameStepUpdatesPerSecond = 3; //stuff like npc AI
 
+    /*Constructors*/
+    
     public Model() {
         Avatar avatar = new Avatar();
         this.gameObject = new GameObject(avatar);
@@ -55,6 +59,160 @@ public class Model extends Thread {
         loadLevels(1, avatar);
     }
 
+    /*Methods*/
+    
+    public void launch(int updatesPerSecond, String saveName) {
+        this.viewUpdatesPerSecond = updatesPerSecond;
+        launchFirstScreen();
+        this.start();
+    }
+
+    public void launchFirstScreen() {
+        launchScreen(new MainScreen(this));
+    }
+
+    public void launchScreen(Screen screen) {
+        RunGame.mainWindow.displayScreen(screen);
+        this.currentScreen = screen;
+    }
+
+    public void updateView() {
+        currentScreen.updateView(this.gameObject);
+    }
+
+    public void refreshController() {
+        currentScreen.refreshController();
+    }
+
+    public boolean moveAvatar(Course course) {
+        return this.gameObject.moveAvatar(course);
+    }
+    
+    // TODO(jraviles) figure out what to do with these legacy functions
+    public String getNextDialogue() {
+        return gameObject.getLevel().getNextDialogue();
+    }
+
+    public void setDialogue(String dialogue) {
+        gameObject.getLevel().setCurrentDialogue(dialogue);
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Model Started");
+        int tolerance = 20;
+        int ms = 0; //between 0-1000, 
+        while (true) {
+            //mainGameLoop(ms);
+            try {
+                Thread.sleep(sleepTime);
+                
+                //adjust ms accordingly
+                if (ms < 1000) {
+                    ms += sleepTime; //increment
+                } else {
+                    ms = 0; //reset
+                }
+                
+                //Perform in main game loop on different timings
+                int viewRemainder = ms%(second/viewUpdatesPerSecond);
+                int environmentRemainder = ms%(second/environmentsStepUpdatesPerSecond);
+                int gameStepRemainder = ms%(second/gameStepUpdatesPerSecond);
+                
+                if (viewRemainder > 0 && viewRemainder < tolerance) {
+                    updateView();
+                    refreshController();
+                }
+                
+                if (environmentRemainder > 0 && environmentRemainder < tolerance) {
+                	this.gameObject.environmentGameStep();
+                }
+                
+                if (gameStepRemainder > 0 && gameStepRemainder < tolerance) {
+                    this.gameObject.gameStep();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void activateAvatarAbility(Ability ability) {
+    	this.gameObject.activateAvatarAbility(ability);
+    }
+    
+    public ArrayList<Ability> getAvatarAbilities() {
+    	return this.gameObject.getAvatar().getAbilities();
+    }
+
+    //***********************************LOAD AND SAVE STUFF*********************************************//
+    
+    public void loadLevels(int numLevels, Avatar avatar) {
+        if (numLevels < 1) {
+            return;
+        }
+        ArrayList<Level> levels = new ArrayList<Level>(numLevels);
+        Map map;
+        Level level;
+        for (int i = 1; i <= numLevels; ++i) {
+            map = MapGenerator.generateMap(new File("Levels/Map" + i + ".csv"));
+            map.getMaptile(new GridLocation(10, 5)).setAreaEffect(new TeleportAreaEffect(new GridLocation(25, 5)));
+            map.getMaptile(new GridLocation(27, 5)).setAreaEffect(new TeleportAreaEffect(new GridLocation(17, 8)));
+            map.getMaptile(new GridLocation(14, 5)).setAreaEffect(new InstantDeathAreaEffect());
+            map.getMaptile(new GridLocation(10, 12)).setAreaEffect(new LevelUpAreaEffect());
+            map.getMaptile(new GridLocation(11, 13)).setAreaEffect(new HealDamageAreaEffect());
+            map.getMaptile(new GridLocation(14, 6)).setAreaEffect(new TakeDamageAreaEffect());
+            Slot[][] slots = ItemGenerator.generateItems(new File("Levels/Items" + i + ".csv"), map);
+            level = new Level(map, slots);
+            Entity newEntity = new Entity();
+            newEntity.setFriendly(false);
+            level.addEntity(newEntity, new GridLocation(28, 5));
+            levels.add(level);
+        }
+        GridLocation avatarLocation = new GridLocation(levels.get(0).getWidth() / 2, levels.get(0).getHeight() / 2);
+        levels.get(0).addEntity(avatar, avatarLocation);
+        setGameObject(new GameObject(levels));
+    }
+    
+    @Override
+    public String toString() {
+        return "[" + gameObject.toString() + "," + utilityData.toString() + "," + viewUpdatesPerSecond + "]";
+    }
+
+    public static Model fromString(String string) {
+        Model model = new Model();
+        if (string.isEmpty()) {
+            return model;
+        }
+        string = string.trim();
+        String stripped = string.substring(1, string.length() - 1);
+        int bracketCount = 0;
+        int start = 0;
+        int itemCount = 0;
+        for (int i = 0; i < stripped.length(); ++i) {
+            if (bracketCount == 0 && stripped.charAt(i) == ',') {
+                if (itemCount == 0) {
+                    GameObject gameObject = GameObject.fromString(stripped.substring(start, i));
+                    model.gameObject = gameObject;
+                } else if (itemCount == 1) {
+                    UtilityData utilityData = UtilityData.fromString(stripped.substring(start, i));
+                    model.utilityData = utilityData;
+                    start = i + 1;
+                    break;
+                }
+                start = i + 1;
+                ++itemCount;
+            } else if (stripped.charAt(i) == '[') {
+                ++bracketCount;
+            } else if (stripped.charAt(i) == ']') {
+                --bracketCount;
+            }
+        }
+        model.viewUpdatesPerSecond = Integer.parseInt(stripped.substring(start));
+        return model;
+    }
+    
+    
     public void save() {
 
         try {
@@ -174,162 +332,10 @@ public class Model extends Thread {
         
         return false;
     }
-
-    public void launch(int updatesPerSecond, String saveName) {
-        this.viewUpdatesPerSecond = updatesPerSecond;
-        launchFirstScreen();
-        this.start();
-    }
-
-    public void launchFirstScreen() {
-        launchScreen(new MainScreen(this));
-    }
-
-    public void launchScreen(Screen screen) {
-        RunGame.mainWindow.displayScreen(screen);
-        this.currentScreen = screen;
-    }
-
-//    public void mainGameLoop(int ms) {
-//        int viewRemainder = ms%(1000/viewUpdatesPerSecond);
-//        int enviornmentRemainder = ms%(1000/environmentsStepUpdatesPerSecond);
-//        int gameStepRemainder = ms%(1000/gameStepUpdatesPerSecond);
-//        
-//        //updateView time elapsed
-//        if (viewRemainder <= sleepTime) { 
-//            updateView();
-//            refreshController();
-//        }
-//        
-//        //updateEnviornment time elapsed
-//        if (enviornmentRemainder <= sleepTime) {
-//            
-//        }
-//        
-//        //updateGameStep time elapsed
-//        if (gameStepRemainder <= sleepTime) {
-//            
-//        }
-//        
-//        gameObject.gameStep(); //refactor this into two methods
-//    }
-
-    public void updateView() {
-        currentScreen.updateView(this.gameObject);
-    }
-
-    public void refreshController() {
-        currentScreen.refreshController();
-    }
-
-    public boolean moveAvatar(Course course) {
-        return this.gameObject.moveAvatar(course);
-    }
-
-    public void loadLevels(int numLevels, Avatar avatar) {
-        if (numLevels < 1) {
-            return;
-        }
-        ArrayList<Level> levels = new ArrayList<Level>(numLevels);
-        Map map;
-        Level level;
-        for (int i = 1; i <= numLevels; ++i) {
-            map = MapGenerator.generateMap(new File("Levels/Map" + i + ".csv"));
-            map.getMaptile(new GridLocation(10, 5)).setAreaEffect(new TeleportAreaEffect(new GridLocation(25, 5)));
-            map.getMaptile(new GridLocation(27, 5)).setAreaEffect(new TeleportAreaEffect(new GridLocation(17, 8)));
-            map.getMaptile(new GridLocation(14, 5)).setAreaEffect(new InstantDeathAreaEffect());
-            map.getMaptile(new GridLocation(10, 12)).setAreaEffect(new LevelUpAreaEffect());
-            map.getMaptile(new GridLocation(11, 13)).setAreaEffect(new HealDamageAreaEffect());
-            map.getMaptile(new GridLocation(14, 6)).setAreaEffect(new TakeDamageAreaEffect());
-            Slot[][] slots = ItemGenerator.generateItems(new File("Levels/Items" + i + ".csv"), map);
-            level = new Level(map, slots);
-            Entity newEntity = new Entity();
-            newEntity.setFriendly(false);
-            level.addEntity(newEntity, new GridLocation(28, 5));
-            levels.add(level);
-        }
-        GridLocation avatarLocation = new GridLocation(levels.get(0).getWidth() / 2, levels.get(0).getHeight() / 2);
-        levels.get(0).addEntity(avatar, avatarLocation);
-        setGameObject(new GameObject(levels));
-    }
-
-    @Override
-    public void run() {
-        System.out.println("Model Started");
-        int tolerance = 20;
-        int ms = 0; //between 0-1000, 
-        while (true) {
-            //mainGameLoop(ms);
-            try {
-                Thread.sleep(sleepTime);
-                
-                //adjust ms accordingly
-                if (ms < 1000) {
-                    ms += sleepTime; //increment
-                } else {
-                    ms = 0; //reset
-                }
-                
-                //Perform in main game loop on different timings
-                int viewRemainder = ms%(second/viewUpdatesPerSecond);
-                int environmentRemainder = ms%(second/environmentsStepUpdatesPerSecond);
-                int gameStepRemainder = ms%(second/gameStepUpdatesPerSecond);
-                
-                if (viewRemainder > 0 && viewRemainder < tolerance) {
-                    updateView();
-                    refreshController();
-                }
-                
-                if (environmentRemainder > 0 && environmentRemainder < tolerance) {
-                	this.gameObject.environmentGameStep();
-                }
-                
-                if (gameStepRemainder > 0 && gameStepRemainder < tolerance) {
-                    this.gameObject.gameStep();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "[" + gameObject.toString() + "," + utilityData.toString() + "," + viewUpdatesPerSecond + "]";
-    }
-
-    public static Model fromString(String string) {
-        Model model = new Model();
-        if (string.isEmpty()) {
-            return model;
-        }
-        string = string.trim();
-        String stripped = string.substring(1, string.length() - 1);
-        int bracketCount = 0;
-        int start = 0;
-        int itemCount = 0;
-        for (int i = 0; i < stripped.length(); ++i) {
-            if (bracketCount == 0 && stripped.charAt(i) == ',') {
-                if (itemCount == 0) {
-                    GameObject gameObject = GameObject.fromString(stripped.substring(start, i));
-                    model.gameObject = gameObject;
-                } else if (itemCount == 1) {
-                    UtilityData utilityData = UtilityData.fromString(stripped.substring(start, i));
-                    model.utilityData = utilityData;
-                    start = i + 1;
-                    break;
-                }
-                start = i + 1;
-                ++itemCount;
-            } else if (stripped.charAt(i) == '[') {
-                ++bracketCount;
-            } else if (stripped.charAt(i) == ']') {
-                --bracketCount;
-            }
-        }
-        model.viewUpdatesPerSecond = Integer.parseInt(stripped.substring(start));
-        return model;
-    }
+    
+    
+    
+    //***********************************END LOAD AND SAVE STUFF*********************************************//
 
     public Screen getCurrentScreen() {
         return currentScreen;
@@ -353,15 +359,6 @@ public class Model extends Thread {
 
     public void setUtilityData(UtilityData utilityData) {
         this.utilityData = utilityData;
-    }
-
-    // TODO(jraviles) figure out what to do with these legacy functions
-    public String getNextDialogue() {
-        return gameObject.getLevel().getNextDialogue();
-    }
-
-    public void setDialogue(String dialogue) {
-        gameObject.getLevel().setCurrentDialogue(dialogue);
     }
 
     public void setAvatarOccupation(Occupation occupation) {

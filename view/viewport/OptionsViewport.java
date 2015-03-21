@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import model.GameObject;
 import controller.Intent;
 import controller.IntentMap.IntentMap;
-import controller.control.KeyboardControl;
 import controller.physicalController.RebindInfo;
-import java.awt.Component;
-import java.awt.event.KeyEvent;
 import utility.Course;
 
 /**
@@ -188,7 +185,8 @@ public class OptionsViewport extends ViewPort {
         backButton.setName("backButton"); // NOI18N
         backButton.setPreferredSize(new java.awt.Dimension(125, 35));
         backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -198,7 +196,8 @@ public class OptionsViewport extends ViewPort {
         resetDefaultsButton.setName("resetDefaultsButton"); // NOI18N
         resetDefaultsButton.setPreferredSize(new java.awt.Dimension(125, 35));
         resetDefaultsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetDefaultsButtonActionPerformed(evt);
             }
         });
@@ -207,7 +206,8 @@ public class OptionsViewport extends ViewPort {
         upButton.setText("Num-Pad 8");
         upButton.setPreferredSize(new java.awt.Dimension(150, 35));
         upButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 upButtonActionPerformed(evt);
             }
         });
@@ -216,7 +216,8 @@ public class OptionsViewport extends ViewPort {
         upLeftButton.setText("Num-Pad 7");
         upLeftButton.setPreferredSize(new java.awt.Dimension(150, 35));
         upLeftButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 upLeftButtonActionPerformed(evt);
             }
         });
@@ -225,7 +226,8 @@ public class OptionsViewport extends ViewPort {
         leftDownButton.setText("Num-Pad 1");
         leftDownButton.setPreferredSize(new java.awt.Dimension(150, 35));
         leftDownButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leftDownButtonActionPerformed(evt);
             }
         });
@@ -234,7 +236,8 @@ public class OptionsViewport extends ViewPort {
         leftButton.setText("Num-Pad 4");
         leftButton.setPreferredSize(new java.awt.Dimension(150, 35));
         leftButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leftButtonActionPerformed(evt);
             }
         });
@@ -276,7 +279,8 @@ public class OptionsViewport extends ViewPort {
         downButton.setText("Num-Pad 2");
         downButton.setPreferredSize(new java.awt.Dimension(150, 35));
         downButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downButtonActionPerformed(evt);
             }
         });
@@ -285,7 +289,8 @@ public class OptionsViewport extends ViewPort {
         downRightButton.setText("Num-Pad 3");
         downRightButton.setPreferredSize(new java.awt.Dimension(150, 35));
         downRightButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downRightButtonActionPerformed(evt);
             }
         });
@@ -294,7 +299,8 @@ public class OptionsViewport extends ViewPort {
         rightUpButton.setText("Num-Pad 9");
         rightUpButton.setPreferredSize(new java.awt.Dimension(150, 35));
         rightUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rightUpButtonActionPerformed(evt);
             }
         });
@@ -303,7 +309,8 @@ public class OptionsViewport extends ViewPort {
         rightButton.setText("Num-Pad 6");
         rightButton.setPreferredSize(new java.awt.Dimension(150, 35));
         rightButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rightButtonActionPerformed(evt);
             }
         });
@@ -312,7 +319,8 @@ public class OptionsViewport extends ViewPort {
         meleeButton.setText("Q");
         meleeButton.setPreferredSize(new java.awt.Dimension(150, 35));
         meleeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 meleeButtonActionPerformed(evt);
             }
         });
@@ -321,7 +329,8 @@ public class OptionsViewport extends ViewPort {
         talkButton.setText("Space");
         talkButton.setPreferredSize(new java.awt.Dimension(150, 35));
         talkButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 talkButtonActionPerformed(evt);
             }
         });
@@ -330,7 +339,8 @@ public class OptionsViewport extends ViewPort {
         macro1Button.setText("1");
         macro1Button.setPreferredSize(new java.awt.Dimension(150, 35));
         macro1Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 macro1ButtonActionPerformed(evt);
             }
         });
@@ -339,7 +349,8 @@ public class OptionsViewport extends ViewPort {
         macro2Button.setText("2");
         macro2Button.setPreferredSize(new java.awt.Dimension(150, 35));
         macro2Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 macro2ButtonActionPerformed(evt);
             }
         });
@@ -348,7 +359,8 @@ public class OptionsViewport extends ViewPort {
         saveButton.setText("\\");
             saveButton.setPreferredSize(new java.awt.Dimension(150, 35));
             saveButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                @Override
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
                     saveButtonActionPerformed(evt);
                 }
             });
@@ -357,7 +369,8 @@ public class OptionsViewport extends ViewPort {
             macro3Button.setText("3");
             macro3Button.setPreferredSize(new java.awt.Dimension(150, 35));
             macro3Button.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                @Override
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
                     macro3ButtonActionPerformed(evt);
                 }
             });

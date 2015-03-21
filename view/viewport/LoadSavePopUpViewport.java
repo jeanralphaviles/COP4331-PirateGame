@@ -5,35 +5,30 @@
  */
 package view.viewport;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+
 import model.GameObject;
 import model.Model;
 import utility.decal.Decal;
-
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import controller.virtualController.LoadSaveParams;
 import java.awt.Component;
 
-import view.viewport.ViewPort;
 
 /**
  *
@@ -187,7 +182,8 @@ public class LoadSavePopUpViewport extends ViewPort {
         }
         
         //new Timer(15, new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+        @Override
+		public void actionPerformed(ActionEvent e) {
           
             if ( savePanelActivated ){
                 
@@ -293,7 +289,6 @@ public class LoadSavePopUpViewport extends ViewPort {
         saveButton.setMaximumSize(new java.awt.Dimension(87, 23));
         saveButton.setMinimumSize(new java.awt.Dimension(87, 23));
         saveButton.setPreferredSize(new java.awt.Dimension(87, 23));
-
         javax.swing.GroupLayout loadSaveFunctionalitiesPanelLayout = new javax.swing.GroupLayout(loadSaveFunctionalitiesPanel);
         loadSaveFunctionalitiesPanel.setLayout(loadSaveFunctionalitiesPanelLayout);
         loadSaveFunctionalitiesPanelLayout.setHorizontalGroup(
@@ -363,7 +358,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         saveNameLabel.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
 
         saveNameTextField.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        saveNameTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        saveNameTextField.setHorizontalAlignment(SwingConstants.CENTER);
         saveNameTextField.setText("DEFAULT");
 
         javax.swing.GroupLayout savePanelLayout = new javax.swing.GroupLayout(savePanel);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import utility.Course;
 import utility.decal.Decal;
 import model.entity.Avatar;
+import model.entity.occupation.ability.Ability;
 import model.map.GridLocation;
 
 /**
@@ -70,6 +71,10 @@ public class GameObject {
 	
 	public int currentLevel() {
 		return 0; // Math.min(avatarLevel, levels.size()) - 1;
+	}
+
+	public void activateAvatarAbility(Ability ability) {
+		this.getLevel().activateAvatarAbility(ability);
 	}
 
 	@Override
