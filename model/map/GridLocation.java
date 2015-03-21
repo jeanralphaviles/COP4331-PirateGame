@@ -31,6 +31,7 @@ public class GridLocation {
 		return false;
 	}
 	
+	@Override
 	public String toString() {
 		return "[" + x + "," + y + "]";
 	}

@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Color;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;

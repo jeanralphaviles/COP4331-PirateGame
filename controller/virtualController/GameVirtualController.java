@@ -5,7 +5,6 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import model.entity.Avatar;
 import model.item.Item;
 import utility.Course;

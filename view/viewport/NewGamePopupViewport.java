@@ -96,7 +96,8 @@ public class NewGamePopupViewport extends ViewPort {
         occupationButtonGroup.add(parrotmancerRadioButton);
         parrotmancerRadioButton.setText("ParrotMancer");
         parrotmancerRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 parrotmancerRadioButtonActionPerformed(evt);
             }
         });

@@ -6,7 +6,6 @@
 package controller.virtualController;
 
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.Model;

@@ -72,7 +72,8 @@ public class
         FlavorImagePanel = new javax.swing.JPanel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
+            @Override
+			public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });

@@ -6,11 +6,7 @@
 package view.viewport;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import static java.awt.PageAttributes.ColorType.COLOR;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *

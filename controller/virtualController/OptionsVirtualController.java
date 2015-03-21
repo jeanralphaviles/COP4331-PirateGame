@@ -5,7 +5,6 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import controller.physicalController.KeyboardController;
-import controller.physicalController.PhysicalController;
 import controller.physicalController.RebindInfo;
 import java.util.ArrayList;
 import javax.swing.JButton;

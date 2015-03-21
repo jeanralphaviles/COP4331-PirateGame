@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import model.GameObject;
 import model.entity.Statistics;
 import controller.IntentMap.IntentMap;
+import java.awt.Dimension;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  *
@@ -228,8 +232,7 @@ public class StatusViewport extends ViewPort {
             .addGap(0, 174, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(250, 250));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setSize(new Dimension(443, 375));
 
         mainStatsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -297,8 +300,6 @@ public class StatusViewport extends ViewPort {
                     .addComponent(hardinessLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        add(mainStatsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 180, 190));
-
         healthManaPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         healthLabel.setFont(new java.awt.Font("Luminari", 3, 22)); // NOI18N
@@ -337,81 +338,79 @@ public class StatusViewport extends ViewPort {
         lifeThreeLabel.setText("<3");
 
         javax.swing.GroupLayout healthManaPanelLayout = new javax.swing.GroupLayout(healthManaPanel);
-        healthManaPanel.setLayout(healthManaPanelLayout);
         healthManaPanelLayout.setHorizontalGroup(
-            healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(healthManaPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(healthManaPanelLayout.createSequentialGroup()
-                        .addComponent(manaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(manaBar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(healthManaPanelLayout.createSequentialGroup()
-                        .addComponent(healthLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                        .addComponent(healthBar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(healthManaPanelLayout.createSequentialGroup()
-                        .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(healthManaPanelLayout.createSequentialGroup()
-                                .addComponent(livesLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(lifeOneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lifeTwoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lifeThreeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(healthManaPanelLayout.createSequentialGroup()
-                                .addComponent(experienceLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(experienceValueLabel)))
-                        .addGap(18, 18, 18)
-                        .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(healthManaPanelLayout.createSequentialGroup()
-                                .addComponent(levelLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(levelValueLabel))
-                            .addGroup(healthManaPanelLayout.createSequentialGroup()
-                                .addComponent(lifeFourLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lifeFiveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+        	healthManaPanelLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(healthManaPanelLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(healthManaPanelLayout.createSequentialGroup()
+        					.addComponent(manaLabel)
+        					.addGap(73)
+        					.addComponent(manaBar, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+        				.addGroup(healthManaPanelLayout.createSequentialGroup()
+        					.addComponent(healthLabel)
+        					.addGap(67)
+        					.addComponent(healthBar, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+        				.addGroup(healthManaPanelLayout.createSequentialGroup()
+        					.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(healthManaPanelLayout.createSequentialGroup()
+        							.addComponent(livesLabel)
+        							.addGap(18)
+        							.addComponent(lifeOneLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(lifeTwoLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(lifeThreeLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(healthManaPanelLayout.createSequentialGroup()
+        							.addComponent(experienceLabel)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(experienceValueLabel)))
+        					.addGap(18)
+        					.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(healthManaPanelLayout.createSequentialGroup()
+        							.addComponent(levelLabel)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(levelValueLabel))
+        						.addGroup(healthManaPanelLayout.createSequentialGroup()
+        							.addComponent(lifeFourLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(lifeFiveLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(0, 96, Short.MAX_VALUE)))
+        			.addGap(18))
         );
         healthManaPanelLayout.setVerticalGroup(
-            healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(healthManaPanelLayout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
-                .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, healthManaPanelLayout.createSequentialGroup()
-                        .addComponent(healthBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(manaBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(healthManaPanelLayout.createSequentialGroup()
-                        .addComponent(healthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(manaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(experienceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(experienceValueLabel))
-                    .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(levelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(levelValueLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(healthManaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(livesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lifeOneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lifeFiveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lifeFourLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lifeThreeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lifeTwoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9))
+        	healthManaPanelLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(healthManaPanelLayout.createSequentialGroup()
+        			.addContainerGap(9, Short.MAX_VALUE)
+        			.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(healthManaPanelLayout.createSequentialGroup()
+        					.addComponent(healthBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(manaBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addGap(12))
+        				.addGroup(healthManaPanelLayout.createSequentialGroup()
+        					.addComponent(healthLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(manaLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(experienceValueLabel))
+        				.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(levelLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(levelValueLabel)))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(healthManaPanelLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(livesLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lifeOneLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lifeFiveLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lifeFourLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lifeThreeLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lifeTwoLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+        			.addGap(9))
         );
-
-        add(healthManaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 430, 170));
+        healthManaPanel.setLayout(healthManaPanelLayout);
 
         otherStatsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -478,8 +477,30 @@ public class StatusViewport extends ViewPort {
                     .addComponent(movementLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(movementLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-
-        add(otherStatsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 250, 190));
+        GroupLayout groupLayout = new GroupLayout(this);
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addComponent(mainStatsPanel, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(otherStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        				.addComponent(healthManaPanel, GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+        			.addGap(1))
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(otherStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(mainStatsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(healthManaPanel, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        			.addGap(3))
+        );
+        setLayout(groupLayout);
     }// </editor-fold>//GEN-END:initComponents
 
 

@@ -12,6 +12,7 @@ public final class EntitySpawner extends InteractiveItem {
 		super(new Decal(Decal.entity_spawner));
 	}
 	
+	@Override
 	public final void triggerProximity(Entity entity, Level level) {
 		Inventory inventory = entity.getInventory();
 		for (Item item : inventory.getItems()) {

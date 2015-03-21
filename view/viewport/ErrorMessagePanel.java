@@ -5,6 +5,8 @@
  */
 package view.viewport;
 
+import javax.swing.SwingConstants;
+
 /**
  *
  * @author darien
@@ -54,7 +56,7 @@ public class ErrorMessagePanel extends javax.swing.JPanel {
         jTextField1.setBackground(new java.awt.Color(147, 91, 33));
         jTextField1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(217, 181, 181));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setHorizontalAlignment(SwingConstants.CENTER);
         jTextField1.setText("No Message");
         jTextField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jTextField1.setDoubleBuffered(true);
