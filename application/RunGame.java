@@ -1,5 +1,7 @@
 package application;
 
+import controller.auxiliaryController.AuxiliaryController;
+import controller.auxiliaryController.KeyboardController;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,14 +25,17 @@ import view.viewport.MainWindow;
 public class RunGame {
 
     /*Properties*/
+    
     private static Model model;
     private static final String modelFilename = "MODEL_FILE.txt";
-    private static KeyboardFocusManager auxController;
+    private static AuxiliaryController auxController;
     private static final int viewUpdatesPerSecond = 10;
     public static MainWindow mainWindow;
 
     /*Constructors*/
+    
     /*Methods*/
+    
     public static void main(String[] args) throws IOException {
         model = initModel(modelFilename);
 
@@ -66,8 +71,7 @@ public class RunGame {
     }
 
     public static void initAuxiliaryController() {
-        auxController = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        auxController.addKeyEventPostProcessor(new EnterKeyListener(model, modelFilename));
+        auxController = new KeyboardController(model, null);
     }
 
     public static void initMainWindow() {
@@ -77,113 +81,11 @@ public class RunGame {
     public static void launchModel(int updatesPerSecond) {
         model.launch(updatesPerSecond, null);
     }
-}
+    
+    /*Get-Sets*/
 
-class EnterKeyListener implements KeyEventPostProcessor {
-
-    private Model model;
-    private String modelFilename;
-
-    public EnterKeyListener(Model model, String modelFilename) {
-        this.model = model;
-        this.modelFilename = modelFilename;
+    public static AuxiliaryController getAuxController() {
+        return auxController;
     }
-
-    @Override
-    public boolean postProcessKeyEvent(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if (e.getID() == KeyEvent.KEY_PRESSED) {
-            if (keyCode == KeyEvent.VK_NUMPAD1) {
-                System.out.println("you pressed 1");
-                model.moveAvatar(new Course(-1, -1));
-            } else if (keyCode == KeyEvent.VK_NUMPAD2 || keyCode == KeyEvent.VK_DOWN) {
-                System.out.println("pressed 2 move down");
-                model.moveAvatar(new Course(0, 1));
-            } else if (keyCode == KeyEvent.VK_NUMPAD3) {
-                System.out.println("pressed 3 move left down");
-                model.moveAvatar(new Course(1, -1));
-            } else if (keyCode == KeyEvent.VK_NUMPAD4 || keyCode == KeyEvent.VK_LEFT) {
-                System.out.println("you pressed 4 move left");
-                model.moveAvatar(new Course(-1, 0));
-            } else if (keyCode == KeyEvent.VK_NUMPAD6 || keyCode == KeyEvent.VK_RIGHT) {
-                System.out.println("you pressed 6 move right");
-                model.moveAvatar(new Course(1, 0));
-            } else if (keyCode == KeyEvent.VK_NUMPAD7) {
-                System.out.println("you pressed 7 move top left");
-                model.moveAvatar(new Course(-1, 1));
-            } else if (keyCode == KeyEvent.VK_NUMPAD8 || keyCode == KeyEvent.VK_UP) {
-                System.out.println("you pressed 8 move top");
-                model.moveAvatar(new Course(0, -1));
-            } else if (keyCode == KeyEvent.VK_NUMPAD9) {
-                System.out.println("you pressed 9 move top right");
-                model.moveAvatar(new Course(1, 1));
-            } else if (keyCode == KeyEvent.VK_P) {
-                JOptionPane.showMessageDialog(null, "You've Paused the Game!");
-            } else if (keyCode == KeyEvent.VK_BACK_SLASH) {
-                System.out.println("Saving Model");
-                model.save();
-            } else if (keyCode == KeyEvent.VK_ENTER) {
-                System.out.println("Loading Model");
-                model.load("This is obviously wrong");
-            }
-            else if (keyCode == KeyEvent.VK_L) {
-                
-                Screen screen = new LoadSavePopup(model);
-                model.launchScreen(screen);
-                
-            }else {
-                System.out.println("You pressed an invalid control");
-            }
-        }
-        return true;
-    }
-
-    public void saveModel() {
-        if (model != null) {
-            try {
-               
-                File file = new File(modelFilename);
-                if (file.exists() == false) {
-                    file.createNewFile();
-                }
-
-                String savedModel = model.toString();
-                FileOutputStream fstream = new FileOutputStream(file, false);
-                fstream.write(savedModel.getBytes());
-                fstream.flush();
-                fstream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void loadModel() {
-        try {
-            File file = new File(modelFilename);
-            if (file != null && file.exists()) {
-                StringBuilder fileContents = new StringBuilder((int) file.length());
-                Scanner scanner = new Scanner(file);
-                String lineSeparator = System.getProperty("line.separator");
-                while (scanner.hasNextLine()) {
-                    fileContents.append(scanner.nextLine() + lineSeparator);
-                }
-                scanner.close();
-                Model newModel;
-
-                if (fileContents.toString().trim().length() != 0) {
-                    System.out.println("Loading Model from DISK");
-                    newModel = Model.fromString(fileContents.toString());
-                } else {
-                    newModel = new Model();
-                    newModel.loadLevels(1, new Avatar());
-                }
-                model.setGameObject(newModel.getGameObject());
-                model.setUtilityData(newModel.getUtilityData());
-            }
-        } catch (FileNotFoundException | NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
 }
