@@ -71,7 +71,7 @@ public class RunGame {
     }
 
     public static void initAuxiliaryController() {
-        auxController = new KeyboardController(model, null);
+        auxController = new KeyboardController(model);
     }
 
     public static void initMainWindow() {

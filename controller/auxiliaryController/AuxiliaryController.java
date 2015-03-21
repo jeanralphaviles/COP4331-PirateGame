@@ -5,6 +5,7 @@ import controller.Intent;
 import controller.control.Control;
 import controller.controllerMap.IntentComponentMap;
 import controller.controllerMap.IntentControlMap;
+import controller.screenController.ScreenController;
 import java.util.ArrayList;
 import model.Model;
 
@@ -13,15 +14,21 @@ public class AuxiliaryController extends Controller {
     /*Properties*/
     
     protected ArrayList<IntentControlMap> icms = new ArrayList<IntentControlMap>(1);
+    //
+    protected ScreenController screenController;
     
     /*Constructors*/
     
-    public AuxiliaryController(Model model, ArrayList<IntentControlMap> icms) {
+    public AuxiliaryController(Model model) {
         super(model);
-        this.icms = icms;
     }
     
     /*Methods*/
+    
+    public void adaptForScreen(ArrayList<IntentControlMap> icms, ScreenController screenController) {
+        this.icms = icms;
+        this.screenController = screenController;
+    }
     
     public void reassignControlWithIntent(Control control, Object object, Intent intent) {
         //remove any old icms with that control

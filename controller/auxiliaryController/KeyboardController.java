@@ -2,6 +2,7 @@ package controller.auxiliaryController;
 
 import controller.control.KeyboardControl;
 import controller.controllerMap.IntentControlMap;
+import controller.screenController.ScreenController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
@@ -14,8 +15,8 @@ public class KeyboardController extends AuxiliaryController {
     private KeyboardFocusManager keyboardManager;
 
     /*Constructors*/
-    public KeyboardController(Model model, ArrayList<IntentControlMap> icms) {
-        super(model, icms);
+    public KeyboardController(Model model) {
+        super(model);
 
         initKeyboardManager();
     }
@@ -27,10 +28,13 @@ public class KeyboardController extends AuxiliaryController {
     }
 
     /*Get-Sets*/
+    
+    
     /*Inner Classes*/
     class EnterKeyListener implements KeyEventPostProcessor {
 
         private Model model;
+        private boolean captureMode = false;
 
         public EnterKeyListener(Model model) {
             this.model = model;
@@ -107,6 +111,6 @@ public class KeyboardController extends AuxiliaryController {
 //            }
 //            return true;
 //        }
-
+        
     }
 }
