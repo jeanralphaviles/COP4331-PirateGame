@@ -136,6 +136,14 @@ public class Model extends Thread {
             }
         }
     }
+    
+    public void activateAvatarAbility(Ability ability) {
+    	this.gameObject.activateAvatarAbility(ability);
+    }
+    
+    public ArrayList<Ability> getAvatarAbilities() {
+    	return this.gameObject.getAvatar().getAbilities();
+    }
 
     //***********************************LOAD AND SAVE STUFF*********************************************//
     
