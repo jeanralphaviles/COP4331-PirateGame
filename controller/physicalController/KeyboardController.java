@@ -1,5 +1,6 @@
 package controller.physicalController;
 
+import controller.Intent;
 import controller.control.KeyboardControl;
 import controller.IntentMap.IntentMap;
 import java.awt.KeyEventPostProcessor;
@@ -32,7 +33,11 @@ public class KeyboardController extends PhysicalController {
     class EnterKeyListener implements KeyEventPostProcessor {
 
         private Model model;
-        private boolean captureMode = false;
+        private boolean rebindMode = false;
+        //
+        private Intent rebindIntent; //should both be replaced by data transfer object
+        private Object rebindObject;
+        
 
         public EnterKeyListener(Model model) {
             this.model = model;
@@ -42,8 +47,16 @@ public class KeyboardController extends PhysicalController {
         public boolean postProcessKeyEvent(KeyEvent e) {
             int keyCode = e.getKeyCode();
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                IntentMap im = getIM(keyCode);
-                virtualController.executeAction(im);
+                if (rebindMode) { //if you want to handle listening for the rebinding key
+                    reassignControlWithIntent(new KeyboardControl(keyCode), rebindObject, rebindIntent);
+                } else { //process key press as usual
+                    IntentMap im = getIM(keyCode);
+                    Intent intent = im.getIntent();
+                    if (intent == intent.LISTEN) {
+                        storeRebindIntent(im);
+                    }
+                    virtualController.executeAction(im);
+                }
             }
             return true;
         }
@@ -60,6 +73,14 @@ public class KeyboardController extends PhysicalController {
                 }
             }
             return null;
+        }
+        
+        private void storeRebindIntent(IntentMap im) {
+            
+        }
+        
+        public void activateRebindMode() {
+            rebindMode = true;
         }
         
 //        @Override
