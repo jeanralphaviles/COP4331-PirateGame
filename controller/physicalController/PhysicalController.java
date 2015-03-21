@@ -36,6 +36,9 @@ public class PhysicalController extends Controller {
     }
     
     private void removeICMForControl(Control control) {
+        if (intentMaps == null) {
+            return;
+        }
         IntentMap im;
         for (int i=0; i<intentMaps.size(); i++) {
             im = intentMaps.get(i);

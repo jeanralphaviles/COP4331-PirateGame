@@ -36,7 +36,7 @@ public class OptionsViewport extends ViewPort {
         
         //test reassign key
         RebindInfo ri = new RebindInfo(Intent.MOVE, new Course(Course.up), upButton);
-        ims.add(new IntentMap(new KeyboardControl(KeyEvent.VK_NUMPAD8), null, ri , Intent.MOVE, ""));
+        ims.add(new IntentMap(null, upButton, ri , Intent.LISTEN, ""));
         
         return ims;
     }

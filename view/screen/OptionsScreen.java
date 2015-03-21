@@ -8,6 +8,7 @@ package view.screen;
 import application.RunGame;
 import controller.IntentMap.IntentMap;
 import controller.virtualController.GameVirtualController;
+import controller.virtualController.OptionsVirtualController;
 import java.util.ArrayList;
 import model.Model;
 import view.viewport.OptionsViewport;
@@ -32,11 +33,11 @@ public class OptionsScreen extends Screen {
     protected void createController() {
         //Virtual Controller
         ArrayList<IntentMap> virtualIMs = viewPort.generateIntentMapping();
-        virtualController = new GameVirtualController(model, virtualIMs);
+        virtualController = new OptionsVirtualController(model, virtualIMs);
         
         //Physical Controller
         physicalController = RunGame.getAuxController();
-        physicalController.adaptForScreen(null, virtualController);
+        physicalController.adaptForScreen(new ArrayList<IntentMap>(1), virtualController);
     }
     
 }

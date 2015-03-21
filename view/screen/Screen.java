@@ -30,7 +30,7 @@ public abstract class Screen {
     protected abstract void createController();
     
     protected ArrayList<IntentMap> generateIntentMapping() {
-        return null;
+        return new ArrayList<IntentMap>(1); //prevent null errors
     }
 
     public void updateView(GameObject gameObject) {

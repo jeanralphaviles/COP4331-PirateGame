@@ -67,6 +67,9 @@ public class KeyboardController extends PhysicalController {
         }
         
         private IntentMap getIM(int keyCode) {
+            if (intentMaps == null) {
+                return null;
+            }
             KeyboardControl control;
             int currentKey;
             IntentMap im;

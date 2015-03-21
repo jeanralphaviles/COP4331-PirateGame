@@ -36,57 +36,59 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="downLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="rightUpLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="downRightLabel" alignment="1" max="32767" attributes="0"/>
-                      <Component id="rightLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="downLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rightUpLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="downRightLabel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="rightLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="leftDownLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="upLeftLabel" max="32767" attributes="0"/>
+                              <Component id="leftLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="1" attributes="0">
+                              <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="upLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="saveLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="macro3Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="macro2Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="macro1Label" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="meleeLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="talkLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                              <Component id="upButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="upLeftButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="leftDownButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="leftButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="downButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="downRightButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rightUpButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rightButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="meleeButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="talkButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="macro1Button" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="macro2Button" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="saveButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="macro3Button" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="leftDownLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="upLeftLabel" max="32767" attributes="0"/>
-                      <Component id="leftLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="backButton" min="-2" pref="175" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="resetDefaultsButton" min="-2" pref="175" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="1" groupAlignment="1" attributes="0">
-                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="upLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="saveLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="macro3Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="macro2Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="macro1Label" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="meleeLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="talkLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                      <Component id="upButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="upLeftButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="leftDownButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="leftButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="downButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="downRightButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="rightUpButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="rightButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="meleeButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="talkButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="macro1Button" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="macro2Button" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="saveButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="macro3Button" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="63" max="32767" attributes="0"/>
-              <Component id="backButton" min="-2" pref="175" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="resetDefaultsButton" min="-2" pref="175" max="-2" attributes="0"/>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -108,7 +110,6 @@
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="upLeftLabel" min="-2" max="-2" attributes="0"/>
