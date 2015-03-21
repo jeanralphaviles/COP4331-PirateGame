@@ -4,6 +4,7 @@ import application.RunGame;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
+import controller.physicalController.KeyboardController;
 import controller.physicalController.PhysicalController;
 import controller.physicalController.RebindInfo;
 import java.util.ArrayList;
@@ -29,15 +30,15 @@ public final class OptionsVirtualController extends VirtualController {
         Intent intent = im.getIntent();
         switch(intent) {
             case LISTEN:
-                PhysicalController aux = RunGame.getAuxController();
+                KeyboardController controller = (KeyboardController)RunGame.getAuxController();
                 
                 //Make the button blank
                 JButton button = (JButton)im.getComponent();
                 button.setText("");
-                //Pass the aux controller rebinding info
+                //Pass the controller controller rebinding info
                 rebindInfo = (RebindInfo)im.getObject(); //aux will retrieve it
                 //Tell the keyboard controller to capture key to rebind to next key pressed
-//                aux.activateRebindMode(); //sets to rebind mode
+                controller.activateRebindMode(); //sets to rebind mode
                 //
                 break;
             default:

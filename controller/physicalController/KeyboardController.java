@@ -3,15 +3,20 @@ package controller.physicalController;
 import controller.Intent;
 import controller.control.KeyboardControl;
 import controller.IntentMap.IntentMap;
+import controller.virtualController.OptionsVirtualController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
 import model.Model;
 
 public class KeyboardController extends PhysicalController {
 
     /*Properties*/
     private KeyboardFocusManager keyboardManager;
+    //
+    private boolean rebindMode = false;    
+
 
     /*Constructors*/
     public KeyboardController(Model model) {
@@ -21,9 +26,14 @@ public class KeyboardController extends PhysicalController {
     }
 
     /*Methods*/
+    
     private void initKeyboardManager() {
         keyboardManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         keyboardManager.addKeyEventPostProcessor(new EnterKeyListener(model));
+    }
+    
+    public void activateRebindMode() {
+            rebindMode = true;
     }
 
     /*Get-Sets*/
@@ -33,11 +43,6 @@ public class KeyboardController extends PhysicalController {
     class EnterKeyListener implements KeyEventPostProcessor {
 
         private Model model;
-        private boolean rebindMode = false;
-        //
-        private Intent rebindIntent; //should both be replaced by data transfer object
-        private Object rebindObject;
-        
 
         public EnterKeyListener(Model model) {
             this.model = model;
@@ -48,13 +53,13 @@ public class KeyboardController extends PhysicalController {
             int keyCode = e.getKeyCode();
             if (e.getID() == KeyEvent.KEY_PRESSED) {
                 if (rebindMode) { //if you want to handle listening for the rebinding key
-                    reassignControlWithIntent(new KeyboardControl(keyCode), rebindObject, rebindIntent);
+                    RebindInfo ri = ((OptionsVirtualController)virtualController).getRebindInfo();
+                    reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
+                    //label key appropriately
+                    JButton button = (JButton)ri.component;
+                    button.setText(e.getKeyChar() + "");
                 } else { //process key press as usual
                     IntentMap im = getIM(keyCode);
-                    Intent intent = im.getIntent();
-                    if (intent == intent.LISTEN) {
-                        storeRebindIntent(im);
-                    }
                     virtualController.executeAction(im);
                 }
             }
@@ -73,14 +78,6 @@ public class KeyboardController extends PhysicalController {
                 }
             }
             return null;
-        }
-        
-        private void storeRebindIntent(IntentMap im) {
-            
-        }
-        
-        public void activateRebindMode() {
-            rebindMode = true;
         }
         
 //        @Override
