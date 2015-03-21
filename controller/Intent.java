@@ -20,5 +20,7 @@ public enum Intent {
         SET_NICKNAME,
         TOGGLE_EQUIPPED,
         LABEL,
-        TREE_PANEL
+        TREE_PANEL,
+        LISTEN,
+        RESET_DEFAULT_CONTROLS
 }

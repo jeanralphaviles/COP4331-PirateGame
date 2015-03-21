@@ -71,6 +71,12 @@ public class
         DialoguePanel = new javax.swing.JPanel();
         FlavorImagePanel = new javax.swing.JPanel();
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+
         DialoguePanel.setBackground(new java.awt.Color(255, 255, 255));
         DialoguePanel.setForeground(new java.awt.Color(255, 255, 255));
         DialoguePanel.setToolTipText("");
@@ -133,6 +139,10 @@ public class
             .addComponent(jLayeredPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        
+    }//GEN-LAST:event_formComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DialoguePanel;

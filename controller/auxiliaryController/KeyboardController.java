@@ -6,11 +6,7 @@ import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Model;
-import utility.Course;
-import view.screen.Screen;
-import view.screen.popup.LoadSavePopup;
 
 public class KeyboardController extends AuxiliaryController {
 
