@@ -31,7 +31,7 @@ public class MainScreenViewport extends ViewPort {
     public ArrayList<IntentMap> generateIntentMapping() {
         ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
         ims.add(new IntentMap(newGameButton, Intent.NEW));
-        ims.add(new IntentMap(loadButton, Intent.GOTO_LOADSAVE));
+        ims.add(new IntentMap(loadButton, Intent.GOTO_LOAD));
         ims.add(new IntentMap(exitButton, Intent.EXIT));
         ims.add(new IntentMap(optionsButton, Intent.GOTO_OPTIONS));
         return ims;

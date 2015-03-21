@@ -1,8 +1,6 @@
 package view.screen.popup;
 
 import controller.virtualController.LoadSaveVirtualController;
-import controller.virtualController.NewGameVirtualController;
-import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;

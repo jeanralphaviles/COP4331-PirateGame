@@ -136,9 +136,8 @@ public class Model extends Thread {
         }
     }
 
-    public void load(String fileName) {
+    public boolean load(String fileName) {
         try {
-            System.out.println("Loading... From Model");
             Avatar avatar = this.getGameObject().getAvatar();
 
             if (avatar.getNickname() != null && !avatar.getNickname().isEmpty()) {
@@ -167,9 +166,13 @@ public class Model extends Thread {
                 }
 
             }
+            
+            return true;
         } catch (FileNotFoundException | NullPointerException e) {
             e.printStackTrace();
         }
+        
+        return false;
     }
 
     public void launch(int updatesPerSecond, String saveName) {

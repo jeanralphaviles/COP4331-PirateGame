@@ -25,7 +25,9 @@ public final class GameVirtualController extends VirtualController {
     @Override
     protected void action(IntentMap im) {
        
+        if ( im == null) return;
         Intent intent = im.getIntent();
+        
         switch(intent) {
             case MOVE:
                 Course course = (Course)im.getObject();

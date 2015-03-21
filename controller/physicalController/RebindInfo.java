@@ -16,9 +16,9 @@ public class RebindInfo {
     
     /*Properties*/
     
-    public static Intent intent;
-    public static Object object;
-    public static Component component;
+    public Intent intent;
+    public Object object;
+    public Component component;
     
     /*Constructor*/
 

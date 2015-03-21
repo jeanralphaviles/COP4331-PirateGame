@@ -30,6 +30,8 @@ import utility.decal.Decal;
 
 import controller.IntentMap.IntentMap;
 import controller.Intent;
+import controller.virtualController.LoadSaveParams;
+import java.awt.Component;
 
 import view.viewport.ViewPort;
 
@@ -42,42 +44,23 @@ public class LoadSavePopUpViewport extends ViewPort {
     /**
      * Creates new form LoadSavePopUpViewport
      */
-    Model model;
-    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
-    boolean savePanelActivated;
-    LoadSaveCategory category;
+    protected Model model;
+    protected ArrayList<IntentMap> icms = new ArrayList<IntentMap>(1);
+    private boolean savePanelActivated;
     
- 
-    
+
     public LoadSavePopUpViewport() {
        
-        category = LoadSaveCategory.LOAD_SAVE_MODE;
         initComponents();
         createTreePanelGUI();
-        savePanelActivated = false;
-        hideSavePanel();
         this.repaint();
     }
     
     public LoadSavePopUpViewport(Model model){
         
-           category = LoadSaveCategory.LOAD_SAVE_MODE;
            this.model = model;
            initComponents();
            createTreePanelGUI(); 
-           savePanelActivated = false;
-           hideSavePanel();
-           this.repaint();
-    }
-    
-     public LoadSavePopUpViewport(Model model, LoadSaveCategory category){
-        
-           this.category = category;
-           this.model = model;
-           initComponents();
-           createTreePanelGUI(); 
-           savePanelActivated = false;
-           hideSavePanel();
            this.repaint();
     }
     
@@ -105,12 +88,6 @@ public class LoadSavePopUpViewport extends ViewPort {
     Is meant to do hide the save panel or pop the save panel whenever is showed or hidden
     respectively.
     */
-     private void hideSavePanel(){
-            
-            savePanel.setVisible(savePanelActivated);
-            Sliding slide = new Sliding(jScrollPane3, playerRecordsTreePanel);
-             savePanelActivated = !savePanelActivated;
-     }
     
     @Override
     public void updateView(GameObject gameObject) {
@@ -125,17 +102,24 @@ public class LoadSavePopUpViewport extends ViewPort {
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
         
-        System.out.println("Intent Componenet is being called");
-        ims.add (new IntentMap(loadButton, Intent.LOAD) );
-        ims.add (new IntentMap(userInstructionLabel, Intent.LABEL));
-        ims.add (new IntentMap(playerRecordsTreePanel, Intent.TREE_PANEL));
-        ims.add (new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
-        ims.add (new IntentMap(backButton, Intent.GOTO_MAIN));
-       
-        return ims;
+         // loadSave:Component // userInstruction:Object // LOAD:Intent
+        ArrayList<Component> components = new ArrayList<Component>(1);
+        components.add(userInstructionLabel);
+        components.add(playerRecordsTreePanel);
+        components.add(saveNameTextField);
+        
+        LoadSaveParams params = new LoadSaveParams(components);
+        
+        icms.add (new IntentMap(loadButton, params, Intent.LOAD) );
+        icms.add (new IntentMap(saveButton, params, Intent.SAVE) );
+        
+        icms.add (new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
+        icms.add (new IntentMap(backButton, Intent.GOTO_MAIN));
+        
+        return icms;
     }
 
-    private void createTreePanelGUI(){
+    protected void createTreePanelGUI(){
     
         
         try {
@@ -188,7 +172,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         }
     }
     
-    private class Sliding implements ActionListener{
+    protected class Sliding implements ActionListener{
         
         Timer time;
         JScrollPane panel;
@@ -205,7 +189,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         //new Timer(15, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
           
-            if ( !savePanelActivated ){
+            if ( savePanelActivated ){
                 
                 panel.setSize(panel.getWidth(), panel.getHeight() - 2);
                 panel1.setSize(panel1.getWidth(), panel1.getHeight() - 2);
@@ -231,30 +215,13 @@ public class LoadSavePopUpViewport extends ViewPort {
         
     }
     
+    protected void hideSavePanel(){
+            
+            savePanel.setVisible(savePanelActivated);
+            Sliding slide = new Sliding(jScrollPane3, playerRecordsTreePanel);
+             savePanelActivated = !savePanelActivated;
+    }
     
-    // ------------- PRIVATE CLASS ------------------
-    // -------------               ------------------
-    
-   public enum LoadSaveCategory {
-	
-        LOAD_MODE(1),
-	LOAD_SAVE_MODE(2);
-
-	private int value;
-
-	private LoadSaveCategory(int value) {
-		this.setValue(value);
-	}
-
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-    };
- 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -305,6 +272,11 @@ public class LoadSavePopUpViewport extends ViewPort {
         continueAdventureButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         continueAdventureButton.setText("Continue Adventure");
         continueAdventureButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
+        continueAdventureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                continueAdventureButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setBackground(new java.awt.Color(151, 99, 47));
         backButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -321,11 +293,6 @@ public class LoadSavePopUpViewport extends ViewPort {
         saveButton.setMaximumSize(new java.awt.Dimension(87, 23));
         saveButton.setMinimumSize(new java.awt.Dimension(87, 23));
         saveButton.setPreferredSize(new java.awt.Dimension(87, 23));
-        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                saveButtonMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout loadSaveFunctionalitiesPanelLayout = new javax.swing.GroupLayout(loadSaveFunctionalitiesPanel);
         loadSaveFunctionalitiesPanel.setLayout(loadSaveFunctionalitiesPanelLayout);
@@ -363,7 +330,7 @@ public class LoadSavePopUpViewport extends ViewPort {
 
         userInstructionLabel.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         userInstructionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userInstructionLabel.setText("Select desired game by the Avatar's Name, Level and Date/Time");
+        userInstructionLabel.setText("Select desired game by the Avatar's Nickname and Save Name");
         userInstructionLabel.setMaximumSize(new java.awt.Dimension(572, 31));
         userInstructionLabel.setMinimumSize(new java.awt.Dimension(572, 31));
         userInstructionLabel.setPreferredSize(new java.awt.Dimension(572, 31));
@@ -375,7 +342,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(columnNamesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(userInstructionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         columnNamesPanelLayout.setVerticalGroup(
             columnNamesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,7 +400,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(loadSavePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loadSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(savePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(savePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
                 .addContainerGap())
             .addComponent(columnNamesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -457,7 +424,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(layout.createSequentialGroup()
                 .addGap(407, 407, 407)
                 .addComponent(loadSavePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(491, Short.MAX_VALUE))
+                .addContainerGap(473, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,62 +435,24 @@ public class LoadSavePopUpViewport extends ViewPort {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
+    private void continueAdventureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueAdventureButtonActionPerformed
         // TODO add your handling code here:
-       
-        if ( !savePanelActivated && model != null ){
-            
-            System.out.println(saveNameTextField.getText());
-            
-            if (saveNameTextField.getText().isEmpty() ){
-            
-                userInstructionLabel.setText("Nothing was saved. File name entry is empty.");
-                return;
-            }
-            else if (saveNameTextField.getText().contains(" ")){
-                
-                 userInstructionLabel.setText("Error: File name cannot contain spaces.");
-                 return;
-            }
-            else if (saveNameTextField.getText().contains("*%$")){
-                
-                 userInstructionLabel.setText("Error: File name cannot contain '*%$' characters sequence.");
-                 return; 
-            }
-            else if (saveNameTextField.getText().equals("DEFAULT") ){
-                
-                userInstructionLabel.setText("Saving to default file name.");
-                model.save();
-            }
-            else {
-                
-                 userInstructionLabel.setText("Saving to " + saveNameTextField.getText() + " file name." );
-                model.save( saveNameTextField.getText() );
-            }
-           
-            
-        }
-        
-        hideSavePanel();
-                 
-        
-        
-    }//GEN-LAST:event_saveButtonMouseClicked
+    }//GEN-LAST:event_continueAdventureButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
-    private javax.swing.JPanel columnNamesPanel;
-    private javax.swing.JButton continueAdventureButton;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton loadButton;
-    private javax.swing.JPanel loadSaveFunctionalitiesPanel;
-    private javax.swing.JPanel loadSavePanel;
-    private javax.swing.JTree playerRecordsTreePanel;
-    private javax.swing.JButton saveButton;
-    private javax.swing.JLabel saveNameLabel;
+    protected javax.swing.JButton backButton;
+    protected javax.swing.JPanel columnNamesPanel;
+    protected javax.swing.JButton continueAdventureButton;
+    protected javax.swing.JScrollPane jScrollPane3;
+    protected javax.swing.JButton loadButton;
+    protected javax.swing.JPanel loadSaveFunctionalitiesPanel;
+    protected javax.swing.JPanel loadSavePanel;
+    protected javax.swing.JTree playerRecordsTreePanel;
+    protected javax.swing.JButton saveButton;
+    protected javax.swing.JLabel saveNameLabel;
     private javax.swing.JTextField saveNameTextField;
-    private javax.swing.JPanel savePanel;
-    private javax.swing.JLabel userInstructionLabel;
+    protected javax.swing.JPanel savePanel;
+    protected javax.swing.JLabel userInstructionLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,15 +1,14 @@
 package controller;
 
-import java.awt.Color;
 import model.Model;
 import controller.IntentMap.IntentMap;
-import controller.Intent;
 import java.util.ArrayList;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
 import view.screen.OptionsScreen;
 import view.screen.Screen;
+import view.screen.popup.LoadPopup;
 import view.screen.popup.LoadSavePopup;
 import view.screen.popup.NewGamePopup;
 import view.screen.popup.PausePopup;
@@ -57,6 +56,12 @@ public abstract class Controller {
     private void goToLoadSaveScreen(){
         
         Screen screen = new LoadSavePopup(model);
+        model.launchScreen(screen);
+    }
+    
+     private void goToLoadScreen(){
+        
+        Screen screen = new LoadPopup(model);
         model.launchScreen(screen);
     }
 
@@ -127,6 +132,9 @@ public abstract class Controller {
                 break;
             case GOTO_LOADSAVE:
                 goToLoadSaveScreen();
+                break;
+            case GOTO_LOAD:
+                goToLoadScreen();
                 break;
             case SAVE:
                 save();
