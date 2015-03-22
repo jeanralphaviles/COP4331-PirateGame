@@ -18,14 +18,12 @@ public class Statistics implements Cloneable {
         livesLeft = 3;
         strength = 10;
         agility = 10;
-        intellect = 10;
-        agility = 10;
-        intellect = 10;
+        intellect = 60;
         hardiness = 10;
         experience = 10;
         maxHealth = 100;
         currentHealth = 100;
-        currentMana = 100;
+        currentMana = 200;
     }
 
 	public Statistics(int livesLeft, int strength, int agility, int intellect,
@@ -47,6 +45,18 @@ public class Statistics implements Cloneable {
 	public Statistics clone() {
         return new Statistics(livesLeft, strength, agility, intellect,
                 hardiness, experience, maxHealth, currentHealth, currentMana);
+    }
+    
+    public void merge(Statistics statistics) {
+    	this.livesLeft += statistics.getLivesLeft();
+    	this.strength += statistics.getStrength();
+    	this.agility += statistics.getAgility();
+    	this.intellect += statistics.getIntellect();
+    	this.hardiness += statistics.getHardiness();
+    	this.experience += statistics.getExperience();
+    	this.maxHealth += statistics.getMaxHealth();
+    	this.currentHealth += statistics.getCurrentHealth();
+    	this.currentMana += statistics.getMaxMana();
     }
 
     public void kill() {
@@ -127,7 +137,7 @@ public class Statistics implements Cloneable {
     }
 
     public int getMaxMana() {
-        return intellect;
+        return intellect * 2;
     }
 
     public int getOffensiveRating() {

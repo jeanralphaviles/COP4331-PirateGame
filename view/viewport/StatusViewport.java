@@ -108,6 +108,8 @@ public class StatusViewport extends ViewPort {
     }
     
     public void updateProgressBars (int health, int mana, int maxHealth, int maxMana) {
+    	healthBar.setStringPainted(true);
+    	manaBar.setStringPainted(true);
         healthBar.setMaximum(maxHealth);
         manaBar.setMaximum(maxMana);
         healthBar.setValue(health);

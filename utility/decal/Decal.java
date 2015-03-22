@@ -42,6 +42,7 @@ public class Decal {
     public static final String fire = "./Sprites/item/S_Fire02.png";
     public static final String map = "./Sprites/item/I_Map.png";
     public static final String entity_spawner = "./Sprites/item/S_Holy02.png";
+    public static final String shoes = "./Sprites/item/A_Shoes02.png";
         //Misc
     public static final String blank = "blank"; 
 

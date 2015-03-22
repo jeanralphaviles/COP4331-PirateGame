@@ -3,6 +3,7 @@ package model.entity.occupation.ability.toggleAbility;
 import utility.decal.Decal;
 import model.Level;
 import model.entity.Entity;
+import model.item.Item;
 import model.map.GridLocation;
 
 public final class DetectTraps extends ToggleAbility {
@@ -27,7 +28,10 @@ public final class DetectTraps extends ToggleAbility {
 	public void exitEffect(Entity caster, Level level) {
 		for (int x = 0; x < level.getWidth(); ++x) {
 			for (int y = 0; y < level.getHeight(); ++y) {
-				level.getItem(new GridLocation(x, y)).setVisbility(true);
+				Item item = level.getItem(new GridLocation(x, y));
+				if (item != null) {
+					item.setVisbility(true);
+				}
 			}
 		}
 	}
@@ -39,7 +43,10 @@ public final class DetectTraps extends ToggleAbility {
 			GridLocation entityLocation = level.getEntityLocation(caster);
 			for (int x = entityLocation.getX() - radius; x < entityLocation.getX() + radius; ++x) {
 				for (int y = entityLocation.getY() - radius; y < entityLocation.getY() + radius; ++y) {
-					level.getItem(new GridLocation(x, y)).setVisbility(false);
+					Item item = level.getItem(new GridLocation(x, y));
+					if (item != null) {
+						item.setVisbility(true);
+					}
 				}
 			}
 		} else {

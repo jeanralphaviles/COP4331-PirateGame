@@ -71,13 +71,8 @@ public class AbilitiesViewport extends ViewPort {
     
     // -----------------------------------------------------
     private void loadAbilities(ArrayList<Ability> abilities){
-        if (abilities.size() < 3) {
-            abilities.add(new Firebolt());
-            abilities.add(new SetTrap());
-        }
-
-        Ability ability = null;
-        Component component = null;
+        Ability ability;
+        Component component;
         Component[] components = this.getComponents();
         
         //while there are still abilities (and space to display them

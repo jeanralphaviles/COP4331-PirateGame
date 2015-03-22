@@ -18,6 +18,8 @@ import model.entity.Entity;
 import model.entity.occupation.Occupation;
 import model.entity.occupation.ability.Ability;
 import model.inventory.Slot;
+import model.item.EntitySpawner;
+import model.item.InteractiveItem;
 import model.map.GridLocation;
 import model.map.Map;
 import model.map.areaeffect.HealDamageAreaEffect;
@@ -176,6 +178,8 @@ public class Model extends Thread {
             level = new Level(map, slots);
             Entity newEntity = new Entity();
             newEntity.setFriendly(false);
+            InteractiveItem entitySpawner = new EntitySpawner();
+            level.addItem(entitySpawner, new GridLocation(19, 8));
             level.addEntity(newEntity, new GridLocation(28, 5));
             levels.add(level);
         }

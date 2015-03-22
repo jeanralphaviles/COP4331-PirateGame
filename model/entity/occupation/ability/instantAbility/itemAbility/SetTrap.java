@@ -11,6 +11,8 @@ public final class SetTrap extends ItemAbility {
 	
 	public SetTrap() {
 		super(new OneShotItem(new Decal(Decal.take_damage), "Trap", new Statistics(0, 0, 0, 0, 0, 0, 0, -20, 0)), "Set Trap", new Decal(Decal.take_damage));
+		this.getItem().setVisbility(false);
+		this.setManaCost(5);
 	}
 
 	@Override

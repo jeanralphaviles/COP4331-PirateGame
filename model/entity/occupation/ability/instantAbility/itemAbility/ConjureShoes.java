@@ -10,7 +10,7 @@ import model.item.TakeableItem;
 public final class ConjureShoes extends ItemAbility {
 
 	public ConjureShoes() {
-		super(new TakeableItem(SlotCategory.FOOT, new Decal(Decal.item_default), "Conjured Shoes", new Statistics(0, 2, 2, 0, 1, 0 ,0 ,0, 0)), "Conjure Shoes", new Decal(Decal.item_default));
+		super(new TakeableItem(SlotCategory.FOOT, new Decal(Decal.shoes), "Conjured Shoes", new Statistics(0, 2, 2, 0, 1, 0 ,0 ,0, 0)), "Conjure Shoes", new Decal(Decal.item_default));
 		this.setManaCost(100);
 	}
 

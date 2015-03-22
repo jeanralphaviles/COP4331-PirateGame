@@ -9,14 +9,14 @@ public final class Boon extends StatusAbility {
 	Statistics statistics;
 	
 	public Boon() {
-		super(25, "Boon", new Decal(Decal.heal_damage));
+		super(15, "Boon", new Decal(Decal.heal_damage));
 		statistics = new Statistics(0, 0, 0, 0, 0, 0, 0, 15, 0);
 	}
 
 	@Override
 	public void activate(Entity caster, Level level) {
 		if (entityHasMana(caster)) {
-			caster.getStatistics().changeCurrentHealth(statistics.getCurrentHealth());
+			caster.getStatistics().merge(this.statistics);
 			removeEntityMana(caster);
 		}
 	}

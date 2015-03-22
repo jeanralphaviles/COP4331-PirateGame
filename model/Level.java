@@ -67,6 +67,7 @@ public class Level {
     		}
     		entity.gameStep(this);
     	}
+    	avatar.getStatistics().changeCurrentMana(15);
     }
     
     public void environmentGameStep() {
