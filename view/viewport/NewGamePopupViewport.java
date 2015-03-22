@@ -16,6 +16,7 @@ import java.awt.Paint;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import utility.ImageUtil;
 import utility.decal.Decal;
 
 public class NewGamePopupViewport extends ViewPort {
@@ -32,8 +33,8 @@ public class NewGamePopupViewport extends ViewPort {
     public static final String turnhat = "./Sprites/characters/turnHat.png";
    
     public static final String theme = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";
-    public static final String main_menu = "./Sprites/backgrounds/Pirate_Ship.png";
-    public static final String begin_game = "./Sprites/backgrounds/play_now.png";
+    public static final String main_menu = "./Sprites/backgrounds/ship1.jpeg";
+    public static final String begin_game = "./Sprites/backgrounds/gold_coin.jpeg";
     
     /*Constructor*/
     
@@ -44,28 +45,13 @@ public class NewGamePopupViewport extends ViewPort {
     }
     
     /*Methods*/
-    
     private void setBackgroundThemes(){
         
-        mainMenuButton.setIcon( getImage(main_menu,100,75));
-        beginAdventureButton.setIcon( getImage(begin_game,75,100));
-        avatarCharacterButton1.setIcon( getImage( parrotmancer) );
-        avatarCharacterButton2.setIcon( getImage( gankplanker) );
-        avatarCharacterButton3.setIcon( getImage( turnhat ) );
-    }
-    
-    private ImageIcon getImage(String fileName){
-        
-         BufferedImage bufferedImage = new Decal(fileName).getImage();
-         bufferedImage = scale(500,550,bufferedImage);
-         return new ImageIcon( bufferedImage );
-    }
-    
-      private ImageIcon getImage(String fileName, int width, int height){
-        
-         BufferedImage bufferedImage = new Decal(fileName).getImage();
-         bufferedImage = scale(width,height,bufferedImage);
-         return new ImageIcon( bufferedImage );
+        mainMenuButton.setIcon( ImageUtil.getImage(main_menu, 125,100) );
+        beginAdventureButton.setIcon( ImageUtil.getImage(begin_game,125,100));
+        avatarCharacterButton1.setIcon( ImageUtil.getImage( parrotmancer) );
+        avatarCharacterButton2.setIcon( ImageUtil.getImage( gankplanker) );
+        avatarCharacterButton3.setIcon( ImageUtil.getImage( turnhat ) );
     }
     
        @Override
@@ -99,21 +85,6 @@ public class NewGamePopupViewport extends ViewPort {
         return ims;
     }
     
-    private BufferedImage scale(int width, int height, BufferedImage image) {
-            
-            Image i = image;
-            i = getScaledImage(i, width, height);
-            return (BufferedImage) i;
-        }
-
-        private Image getScaledImage(Image srcImg, int w, int h) {
-            BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2 = resizedImg.createGraphics();
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g2.drawImage(srcImg, 0, 0, w, h, null);
-            g2.dispose();
-            return resizedImg;
-        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,8 +192,50 @@ public class NewGamePopupViewport extends ViewPort {
         jPanel1 = new javax.swing.JPanel();
         nicknameTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        beginAdventureButton = new javax.swing.JButton();
-        mainMenuButton = new javax.swing.JButton();
+        beginAdventureButton = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+
+                if (g instanceof Graphics2D) {
+                    final int R = 60;
+                    final int G = 180;
+                    final int B = 207;
+
+                    Paint p =
+                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
+                        0.0f, getHeight(), new Color(R, G, B, 255), true);
+                    Graphics2D g2d = (Graphics2D)g;
+                    g2d.setPaint(p);
+                    g2d.fillRect(0, 0, getWidth(), getHeight());
+                }
+            }
+
+        };
+        mainMenuButton = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+
+                if (g instanceof Graphics2D) {
+                    final int R = 76;
+                    final int G = 76;
+                    final int B = 76;
+
+                    Paint p =
+                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 50),
+                        0.0f, getHeight(), new Color(R, G, B, 255), true);
+                    Graphics2D g2d = (Graphics2D)g;
+                    g2d.setPaint(p);
+                    g2d.fillRect(0, 0, getWidth(), getHeight());
+                }
+            }
+
+        };
 
         jPanel3.setBackground(new java.awt.Color(230, 154, 78));
         jPanel3.setOpaque(false);
@@ -259,7 +272,11 @@ public class NewGamePopupViewport extends ViewPort {
         jScrollPane1.setOpaque(false);
 
         characterTextArea1.setColumns(20);
+        characterTextArea1.setFont(new java.awt.Font("Ubuntu", 3, 18)); // NOI18N
+        characterTextArea1.setLineWrap(true);
         characterTextArea1.setRows(5);
+        characterTextArea1.setTabSize(15);
+        characterTextArea1.setWrapStyleWord(true);
         characterTextArea1.setOpaque(false);
         jScrollPane1.setViewportView(characterTextArea1);
 
@@ -400,12 +417,14 @@ public class NewGamePopupViewport extends ViewPort {
         jLabel1.setForeground(new java.awt.Color(195, 105, 105));
         jLabel1.setText("Nickname: ");
 
+        beginAdventureButton.setBackground(new java.awt.Color(208, 208, 61));
         beginAdventureButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        beginAdventureButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 8, 8, new java.awt.Color(158, 87, 17)));
+        beginAdventureButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 8, 8, new java.awt.Color(70, 35, 1)));
         beginAdventureButton.setOpaque(true);
 
+        mainMenuButton.setBackground(new java.awt.Color(76, 76, 76));
         mainMenuButton.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        mainMenuButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 8, 8, new java.awt.Color(158, 87, 17)));
+        mainMenuButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 8, 8, new java.awt.Color(70, 35, 1)));
         mainMenuButton.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

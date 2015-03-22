@@ -67,8 +67,8 @@ public class GameScreen extends Screen {
 //        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_E), null, new Talk(), Intent.TALK, ""));
         
         //Load and Save
-        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_BACK_SLASH), null, null, Intent.SAVE, ""));
-        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_L), null, null, Intent.GOTO_LOADSAVE, ""));
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_BACK_SLASH), null, null, Intent.GOTO_LOADSAVE, ""));
+//        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_L), null, null, Intent.GOTO_LOADSAVE, ""));
         
         //Pause
 

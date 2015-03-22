@@ -198,7 +198,13 @@
                 <Component class="javax.swing.JTextArea" name="characterTextArea1">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Ubuntu" size="18" style="3"/>
+                    </Property>
+                    <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="tabSize" type="int" value="15"/>
+                    <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                 </Component>
@@ -404,33 +410,45 @@
         </Component>
         <Component class="javax.swing.JButton" name="beginAdventureButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="3d" green="d0" red="d0" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="18" style="1"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                 <MatteColorBorder bottom="8" left="1" right="8" top="1">
-                  <Color PropertyName="color" blue="11" green="57" red="9e" type="rgb"/>
+                  <Color PropertyName="color" blue="1" green="23" red="46" type="rgb"/>
                 </MatteColorBorder>
               </Border>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 60;&#xa;            final int G = 180;&#xa;            final int B = 207;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="mainMenuButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4c" green="4c" red="4c" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="18" style="1"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                 <MatteColorBorder bottom="8" left="1" right="8" top="1">
-                  <Color PropertyName="color" blue="11" green="57" red="9e" type="rgb"/>
+                  <Color PropertyName="color" blue="1" green="23" red="46" type="rgb"/>
                 </MatteColorBorder>
               </Border>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 76;&#xa;            final int G = 76;&#xa;            final int B = 76;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 50),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
