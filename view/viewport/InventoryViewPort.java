@@ -21,6 +21,7 @@ import model.entity.Avatar;
 import model.item.Item;
 import controller.IntentMap.IntentMap;
 import java.awt.image.BufferedImage;
+import utility.ImageUtil;
 import utility.decal.Decal;
 import view.viewport.ViewPort;
 
@@ -64,14 +65,8 @@ public class InventoryViewPort extends ViewPort {
     // -----------------------------------------------------
    @Override
     public void updateView(GameObject gameObject) {      
-        
-        
         Avatar avatar = gameObject.getAvatar();
-        Decal decal = avatar.getDecal();
-        BufferedImage b_image = decal.getImage();
-       
-        avatarIconLabel.setIcon( new ImageIcon( b_image ));
-         
+        
         if (refreshNeeded(avatar)) {
             
             clearAllItems();
@@ -81,6 +76,12 @@ public class InventoryViewPort extends ViewPort {
             displayEquippedInventory(avatar);
             displayInventory(avatar);
             addCommandButtonsToims();
+            
+           Decal occupationDecal =  avatar.getOccupation().getPicture();
+           ImageIcon image = new ImageIcon(occupationDecal.getImage());
+           image = ImageUtil.getImage(image, 175, 175);
+           avatarIconLabel.setIcon(image);
+           
         }
     }
    
@@ -641,21 +642,23 @@ public class InventoryViewPort extends ViewPort {
 
         avatarIconPanel.setBackground(new java.awt.Color(186, 163, 132));
 
+        avatarIconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout avatarIconPanelLayout = new javax.swing.GroupLayout(avatarIconPanel);
         avatarIconPanel.setLayout(avatarIconPanelLayout);
         avatarIconPanelLayout.setHorizontalGroup(
             avatarIconPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(avatarIconPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(avatarIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(avatarIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         avatarIconPanelLayout.setVerticalGroup(
             avatarIconPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(avatarIconPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(avatarIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(avatarIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EquippedInventoryPanelLayout = new javax.swing.GroupLayout(EquippedInventoryPanel);
@@ -687,7 +690,7 @@ public class InventoryViewPort extends ViewPort {
                                     .addComponent(Equip_Inv_Item5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Equip_Inv_Item7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(avatarIconPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(avatarIconPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(9, 9, 9)
                         .addGroup(EquippedInventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Equip_Inv_Item6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

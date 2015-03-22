@@ -29,6 +29,7 @@ public class Audio {
     
     
     public Audio() {
+        
         try {
             // Open an audio input stream.
             url = this.getClass().getResource(fightingTheStorm);
@@ -42,6 +43,7 @@ public class Audio {
         } catch (LineUnavailableException ex) {
             Logger.getLogger(Audio.class.getName()).log(Level.SEVERE, null, ex);
         }
+               
     }
 
     public Audio(URL url) {
