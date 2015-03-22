@@ -147,7 +147,11 @@ public final class GameVirtualController extends VirtualController {
     private void talk(IntentMap im) {
 //        RunGame.showErrorMessage("TALK"); //debugging
         activateAbility(im);
-        Level.getResponse().address(model);
+        try {
+            Level.getResponse().address(model);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     

@@ -6,19 +6,22 @@ import utility.decal.Decal;
 import model.entity.Statistics;
 import model.entity.occupation.ability.Ability;
 import model.entity.occupation.ability.instantAbility.Melee;
+import model.entity.occupation.ability.instantAbility.Talk;
 
 /**
  * @author Jean-Ralph Aviles
  */
 public abstract class Occupation {
 	private String occupationName;
-	private ArrayList<Ability> abilities;
+	private ArrayList<Ability> abilities = new ArrayList<Ability>(1);
 	private Decal picture;
 	
 	public Occupation(String occupationName) {
 		this.occupationName = occupationName;
-		this.abilities = new ArrayList<Ability>(1);
+                
 		this.abilities.add(new Melee());
+                this.abilities.add(new Talk());
+                
 		this.picture = new Decal(Decal.summonerPicture);
 	}
 	

@@ -47,7 +47,7 @@ public class AreaViewport extends ViewPort {
         //Determine if Update is needed
         boolean avatarMoved = !currentAvatarGridLocation.equals(oldAvatarGridLocation);
         boolean firstRender = oldAvatarGridLocation == null;   
-        boolean gameStep = false; //checkGameStepTaken();
+        boolean gameStep = checkGameStepTaken();
         boolean updateNeeded = avatarMoved || firstRender || gameStep; 
         oldAvatarGridLocation = currentAvatarGridLocation;
         
