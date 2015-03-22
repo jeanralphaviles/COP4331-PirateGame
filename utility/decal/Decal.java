@@ -12,9 +12,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.entity.occupation.Occupation;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -77,6 +79,12 @@ public class Decal {
             e.printStackTrace();
         }
         return null;
+    }
+        
+    public static Decal getImageIcon(ImageIcon imageIcon){
+        
+        BufferedImage bufferImage = (BufferedImage)imageIcon.getImage();
+        return new Decal( bufferImage );
     }
     
     public static final BufferedImage extractImage(String filename) {

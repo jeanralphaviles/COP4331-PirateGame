@@ -16,7 +16,8 @@ public abstract class Occupation {
 	private Decal picture;
 	
 	public Occupation(String occupationName) {
-		this.occupationName = occupationName;
+                
+                this.occupationName = occupationName;
 		this.abilities = new ArrayList<Ability>(1);
 		this.abilities.add(new Melee());
 		this.picture = new Decal(Decal.summonerPicture);
@@ -87,5 +88,6 @@ public abstract class Occupation {
 			}
 		}
 	}
+       
 	
 }

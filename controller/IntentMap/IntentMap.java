@@ -45,6 +45,7 @@ public class IntentMap {
         this.object = object;
         this.intent = intent;
     }
+    
 
     public IntentMap(Control control, Component component, Object object, Intent intent, String details) {
         this.control = control;
