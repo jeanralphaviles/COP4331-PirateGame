@@ -29,7 +29,11 @@ public class TradeViewport extends ViewPort {
 
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
-        return new ArrayList<IntentMap>(1);
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        
+        
+        
+        return ims;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,20 +44,29 @@ public class TradeViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        continueButton = new javax.swing.JButton();
+
+        continueButton.setText("Continue");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 505, Short.MAX_VALUE)
+                .addComponent(continueButton))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 267, Short.MAX_VALUE)
+                .addComponent(continueButton))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton continueButton;
     // End of variables declaration//GEN-END:variables
 
     
