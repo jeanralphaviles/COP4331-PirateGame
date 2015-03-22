@@ -9,6 +9,7 @@ public final class Firebolt extends ProjectileAbility {
 	
 	public Firebolt() {
 		super(10, "Firebolt", new Projectile(new Course(0, 0), new CollisionEffect(50, 1, 1), new Decal(Decal.fire)), new Decal(Decal.fire));
+                this.setManaCost(0);
 	}
 
 }

@@ -1,11 +1,13 @@
 package controller.virtualController;
 
+import application.RunGame;
 import java.awt.Color;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import java.util.ArrayList;
 import model.entity.Avatar;
+import model.entity.occupation.ability.Ability;
 import model.item.Item;
 import utility.Course;
 
@@ -24,7 +26,11 @@ public final class GameVirtualController extends VirtualController {
     @Override
     protected void action(IntentMap im) {
        
-        if ( im == null) return;
+        if ( im == null) {
+            RunGame.showErrorMessage("Null IntentMap triggered!!!");
+            return;
+        }
+        
         Intent intent = im.getIntent();
         
         switch(intent) {
@@ -39,13 +45,16 @@ public final class GameVirtualController extends VirtualController {
                 selectItem(im);
                 break;
             case EQUIP_ITEM:
-                   toggleEquip();
-                    break;
+                toggleEquip();
+                break;
             case UNEQUIP_ITEM:
                   toggleUnequip();
                 break;
             case DROP_ITEM:
                 toggleDrop();
+                break;
+            case ACTIVATE_ABILITY:
+                activateAbility(im);
                 break;
             default:
                 break;
@@ -125,6 +134,11 @@ public final class GameVirtualController extends VirtualController {
             
         }
         
+    }
+    
+    private void activateAbility(IntentMap im) {
+        Ability ability = (Ability)im.getObject();
+        model.activateAvatarAbility(ability);
     }
     
     

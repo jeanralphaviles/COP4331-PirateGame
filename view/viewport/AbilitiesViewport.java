@@ -5,6 +5,8 @@
  */
 package view.viewport;
 
+import controller.Intent;
+import controller.IntentMap.IntentMap;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
@@ -17,12 +19,119 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.GameObject;
 import model.entity.occupation.ability.Ability;
+import model.entity.occupation.ability.instantAbility.itemAbility.SetTrap;
+import model.entity.occupation.ability.instantAbility.projectile.Firebolt;
 
 /**
  *
  * @author darien
  */
 public class AbilitiesViewport extends ViewPort {
+    
+    /*Properties*/
+    
+    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+    //
+    private int mostRecentNumAbilities = -1; //nonsense value to ensure first update
+    
+    /*Constructors*/
+    
+    public AbilitiesViewport() {
+        initComponents();
+    }
+    
+    /*Methods*/
+    
+    // -----------------------------------------------------
+   @Override
+    public void updateView(GameObject gameObject) {      
+        
+        ArrayList<Ability> abilities = gameObject.getAvatar().getAbilities();
+        
+        if (refreshNeeded(abilities)) {
+            loadAbilities(abilities);
+        }
+      
+    }
+    
+    @Override
+    public ArrayList<IntentMap> generateIntentMapping() {
+        return ims;
+    } 
+    
+    private boolean refreshNeeded(ArrayList<Ability> abilities) {
+        int numAbilities = abilities.size();
+        if (numAbilities != mostRecentNumAbilities) {
+            refreshControllerNeeded = true;
+        } else {
+            refreshControllerNeeded = false;
+        }
+        return refreshControllerNeeded;
+    }
+    
+    // -----------------------------------------------------
+    private void loadAbilities(ArrayList<Ability> abilities){
+        if (abilities.size() < 3) {
+            abilities.add(new Firebolt());
+            abilities.add(new SetTrap());
+        }
+
+        Ability ability = null;
+        Component component = null;
+        Component[] components = this.getComponents();
+        
+        //while there are still abilities (and space to display them
+        for (int i=0; i<components.length && i<abilities.size(); i++ ){
+            component = components[i];
+            ability = abilities.get(i);
+            
+            if ( component instanceof JPanel ){
+                
+                JPanel panel = (JPanel)component;
+
+                loadAbilitiesIntoPanel(ability, panel);
+            }
+            
+        }
+       
+    }
+   
+    private void loadAbilitiesIntoPanel(Ability ability, JPanel panel) {
+        Component[] components = panel.getComponents();
+        Component component = null;
+        
+        for (int i=0; i<components.length; i++) {
+
+            component = components[i];
+            
+            if ( component instanceof JButton){
+
+                JButton button = (JButton)component;
+                //setup button visual
+                ImageIcon image = new ImageIcon( ability.getIcon().getImage() );
+                button.setIcon(image);
+                button.repaint();   
+                //setup button action
+                ims.add(new IntentMap(button, ability, Intent.ACTIVATE_ABILITY));
+            }
+            else if ( component instanceof JLabel){
+
+                JLabel nameLabel = (JLabel)component;
+                nameLabel.setText(ability.getName() );
+
+                nameLabel.repaint();
+
+            }
+            else if ( component instanceof JTextField){
+
+                JTextField manaTextField = (JTextField)component;
+                String num = Integer.toString(ability.getManaCost());
+
+                manaTextField.setText( num  );
+            }
+        }
+        
+    }
     
     public static void main(String[] args){
         
@@ -35,73 +144,7 @@ public class AbilitiesViewport extends ViewPort {
        
         
     }
-    private Object Interger;
-    public AbilitiesViewport() {
-        initComponents();
-    }
     
-    // -----------------------------------------------------
-   @Override
-    public void updateView(GameObject gameObject) {      
-        
-        loadAbilities(gameObject);
-      
-    }
-    // -----------------------------------------------------
-    private void loadAbilities(GameObject gameObject){
-        
-        ArrayList<Ability> abilities = gameObject.getAvatar().getAbilities();
-        
-        for (Component i : this.getComponents() ){
-            
-            if ( i instanceof JPanel ){
-                
-                JPanel panel = (JPanel)i;
-                
-                for ( Component j : panel.getComponents() ){
-                
-                    // Prevent index out of bounds
-                    if ( abilities.size() <= 0){
-                        
-                        return;
-                    }
-                    
-                    if ( j instanceof JButton){
-                    
-                        JButton button = (JButton)j;
-                        ImageIcon image = new ImageIcon( abilities.get(0).getIcon().getImage() );
-                
-                        button.setIcon(image);
-                        button.repaint();   
-                    }
-                    else if ( j instanceof JLabel){
-                        
-                        
-                        JLabel nameLabel = (JLabel)j;
-                        nameLabel.setText(abilities.get(0).getName() );
-                       
-                        nameLabel.repaint();
-                        
-                    }
-                    else if ( j instanceof JTextField){
-                        
-                        JTextField manaTextField = (JTextField)j;
-                        String num = Integer.toString(abilities.get(0).getManaCost());
-                        
-                        manaTextField.setText( num  );
-                    }
-                }
-                
-                abilities.remove(0);
-            }
-            
-        }
-       
-        
-        
-    }
-   
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

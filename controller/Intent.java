@@ -28,4 +28,5 @@ public enum Intent {
     LISTEN,
     RESET_DEFAULT_CONTROLS,
     CAN_NOT_SAVE,
+    ACTIVATE_ABILITY
 }
