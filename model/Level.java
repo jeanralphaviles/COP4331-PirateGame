@@ -60,14 +60,19 @@ public class Level {
     }
 
     public void gameStep() {
-        Avatar avatar = getAvatar();
-        ArrayList<Entity> entities = getEntities();
-        for (Entity entity : entities) {
-            if (entity != avatar) {
-                advanceEntity(entity);
-            }
-            entity.gameStep(this);
-        }
+    	Avatar avatar = getAvatar();
+    	ArrayList<Entity> entities = getEntities();
+    	for (Entity entity : entities) {
+    		if (entity != avatar) {
+    			advanceEntity(entity);
+    			if (entity.isDead()) {
+    				removeEntity(entity);
+    				return;
+    			}
+    		}
+    		entity.gameStep(this);
+    	}
+    	avatar.getStatistics().changeCurrentMana(15);
     }
 
     public void environmentGameStep() {
@@ -346,42 +351,42 @@ public class Level {
     }
 
     public void moveProjectile(Projectile projectile, GridLocation destination) {
-        if (isValidGridLocation(destination)) {
-            removeProjectile(projectile);
-            addProjectile(projectile, destination);
-            if (!isPassable(projectile, destination) || getEntity(destination) != null) {
-                triggerProjectileEffect(projectile);
-                removeProjectile(projectile);
-            }
-        }
+    	if (isValidGridLocation(destination)) {
+    		removeProjectile(projectile);
+    		addProjectile(projectile, destination);
+    		if (!isPassable(projectile, destination) || getEntity(destination) != null) {
+    			triggerProjectileEffect(projectile);
+    			removeProjectile(projectile);
+    		}
+    	}
     }
 
-    public boolean isPassable(Projectile projectile, GridLocation gridLocation) {
-        if (isValidGridLocation(gridLocation)) {
-            if (map.getMaptile(gridLocation) != null) {
-                return map.getMaptile(gridLocation).isPassable(projectile);
-            }
-        }
-        return false;
-    }
+	public boolean isPassable(Projectile projectile, GridLocation gridLocation) {
+		if (isValidGridLocation(gridLocation)) {
+			if (map.getMaptile(gridLocation) != null) {
+				return map.getMaptile(gridLocation).isPassable(projectile);
+			}
+		}
+		return false;
+	}
 
-    public void triggerProjectileEffect(Projectile projectile) {
-        GridLocation projectileLocation = getProjectileLocation(projectile);
-        if (projectileLocation != null) {
-            int radius = projectile.getEffectRadius() - 1;
-            for (int x = projectileLocation.getX() - radius; x <= projectileLocation.getX() + radius; ++x) {
-                for (int y = projectileLocation.getY() - radius; y < projectileLocation.getY() + radius; ++y) {
-                    GridLocation target = new GridLocation(x, y);
-                    if (isValidGridLocation(target)) {
-                        if (getEntity(target) != null) {
-                            int distance = Math.max(Math.abs(x - projectileLocation.getX()), Math.abs(y - projectileLocation.getY()));
-                            projectile.triggerEffect(getEntity(target), distance);
-                            getEntity(target).setFriendly(false);
-                        }
-                    }
-                }
-            }
-        }
+	public void triggerProjectileEffect(Projectile projectile) {
+    	GridLocation projectileLocation = getProjectileLocation(projectile);
+    	if (projectileLocation != null) {
+    		int radius = projectile.getEffectRadius() - 1;
+    		for (int x = projectileLocation.getX() - radius; x <= projectileLocation.getX() + radius; ++x) {
+    			for (int y = projectileLocation.getY() - radius; y <= projectileLocation.getY() + radius; ++y) {
+    				GridLocation target = new GridLocation(x, y);
+    				if (isValidGridLocation(target)) {
+    					if (getEntity(target) != null) {
+    						int distance = Math.max(Math.abs(x - projectileLocation.getX()), Math.abs(y - projectileLocation.getY()));
+    						projectile.triggerEffect(getEntity(target), distance);
+    						getEntity(target).setFriendly(false);
+    					}
+    				}
+    			}
+    		}
+    	}
     }
 
     public Projectile removeProjectile(Projectile projectile) {

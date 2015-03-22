@@ -27,6 +27,7 @@ public class Avatar extends Entity {
         this.storeItem(stick);
         this.storeItem(arch);
         this.equipItem(bazzuca);
+        this.setStatistics(new Statistics());
     }
 
     public Avatar(Occupation occupation, Decal decal) {

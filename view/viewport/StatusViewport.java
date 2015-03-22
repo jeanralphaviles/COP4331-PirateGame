@@ -53,7 +53,7 @@ public class StatusViewport extends ViewPort {
         int health = statistics.getCurrentHealth();
         int maxHealth = statistics.getMaxHealth();
         int mana = statistics.getCurrentMana();
-        int maxMana = 100;
+        int maxMana = statistics.getMaxMana();
         int level = statistics.getLevel();
         int livesLeft = statistics.getLivesLeft(); 
         int offense = statistics.getOffensiveRating();
@@ -108,6 +108,8 @@ public class StatusViewport extends ViewPort {
     }
     
     public void updateProgressBars (int health, int mana, int maxHealth, int maxMana) {
+    	healthBar.setStringPainted(true);
+    	manaBar.setStringPainted(true);
         healthBar.setMaximum(maxHealth);
         manaBar.setMaximum(maxMana);
         healthBar.setValue(health);

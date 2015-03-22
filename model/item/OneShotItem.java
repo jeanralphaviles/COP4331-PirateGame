@@ -24,7 +24,7 @@ public class OneShotItem extends Item implements Cloneable {
 
     @Override
 	public void triggerProximity(Entity entity, Level level) {
-    	entity.getStatistics().changeCurrentHealth(100);
+    	entity.getStatistics().merge(getStatistics());
     }
 
 	@Override
