@@ -228,6 +228,28 @@ public class Entity {
         public Response getResponse() {
             return response;
         }
+        
+        public String[] getInspectionDetails () {  
+            String[] details = new String[3];
+        
+            details[0] = "Occupation: " + getOccupation().getOccupationName();
+            details[1] = "Health: " + getStatistics().getCurrentHealth() + "\nMana: " + getStatistics().getCurrentMana();
+            details[2] = constructStatsString();
+        
+            return details;
+        }
+
+        public String constructStatsString() {
+            Statistics stats = getStatistics();
+        
+            String statsString = "Statistics:";
+            statsString += ("\nStrength: " + stats.getStrength());
+            statsString += ("\nAgility: " + stats.getAgility());
+            statsString += ("\nIntellect: " + stats.getIntellect());
+            statsString += ("\nHardiness: " + stats.getHardiness());
+        
+            return statsString;
+        }
 
 	public static void main(String[] args) {
 		Entity orig = new Entity(new Decal(Decal.summoner));
