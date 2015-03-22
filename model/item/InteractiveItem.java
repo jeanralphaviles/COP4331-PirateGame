@@ -8,7 +8,7 @@ import utility.decal.Decal;
 public class InteractiveItem extends Item implements Cloneable {
 
     public InteractiveItem() {
-        super(new Decal(Decal.item_default), Category.INTERACTIVE_ITEM);
+        super(new Decal(Decal.interactive_item), Category.INTERACTIVE_ITEM);
     }
 
     public InteractiveItem(Decal decal) {

@@ -16,9 +16,9 @@ public abstract class Occupation {
 	private ArrayList<Ability> abilities = new ArrayList<Ability>(1);
 	private Decal picture;
 	
-	public Occupation(String occupationName) {
-		this.occupationName = occupationName;
-                
+	public Occupation(String occupationName) {                
+                this.occupationName = occupationName;
+		this.abilities = new ArrayList<Ability>(1);
 		this.abilities.add(new Melee());
                 this.abilities.add(new Talk());
                 
@@ -90,5 +90,6 @@ public abstract class Occupation {
 			}
 		}
 	}
+       
 	
 }

@@ -12,9 +12,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.entity.occupation.Occupation;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -43,6 +45,10 @@ public class Decal {
     public static final String map = "./Sprites/item/I_Map.png";
     public static final String entity_spawner = "./Sprites/item/S_Holy02.png";
     public static final String shoes = "./Sprites/item/A_Shoes02.png";
+    public static final String interactive_item = "./Sprites/item/S_Water07.png";
+    public static final String obstacle_item = "./Sprites/item/I_Rock05.png";
+    public static final String one_shot_item ="./Sprites/item/I_C_Banana.png";
+    public static final String takeable_item = "./Sprites/item/W_Mace004.png";
         //Misc
     public static final String blank = "blank"; 
 
@@ -73,6 +79,12 @@ public class Decal {
             e.printStackTrace();
         }
         return null;
+    }
+        
+    public static Decal getImageIcon(ImageIcon imageIcon){
+        
+        BufferedImage bufferImage = (BufferedImage)imageIcon.getImage();
+        return new Decal( bufferImage );
     }
     
     public static final BufferedImage extractImage(String filename) {

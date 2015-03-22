@@ -33,7 +33,7 @@ public class KeyboardController extends PhysicalController {
     }
     
     public void activateRebindMode() {
-            rebindMode = true;
+        rebindMode = true;
     }
 
     /*Get-Sets*/
@@ -58,7 +58,7 @@ public class KeyboardController extends PhysicalController {
                     reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
                     //label key appropriately
                     JButton button = (JButton)ri.component;
-                    button.setText(e.getKeyChar() + "");
+                    button.setText(KeyEvent.getKeyText(keyCode));
                     rebindMode = false; //remember to do this /*Derpy face*/
                 } else { //process key press as usual
                     if (enabled) {

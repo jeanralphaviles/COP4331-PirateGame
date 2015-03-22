@@ -10,7 +10,9 @@ import model.entity.occupation.ability.instantAbility.status.Boon;
  * @author Jean-Ralph Aviles
  */
 public class Summoner extends Occupation {
-
+    
+    public static final String description = "Category: Summoner\nThis the third best of the characters\nEnjoy";
+    
     public Summoner() {
         super("Summoner");
         this.getAbilities().add(new Firebolt());

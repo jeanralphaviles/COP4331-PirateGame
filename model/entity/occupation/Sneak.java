@@ -10,7 +10,8 @@ import model.entity.occupation.ability.toggleAbility.DetectTraps;
  * @author Jean-Ralph Aviles
  */
 public class Sneak extends Occupation {
-
+    
+    public static final String description = "Category: Sneak\nThis the second best of the characters\nEnjoy";
     public Sneak() {
         super("Sneak");
         this.getAbilities().add(new SetTrap());

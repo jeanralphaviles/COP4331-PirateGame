@@ -7,7 +7,7 @@ import utility.decal.Decal;
 
 public class OneShotItem extends Item implements Cloneable {
     public OneShotItem() {
-        super(new Decal(Decal.item_default), Category.ONE_SHOT_ITEM);
+        super(new Decal(Decal.one_shot_item), Category.ONE_SHOT_ITEM);
     }
     
     public OneShotItem(Decal decal) {
