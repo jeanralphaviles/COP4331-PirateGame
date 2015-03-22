@@ -52,9 +52,6 @@ public class KeyboardController extends PhysicalController {
         public boolean postProcessKeyEvent(KeyEvent e) {
             int keyCode = e.getKeyCode();
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                if (keyCode == KeyEvent.VK_DOWN) {
-                    RunGame.showErrorMessage("Working as intended");
-                }
                 if (rebindMode) { //if you want to handle listening for the rebinding key
                     OptionsVirtualController ovc = ((OptionsVirtualController)virtualController);
                     RebindInfo ri = ovc.getRebindInfo();
