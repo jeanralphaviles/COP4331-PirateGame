@@ -38,7 +38,6 @@ public final class OptionsVirtualController extends VirtualController {
                 rebindInfo = (RebindInfo)im.getObject(); //aux will retrieve it
                 //Tell the keyboard controller to capture key to rebind to next key pressed
                 controller.activateRebindMode(); //sets to rebind mode
-                //
                 break;
             default:
                 break;

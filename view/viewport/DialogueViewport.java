@@ -70,14 +70,13 @@ public class DialogueViewport extends ViewPort {
         dialogueTextView.setBackground(new java.awt.Color(0, 51, 51));
         dialogueTextView.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         dialogueTextView.setForeground(new java.awt.Color(255, 255, 255));
-        dialogueTextView.setHorizontalAlignment(SwingConstants.CENTER);
+        dialogueTextView.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         dialogueTextView.setText("Dialogue");
         dialogueTextView.setAlignmentX(Component.LEFT_ALIGNMENT);
         dialogueTextView.setAlignmentY(Component.CENTER_ALIGNMENT);
         dialogueTextView.setBorder(null);
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });
@@ -86,17 +85,20 @@ public class DialogueViewport extends ViewPort {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(600, Short.MAX_VALUE)
-                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(dialogueTextView)
+            .addComponent(dialogueTextView, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
