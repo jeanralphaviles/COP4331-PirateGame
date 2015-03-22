@@ -6,6 +6,7 @@ import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.GameObject;
 import model.Model;
+import model.Model.Mode;
 import view.viewport.ViewPort;
 
 public abstract class Screen {
@@ -20,6 +21,7 @@ public abstract class Screen {
 
     public Screen(Model model) {
         this.model = model;
+        model.setMode(Mode.PAUSE);
         init();
     }
 

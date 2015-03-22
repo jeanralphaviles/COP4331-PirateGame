@@ -31,6 +31,13 @@ public abstract class Ability {
 	}
 	
 	public abstract void activate(Entity caster, Level level);
+        
+        @Override
+        public boolean equals(Object object) {
+            Ability ability = (Ability)object;
+            boolean sameName = this.name.equals(ability.getName());
+            return sameName;
+        }
 	
 	public boolean entityHasMana(Entity entity) {
 		return entity.getDerivedStatistics().getCurrentMana() >= manaCost;

@@ -8,6 +8,7 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.control.KeyboardControl;
 import java.awt.event.KeyEvent;
+import model.Model.Mode;
 import model.entity.occupation.ability.instantAbility.Talk;
 import utility.Course;
 import view.viewport.GameScreenViewport;
@@ -16,6 +17,7 @@ public class GameScreen extends Screen {
 
     public GameScreen(Model model) {
         super(model);
+        model.setMode(Mode.RUN);
     }
     
     @Override
@@ -64,7 +66,7 @@ public class GameScreen extends Screen {
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_RIGHT), null, new Course(Course.right), Intent.MOVE, ""));
         
         //Talk
-//        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_E), null, new Talk(), Intent.TALK, ""));
+        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_E), null, new Talk(), Intent.TALK, ""));
         
         //Load and Save
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_BACK_SLASH), null, null, Intent.GOTO_LOADSAVE, ""));

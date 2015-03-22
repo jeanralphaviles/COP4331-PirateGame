@@ -42,7 +42,6 @@ import view.viewport.AreaViewport;
 public class Model extends Thread {
 
     /*Properties*/
-    
     private GameObject gameObject;
     private UtilityData utilityData;
     private Screen currentScreen;
@@ -53,9 +52,11 @@ public class Model extends Thread {
     private static final int second = 1000; //ms
     private static final int environmentsStepUpdatesPerSecond = 3; //stuff like projectiles
     private static final int gameStepUpdatesPerSecond = 3; //stuff like npc AI
+    private static final int tolerance = 20; //window for checking if an update should occur
+    //
+    private Mode mode = new  RunMode(); //new PauseMode();
 
     /*Constructors*/
-    
     public Model() {
         Avatar avatar = new Avatar();
         this.gameObject = new GameObject(avatar);
@@ -64,7 +65,6 @@ public class Model extends Thread {
     }
 
     /*Methods*/
-    
     public void launch(int updatesPerSecond, String saveName) {
         this.viewUpdatesPerSecond = updatesPerSecond;
         launchFirstScreen();
@@ -91,7 +91,7 @@ public class Model extends Thread {
     public boolean moveAvatar(Course course) {
         return this.gameObject.moveAvatar(course);
     }
-    
+
     // TODO(jraviles) figure out what to do with these legacy functions
     public String getNextDialogue() {
         return gameObject.getLevel().getNextDialogue();
@@ -104,62 +104,45 @@ public class Model extends Thread {
     @Override
     public void run() {
         System.out.println("Model Started");
-        int tolerance = 20;
         int ms = 0; //between 0-1000, 
         while (true) {
             //mainGameLoop(ms);
             try {
                 Thread.sleep(sleepTime);
-                
+
                 //adjust ms accordingly
                 if (ms < 1000) {
                     ms += sleepTime; //increment
                 } else {
                     ms = 0; //reset
                 }
+
+                mode.executeMainGameLoop(ms);
                 
-                //Perform in main game loop on different timings
-                int viewRemainder = ms%(second/viewUpdatesPerSecond);
-                int environmentRemainder = ms%(second/environmentsStepUpdatesPerSecond);
-                int gameStepRemainder = ms%(second/gameStepUpdatesPerSecond);
-                
-                if (viewRemainder > 0 && viewRemainder < tolerance) { // View Timer
-                    updateView();
-                    refreshController();
-                }
-                
-                if (environmentRemainder > 0 && environmentRemainder < tolerance) { // Environment Timer
-                    this.gameObject.environmentGameStep();
-                    AreaViewport.registerGameStep();
-                }
-                
-                if (gameStepRemainder > 0 && gameStepRemainder < tolerance) { // Game step timer
-                    this.gameObject.gameStep();
-                    AreaViewport.registerGameStep();
-                    if (this.gameObject.getAvatar().isDead()) {
-                    	// Launch Popup
-                    	RunGame.showErrorMessage("You have died. Insert coin to continue!");
-                    	// Give avatar some more lives
-                    	this.gameObject.getAvatar().getStatistics().changeCurrentHealth(1000);
-                    	this.gameObject.getAvatar().getStatistics().changeLivesLeft(1);
-                    }
-                }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-    
+
     public void activateAvatarAbility(Ability ability) {
-    	this.gameObject.activateAvatarAbility(ability);
+        this.gameObject.activateAvatarAbility(ability);
     }
-    
+
     public ArrayList<Ability> getAvatarAbilities() {
-    	return this.gameObject.getAvatar().getAbilities();
+        return this.gameObject.getAvatar().getAbilities();
+    }
+
+    public void setAvatarOccupation(Occupation occupation) {
+        this.gameObject.getAvatar().setOccupation(occupation);
+    }
+
+    public void setAvatarNickname(String nickname) {
+        this.gameObject.getAvatar().setNickname(nickname);
     }
 
     //***********************************LOAD AND SAVE STUFF*********************************************//
-    
     public void loadLevels(int numLevels, Avatar avatar) {
         if (numLevels < 1) {
             return;
@@ -190,7 +173,7 @@ public class Model extends Thread {
         levels.get(0).addEntity(avatar, avatarLocation);
         setGameObject(new GameObject(levels));
     }
-    
+
     @Override
     public String toString() {
         return "[" + gameObject.toString() + "," + utilityData.toString() + "," + viewUpdatesPerSecond + "]";
@@ -228,8 +211,7 @@ public class Model extends Thread {
         model.viewUpdatesPerSecond = Integer.parseInt(stripped.substring(start));
         return model;
     }
-    
-    
+
     public void save() {
 
         try {
@@ -341,19 +323,17 @@ public class Model extends Thread {
                 }
 
             }
-            
+
             return true;
         } catch (FileNotFoundException | NullPointerException e) {
             e.printStackTrace();
         }
-        
+
         return false;
     }
-    
-    
-    
-    //***********************************END LOAD AND SAVE STUFF*********************************************//
 
+    //***********************************END LOAD AND SAVE STUFF*********************************************//
+    /*Get-Sets*/ //for just this class
     public Screen getCurrentScreen() {
         return currentScreen;
     }
@@ -378,14 +358,104 @@ public class Model extends Thread {
         this.utilityData = utilityData;
     }
 
-    public void setAvatarOccupation(Occupation occupation) {
-        this.gameObject.getAvatar().setOccupation(occupation);
+    public void setMode(String mode) {
+        switch (mode) {
+            case Mode.PAUSE:
+                this.mode = new PauseMode();
+                break;
+            case Mode.RUN:
+                this.mode = new RunMode();
+                break;
+            default:
+                RunGame.showErrorMessage("Invalid mode: " + mode);
+                break;
+        }
+    }
+    
+    /*Inner Classes*//////////////////////////////////////////////////////////////////////////////
+    public abstract class Mode {
+        
+        /*Properties*/
+        
+        public static final String PAUSE = "PAUSE";
+        public static final String RUN = "RUN";
+        
+        /*Constructors*/
+        
+        /*Methods*/
+
+        //Perform tasks on different timings
+        public abstract void executeMainGameLoop(int ms);
+
+        protected final void updateViewOnTimer(int ms) {
+            int viewRemainder = ms % (second / viewUpdatesPerSecond);
+
+            if (viewRemainder > 0 && viewRemainder < tolerance) { // View Timer
+                updateView();
+                refreshController();
+            }
+        }
+
+        protected final void updateEnviornmentOnTimer(int ms) {
+            int environmentRemainder = ms % (second / environmentsStepUpdatesPerSecond);
+            
+            if (environmentRemainder > 0 && environmentRemainder < tolerance) { // Environment Timer
+                gameObject.environmentGameStep();
+                AreaViewport.registerGameStep();
+            }
+        }
+        
+        protected final void updateGameStepOnTimer(int ms) {
+            int gameStepRemainder = ms%(second/gameStepUpdatesPerSecond);
+            
+            if (gameStepRemainder > 0 && gameStepRemainder < tolerance) { // Game step timer
+            gameObject.gameStep();
+            AreaViewport.registerGameStep();
+            if (gameObject.getAvatar().isDead()) {
+                // Launch Popup
+                RunGame.showErrorMessage("You have died. Insert coin to continue!");
+                // Give avatar some more lives
+                gameObject.getAvatar().getStatistics().changeCurrentHealth(1000);
+                gameObject.getAvatar().getStatistics().changeLivesLeft(1);
+            }
+        }
+        }
+
     }
 
-    public void setAvatarNickname(String nickname) {
-        this.gameObject.getAvatar().setNickname(nickname);
+    private class PauseMode extends Mode {
+
+        public PauseMode() {
+            //
+        }
+        
+        @Override
+        public void executeMainGameLoop(int ms) {
+            updateViewOnTimer(ms); //just keep updating the view
+        }
+
     }
 
+    private class RunMode extends Mode {
+
+        public RunMode() {
+            //
+        }
+        
+        @Override
+        public void executeMainGameLoop(int ms) {
+            //update the view
+            updateViewOnTimer(ms); 
+            //and execute game steps
+            updateEnviornmentOnTimer(ms); //for projectiles and stuff
+            updateGameStepOnTimer(ms); //for entities
+        }
+
+    }
+    
+    /*END Inner Classes*//////////////////////////////////////////////////////////////////////////////
+
+    /*Main method for testing*/
     public static void main(String[] args) {
         Model orig = new Model();
         orig.loadLevels(1, new Avatar());
@@ -405,4 +475,5 @@ public class Model extends Thread {
             System.out.println("UpdatesPerSecond differs");
         }
     }
+
 }

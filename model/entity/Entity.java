@@ -54,6 +54,7 @@ public class Entity {
 	}
 	
 	public void activateAbility(Ability ability, Level level) {
+            boolean b = hasAbility(ability);
 		if (hasAbility(ability)) {
 			ability.activate(this, level);
 		}

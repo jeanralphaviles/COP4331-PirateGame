@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import view.viewport.DialogueScreenViewport;
+import view.viewport.TradeScreenViewport;
 
 public class TradeScreen extends Screen {
 
@@ -14,7 +15,7 @@ public class TradeScreen extends Screen {
         
     @Override
     public void createView() {
-        viewPort = new DialogueScreenViewport();
+        viewPort = new TradeScreenViewport();
     }
     
     @Override

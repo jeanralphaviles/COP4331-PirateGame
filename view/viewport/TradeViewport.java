@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import controller.Intent;
 import java.util.ArrayList;
 import model.GameObject;
 import controller.IntentMap.IntentMap;
@@ -37,7 +38,7 @@ public class TradeViewport extends ViewPort {
     public ArrayList<IntentMap> generateIntentMapping() {
         ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
         
-        
+        ims.add(new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
         
         return ims;
     }
