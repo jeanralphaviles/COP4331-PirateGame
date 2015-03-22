@@ -31,13 +31,7 @@ public class StatusViewport extends ViewPort {
     	setBackground(Color.BLACK);
         initComponents();
         initPanels();
-        initProgressBars(10, 10);
-        
-        lifeOneLabel.setVisible(false);
-        lifeTwoLabel.setVisible(false);
-        lifeThreeLabel.setVisible(false);
-        lifeFourLabel.setVisible(false);
-        lifeFiveLabel.setVisible(false); 
+        initProgressBars(10, 10); 
     }
     
     public void initPanels() {    
@@ -117,6 +111,12 @@ public class StatusViewport extends ViewPort {
     }
     
     public void updateLives(int livesLeft) {
+        lifeOneLabel.setVisible(false);
+        lifeTwoLabel.setVisible(false);
+        lifeThreeLabel.setVisible(false);
+        lifeFourLabel.setVisible(false);
+        lifeFiveLabel.setVisible(false);
+        
         if (livesLeft >= 1) {
             lifeOneLabel.setVisible(true);
         }

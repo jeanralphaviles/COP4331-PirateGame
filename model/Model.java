@@ -26,6 +26,7 @@ import model.map.Map;
 import model.map.areaeffect.HealDamageAreaEffect;
 import model.map.areaeffect.InstantDeathAreaEffect;
 import model.map.areaeffect.LevelUpAreaEffect;
+import model.map.areaeffect.OneUpAreaEffect;
 import model.map.areaeffect.TakeDamageAreaEffect;
 import model.map.areaeffect.TeleportAreaEffect;
 import utility.Course;
@@ -158,6 +159,7 @@ public class Model extends Thread {
             map.getMaptile(new GridLocation(10, 12)).setAreaEffect(new LevelUpAreaEffect());
             map.getMaptile(new GridLocation(11, 13)).setAreaEffect(new HealDamageAreaEffect());
             map.getMaptile(new GridLocation(14, 6)).setAreaEffect(new TakeDamageAreaEffect());
+            map.getMaptile(new GridLocation(13, 6)).setAreaEffect(new OneUpAreaEffect());
             Slot[][] slots = ItemGenerator.generateItems(new File("Levels/Items" + i + ".csv"), map);
             level = new Level(map, slots);
             Entity newEntity = new Entity();
