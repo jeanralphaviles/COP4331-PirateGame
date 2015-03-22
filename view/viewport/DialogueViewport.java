@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+import model.Level;
 
 /**
  *
@@ -30,7 +31,7 @@ public class DialogueViewport extends ViewPort {
 
     @Override
     public void updateView(GameObject gameObject) {
-        String dialogue = gameObject.getLevel().getCurrentDialogue();
+        String dialogue = Level.getResponse().getDialogue(); //gameObject.getLevel().getCurrentDialogue();
         dialogueTextView.setText(dialogue);
     }
 

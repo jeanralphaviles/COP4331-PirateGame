@@ -13,6 +13,8 @@ import model.entity.occupation.ability.toggleAbility.ToggleAbility;
 import model.inventory.EquippedInventory;
 import model.inventory.Inventory;
 import model.item.Item;
+import utility.response.Response;
+import utility.response.RudeResponse;
 
 /**
  * @author Jean-Ralph Aviles
@@ -26,6 +28,8 @@ public class Entity {
 	protected Course directionFacing;
 	protected static String[] dialog = {"Arrrg! Friend or foe?", "Arrg, pleasure to speak to ya", "ARRRRGGG!!!1"};
 	protected boolean friendly = true;
+        //
+        protected Response response = new RudeResponse("I have nothing to say to you...");
 	
 	public Entity() {
 		setStatistics(new Statistics());
@@ -214,6 +218,10 @@ public class Entity {
 	public void setFriendly(boolean friendly) {
 		this.friendly = friendly;
 	}
+        
+        public Response getResponse() {
+            return response;
+        }
 
 	public static void main(String[] args) {
 		Entity orig = new Entity(new Decal(Decal.summoner));

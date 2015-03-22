@@ -6,6 +6,7 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import java.util.ArrayList;
+import model.Level;
 import model.entity.Avatar;
 import model.entity.occupation.ability.Ability;
 import model.item.Item;
@@ -55,6 +56,9 @@ public final class GameVirtualController extends VirtualController {
                 break;
             case ACTIVATE_ABILITY:
                 activateAbility(im);
+                break;
+            case TALK:
+                talk(im);
                 break;
             default:
                 break;
@@ -139,6 +143,12 @@ public final class GameVirtualController extends VirtualController {
     private void activateAbility(IntentMap im) {
         Ability ability = (Ability)im.getObject();
         model.activateAvatarAbility(ability);
+    }
+    
+    private void talk(IntentMap im) {
+//        RunGame.showErrorMessage("TALK"); //debugging
+        activateAbility(im);
+        Level.getResponse().address(model);
     }
     
     

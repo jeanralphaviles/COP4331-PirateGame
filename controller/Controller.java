@@ -3,6 +3,7 @@ package controller;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import java.util.ArrayList;
+import model.Level;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
@@ -95,15 +96,22 @@ public abstract class Controller {
     }
 
     private void showNextDialogue() {
-        String dialogue = model.getNextDialogue();
-        if (dialogue != null) { //there is more dialogue to display
-            model.setDialogue(dialogue);
-        } else { //no more dialogue to display
+//        String dialogue = model.getNextDialogue();
+//        if (dialogue != null) { //there is more dialogue to display
+//            model.setDialogue(dialogue);
+//        } else { //no more dialogue to display
+//            Screen screen = model.getCurrentScreen();
+//            if (screen instanceof DialogueScreen) { //done with intro
+//                gotoGameScreen();
+//            } else { //clear dialogue field
+//                model.setDialogue("");
+//            }
+//        }
+        boolean anotherDialogueLine = Level.getResponse().advanceResponse();
+        if (!anotherDialogueLine) {
             Screen screen = model.getCurrentScreen();
             if (screen instanceof DialogueScreen) { //done with intro
                 gotoGameScreen();
-            } else { //clear dialogue field
-                model.setDialogue("");
             }
         }
     }
