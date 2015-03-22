@@ -23,9 +23,9 @@ public class Statistics implements Cloneable {
         intellect = 10;
         hardiness = 10;
         experience = 10;
-        maxHealth = 10;
-        currentHealth = 10;
-        currentMana = 10;
+        maxHealth = 100;
+        currentHealth = 100;
+        currentMana = 100;
     }
 
 	public Statistics(int livesLeft, int strength, int agility, int intellect,

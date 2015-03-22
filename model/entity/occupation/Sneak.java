@@ -1,5 +1,6 @@
 package model.entity.occupation;
 
+import utility.decal.Decal;
 import model.entity.Statistics;
 import model.entity.occupation.ability.instantAbility.itemAbility.SetTrap;
 import model.entity.occupation.ability.instantAbility.projectile.ThrowKnife;
@@ -15,6 +16,7 @@ public class Sneak extends Occupation {
         this.getAbilities().add(new SetTrap());
         this.getAbilities().add(new DetectTraps());
         this.getAbilities().add(new ThrowKnife());
+        this.setPicture(new Decal(Decal.sneakPicture));
     }
 
     @Override

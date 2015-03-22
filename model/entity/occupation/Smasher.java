@@ -1,5 +1,6 @@
 package model.entity.occupation;
 
+import utility.decal.Decal;
 import model.entity.Statistics;
 
 /**
@@ -9,6 +10,7 @@ public class Smasher extends Occupation {
 
     public Smasher() {
         super("Smasher");
+        this.setPicture(new Decal(Decal.smasherPicture));
     }
 
     @Override

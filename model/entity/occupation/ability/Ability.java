@@ -33,7 +33,7 @@ public abstract class Ability {
 	public abstract void activate(Entity caster, Level level);
 	
 	public boolean entityHasMana(Entity entity) {
-		return entity.getDerivedStatistics().getCurrentMana() > manaCost;
+		return entity.getDerivedStatistics().getCurrentMana() >= manaCost;
 	}
 	
 	public void removeEntityMana(Entity entity) {

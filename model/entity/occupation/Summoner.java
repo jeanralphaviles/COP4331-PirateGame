@@ -1,5 +1,6 @@
 package model.entity.occupation;
 
+import utility.decal.Decal;
 import model.entity.Statistics;
 import model.entity.occupation.ability.instantAbility.itemAbility.ConjureShoes;
 import model.entity.occupation.ability.instantAbility.projectile.Firebolt;
@@ -15,6 +16,7 @@ public class Summoner extends Occupation {
         this.getAbilities().add(new Firebolt());
         this.getAbilities().add(new Boon());
         this.getAbilities().add(new ConjureShoes());
+        this.setPicture(new Decal(Decal.summonerPicture));
     }
 
     @Override

@@ -2,6 +2,7 @@ package model.entity.occupation;
 
 import java.util.ArrayList;
 
+import utility.decal.Decal;
 import model.entity.Statistics;
 import model.entity.occupation.ability.Ability;
 import model.entity.occupation.ability.instantAbility.Melee;
@@ -12,11 +13,13 @@ import model.entity.occupation.ability.instantAbility.Melee;
 public abstract class Occupation {
 	private String occupationName;
 	private ArrayList<Ability> abilities;
+	private Decal picture;
 	
 	public Occupation(String occupationName) {
 		this.occupationName = occupationName;
 		this.abilities = new ArrayList<Ability>(1);
 		this.abilities.add(new Melee());
+		this.picture = new Decal(Decal.summonerPicture);
 	}
 	
 	/**
@@ -59,6 +62,14 @@ public abstract class Occupation {
 		this.abilities = abilities;
 	}
 	
+	public Decal getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Decal picture) {
+		this.picture = picture;
+	}
+
 	public static void main(String[] args) {
 		Occupation[] originals = {
 				new Smasher(),
