@@ -49,6 +49,8 @@ public class AbilitiesViewport extends ViewPort {
         ArrayList<Ability> abilities = gameObject.getAvatar().getAbilities();
         
         if (refreshNeeded(abilities)) {
+            clearIMs();
+            
             loadAbilities(abilities);
         }
       
@@ -62,11 +64,16 @@ public class AbilitiesViewport extends ViewPort {
     private boolean refreshNeeded(ArrayList<Ability> abilities) {
         int numAbilities = abilities.size();
         if (numAbilities != mostRecentNumAbilities) {
+            mostRecentNumAbilities = numAbilities;
             refreshControllerNeeded = true;
         } else {
             refreshControllerNeeded = false;
         }
         return refreshControllerNeeded;
+    }
+    
+    private void clearIMs() {
+        ims = new ArrayList<IntentMap>(1);
     }
     
     // -----------------------------------------------------

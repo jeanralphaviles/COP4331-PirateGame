@@ -8,6 +8,7 @@ import utility.decal.Decal;
 import model.entity.Avatar;
 import model.entity.Entity;
 import model.entity.occupation.ability.Ability;
+import model.entity.occupation.ability.instantAbility.Talk;
 import model.inventory.Slot;
 import model.inventory.SlotCategory;
 import model.item.Category;
@@ -173,8 +174,13 @@ public class Level {
             } else { // 50% Chance to use an Ability, won't use abilities if friendly
                 int randomAbilityIndex = rand.nextInt(entity.getAbilities().size());
                 Ability ability = entity.getAbilities().get(randomAbilityIndex);
-                entity.getStatistics().changeCurrentMana(100); // Ensure entities always have mana
-                entity.activateAbility(ability, this);
+                if (ability instanceof Talk) {
+                    //ignore it
+                } else {
+                    entity.getStatistics().changeCurrentMana(100); // Ensure entities always have mana
+                    entity.activateAbility(ability, this);
+                }
+                
             }
         }
     }
