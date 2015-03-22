@@ -99,6 +99,17 @@ public class Avatar extends Entity {
 	            break;
 	    }
 	}
+        
+    @Override
+    public String[] getInspectionDetails () {
+        String[] details = new String[3];
+        
+        details[0] = "Name: " + getName();
+        details[1] = "Health: " + getStatistics().getCurrentHealth() + "\nMana: " + getStatistics().getCurrentMana();
+        details[2] = constructStatsString();
+        
+        return details;
+    }
 
     public static void main(String[] args) {
     	Avatar orig = new Avatar(new Smasher(), new Decal(Decal.water));
