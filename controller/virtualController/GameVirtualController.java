@@ -27,7 +27,6 @@ public final class GameVirtualController extends VirtualController {
     protected void action(IntentMap im) {
        
         if ( im == null) {
-            RunGame.showErrorMessage("Null IntentMap triggered!!!");
             return;
         }
         

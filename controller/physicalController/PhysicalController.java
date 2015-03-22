@@ -8,7 +8,6 @@ import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
 import view.screen.GameScreen;
-import view.screen.Screen;
 
 public class PhysicalController extends Controller {
 
