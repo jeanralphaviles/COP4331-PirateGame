@@ -334,6 +334,9 @@ public class Level {
     
     public void advanceProjectile(Projectile projectile) {
     	GridLocation destination = getProjectileLocation(projectile).nextGridLocation(projectile.getCourse());
+    	if (destination == null) {
+    		triggerProjectileEffect(projectile);
+    	}
     	moveProjectile(projectile, destination);
     }
     
