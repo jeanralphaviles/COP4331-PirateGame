@@ -29,7 +29,7 @@ public class TakeableItem extends Item implements Cloneable {
     }
 
     public TakeableItem(SlotCategory slotCategory) {
-        super(new Decal(Decal.item_default), Category.TAKEABLE_ITEM);
+        super(new Decal(Decal.takeable_item), Category.TAKEABLE_ITEM);
         this.slotCategory = slotCategory;
     }
 

@@ -7,7 +7,7 @@ import model.entity.Statistics;
 
 public class ObstacleItem extends Item implements Cloneable {
     public ObstacleItem() {
-       super(new Decal(Decal.item_default), Category.OBSTACLE_ITEM);
+       super(new Decal(Decal.obstacle_item), Category.OBSTACLE_ITEM);
     }
     
     public ObstacleItem(Decal decal) {
