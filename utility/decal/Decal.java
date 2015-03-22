@@ -49,6 +49,7 @@ public class Decal {
     public static final String obstacle_item = "./Sprites/item/I_Rock05.png";
     public static final String one_shot_item ="./Sprites/item/I_C_Banana.png";
     public static final String takeable_item = "./Sprites/item/W_Mace004.png";
+    public static final String trader = "./Sprites/item/A_Armour03.png";
         //Misc
     public static final String blank = "blank"; 
 

@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 import model.entity.Avatar;
 import model.entity.Entity;
+import model.entity.Trader;
 import model.entity.occupation.Occupation;
 import model.entity.occupation.ability.Ability;
 import model.inventory.Slot;
@@ -178,9 +179,11 @@ public class Model extends Thread {
             level = new Level(map, slots);
             Entity newEntity = new Entity();
             newEntity.setFriendly(false);
+            Trader newTrader = new Trader();
             InteractiveItem entitySpawner = new EntitySpawner();
             level.addItem(entitySpawner, new GridLocation(19, 8));
             level.addEntity(newEntity, new GridLocation(28, 5));
+            level.addEntity(newTrader, new GridLocation(19, 13));
             levels.add(level);
         }
         GridLocation avatarLocation = new GridLocation(levels.get(0).getWidth() / 2, levels.get(0).getHeight() / 2);
