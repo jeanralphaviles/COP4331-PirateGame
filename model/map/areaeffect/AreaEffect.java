@@ -34,11 +34,13 @@ public abstract class AreaEffect {
 			return LevelUpAreaEffect.fromString(string);
 		} else if (string.startsWith("[TakeDamageAreaEffect")) {
 			return TakeDamageAreaEffect.fromString(string);
-		} else if (string.startsWith("[TeleportAreaEffect")) {
+		} else if (string.startsWith("[OneUpAreaEffect")) {
+                        return OneUpAreaEffect.fromString(string);
+                } else if (string.startsWith("[TeleportAreaEffect")) {
 			return TeleportAreaEffect.fromString(string);
 		} else { 
 			return NullAreaEffect.fromString(string);
-		}
+		} 
 	}
 
 	public final Decal getDecal() {
@@ -64,7 +66,8 @@ public abstract class AreaEffect {
 				new LevelUpAreaEffect(),
 				new NullAreaEffect(),
 				new TakeDamageAreaEffect(),
-				new TeleportAreaEffect()
+				new TeleportAreaEffect(),
+                                new OneUpAreaEffect()
 		};
 		AreaEffect[] copies = new AreaEffect[originals.length];
 		for (int i = 0; i < originals.length; ++i) {
