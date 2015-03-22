@@ -34,8 +34,8 @@ public class InventoryViewPort extends ViewPort {
     private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
     private int totalEquippedItems;
     private int totalInventoryItems;
-    Color SELECTED_BUTTON_COLOR;
-    Color BUTTONS_COLOR;
+    private Color SELECTED_BUTTON_COLOR;
+    private Color BUTTONS_COLOR;
     
     /**
      * Creates new form InventoryViewPort

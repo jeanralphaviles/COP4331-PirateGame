@@ -26,6 +26,8 @@ public class AreaViewport extends ViewPort {
     private boolean followAvatar = true;
     //
     private GridLocation oldAvatarGridLocation = null;
+    //
+    private static boolean gameStepTaken = false;
 
     /**
      * Creates new form AreaViewport
@@ -44,8 +46,9 @@ public class AreaViewport extends ViewPort {
         
         //Determine if Update is needed
         boolean avatarMoved = !currentAvatarGridLocation.equals(oldAvatarGridLocation);
-        boolean firstRender = oldAvatarGridLocation == null;     
-        boolean updateNeeded = avatarMoved || firstRender; // There are projectiles now avatarMoved || firstRender;
+        boolean firstRender = oldAvatarGridLocation == null;   
+        boolean gameStep = true; //checkGameStepTaken();
+        boolean updateNeeded = avatarMoved || firstRender || gameStep; 
         oldAvatarGridLocation = currentAvatarGridLocation;
         
         //Update if necessary
@@ -146,6 +149,19 @@ public class AreaViewport extends ViewPort {
         minAndMaxXYs[2] = minY;
         minAndMaxXYs[3] = maxY;
         return minAndMaxXYs;
+    }
+    
+    public static void registerGameStep() {
+        gameStepTaken = true;
+    }
+    
+    private boolean checkGameStepTaken() {
+        if (gameStepTaken) {
+            gameStepTaken = false;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*Inner classes*/

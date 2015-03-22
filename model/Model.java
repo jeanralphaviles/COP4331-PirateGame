@@ -31,6 +31,7 @@ import utility.MapGenerator;
 import utility.UtilityData;
 import view.screen.MainScreen;
 import view.screen.Screen;
+import view.viewport.AreaViewport;
 
 /**
  * @author Jean-Ralph Aviles and Carlos Vizcaino
@@ -126,10 +127,12 @@ public class Model extends Thread {
                 
                 if (environmentRemainder > 0 && environmentRemainder < tolerance) {
                     this.gameObject.environmentGameStep();
+                    AreaViewport.registerGameStep();
                 }
                 
                 if (gameStepRemainder > 0 && gameStepRemainder < tolerance) {
                     this.gameObject.gameStep();
+                    AreaViewport.registerGameStep();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
