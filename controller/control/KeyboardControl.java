@@ -29,7 +29,9 @@ public class KeyboardControl extends Control {
         return this.keyCode == keyCode;
     }
     
-    public boolean equals(KeyboardControl control) {
+    @Override
+    public boolean equals(Object object) {
+        KeyboardControl control = (KeyboardControl)object;
         return representsKey(control.getKeyCode());
     }
     

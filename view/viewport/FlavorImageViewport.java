@@ -8,18 +8,39 @@ package view.viewport;
 import java.util.ArrayList;
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+import java.net.URL;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author comcc_000
  */
 public class FlavorImageViewport extends ViewPort {
-
+    //Now with actual images™
+    private Icon image;
+    public static final String DERP = "./Sprites/flavorImages/Derp.jpg";
+    public static final String TRADER = "./Sprites/flavorImages/...";
+    // ... Put more image files here
+    
     /**
      * Creates new form FlavorImageViewport
      */
-    public FlavorImageViewport() {
+    public FlavorImageViewport() {	
         initComponents();
+        image = getIcon(DERP);
+    	if (image != null) {
+            imageLabel.setIcon(image);
+        }
+    }
+    
+    //Can initialize using static constants from this class
+    public FlavorImageViewport(String fileName) {	
+        initComponents();
+        image = getIcon(fileName);
+    	if (image != null) {
+            imageLabel.setIcon(image);
+        }
     }
     
     @Override
@@ -31,6 +52,13 @@ public class FlavorImageViewport extends ViewPort {
     public ArrayList<IntentMap> generateIntentMapping() {
         return new ArrayList<IntentMap>(1);
     }
+    
+    private Icon getIcon(String fileName) {
+        URL url = ClassLoader.getSystemClassLoader().getResource(fileName);
+        Icon icon = new ImageIcon(url);
+        return icon;
+    }
+              
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,23 +68,30 @@ public class FlavorImageViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(0, 51, 51));
+        imageLabel = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addComponent(imageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel imageLabel;
     // End of variables declaration//GEN-END:variables
-
-    
+  
+    public static void main(String[] args) {
+        //
+    }
 }
+
+
