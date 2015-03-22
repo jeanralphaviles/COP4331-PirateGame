@@ -37,10 +37,10 @@ public class GameScreenViewport extends ViewPort {
     }
     
     // Attributes:
-    InventoryViewPort inventoryViewport;
-    AreaViewport areaViewport;
-    StatusViewport statusViewport;
-    AbilitiesViewport abilitiesViewport;
+    private InventoryViewPort inventoryViewport;
+    private AreaViewport areaViewport;
+    private StatusViewport statusViewport;
+    private AbilitiesViewport abilitiesViewport;
     
     // Default Constructor
     public GameScreenViewport() {

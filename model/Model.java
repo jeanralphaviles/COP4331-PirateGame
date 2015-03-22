@@ -125,7 +125,7 @@ public class Model extends Thread {
                 }
                 
                 if (environmentRemainder > 0 && environmentRemainder < tolerance) {
-                	this.gameObject.environmentGameStep();
+                    this.gameObject.environmentGameStep();
                 }
                 
                 if (gameStepRemainder > 0 && gameStepRemainder < tolerance) {

@@ -39,12 +39,7 @@ public class LoadPopUpViewport extends LoadSavePopUpViewport {
      
     @Override
     public void updateView(GameObject gameObject) {
-        
-       if (errorMessageFrame != null){ 
-           
-           errorMessageFrame.setVisible(true);
-           errorMessageFrame = null;
-       }
+
     }
     
     @Override

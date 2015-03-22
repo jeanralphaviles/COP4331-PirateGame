@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import application.RunGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -86,12 +87,7 @@ public class LoadSavePopUpViewport extends ViewPort {
     
     @Override
     public void updateView(GameObject gameObject) {
-        
-       if (errorMessageFrame != null){ 
-           
-           errorMessageFrame.setVisible(true);
-           errorMessageFrame = null;
-       }
+
     }
     
     @Override
@@ -162,8 +158,7 @@ public class LoadSavePopUpViewport extends ViewPort {
            jScrollPane3.setViewportView(playerRecordsTreePanel);
         }
         catch (FileNotFoundException e){
-            
-            errorMessageFrame = new ErrorMessageFrame(e.getMessage());
+            RunGame.showErrorMessage(e.getMessage());
         }
     }
     

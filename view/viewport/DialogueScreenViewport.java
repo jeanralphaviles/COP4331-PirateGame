@@ -72,13 +72,12 @@ public class
         FlavorImagePanel = new javax.swing.JPanel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-			public void componentResized(java.awt.event.ComponentEvent evt) {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });
 
-        DialoguePanel.setBackground(new java.awt.Color(255, 255, 255));
+        DialoguePanel.setBackground(new java.awt.Color(102, 255, 255));
         DialoguePanel.setForeground(new java.awt.Color(255, 255, 255));
         DialoguePanel.setToolTipText("");
         DialoguePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -88,31 +87,31 @@ public class
         DialoguePanel.setLayout(DialoguePanelLayout);
         DialoguePanelLayout.setHorizontalGroup(
             DialoguePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGap(0, 861, Short.MAX_VALUE)
         );
         DialoguePanelLayout.setVerticalGroup(
             DialoguePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 372, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        FlavorImagePanel.setBackground(new java.awt.Color(0, 51, 51));
+        FlavorImagePanel.setBackground(new java.awt.Color(255, 0, 153));
 
         javax.swing.GroupLayout FlavorImagePanelLayout = new javax.swing.GroupLayout(FlavorImagePanel);
         FlavorImagePanel.setLayout(FlavorImagePanelLayout);
         FlavorImagePanelLayout.setHorizontalGroup(
             FlavorImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGap(0, 861, Short.MAX_VALUE)
         );
         FlavorImagePanelLayout.setVerticalGroup(
             FlavorImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 372, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGap(0, 861, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(DialoguePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +119,7 @@ public class
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 372, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(DialoguePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

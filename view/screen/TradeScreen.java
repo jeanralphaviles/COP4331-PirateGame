@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import view.viewport.DialogueScreenViewport;
-import view.viewport.TradeScreenViewport;
 
-public class DialogueScreen extends Screen {
+public class TradeScreen extends Screen {
 
-    public DialogueScreen(Model model) {
+    public TradeScreen(Model model) {
         super(model);
     }
         

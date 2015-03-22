@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import model.Model;
 import model.entity.Avatar;
 import view.viewport.MainWindow;
@@ -70,6 +71,10 @@ public class RunGame {
 
     public static void launchModel(int updatesPerSecond) {
         model.launch(updatesPerSecond, null);
+    }
+    
+    public static void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(null, message,"ERROR MESSAGE",JOptionPane.WARNING_MESSAGE);
     }
     
     /*Get-Sets*/
