@@ -60,6 +60,10 @@ public class Level {
     	for (Entity entity : entities) {
     		if (entity != avatar) {
     			advanceEntity(entity);
+    			if (entity.isDead()) {
+    				removeEntity(entity);
+    				return;
+    			}
     		}
     		entity.gameStep(this);
     	}
@@ -365,7 +369,7 @@ public class Level {
     	if (projectileLocation != null) {
     		int radius = projectile.getEffectRadius() - 1;
     		for (int x = projectileLocation.getX() - radius; x <= projectileLocation.getX() + radius; ++x) {
-    			for (int y = projectileLocation.getY() - radius; y < projectileLocation.getY() + radius; ++y) {
+    			for (int y = projectileLocation.getY() - radius; y <= projectileLocation.getY() + radius; ++y) {
     				GridLocation target = new GridLocation(x, y);
     				if (isValidGridLocation(target)) {
     					if (getEntity(target) != null) {

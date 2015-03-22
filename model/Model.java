@@ -120,19 +120,26 @@ public class Model extends Thread {
                 int environmentRemainder = ms%(second/environmentsStepUpdatesPerSecond);
                 int gameStepRemainder = ms%(second/gameStepUpdatesPerSecond);
                 
-                if (viewRemainder > 0 && viewRemainder < tolerance) {
+                if (viewRemainder > 0 && viewRemainder < tolerance) { // View Timer
                     updateView();
                     refreshController();
                 }
                 
-                if (environmentRemainder > 0 && environmentRemainder < tolerance) {
+                if (environmentRemainder > 0 && environmentRemainder < tolerance) { // Environment Timer
                     this.gameObject.environmentGameStep();
                     AreaViewport.registerGameStep();
                 }
                 
-                if (gameStepRemainder > 0 && gameStepRemainder < tolerance) {
+                if (gameStepRemainder > 0 && gameStepRemainder < tolerance) { // Game step timer
                     this.gameObject.gameStep();
                     AreaViewport.registerGameStep();
+                    if (this.gameObject.getAvatar().isDead()) {
+                    	// Launch Popup
+                    	RunGame.showErrorMessage("You have died. Insert coin to continue!");
+                    	// Give avatar some more lives
+                    	this.gameObject.getAvatar().getStatistics().changeCurrentHealth(1000);
+                    	this.gameObject.getAvatar().getStatistics().changeLivesLeft(1);
+                    }
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -34,6 +34,7 @@ public class Entity {
 		setEquippedInventory(new EquippedInventory());
 		setDecal(new Decal(Decal.smasher));
 		setDirectionFacing(new Course(1, 1));
+		getStatistics().setLivesLeft(1);
 	}
 	
 	public Entity(Decal decal) {
@@ -81,6 +82,10 @@ public class Entity {
 				((ToggleAbility)ability).tick(this, level);
 			}
 		}
+	}
+	
+	public boolean isDead() {
+		return statistics.isDead();
 	}
 
 	public Statistics getStatistics() {
