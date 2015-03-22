@@ -18,6 +18,11 @@ import utility.decal.Decal;
  */
 public class ImageUtil {
     
+    // Path for characters and backgrounds
+    public static final String trader_pic = "./Sprites/characters/DaveOnACamel.jpg";
+    public static final String trader_view_port_background = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";
+    public static final String item = "./Sprites/item/A_Armour03.png";
+    
     public static ImageIcon getImage(ImageIcon image, int width, int height){
         
          BufferedImage bufferedImage = (BufferedImage)image.getImage();

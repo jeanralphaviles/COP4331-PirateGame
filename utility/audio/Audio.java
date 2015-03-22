@@ -76,7 +76,6 @@ public class Audio {
         } catch (LineUnavailableException ex) {
             Logger.getLogger(Audio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
      public void playMusic(){
@@ -85,7 +84,6 @@ public class Audio {
      public void stopMusic(){
         clip.stop();
      }
-     
      public static void main(String[] args) {
          Audio a = new Audio();
          a.playMusic();
