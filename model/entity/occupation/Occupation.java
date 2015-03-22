@@ -19,6 +19,7 @@ public abstract class Occupation {
 	public Occupation(String occupationName) {                
                 this.occupationName = occupationName;
 		this.abilities = new ArrayList<Ability>(1);
+                
 		this.abilities.add(new Melee());
                 this.abilities.add(new Talk());
                 
