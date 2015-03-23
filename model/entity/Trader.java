@@ -13,5 +13,7 @@ public final class Trader extends Entity {
         super(new Decal(Decal.trader));
         response = new TradeResponse();
     }
+    
+    
 
 }
