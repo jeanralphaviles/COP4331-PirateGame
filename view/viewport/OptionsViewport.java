@@ -21,6 +21,7 @@ public class OptionsViewport extends ViewPort {
     
     private static final int ARRAY_LENGTH = 14;
     private static String[] labels;
+    private static int[] keyCodes;
     
     public OptionsViewport() {
         initComponents();
@@ -35,30 +36,30 @@ public class OptionsViewport extends ViewPort {
     
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
-        ArrayList<IntentMap> ims = new ArrayList<>(1);
+        ArrayList<IntentMap> intentMap = new ArrayList<>(1);
         
         //Reassign movement keys
-        ims.add(new IntentMap(null, upButton, new RebindInfo(Intent.MOVE, new Course(Course.up), upButton, backButton) , Intent.LISTEN, ""));   
-        ims.add(new IntentMap(null, upLeftButton, new RebindInfo(Intent.MOVE, new Course(Course.left_up), upLeftButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, leftButton, new RebindInfo(Intent.MOVE, new Course(Course.left), leftButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, leftDownButton, new RebindInfo(Intent.MOVE, new Course(Course.left_down), leftDownButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, downButton, new RebindInfo(Intent.MOVE, new Course(Course.down), downButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, downRightButton, new RebindInfo(Intent.MOVE, new Course(Course.right_down), downRightButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, rightButton, new RebindInfo(Intent.MOVE, new Course(Course.right), rightButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, rightUpButton, new RebindInfo(Intent.MOVE, new Course(Course.right_up), rightUpButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, upButton, new RebindInfo(Intent.MOVE, new Course(Course.up), upButton, backButton) , Intent.LISTEN, ""));   
+        intentMap.add(new IntentMap(null, upLeftButton, new RebindInfo(Intent.MOVE, new Course(Course.left_up), upLeftButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, leftButton, new RebindInfo(Intent.MOVE, new Course(Course.left), leftButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, leftDownButton, new RebindInfo(Intent.MOVE, new Course(Course.left_down), leftDownButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, downButton, new RebindInfo(Intent.MOVE, new Course(Course.down), downButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, downRightButton, new RebindInfo(Intent.MOVE, new Course(Course.right_down), downRightButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, rightButton, new RebindInfo(Intent.MOVE, new Course(Course.right), rightButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, rightUpButton, new RebindInfo(Intent.MOVE, new Course(Course.right_up), rightUpButton, backButton), Intent.LISTEN, ""));
         
         //Reassign other keys (Intents need to be fixed)
-        ims.add(new IntentMap(null, macro1Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro1Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro2Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro2Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro3Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro3Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro4Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro4Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro5Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro5Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, saveButton, new RebindInfo(Intent.SAVE, null, saveButton, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, macro1Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro1Button, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, macro2Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro2Button, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, macro3Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro3Button, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, macro4Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro4Button, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, macro5Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro5Button, backButton), Intent.LISTEN, ""));
+        intentMap.add(new IntentMap(null, saveButton, new RebindInfo(Intent.SAVE, null, saveButton, backButton), Intent.LISTEN, ""));
         
-        ims.add(new IntentMap(backButton, Intent.GOTO_GAME));
-        ims.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
+        intentMap.add(new IntentMap(backButton, Intent.GOTO_GAME));
+        intentMap.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
         
-        return ims;
+        return intentMap;
     }
     
     public static String[] getDefaultLabels() {
@@ -101,6 +102,14 @@ public class OptionsViewport extends ViewPort {
         return buttons;
     }
     
+    public int[] getKeyCodes() {
+        return keyCodes;
+    }
+    
+    public void setKeyCodes(int keyCodeOrder, int keyCode) {
+        keyCodes[keyCodeOrder] = keyCode;
+    }
+    
     private static void setLabels(JButton[] buttons) {
         if (labels == null) labels = getDefaultLabels();
         for (int i = 0; i < ARRAY_LENGTH; ++i) {
@@ -110,7 +119,7 @@ public class OptionsViewport extends ViewPort {
 
     private static String[] getLabels() {
         if (labels == null) 
-            getDefaultLabels();
+            labels = getDefaultLabels();
         return labels;
     }
     
@@ -134,22 +143,26 @@ public class OptionsViewport extends ViewPort {
         frame.setSize(2500,2500);
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         frame.add( new OptionsViewport() );
-     
         frame.setVisible(true);
     }
     
-    /* Load/Save TODO (not priority) - MOVE TO APPROPRIATE CLASS (most likely controller) 
-    @Override
-    public String toString() {
-	return "[" + "]"; //TODO
+    public enum KeyCodeOrder {
+        UP,
+        UP_LEFT,
+        LEFT,
+        LEFT_DOWN,
+        DOWN,
+        DOWN_RIGHT,
+        RIGHT,
+        RIGHT_UP,
+        MACRO_1,
+        MACRO_2,
+        MACRO_3,
+        MACRO_4,
+        MACRO_5,
+        SAVE
     }
-
-    public static OptionsViewport fromString(String string) {
-	String stripped = string.substring(1, string.length() - 1);
-        //TODO
-	return new OptionsViewport();
-    }
-    */
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

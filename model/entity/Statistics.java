@@ -4,26 +4,18 @@ package model.entity;
  * @author Jean-Ralph Aviles
  */
 public class Statistics implements Cloneable {
-    protected int livesLeft;
-    protected int strength;
-    protected int agility;
-    protected int intellect;
-    protected int hardiness;
-    protected int experience;
-    protected int maxHealth;
-    protected int currentHealth;
-    protected int currentMana;
+    protected int livesLeft = 3;
+    protected int strength = 10;
+    protected int agility = 10;
+    protected int intellect = 60;
+    protected int hardiness = 10;
+    protected int experience = 10;
+    protected int maxHealth = 100;
+    protected int currentHealth = 100;
+    protected int currentMana = getMaxMana();
 
     public Statistics() {
-        livesLeft = 3;
-        strength = 10;
-        agility = 10;
-        intellect = 60;
-        hardiness = 10;
-        experience = 10;
-        maxHealth = 100;
-        currentHealth = 100;
-        currentMana = 200;
+        
     }
 
 	public Statistics(int livesLeft, int strength, int agility, int intellect,
@@ -153,7 +145,8 @@ public class Statistics implements Cloneable {
     }
 
     public int getMovement() {
-        return (int) (agility - (maxHealth - currentHealth) * 0.5);
+        int movement = (int)(agility - (maxHealth - currentHealth) * 0.5);
+        return  movement > 0 ? movement : 0;
     }
 
     public int getLivesLeft() {

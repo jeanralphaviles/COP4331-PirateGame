@@ -85,6 +85,10 @@ public abstract class PhysicalController extends Controller {
     
     /*Get-Sets*/
     
+    public ArrayList<IntentMap> getIntentMaps() {
+        return intentMaps;
+    }
+    
     /*Inner Classes*//////////////////////////////////////////////////////////////////////////////
     public abstract class PhysicalControllerMode {
         

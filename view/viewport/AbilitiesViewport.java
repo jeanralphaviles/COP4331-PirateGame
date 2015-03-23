@@ -31,7 +31,7 @@ public class AbilitiesViewport extends ViewPort {
     
     /*Properties*/
     
-    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+    private ArrayList<IntentMap> ims = new ArrayList<>(1);
     //
     private int mostRecentNumAbilities = -1; //nonsense value to ensure first update
     //

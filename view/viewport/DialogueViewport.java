@@ -101,15 +101,14 @@ public class DialogueViewport extends ViewPort {
 
         dialogueTextView.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         dialogueTextView.setForeground(new java.awt.Color(255, 255, 255));
-        dialogueTextView.setHorizontalAlignment(SwingConstants.CENTER);
+        dialogueTextView.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         dialogueTextView.setText("Dialogue");
         dialogueTextView.setAlignmentX(Component.LEFT_ALIGNMENT);
         dialogueTextView.setAlignmentY(Component.CENTER_ALIGNMENT);
         dialogueTextView.setBorder(null);
         dialogueTextView.setOpaque(false);
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });
@@ -148,7 +147,7 @@ public class DialogueViewport extends ViewPort {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

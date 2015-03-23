@@ -9,6 +9,8 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import model.Model;
+import utility.Course;
+import view.viewport.OptionsViewport;
 
 public class KeyboardController extends PhysicalController {
 
@@ -33,7 +35,7 @@ public class KeyboardController extends PhysicalController {
         setMode(PhysicalControllerMode.REBIND);
     }
     
-        @Override
+    @Override
     public void rebind(Control control) {
         int keyCode = ((KeyboardControl) control).getKeyCode();
         OptionsVirtualController ovc = ((OptionsVirtualController) virtualController);

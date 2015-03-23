@@ -52,9 +52,9 @@ public class LoadSaveVirtualController extends VirtualController {
         super.action(icm);
     }
     
-    private void load(IntentMap icm){
+    private void load(IntentMap im){
             
-       LoadSaveParams loadSaveComponents = (LoadSaveParams)icm.getObject();
+       LoadSaveParams loadSaveComponents = (LoadSaveParams)im.getObject();
        JTree tree = loadSaveComponents.getJTree();
         
        if (tree != null){
@@ -82,7 +82,6 @@ public class LoadSaveVirtualController extends VirtualController {
 
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
         if ( node != null && node.isLeaf() && !node.isRoot() ){
-
              return model.load( node.toString() );
         }
         

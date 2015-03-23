@@ -38,8 +38,8 @@ public final class OptionsVirtualController extends VirtualController {
                 rebindInfo = (RebindInfo)im.getObject(); //aux will retrieve it
                 //Tell the keyboard controller to capture key to rebind to next key pressed
                 JButton backButton = (JButton)rebindInfo.backButton;
-                backButton.setEnabled(false); //disable back button until a key is pressed
-                controller.activateRebindMode(); //sets to rebind mode
+                backButton.setEnabled(false);       //disable back button until a key is pressed
+                controller.activateRebindMode();    //sets to rebind mode
                 break;
             default:
                 break;
