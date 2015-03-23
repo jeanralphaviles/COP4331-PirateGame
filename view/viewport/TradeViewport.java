@@ -265,10 +265,9 @@ public class TradeViewport extends ViewPort {
         itemLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         itemLabel1.setText("Name");
         itemLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
-
         itemTextField1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         itemTextField1.setForeground(new java.awt.Color(172, 227, 25));
-        itemTextField1.setHorizontalAlignment(SwingConstants.CENTER);
+        itemTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         itemTextField1.setText("Price");
         itemTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
         itemTextField1.setOpaque(false);
@@ -412,7 +411,7 @@ public class TradeViewport extends ViewPort {
         jLabel6.setText("Name");
         jLabel6.setOpaque(true);
 
-        jTextField6.setHorizontalAlignment(SwingConstants.CENTER);
+        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("Price");
 
         jPanel10.setBackground(new java.awt.Color(149, 101, 54));
@@ -486,7 +485,7 @@ public class TradeViewport extends ViewPort {
         jLabel7.setText("Name");
         jLabel7.setOpaque(true);
 
-        jTextField7.setHorizontalAlignment(SwingConstants.CENTER);
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField7.setText("Price");
 
         jPanel11.setBackground(new java.awt.Color(149, 101, 54));
@@ -560,7 +559,7 @@ public class TradeViewport extends ViewPort {
         jLabel8.setText("Name");
         jLabel8.setOpaque(true);
 
-        jTextField8.setHorizontalAlignment(SwingConstants.CENTER);
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setText("Price");
 
         jPanel12.setBackground(new java.awt.Color(149, 101, 54));

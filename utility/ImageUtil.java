@@ -24,7 +24,7 @@ public class ImageUtil {
     public static final String item = "./Sprites/item/A_Armour03.png";
     public static final String options_viewport_background = "./Sprites/backgrounds/map_theme.jpg";
     public static final String trader_background = "./Sprites/backgrounds/desert_backgrounds.jpg";
-    
+
     // Trade Viewport Items
      public static final String blue_potion_1 = "./Sprites/item/P_Blue01.png";
      public static final String blue_potion_2 = "./Sprites/item/P_Blue02.png";
@@ -34,7 +34,7 @@ public class ImageUtil {
      
      public static final String sword_1 = "./Sprites/item/S_Sword01.png";
      public static final String dialogue_viewport_background = "./Sprites/backgrounds/blank_black_background.jpg";
-
+    
     public static ImageIcon getImage(ImageIcon image, int width, int height){
         
          BufferedImage bufferedImage = (BufferedImage)image.getImage();
