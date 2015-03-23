@@ -18,7 +18,6 @@ public class Avatar extends Entity {
     public Avatar() {
         super();
         
-        /*
         this.name = "Richard Bonehard";
         this.nickname = "Woodman";
 
@@ -33,7 +32,6 @@ public class Avatar extends Entity {
         this.storeItem(arch);
         this.equipItem(bazzuca);
         this.setStatistics(new Statistics());
-        */
         
         Weapon sword = new Weapon(Decal.createDecal(Decal.defualt_sword), "Bazzuca");
         this.storeItem( sword );
