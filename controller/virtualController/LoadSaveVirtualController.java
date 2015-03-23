@@ -62,6 +62,7 @@ public class LoadSaveVirtualController extends VirtualController {
                  
                  if ( continueButton != null && instructionLabel != null){
                      
+                     
                       instructionLabel.setText("Loading successfully");
                       instructionLabel.repaint();
                       
@@ -76,7 +77,7 @@ public class LoadSaveVirtualController extends VirtualController {
     private boolean load(JTree tree) {
 
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
-        if ( node != null && node.isLeaf() ){
+        if ( node != null && node.isLeaf() && !node.isRoot() ){
 
              return model.load( node.toString() );
         }

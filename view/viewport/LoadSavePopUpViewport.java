@@ -112,17 +112,21 @@ public class LoadSavePopUpViewport extends ViewPort {
 
     protected void createTreePanelGUI(){
     
-        
-        try {
             // This is the root of the tree
             File folder = new File("LoadSave/");
             if ( folder.exists() == false){
                 
-                throw new FileNotFoundException("LoadSave file was not found.");
+                folder.mkdir();
             }
             File[] listOfFiles = folder.listFiles();
-            
             DefaultMutableTreeNode top = new DefaultMutableTreeNode("Avatars");
+            
+            // If threre are no other directories inside LoadSave return.
+            if (listOfFiles == null){
+                
+                return;
+            }
+            
             for (File file : listOfFiles) {
 
                 if (file.isDirectory()) {
@@ -156,10 +160,7 @@ public class LoadSavePopUpViewport extends ViewPort {
            playerRecordsTreePanel.setBackground( new Color (123,38,38));
            playerRecordsTreePanel.setModel(new javax.swing.tree.DefaultTreeModel(top));
            jScrollPane3.setViewportView(playerRecordsTreePanel);
-        }
-        catch (FileNotFoundException e){
-            RunGame.showErrorMessage(e.getMessage());
-        }
+
     }
     
     protected class Sliding implements ActionListener{
