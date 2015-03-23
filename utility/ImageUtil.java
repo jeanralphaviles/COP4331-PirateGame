@@ -42,7 +42,7 @@ public class ImageUtil {
      public static final String blue_potion_2 = "./Sprites/item/P_Blue02.png";
      public static final String blue_potion_3 = "./Sprites/item/P_Blue03.png";
      public static final String blue_potion_4 = "./Sprites/item/P_Blue04.png";
-     
+
      public static final String red_potion_1 = "./Sprites/item/P_Red01.png";
      public static final String red_potion_2 = "./Sprites/item/P_Red02.png";
      public static final String red_potion_3 = "./Sprites/item/P_Red03.png";
