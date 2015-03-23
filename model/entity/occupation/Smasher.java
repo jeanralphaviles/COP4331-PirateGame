@@ -12,7 +12,7 @@ public class Smasher extends Occupation {
     
     public Smasher() {
         super("Smasher");
-        this.setPicture(new Decal(Decal.smasherPicture));
+        this.setPicture(Decal.createDecal(Decal.smasherPicture));
     }
 
     @Override

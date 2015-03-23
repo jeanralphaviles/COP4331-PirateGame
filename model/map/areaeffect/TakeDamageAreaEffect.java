@@ -11,7 +11,7 @@ public final class TakeDamageAreaEffect extends AreaEffect {
 	private int damageTaken = 3;
 	
 	public TakeDamageAreaEffect() {
-		super(new Decal(Decal.take_damage));
+		super(Decal.createDecal(Decal.take_damage));
 	}
 	
 	public TakeDamageAreaEffect(Decal decal, int damageTaken) {

@@ -10,7 +10,7 @@ public final class DetectTraps extends ToggleAbility {
 	int radius;
 	
 	public DetectTraps() {
-		super(1, "Detect Traps", new Decal(Decal.sneak));
+		super(1, "Detect Traps", Decal.createDecal(Decal.sneak));
 		this.radius = 1;
 	}
 	

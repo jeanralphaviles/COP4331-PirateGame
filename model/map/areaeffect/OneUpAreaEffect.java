@@ -16,7 +16,7 @@ import utility.decal.Decal;
 public class OneUpAreaEffect extends AreaEffect {
     
     public OneUpAreaEffect() {
-	super(new Decal(Decal.level_up));
+	super(Decal.createDecal(Decal.level_up));
     }
     
     public OneUpAreaEffect(Decal decal) {

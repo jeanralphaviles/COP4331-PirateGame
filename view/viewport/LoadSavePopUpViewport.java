@@ -75,7 +75,7 @@ public class LoadSavePopUpViewport extends ViewPort {
     protected void paintComponent(Graphics g){
         
         super.paintComponent(g);
-        ImageIcon image = new ImageIcon( new Decal("./Sprites/backgrounds/rockPirateBig.jpg").getImage());
+        ImageIcon image = new ImageIcon( Decal.createDecal("./Sprites/backgrounds/rockPirateBig.jpg").getImage());
         g.drawImage( image.getImage() , 0, 0, this.getWidth(), this.getHeight(), this);
     }
     
@@ -264,7 +264,8 @@ public class LoadSavePopUpViewport extends ViewPort {
         continueAdventureButton.setText("Continue Adventure");
         continueAdventureButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
         continueAdventureButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 continueAdventureButtonActionPerformed(evt);
             }
         });

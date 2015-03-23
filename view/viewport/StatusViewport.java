@@ -15,7 +15,6 @@ import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
 
 /**
@@ -239,7 +238,7 @@ public class StatusViewport extends ViewPort {
 
         setSize(new Dimension(443, 375));
 
-        mainStatsPanel.setBorder(new MatteBorder(4, 4, 1, 1, (Color) new Color(153, 51, 0)));
+        mainStatsPanel.setBorder(new MatteBorder(4, 4, 1, 1, new Color(153, 51, 0)));
 
         strengthLabel.setFont(new java.awt.Font("Luminari", 1, 20)); // NOI18N
         strengthLabel.setText("Strength");
@@ -305,7 +304,7 @@ public class StatusViewport extends ViewPort {
                     .addComponent(hardinessLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        healthManaPanel.setBorder(new MatteBorder(1, 4, 4, 4, (Color) new Color(153, 51, 0)));
+        healthManaPanel.setBorder(new MatteBorder(1, 4, 4, 4, new Color(153, 51, 0)));
 
         healthLabel.setFont(new java.awt.Font("Luminari", 3, 22)); // NOI18N
         healthLabel.setText("Health : ");
@@ -417,7 +416,7 @@ public class StatusViewport extends ViewPort {
         );
         healthManaPanel.setLayout(healthManaPanelLayout);
 
-        otherStatsPanel.setBorder(new MatteBorder(4, 1, 1, 4, (Color) new Color(153, 51, 0)));
+        otherStatsPanel.setBorder(new MatteBorder(4, 1, 1, 4, new Color(153, 51, 0)));
 
         offensiveRatingLabel.setFont(new java.awt.Font("Luminari", 1, 18)); // NOI18N
         offensiveRatingLabel.setText("Offensive Rating");

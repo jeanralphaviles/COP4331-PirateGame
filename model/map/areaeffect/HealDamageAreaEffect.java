@@ -11,7 +11,7 @@ public final class HealDamageAreaEffect extends AreaEffect {
     private int damageHealed = 3;
 
     public HealDamageAreaEffect() {
-        super(new Decal(Decal.heal_damage));
+        super(Decal.createDecal(Decal.heal_damage));
     }
 
     public HealDamageAreaEffect(Decal decal) {

@@ -17,11 +17,11 @@ public class Avatar extends Entity {
         this.name = "Richard Bonehard";
         this.nickname = "TestNickName";
         
-        Weapon bazzuca = new Weapon(new Decal(Decal.item_default), "Bazzuca");
-        Weapon pistol = new Weapon(new Decal(Decal.item_default), "Pistol");
-        Weapon spade = new Weapon(new Decal(Decal.item_default), "Spade");
-        Weapon stick = new Weapon(new Decal(Decal.item_default), "Stick");
-        Weapon arch = new Weapon(new Decal(Decal.item_default), "Arch");
+        Weapon bazzuca = new Weapon(Decal.createDecal(Decal.item_default), "Bazzuca");
+        Weapon pistol = new Weapon(Decal.createDecal(Decal.item_default), "Pistol");
+        Weapon spade = new Weapon(Decal.createDecal(Decal.item_default), "Spade");
+        Weapon stick = new Weapon(Decal.createDecal(Decal.item_default), "Stick");
+        Weapon arch = new Weapon(Decal.createDecal(Decal.item_default), "Arch");
         this.storeItem(pistol);
         this.storeItem(spade);
         this.storeItem(stick);
@@ -89,19 +89,19 @@ public class Avatar extends Entity {
 	    String occ = occupation.getOccupationName();
 	    switch(occ) {
 	        case "Summoner":
-	            this.decal = new Decal(Decal.summoner);
+	            this.decal = Decal.createDecal(Decal.summoner);
 	            break;
 	        case "Smasher":
-	            this.decal = new Decal(Decal.smasher);
+	            this.decal = Decal.createDecal(Decal.smasher);
 	            break;
 	        case "Sneak":
-	            this.decal = new Decal(Decal.sneak);
+	            this.decal = Decal.createDecal(Decal.sneak);
 	            break;
 	    }
 	}
 
     public static void main(String[] args) {
-    	Avatar orig = new Avatar(new Smasher(), new Decal(Decal.water));
+    	Avatar orig = new Avatar(new Smasher(), Decal.createDecal(Decal.water));
     	orig.setName("Charles");
     	orig.setNickname("Charlie");
     	Avatar restored = Avatar.fromString(orig.toString());

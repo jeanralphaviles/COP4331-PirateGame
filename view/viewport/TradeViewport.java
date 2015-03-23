@@ -6,12 +6,18 @@
 package view.viewport;
 
 import controller.Intent;
+
 import java.util.ArrayList;
+
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+
 import java.awt.Graphics;
 import java.awt.Image;
+
 import javax.swing.JFrame;
+import javax.swing.SwingConstants;
+
 import utility.ImageUtil;
 
 /**
@@ -148,7 +154,7 @@ public class TradeViewport extends ViewPort {
         jButton2.setText("Picture");
 
         jTextField2.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setHorizontalAlignment(SwingConstants.CENTER);
         jTextField2.setText("Price");
         jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
         jTextField2.setOpaque(false);
@@ -184,7 +190,7 @@ public class TradeViewport extends ViewPort {
 
         jButton3.setText("Picture");
 
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField3.setHorizontalAlignment(SwingConstants.CENTER);
         jTextField3.setText("Price");
 
         javax.swing.GroupLayout itemPanel2Layout = new javax.swing.GroupLayout(itemPanel2);
@@ -218,7 +224,7 @@ public class TradeViewport extends ViewPort {
 
         jButton6.setText("Picture");
 
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField6.setHorizontalAlignment(SwingConstants.CENTER);
         jTextField6.setText("Price");
 
         javax.swing.GroupLayout itemPanel3Layout = new javax.swing.GroupLayout(itemPanel3);
@@ -252,7 +258,7 @@ public class TradeViewport extends ViewPort {
 
         jButton7.setText("Picture");
 
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField7.setHorizontalAlignment(SwingConstants.CENTER);
         jTextField7.setText("Price");
 
         javax.swing.GroupLayout itemPanel4Layout = new javax.swing.GroupLayout(itemPanel4);
@@ -286,7 +292,7 @@ public class TradeViewport extends ViewPort {
 
         jButton8.setText("Picture");
 
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setHorizontalAlignment(SwingConstants.CENTER);
         jTextField8.setText("Price");
 
         javax.swing.GroupLayout itemPanel5Layout = new javax.swing.GroupLayout(itemPanel5);

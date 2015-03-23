@@ -70,13 +70,14 @@ public class DialogueViewport extends ViewPort {
         dialogueTextView.setBackground(new java.awt.Color(0, 51, 51));
         dialogueTextView.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         dialogueTextView.setForeground(new java.awt.Color(255, 255, 255));
-        dialogueTextView.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        dialogueTextView.setHorizontalAlignment(SwingConstants.CENTER);
         dialogueTextView.setText("Dialogue");
         dialogueTextView.setAlignmentX(Component.LEFT_ALIGNMENT);
         dialogueTextView.setAlignmentY(Component.CENTER_ALIGNMENT);
         dialogueTextView.setBorder(null);
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });

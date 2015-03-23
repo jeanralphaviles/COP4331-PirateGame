@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import model.GameObject;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
-import java.awt.Graphics;
-import javax.swing.ImageIcon;
-import utility.decal.Decal;
 
 /**
  *

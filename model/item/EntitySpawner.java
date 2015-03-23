@@ -9,7 +9,7 @@ import model.map.GridLocation;
 public final class EntitySpawner extends InteractiveItem {
 
 	public EntitySpawner() {
-		super(new Decal(Decal.entity_spawner));
+		super(Decal.createDecal(Decal.entity_spawner));
 	}
 	
 	@Override

@@ -6,7 +6,6 @@
 package view.viewport;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import model.GameObject;
 
 /**
@@ -63,7 +62,8 @@ public class TradeScreenViewport extends ViewPort {
         TradePanel = new javax.swing.JPanel();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
+            @Override
+			public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });

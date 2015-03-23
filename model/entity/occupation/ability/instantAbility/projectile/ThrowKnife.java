@@ -8,6 +8,6 @@ import utility.decal.Decal;
 public final class ThrowKnife extends ProjectileAbility {
 
 	public ThrowKnife() {
-		super(10, "Throw Knife", new Projectile(new Course(0, 0), new CollisionEffect(50, 1, 1), new Decal(Decal.fire)), new Decal(Decal.fire));
+		super(10, "Throw Knife", new Projectile(new Course(0, 0), new CollisionEffect(50, 1, 1), Decal.createDecal(Decal.fire)), Decal.createDecal(Decal.fire));
 	}
 }

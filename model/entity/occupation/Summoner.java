@@ -18,7 +18,7 @@ public class Summoner extends Occupation {
         this.getAbilities().add(new Firebolt());
         this.getAbilities().add(new Boon());
         this.getAbilities().add(new ConjureShoes());
-        this.setPicture(new Decal(Decal.summonerPicture));
+        this.setPicture(Decal.createDecal(Decal.summonerPicture));
     }
 
     @Override

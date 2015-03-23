@@ -9,7 +9,7 @@ public final class Boon extends StatusAbility {
 	Statistics statistics;
 	
 	public Boon() {
-		super(15, "Boon", new Decal(Decal.heal_damage));
+		super(15, "Boon", Decal.createDecal(Decal.heal_damage));
 		statistics = new Statistics(0, 0, 0, 0, 0, 0, 0, 15, 0);
 	}
 
