@@ -23,6 +23,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     public MainWindow() {
         initComponents();
+        setExtendedState(Frame.MAXIMIZED_BOTH); //fullscreen
     }
     
     public void displayScreen(Screen screen) {
