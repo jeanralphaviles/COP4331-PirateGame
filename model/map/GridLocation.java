@@ -23,6 +23,13 @@ public class GridLocation {
 		int y = this.getY() + course.getYDisplacement();
 		return new GridLocation(x, y);
 	}
+        
+        public int distanceFrom(GridLocation gridLocation) {
+            int xDiff = Math.abs(this.x - gridLocation.getX());
+            int yDiff = Math.abs(this.y - gridLocation.getY());
+            int distance = (int)Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+            return distance;
+        }
 
 	public boolean equals(GridLocation gridLocation) {
 		if (gridLocation != null) {
@@ -64,5 +71,9 @@ public class GridLocation {
 		if (original.getY() != restored.getY()) {
 			System.out.println("Y values differ");
 		}
+                
+                GridLocation g1 = new GridLocation(0,0);
+                GridLocation g2 = new GridLocation(5,5);
+                System.out.println(g1.distanceFrom(g2)); //should be 7
 	}
 }
