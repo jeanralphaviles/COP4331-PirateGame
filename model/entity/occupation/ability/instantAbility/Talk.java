@@ -23,7 +23,7 @@ public final class Talk extends InstantAbility {
         Entity entity = level.getEntity(enemyLocation);
         if (entity == null) { //if no entity, look for item
             Item item = level.getItem(enemyLocation);
-            if (level == null) {
+            if (item == null) {
                 return;
             } else { //talk to the item...
                 Response response = item.getResponse();

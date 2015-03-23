@@ -36,12 +36,6 @@ public class GameScreenViewport extends ViewPort {
         frame.setVisible(true);
     }
     
-    // Attributes:
-    private InventoryViewPort inventoryViewport;
-    private AreaViewport areaViewport;
-    private StatusViewport statusViewport;
-    private AbilitiesViewport abilitiesViewport;
-    
     // Default Constructor
     public GameScreenViewport() {
         
@@ -61,33 +55,41 @@ public class GameScreenViewport extends ViewPort {
     
     public void generateView(){
         
-        areaViewport = new AreaViewport();
-        inventoryViewport = new InventoryViewPort();
-        statusViewport = new StatusViewport();
-        abilitiesViewport = new AbilitiesViewport();
+        //Create the viewports to be included in the screen
+        AreaViewport areaViewport = new AreaViewport();
+        InventoryViewPort inventoryViewport = new InventoryViewPort();
+        StatusViewport statusViewport = new StatusViewport();
+        AbilitiesViewport abilitiesViewport = new AbilitiesViewport();
+        DialogueViewport dialogueViewport = new DialogueViewport();
         
-        
+        //Add viewports to their places
         this.addViewport(areaViewport);
         GamePanel.setLayout( new BorderLayout() );
         GamePanel.add( areaViewport , BorderLayout.CENTER );
-        
-       
+            //
         this.addViewport(statusViewport);
         StatisticsPanel.setLayout( new BorderLayout() );
         StatisticsPanel.add( statusViewport, BorderLayout.CENTER);
-        
+        StatisticsPanel.revalidate();
+        StatisticsPanel.repaint();
+            //
         this.addViewport( inventoryViewport );
         InventoryMainPanel.setLayout( new BorderLayout() );
         InventoryMainPanel.add( inventoryViewport , BorderLayout.CENTER );
-        
+            //
+        this.addViewport( abilitiesViewport );
+        AbilitiesPanel.setLayout( new BorderLayout() );
+        AbilitiesPanel.add( abilitiesViewport , BorderLayout.CENTER );
+            //
         this.addViewport( abilitiesViewport );
         AbilitiesPanel.setLayout( new BorderLayout() );
         AbilitiesPanel.add( abilitiesViewport , BorderLayout.CENTER );
         
-       
-        StatisticsPanel.revalidate();
-        StatisticsPanel.repaint();
+        this.addViewport( dialogueViewport );
+        DialoguePanel.setLayout( new BorderLayout() );
+        DialoguePanel.add( dialogueViewport , BorderLayout.CENTER );
         
+        //Update
         this.revalidate();
         this.repaint();
     }
