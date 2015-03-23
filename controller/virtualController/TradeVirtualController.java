@@ -6,136 +6,72 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import model.Level;
 import model.entity.Avatar;
 import model.entity.occupation.ability.Ability;
 import model.item.Item;
 import utility.Course;
+import view.viewport.InventoryViewPort;
 
 public final class TradeVirtualController extends VirtualController {
     
-    private Color SELECTED_COLOR;
-    private Color UNSELECTED_COLOR;
-     
+    // This color is equivalent to the InventoryPanel Background Color
+    private Color SELECTED_COLOR = InventoryViewPort.lightColor;
+    private Color UNSELECTED_COLOR = InventoryViewPort.darkColor;
+
     public TradeVirtualController(Model model, ArrayList<IntentMap> ims) {
         super(model, ims);
-        // This color is equivalent to the InventoryPanel Background Color
-        SELECTED_COLOR = new Color(101,79,57);
-        UNSELECTED_COLOR = new Color(186,163,132);
     }
-    
+
     @Override
     protected void action(IntentMap im) {
-       
-        if ( im == null) {
+
+        if (im == null) {
             return;
         }
-        
+
         Intent intent = im.getIntent();
-        
-        switch(intent) {
+
+        switch (intent) {
             case PURCHASE:
-                PurchaseParams params = (PurchaseParams)im.getObject();
-                Item item = params.item;
-                int price = params.price;
-                //forward item and purchase request to model
-                model.purchaseAvatarItem(item, price);
+                purchase(im);
                 break;
             default:
                 break;
         }
         super.action(im);
     }
+
+    private void purchase(IntentMap im) {
+        performPurchase(im);
+        updateButton(im);
+    }
     
-    private void selectItem(IntentMap icm){}
+    private void performPurchase(IntentMap im) {
+        PurchaseParams params = (PurchaseParams) im.getObject();
+        Item item = params.item;
+        int price = params.price;
+        //forward item and purchase request to model
+        model.purchaseAvatarItem(item, price);
+    }
     
-    private void toggleEquip(){
+    private void updateButton(IntentMap im) {
         
-       
-        Item item;
-        for ( IntentMap i : this.ims ){
-            
-            // When the item is selected and belongs only to the inventory
-            if ( i.getComponent().getBackground().equals( SELECTED_COLOR ) && i.getIntent().equals(Intent.INVENTORY_ITEM) ){
-                 
+            if (im.getComponent() instanceof JButton ){
                 
-                 item = (Item)i.getObject();
-                 Avatar avatar = model.getGameObject().getAvatar();
-                 
-                 if ( avatar.getEquippedInventory().storeItem(item)){
-                     
-                     avatar.getInventory().removeItem(item);
-                     i.getComponent().setBackground( UNSELECTED_COLOR );
-                 }
-             
-            }
-        }
-    }
-    
-    private void toggleUnequip(){
-         
-        Item item;
-        for ( IntentMap i : this.ims ){
-            
-            // When the item is selected and belongs only to the inventory
-            if ( i.getComponent().getBackground().equals( SELECTED_COLOR) && i.getIntent().equals(Intent.TOGGLE_EQUIPPED) ){
-                 
+                JButton button = (JButton)im.getComponent();
                 
-                 item = (Item)i.getObject();
-                 Avatar avatar = model.getGameObject().getAvatar();
-                 
-                 // Attemp to store item in inventory
-                 if ( !avatar.getInventory().hasItem(item) ){
-                       
-                      
-                       if ( avatar.getInventory().storeItem(item) ){
-                           
-                           i.getComponent().setBackground( UNSELECTED_COLOR );
-                           avatar.getEquippedInventory().removeItem(item);
-                       }
-                       
-                 }
+                if (button.getBackground().equals(UNSELECTED_COLOR)){
+                    
+                    button.setBackground(SELECTED_COLOR);
+                } 
+                else {
+                    
+                    button.setBackground(UNSELECTED_COLOR);
+                }
+                button.repaint();
             }
-        }
-        
     }
-    
-    private void toggleDrop(){
-        
-        Item item;
-        for ( IntentMap i : this.ims ){
-            
-            
-            // When the item is selected and belongs only to the inventory
-            if ( i.getComponent().getBackground().equals( SELECTED_COLOR) && i.getIntent().equals( Intent.INVENTORY_ITEM ) ){
-                 
-                
-                 item = (Item)i.getObject();
-                 Avatar avatar = model.getGameObject().getAvatar();
-                 avatar.getInventory().removeItem(item);
-                 i.getComponent().setBackground( UNSELECTED_COLOR );
-            }
-            
-            
-        }
-        
-    }
-    
-    private void activateAbility(IntentMap im) {
-        Ability ability = (Ability)im.getObject();
-        model.activateAvatarAbility(ability);
-    }
-    
-    private void talk(IntentMap im) {
-//        RunGame.showErrorMessage("TALK"); //debugging
-        activateAbility(im);
-        try {
-            Level.getResponse().address(model);
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    
 
 }

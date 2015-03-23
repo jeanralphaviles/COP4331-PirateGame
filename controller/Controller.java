@@ -37,15 +37,6 @@ public abstract class Controller {
         System.out.println(content);
     }
 
-    private void load() {
-        //
-        
-    }
-
-    private void save() {
-        //
-    }
-
     private void exit() {
         System.exit(0);
     }
@@ -160,9 +151,6 @@ public abstract class Controller {
                 goToLoadScreen();
             case RESET_DEFAULT_CONTROLS:
                 resetControlsToDefault();
-                break;
-            case SAVE:
-                save();
                 break;
             case EXIT:
                 exit();

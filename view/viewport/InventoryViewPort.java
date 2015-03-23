@@ -38,6 +38,9 @@ public class InventoryViewPort extends ViewPort {
     private int totalInventoryItems;
     private Color SELECTED_BUTTON_COLOR;
     private Color BUTTONS_COLOR;
+    //
+    public static final Color darkColor = new Color(101,79,57);
+    public static final Color lightColor = new Color(186,163,132);
     
     /**
      * Creates new form InventoryViewPort
