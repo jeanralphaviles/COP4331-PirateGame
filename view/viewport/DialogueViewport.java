@@ -10,11 +10,16 @@ import controller.Intent;
 import java.awt.Component;
 import java.util.ArrayList;
 
-import javax.swing.SwingConstants;
-
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.SwingConstants;
+
 import model.Level;
+import utility.ImageUtil;
 
 /**
  *
@@ -27,6 +32,8 @@ public class DialogueViewport extends ViewPort {
      */
     public DialogueViewport() {
         initComponents();
+        yesButton.setVisible(false);
+        noButton.setVisible(false);
     }
 
     @Override
@@ -42,6 +49,13 @@ public class DialogueViewport extends ViewPort {
         ims.add(new IntentMap(continueButton, Intent.SHOW_DIALOGUE));
         return ims;
     }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Image image = ImageUtil.getImage( ImageUtil.dialogue_viewport_background, this.getWidth(), this.getHeight()).getImage();
+        g.drawImage( image, 0, 0, this);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +68,8 @@ public class DialogueViewport extends ViewPort {
 
         continueButton = new javax.swing.JButton();
         dialogueTextView = new javax.swing.JTextField();
+        yesButton = new javax.swing.JButton();
+        noButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 51, 51));
         setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -67,7 +83,6 @@ public class DialogueViewport extends ViewPort {
         continueButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         continueButton.setPreferredSize(new java.awt.Dimension(75, 20));
 
-        dialogueTextView.setBackground(new java.awt.Color(0, 51, 51));
         dialogueTextView.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         dialogueTextView.setForeground(new java.awt.Color(255, 255, 255));
         dialogueTextView.setHorizontalAlignment(SwingConstants.CENTER);
@@ -75,12 +90,27 @@ public class DialogueViewport extends ViewPort {
         dialogueTextView.setAlignmentX(Component.LEFT_ALIGNMENT);
         dialogueTextView.setAlignmentY(Component.CENTER_ALIGNMENT);
         dialogueTextView.setBorder(null);
+        dialogueTextView.setOpaque(false);
         dialogueTextView.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogueTextViewActionPerformed(evt);
             }
         });
+
+        yesButton.setText("Yes");
+        yesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        yesButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        yesButton.setBorder(null);
+        yesButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        yesButton.setPreferredSize(new java.awt.Dimension(75, 20));
+
+        noButton.setText("No");
+        noButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        noButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        noButton.setBorder(null);
+        noButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        noButton.setPreferredSize(new java.awt.Dimension(75, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,14 +119,25 @@ public class DialogueViewport extends ViewPort {
             .addComponent(dialogueTextView, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(yesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(noButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dialogueTextView, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
@@ -111,5 +152,7 @@ public class DialogueViewport extends ViewPort {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton continueButton;
     private javax.swing.JTextField dialogueTextView;
+    private javax.swing.JButton noButton;
+    private javax.swing.JButton yesButton;
     // End of variables declaration//GEN-END:variables
 }
