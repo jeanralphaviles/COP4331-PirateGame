@@ -10,7 +10,7 @@ import utility.decal.Decal;
 public final class Mountain extends Terrain {
 
 	public Mountain() {
-		super(new Decal(Decal.mountain));
+		super(Decal.createDecal(Decal.mountain));
 	}
 
 	public Mountain(Decal decal) {

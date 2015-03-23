@@ -79,7 +79,7 @@ public class Audio {
     }
     
      public void playMusic(){
-        clip.start();
+        //clip.start();
     }
      public void stopMusic(){
         clip.stop();

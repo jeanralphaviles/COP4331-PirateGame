@@ -1,13 +1,11 @@
 package controller.physicalController;
 
-import application.RunGame;
 import controller.control.KeyboardControl;
 import controller.IntentMap.IntentMap;
 import controller.virtualController.OptionsVirtualController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import model.Model;
 

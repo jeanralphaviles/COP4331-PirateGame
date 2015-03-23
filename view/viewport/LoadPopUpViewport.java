@@ -9,12 +9,7 @@ import controller.Intent;
 import controller.IntentMap.IntentMap;
 import controller.virtualController.LoadSaveParams;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.Timer;
 import model.GameObject;
 import model.Model;
 

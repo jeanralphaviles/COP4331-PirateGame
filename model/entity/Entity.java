@@ -36,7 +36,7 @@ public class Entity {
 		setOccupation(new Smasher());
 		setInventory(new Inventory(statistics.getInventoryCapacity()));
 		setEquippedInventory(new EquippedInventory());
-		setDecal(new Decal(Decal.smasher));
+		setDecal(Decal.createDecal(Decal.smasher));
 		setDirectionFacing(new Course(1, 1));
 		getStatistics().setLivesLeft(1);
 	}
@@ -252,7 +252,7 @@ public class Entity {
         }
 
 	public static void main(String[] args) {
-		Entity orig = new Entity(new Decal(Decal.summoner));
+		Entity orig = new Entity(Decal.createDecal(Decal.summoner));
 		orig.setOccupation(new Summoner());
 		orig.setFriendly(false);
 		Entity restored = Entity.fromString(orig.toString());
@@ -282,7 +282,7 @@ public class Entity {
 			System.out.println("Friendliness differs");
 		}
 		
-		Entity avatar = new Avatar(new Summoner(), new Decal(Decal.summoner));
+		Entity avatar = new Avatar(new Summoner(), Decal.createDecal(Decal.summoner));
 		Entity restoredAvatar = Entity.fromString(avatar.toString());
 		
 		if (restoredAvatar.getClass().getSimpleName().equals("Avatar") == false) {

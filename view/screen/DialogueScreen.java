@@ -4,8 +4,7 @@ import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
-import view.viewport.DialogueScreenViewport;
-import view.viewport.TradeScreenViewport;
+import view.viewport.DialogueViewport;
 
 public class DialogueScreen extends Screen {
 
@@ -15,7 +14,7 @@ public class DialogueScreen extends Screen {
         
     @Override
     public void createView() {
-        viewPort = new DialogueScreenViewport();
+        viewPort = new DialogueViewport();
     }
     
     @Override

@@ -1,5 +1,6 @@
 package controller.virtualController;
 
+import application.RunGame;
 import java.awt.Color;
 import model.Model;
 import controller.IntentMap.IntentMap;
@@ -11,12 +12,11 @@ import model.entity.occupation.ability.Ability;
 import model.item.Item;
 import utility.Course;
 
-public final class GameVirtualController extends VirtualController {
-    
+public final class TradeVirtualController extends VirtualController {
      Color SELECTED_COLOR;
      Color UNSELECTED_COLOR;
      
-    public GameVirtualController(Model model, ArrayList<IntentMap> ims) {
+    public TradeVirtualController(Model model, ArrayList<IntentMap> ims) {
         super(model, ims);
         // This color is equivalent to the InventoryPanel Background Color
         SELECTED_COLOR = new Color(101,79,57);

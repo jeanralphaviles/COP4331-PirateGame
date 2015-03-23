@@ -9,7 +9,7 @@ import utility.decal.Decal;
  */
 public final class LevelUpAreaEffect extends AreaEffect {
 	public LevelUpAreaEffect() {
-		super(new Decal(Decal.level_up));
+		super(Decal.createDecal(Decal.level_up));
 	}
 
 	public LevelUpAreaEffect(Decal decal) {

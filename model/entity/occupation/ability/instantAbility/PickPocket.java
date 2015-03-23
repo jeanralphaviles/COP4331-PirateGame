@@ -11,7 +11,7 @@ import model.map.GridLocation;
 public final class PickPocket extends InstantAbility {
 	
 	public PickPocket() {
-		super(50, "Pick Pocket", new Decal(Decal.sneak));
+		super(50, "Pick Pocket", Decal.createDecal(Decal.sneak));
 	}
 
 	@Override

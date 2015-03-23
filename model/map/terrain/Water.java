@@ -10,7 +10,7 @@ import utility.decal.Decal;
 public final class Water extends Terrain {
 
     public Water() {
-        super(new Decal(Decal.water));
+        super(Decal.createDecal(Decal.water));
     }
 
     public Water(Decal decal) {

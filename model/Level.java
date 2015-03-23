@@ -747,7 +747,7 @@ public class Level {
     }
     
     public void setResponse(Response response) {
-        this.response = response;
+        Level.response = response;
     }
 
     public static void main(String[] args) {

@@ -5,9 +5,12 @@ import controller.Intent;
 import controller.control.Control;
 import controller.IntentMap.IntentMap;
 import controller.virtualController.VirtualController;
+
 import java.util.ArrayList;
+
 import model.Model;
 import view.screen.GameScreen;
+import view.screen.Screen;
 
 public class PhysicalController extends Controller {
 
@@ -35,7 +38,7 @@ public class PhysicalController extends Controller {
     
     public void reassignControlWithIntent(Control control, Object object, Intent intent) {
         //get screen of interest
-        ArrayList<IntentMap> ims = GameScreen.getPhysicalControlIMs();
+        ArrayList<IntentMap> ims = Screen.getPhysicalControlIMs();
         
         //remove any old ims with that control
         removeICMForControl(ims, control);

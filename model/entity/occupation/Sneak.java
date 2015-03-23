@@ -17,7 +17,7 @@ public class Sneak extends Occupation {
         this.getAbilities().add(new SetTrap());
         this.getAbilities().add(new DetectTraps());
         this.getAbilities().add(new ThrowKnife());
-        this.setPicture(new Decal(Decal.sneakPicture));
+        this.setPicture(Decal.createDecal(Decal.sneakPicture));
     }
 
     @Override

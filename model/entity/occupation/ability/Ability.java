@@ -7,7 +7,7 @@ import utility.decal.Decal;
 public abstract class Ability {
 	private int manaCost = 10;
 	private String name = "Ability";
-	private Decal icon = new Decal(Decal.level_up);
+	private Decal icon = Decal.createDecal(Decal.level_up);
 	
 	public Ability() {}
 	

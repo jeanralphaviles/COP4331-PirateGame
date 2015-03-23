@@ -15,7 +15,7 @@ public class Projectile implements Cloneable {
 	public Projectile() {
 		setCourse(new Course(0, 1));
 		setCollisionEffect(new CollisionEffect());
-		setDecal(new Decal(Decal.take_damage));
+		setDecal(Decal.createDecal(Decal.take_damage));
 	}
 	
 	public Projectile(Course course, CollisionEffect collisionEffect, Decal decal) {
