@@ -14,8 +14,10 @@ import controller.IntentMap.IntentMap;
 import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.MatteBorder;
+import utility.decal.Decal;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.swing.border.MatteBorder;
  */
 public class StatusViewport extends ViewPort {
 
+    private int lastLivesLeft = -1;
     /**
      * Creates new form StatusViewport
      */
@@ -77,7 +80,10 @@ public class StatusViewport extends ViewPort {
         
         levelValueLabel.setText(Integer.toString(level));
         
-        updateLives(livesLeft);
+        if (lastLivesLeft != livesLeft) {
+            lastLivesLeft = livesLeft;
+            updateLives(livesLeft);
+        }
     }
 
     @Override
@@ -97,7 +103,15 @@ public class StatusViewport extends ViewPort {
         manaBar.setMinimum(0);
         manaBar.setStringPainted(true);
         manaBar.setForeground(Color.blue);
-        manaBar.setBackground(new Color(200, 200, 200));
+        manaBar.setBackground(Color.red);
+        
+        ImageIcon image = new ImageIcon(Decal.life);
+        
+        lifeOneLabel.setIcon(image);
+        lifeTwoLabel.setIcon(image);
+        lifeThreeLabel.setIcon(image);
+        lifeFourLabel.setIcon(image);
+        lifeFiveLabel.setIcon(image);
     }
     
     public void updateProgressBars (int health, int mana, int maxHealth, int maxMana) {
