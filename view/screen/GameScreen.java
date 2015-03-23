@@ -77,6 +77,9 @@ public class GameScreen extends Screen {
         //Options
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_O), null, null, Intent.GOTO_OPTIONS, ""));
         
+        //
+//        physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_A), null, null, Intent.GOTO_ABILITIES_ALLOCATE, ""));
+        
         return physicalIMs;
     }
     

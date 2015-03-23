@@ -5,6 +5,7 @@ import controller.IntentMap.IntentMap;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import model.Level;
+import view.screen.AbilitiesAllocateScreen;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
 import view.screen.MainScreen;
@@ -108,6 +109,10 @@ public abstract class Controller {
         }
     }
     
+    private void gotoAbilitiesAllocate() {
+        model.launchScreen(new AbilitiesAllocateScreen(model));
+    }
+    
     private void activateVirtualKey(IntentMap im) {
         JButton button = (JButton)im.getObject();
         button.doClick();
@@ -149,6 +154,9 @@ public abstract class Controller {
                 break;
             case GOTO_LOAD:
                 goToLoadScreen();
+            case GOTO_ABILITIES_ALLOCATE:
+                gotoAbilitiesAllocate();
+                break;
             case RESET_DEFAULT_CONTROLS:
                 resetControlsToDefault();
                 break;

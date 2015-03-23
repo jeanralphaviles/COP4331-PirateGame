@@ -45,6 +45,10 @@ public abstract class Screen {
     }
     
     public void refreshController() {
+        if (viewPort.isRefreshControllerNeeded()) {
+            createController();
+            return;
+        }
         ArrayList<ViewPort> viewports = viewPort.getInteriorViewports();
         int size = viewports.size();
         ViewPort v;

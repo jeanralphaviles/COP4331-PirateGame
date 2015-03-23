@@ -5,11 +5,14 @@ import model.GameObject;
 import controller.Intent;
 import controller.IntentMap.IntentMap;
 import controller.physicalController.RebindInfo;
+import controller.virtualController.AllocateAbilityPointsParams;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import model.entity.Avatar;
 import model.entity.occupation.ability.Ability;
 import utility.Course;
@@ -24,49 +27,110 @@ public class AbilitiesAllocateViewport extends ViewPort {
     private static final int ARRAY_LENGTH = 14;
     private static String[] labels;
     //
-    private boolean labelsSet = false;
+    private boolean firstRender = true;
+    //
+    private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+    //
+    private int[] oldAbilityLevelValues;
     
     public AbilitiesAllocateViewport() {
         initComponents();
         setVisible(true);
+        initGUIProperites();
     }
     
-    @Override
-    public void updateView(GameObject gameObject) {
-        if (!labelsSet) {
-            Avatar avatar = gameObject.getAvatar();
-            ArrayList<Ability> abilities = avatar.getAbilities();
-            setLabels(abilities);
-            labelsSet = true;
+    private void initGUIProperites() {
+        JTextField[] textfields = getTextFields();
+        for (int i=0; i<textfields.length; i++) {
+            textfields[i].setHorizontalAlignment(JTextField.CENTER);
         }
     }
     
     @Override
-    public ArrayList<IntentMap> generateIntentMapping() {
-        ArrayList<IntentMap> ims = new ArrayList<>(1);
+    public void updateView(GameObject gameObject) {
+        Avatar avatar = gameObject.getAvatar();
+        ArrayList<Ability> abilities = avatar.getAbilities();
+        if (firstRender) {
+            setLabels(abilities);
+            updateIntentMappings(gameObject);
+            firstRender = false;
+            refreshControllerNeeded = true;
+        } else {
+            refreshControllerNeeded = false;
+        }
         
-        //Reassign movement keys
-        ims.add(new IntentMap(null, upButton, new RebindInfo(Intent.MOVE, new Course(Course.up), upButton, backButton) , Intent.LISTEN, ""));   
-        ims.add(new IntentMap(null, upLeftButton, new RebindInfo(Intent.MOVE, new Course(Course.left_up), upLeftButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, leftButton, new RebindInfo(Intent.MOVE, new Course(Course.left), leftButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, leftDownButton, new RebindInfo(Intent.MOVE, new Course(Course.left_down), leftDownButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, downButton, new RebindInfo(Intent.MOVE, new Course(Course.down), downButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, downRightButton, new RebindInfo(Intent.MOVE, new Course(Course.right_down), downRightButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, rightButton, new RebindInfo(Intent.MOVE, new Course(Course.right), rightButton, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, rightUpButton, new RebindInfo(Intent.MOVE, new Course(Course.right_up), rightUpButton, backButton), Intent.LISTEN, ""));
+        if (abilityValuesChanged(abilities) ) {
+            updateAbilityValues(abilities);
+        }
         
-        //Reassign other keys (Intents need to be fixed)
-        ims.add(new IntentMap(null, macro1Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro1Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro2Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro2Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro3Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro3Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro4Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro4Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro5Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro5Button, backButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, saveButton, new RebindInfo(Intent.SAVE, null, saveButton, backButton), Intent.LISTEN, ""));
+        updatePoints(avatar);
+    }
+    
+    private void updatePoints(Avatar avatar) {
+        int points = avatar.getBooty();
+        pointsTextField.setText("Points: " + points);
+    }
+    
+    private void updateIntentMappings(GameObject gameObject) {
+        ims = new ArrayList<IntentMap>(1); //clear
         
+        //ability point allocation textfields
+        Avatar avatar = gameObject.getAvatar();
+        ArrayList<Ability> abilities = avatar.getAbilities();
+        JTextField[] textFields = getTextFields();
+        
+        Ability ability;
+        JTextField textField;
+        //AllocateAbilityPointsParams params; // = new AllocateAbilityPointsParams()
+        for (int i = 0; i<abilities.size() && i<textFields.length; ++i) {
+            ability = abilities.get(i);
+            textField = textFields[i];
+//            params = new AllocateAbilityPointsParams(ability); 
+            
+            ims.add(new IntentMap(textField, ability, Intent.ALLOCATE_ABILITY_POINTS));
+        }
+        
+        //back
         ims.add(new IntentMap(backButton, Intent.GOTO_GAME));
-//        ims.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
-        
+    }
+    
+    private boolean abilityValuesChanged(ArrayList<Ability> abilities) {
+        boolean abilityValuesChanged = false;
+        if (oldAbilityLevelValues == null) { //first time
+            abilityValuesChanged = true;
+            oldAbilityLevelValues = new int[abilities.size()];
+            for (int i=0; i<abilities.size(); i++) {
+                oldAbilityLevelValues[i] = abilities.get(i).getAbilityLevel();
+            }
+        } else {
+            int[] newAbilityLevelValues = new int[abilities.size()];
+            for (int i=0; i<abilities.size(); i++) {
+                newAbilityLevelValues[i] = abilities.get(i).getAbilityLevel();
+                if (newAbilityLevelValues[i] != oldAbilityLevelValues[i]) {
+                    oldAbilityLevelValues[i] = newAbilityLevelValues[i];
+                    abilityValuesChanged = true;
+                }
+            }
+        }
+        return abilityValuesChanged;
+    }
+    
+    @Override
+    public ArrayList<IntentMap> generateIntentMapping() {
         return ims;
+    }
+    
+    private void updateAbilityValues(ArrayList<Ability> abilities) {
+        Ability ability;
+        int abilityLevel; // = ability.getAbilityLevel();
+        JTextField[] textFields = getTextFields();
+        
+        for (int i = 0; i<abilities.size() && i<textFields.length; ++i) {
+            ability = abilities.get(i);
+            abilityLevel = ability.getAbilityLevel();
+            
+            textFields[i].setText(abilityLevel + "");    
+        }
     }
     
     public static String[] getDefaultLabels() {
@@ -89,44 +153,50 @@ public class AbilitiesAllocateViewport extends ViewPort {
         return labelString;
     }
     
-    public JButton[] getButtons(){
-        JButton[] buttons = {
-            upButton,
-            upLeftButton,
-            leftButton,
-            leftDownButton,
-            downButton,
-            downRightButton,
-            rightButton,
-            rightUpButton,
-            macro1Button,
-            macro2Button,
-            macro3Button,
-            macro4Button,
-            macro5Button,
-            saveButton
+    public JTextField[] getTextFields(){
+        JTextField[] textFields = {
+            jTextField1,
+            jTextField2,
+            jTextField3,
+            jTextField3,
+            jTextField4,
+            jTextField5,
+            jTextField6,
+            jTextField7,
+            jTextField8,
+            jTextField9,
+            jTextField10,
+            jTextField11,
+            jTextField12,
+            jTextField13
         };
-        return buttons;
+        return textFields;
     }
     
-    private void setLabels(ArrayList<Ability> abilites) {
-        JButton[] buttons = getButtons();
-        if (labels == null) labels = getDefaultLabels();
-        for (int i = 0; i < ARRAY_LENGTH; ++i) {
-            buttons[i].setText(labels[i]);           
-        }
-    }
-
-    private String[] getLabels() {
-        if (labels == null) 
-            getDefaultLabels();
+    public JLabel[] getLabels() {
+        JLabel[] labels = {
+            upLabel,
+            upLeftLabel,
+            leftLabel,
+            leftLabel,
+            downLabel,
+            downRightLabel,
+            rightLabel,
+            rightLabel,
+            macro1Label,
+            macro2Label,
+            macro3Label,
+            saveLabel
+        };
         return labels;
     }
     
-    private void saveCurrentLabels(JButton[] buttons) {
-        for (int i = 0; i < ARRAY_LENGTH; ++i) {
-            buttons[i].setText(labels[i]);
-            labels[i] = buttons[i].getText();
+    private void setLabels(ArrayList<Ability> abilities) {
+        JLabel[] labels = getLabels();
+        String abilityName;
+        for (int i = 0; i<abilities.size() && i<labels.length; ++i) {
+            abilityName = abilities.get(i).getName();
+            labels[i].setText(abilityName);    
         }
     }
     
@@ -181,28 +251,28 @@ public class AbilitiesAllocateViewport extends ViewPort {
         macro3Label = new javax.swing.JLabel();
         saveLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        upButton = new javax.swing.JButton();
-        upLeftButton = new javax.swing.JButton();
-        leftDownButton = new javax.swing.JButton();
-        leftButton = new javax.swing.JButton();
         downLabel = new javax.swing.JLabel();
         downRightLabel = new javax.swing.JLabel();
         rightLabel = new javax.swing.JLabel();
         rightUpLabel = new javax.swing.JLabel();
-        downButton = new javax.swing.JButton();
-        downRightButton = new javax.swing.JButton();
-        rightUpButton = new javax.swing.JButton();
-        rightButton = new javax.swing.JButton();
-        macro2Button = new javax.swing.JButton();
-        macro1Button = new javax.swing.JButton();
-        macro3Button = new javax.swing.JButton();
-        macro4Button = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
-        macro5Button = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         pointsTextField = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField13 = new javax.swing.JTextField();
+        jTextField14 = new javax.swing.JTextField();
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Up Arrow");
@@ -307,46 +377,6 @@ public class AbilitiesAllocateViewport extends ViewPort {
             }
         });
 
-        upButton.setBackground(new java.awt.Color(151, 99, 47));
-        upButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        upButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        upButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        upButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                upButtonActionPerformed(evt);
-            }
-        });
-
-        upLeftButton.setBackground(new java.awt.Color(151, 99, 47));
-        upLeftButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        upLeftButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        upLeftButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        upLeftButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                upLeftButtonActionPerformed(evt);
-            }
-        });
-
-        leftDownButton.setBackground(new java.awt.Color(151, 99, 47));
-        leftDownButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        leftDownButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        leftDownButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        leftDownButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leftDownButtonActionPerformed(evt);
-            }
-        });
-
-        leftButton.setBackground(new java.awt.Color(151, 99, 47));
-        leftButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        leftButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        leftButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        leftButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leftButtonActionPerformed(evt);
-            }
-        });
-
         downLabel.setBackground(new java.awt.Color(151, 99, 47));
         downLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         downLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -379,106 +409,6 @@ public class AbilitiesAllocateViewport extends ViewPort {
         rightUpLabel.setName("rightUpLabel"); // NOI18N
         rightUpLabel.setOpaque(true);
         rightUpLabel.setPreferredSize(new java.awt.Dimension(150, 35));
-
-        downButton.setBackground(new java.awt.Color(151, 99, 47));
-        downButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        downButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        downButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        downButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                downButtonActionPerformed(evt);
-            }
-        });
-
-        downRightButton.setBackground(new java.awt.Color(151, 99, 47));
-        downRightButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        downRightButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        downRightButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        downRightButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                downRightButtonActionPerformed(evt);
-            }
-        });
-
-        rightUpButton.setBackground(new java.awt.Color(151, 99, 47));
-        rightUpButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        rightUpButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        rightUpButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        rightUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rightUpButtonActionPerformed(evt);
-            }
-        });
-
-        rightButton.setBackground(new java.awt.Color(151, 99, 47));
-        rightButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        rightButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        rightButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        rightButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rightButtonActionPerformed(evt);
-            }
-        });
-
-        macro2Button.setBackground(new java.awt.Color(151, 99, 47));
-        macro2Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        macro2Button.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        macro2Button.setPreferredSize(new java.awt.Dimension(150, 35));
-        macro2Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                macro2ButtonActionPerformed(evt);
-            }
-        });
-
-        macro1Button.setBackground(new java.awt.Color(151, 99, 47));
-        macro1Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        macro1Button.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        macro1Button.setPreferredSize(new java.awt.Dimension(150, 35));
-        macro1Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                macro1ButtonActionPerformed(evt);
-            }
-        });
-
-        macro3Button.setBackground(new java.awt.Color(151, 99, 47));
-        macro3Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        macro3Button.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        macro3Button.setPreferredSize(new java.awt.Dimension(150, 35));
-        macro3Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                macro3ButtonActionPerformed(evt);
-            }
-        });
-
-        macro4Button.setBackground(new java.awt.Color(151, 99, 47));
-        macro4Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        macro4Button.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        macro4Button.setPreferredSize(new java.awt.Dimension(150, 35));
-        macro4Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                macro4ButtonActionPerformed(evt);
-            }
-        });
-
-        saveButton.setBackground(new java.awt.Color(151, 99, 47));
-        saveButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        saveButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        saveButton.setPreferredSize(new java.awt.Dimension(150, 35));
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-
-        macro5Button.setBackground(new java.awt.Color(151, 99, 47));
-        macro5Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        macro5Button.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
-        macro5Button.setPreferredSize(new java.awt.Dimension(150, 35));
-        macro5Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                macro5ButtonActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(226, 177, 127));
 
@@ -551,36 +481,34 @@ public class AbilitiesAllocateViewport extends ViewPort {
                     .addComponent(talkLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(100, 100, 100)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(upButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(upLeftButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(leftDownButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(leftButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(downButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(downRightButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rightUpButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rightButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(macro2Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(macro1Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(macro3Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(macro4Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(macro5Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pointsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pointsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField2)
+                    .addComponent(jTextField3)
+                    .addComponent(jTextField4)
+                    .addComponent(jTextField5)
+                    .addComponent(jTextField6)
+                    .addComponent(jTextField7)
+                    .addComponent(jTextField8)
+                    .addComponent(jTextField9)
+                    .addComponent(jTextField10)
+                    .addComponent(jTextField11)
+                    .addComponent(jTextField12)
+                    .addComponent(jTextField13)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(upLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(upButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(upLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(upLeftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -608,32 +536,33 @@ public class AbilitiesAllocateViewport extends ViewPort {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(upLeftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(leftButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(leftDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(downButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(downRightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rightButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rightUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(macro1Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(macro2Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(macro3Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(macro4Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(macro5Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pointsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -652,107 +581,51 @@ public class AbilitiesAllocateViewport extends ViewPort {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        saveCurrentLabels(getButtons());
+
     }//GEN-LAST:event_backButtonActionPerformed
-
-    private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_upButtonActionPerformed
-
-    private void upLeftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upLeftButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_upLeftButtonActionPerformed
-
-    private void leftDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDownButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_leftDownButtonActionPerformed
-
-    private void leftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_leftButtonActionPerformed
-
-    private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_downButtonActionPerformed
-
-    private void downRightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downRightButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_downRightButtonActionPerformed
-
-    private void rightUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightUpButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rightUpButtonActionPerformed
-
-    private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rightButtonActionPerformed
-
-    private void macro2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro2ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_macro2ButtonActionPerformed
-
-    private void macro1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro1ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_macro1ButtonActionPerformed
-
-    private void macro3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro3ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_macro3ButtonActionPerformed
-
-    private void macro4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro4ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_macro4ButtonActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void macro5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macro5ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_macro5ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JButton downButton;
     private javax.swing.JLabel downLabel;
-    private javax.swing.JButton downRightButton;
     private javax.swing.JLabel downRightLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton leftButton;
-    private javax.swing.JButton leftDownButton;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel leftDownLabel;
     private javax.swing.JLabel leftLabel;
-    private javax.swing.JButton macro1Button;
     private javax.swing.JLabel macro1Label;
-    private javax.swing.JButton macro2Button;
     private javax.swing.JLabel macro2Label;
-    private javax.swing.JButton macro3Button;
     private javax.swing.JLabel macro3Label;
-    private javax.swing.JButton macro4Button;
-    private javax.swing.JButton macro5Button;
     private javax.swing.JLabel meleeLabel;
     private javax.swing.JTextField pointsTextField;
-    private javax.swing.JButton rightButton;
     private javax.swing.JLabel rightLabel;
-    private javax.swing.JButton rightUpButton;
     private javax.swing.JLabel rightUpLabel;
-    private javax.swing.JButton saveButton;
     private javax.swing.JLabel saveLabel;
     private javax.swing.JLabel talkLabel;
-    private javax.swing.JButton upButton;
     private javax.swing.JLabel upLabel;
-    private javax.swing.JButton upLeftButton;
     private javax.swing.JLabel upLeftLabel;
     // End of variables declaration//GEN-END:variables
 }

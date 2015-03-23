@@ -11,6 +11,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import model.Model;
 import model.entity.Avatar;
+import view.screen.AbilitiesAllocateScreen;
 import view.viewport.MainWindow;
 
 public class RunGame {
@@ -77,6 +78,11 @@ public class RunGame {
     
     public static void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(null, message,"ERROR MESSAGE",JOptionPane.WARNING_MESSAGE);
+    }
+    
+    //hacky, last minute way to respond to level up
+    public static void gotoLevelUpScreen() {
+        model.launchScreen(new AbilitiesAllocateScreen(model));
     }
     
     /*Get-Sets*/

@@ -134,7 +134,7 @@ public class AbilitiesViewport extends ViewPort {
             else if ( component instanceof JTextField){
 
                 JTextField manaTextField = (JTextField)component;
-                String num = Integer.toString(ability.getManaCost());
+                String num = Integer.toString(ability.getEffectiveManaCost());
 
                 manaTextField.setText( num  );
             }

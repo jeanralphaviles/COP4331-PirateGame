@@ -2,6 +2,7 @@ package model.entity;
 
 import model.entity.occupation.Occupation;
 import model.entity.occupation.Smasher;
+import model.entity.occupation.ability.Ability;
 import model.item.*;
 import utility.decal.Decal;
 
@@ -41,6 +42,28 @@ public class Avatar extends Entity {
     @Override
     public boolean storeItem(Item item) {
         return super.storeItem(item); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean spendAbilityPoints(Ability ability, int points) {
+        int abilityLevels = convertPointsToAbilityLevels(points);
+        int price = convertPointsToAbilityLevelsPrice(points);
+        if (changeBooty(price * -1)) {
+            ability.setAbilityLevel(abilityLevels);
+            return true;
+        }
+        return false;
+    }
+    
+    private int convertPointsToAbilityLevelsPrice(int points) {
+        //round down to nearest abilityLevelCost increment
+        int multiple = convertPointsToAbilityLevels(points);
+        int remainder = points - (multiple * Ability.abilityLevelCost);
+        int price = points - remainder;
+        return price;
+    }
+    
+    private int convertPointsToAbilityLevels(int points) {
+        return Math.abs(points/Ability.abilityLevelCost);
     }
 
     public Avatar(Occupation occupation, Decal decal) {

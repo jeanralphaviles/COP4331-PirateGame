@@ -1,5 +1,6 @@
 package model.map.areaeffect;
 
+import application.RunGame;
 import model.Level;
 import model.entity.Entity;
 import utility.decal.Decal;
@@ -22,6 +23,7 @@ public final class LevelUpAreaEffect extends AreaEffect {
 			int expToNextLevel = 100 - entity.getStatistics().getExperience() % 100;
 			entity.getStatistics().addExperience(expToNextLevel);
 			setActive(false);
+                        RunGame.gotoLevelUpScreen();
 		}
 	}
 
