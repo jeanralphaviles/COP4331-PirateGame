@@ -137,8 +137,9 @@ public class MainScreenViewport extends ViewPort {
 
         jLabel3.setFont(new java.awt.Font("Luminari", 3, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 60, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Welcome Aboard!");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 400, 90));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 580, 90));
     }// </editor-fold>//GEN-END:initComponents
 
 
