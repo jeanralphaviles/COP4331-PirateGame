@@ -8,7 +8,7 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.control.KeyboardControl;
 import java.awt.event.KeyEvent;
-import model.Model.Mode;
+import model.Model.ModelMode;
 import model.entity.occupation.ability.instantAbility.Talk;
 import utility.Course;
 import view.viewport.GameScreenViewport;
@@ -17,7 +17,7 @@ public class GameScreen extends Screen {
 
     public GameScreen(Model model) {
         super(model);
-        model.setMode(Mode.RUN);
+        model.setMode(ModelMode.RUN);
     }
     
     @Override

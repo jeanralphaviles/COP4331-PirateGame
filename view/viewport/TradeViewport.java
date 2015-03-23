@@ -19,6 +19,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +31,7 @@ import javax.swing.JTextField;
 import model.entity.Avatar;
 import model.item.Food;
 import model.item.Item;
+import model.item.Weapon;
 import utility.ImageUtil;
 import utility.decal.Decal;
 
@@ -74,32 +78,71 @@ public class TradeViewport extends ViewPort {
 
         //buy mana potion
         int manaBottlePrice = getPrice(itemTextField1);
-        ims.add(new IntentMap(bluePotionButton1, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-//        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-//        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-//        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        Decal manaDecal = new Decal(Decal.fire);
+            //
+        setupFoodButton(bluePotionButton1, manaBottlePrice, manaDecal, ims);
+        setupFoodButton(jButton4, manaBottlePrice, manaDecal, ims);
+        setupFoodButton(jButton3, manaBottlePrice, manaDecal, ims);
+        setupFoodButton(jButton2, manaBottlePrice, manaDecal, ims);
 
         //buy health potion
         int healtPotionPrice = getPrice(itemTextField2);
-
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        Decal healthDecal = new Decal(Decal.life);
+            //
+        setupFoodButton(jButton9, healtPotionPrice, healthDecal, ims);
+        setupFoodButton(jButton12, healtPotionPrice, healthDecal, ims);
+        setupFoodButton(jButton11, healtPotionPrice, healthDecal, ims);
+        setupFoodButton(jButton10, healtPotionPrice, healthDecal, ims);
 
         //buy fruit
         int fruitPrice = getPrice(itemTextField3);
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        Decal fruitDecal = new Decal(Decal.level_up);
+            //
+        setupFoodButton(jButton13, fruitPrice, fruitDecal, ims);
+        setupFoodButton(jButton16, fruitPrice, fruitDecal, ims);
+        setupFoodButton(jButton15, fruitPrice, fruitDecal, ims);
+        setupFoodButton(jButton14, fruitPrice, fruitDecal, ims);
 
         //buy book
         int bookPrice = getPrice(itemTextField4);
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        Decal bookDecal = new Decal(Decal.instant_death);
+            //books arm you with knowledge...
+        setupWeaponButton(jButton17, bookPrice, "book", fruitDecal, ims);
+        setupWeaponButton(jButton20, bookPrice, "book", fruitDecal, ims);
+        setupWeaponButton(jButton19, bookPrice, "book", fruitDecal, ims);
+        setupWeaponButton(jButton18, bookPrice, "book", fruitDecal, ims);
 
         //buy sword
         int swordPrice = getPrice(itemTextField5);
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        Decal swordDecal = new Decal(Decal.glaives);
+            //
+        setupWeaponButton(jButton21, swordPrice, "sword", swordDecal, ims);
+        setupWeaponButton(jButton24, swordPrice, "sword", swordDecal, ims);
+        setupWeaponButton(jButton23, swordPrice, "sword", swordDecal, ims);
+        setupWeaponButton(jButton22, swordPrice, "sword", swordDecal, ims);
 
         //continue
         ims.add(new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
 
         return ims;
+    }
+    
+    private void setupFoodButton(JButton button, int price, Decal decal, ArrayList<IntentMap> ims) {
+//        BufferedImage image = getScaledImage(button);
+//        Decal decal = new Decal(image);
+        
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(decal), price), Intent.PURCHASE));
+    }
+    
+    private void setupWeaponButton(JButton button, int price, String itemName, Decal decal, ArrayList<IntentMap> ims) {
+        ims.add(new IntentMap(button, new PurchaseParams(new Weapon(decal, itemName), price), Intent.PURCHASE));
+    }
+    
+    private BufferedImage getScaledImage(JButton button) {
+        ImageIcon icon = (ImageIcon)button.getIcon();
+        BufferedImage oldImage = (BufferedImage)icon.getImage();
+        BufferedImage scaledImage = ImageUtil.scale(32, 32, oldImage);
+        return scaledImage;
     }
 
     private int getPrice(JTextField priceTextField) {
