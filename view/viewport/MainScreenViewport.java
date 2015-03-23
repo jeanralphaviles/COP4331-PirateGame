@@ -10,6 +10,8 @@ import model.GameObject;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import utility.decal.Decal;
 
@@ -20,11 +22,19 @@ import utility.decal.Decal;
 public class MainScreenViewport extends ViewPort {
     
     /*Properties*/
+    Image backgroundImage;
 
     /*Constructors*/
     public MainScreenViewport() {
         initComponents();
         setVisible(true);
+        
+        backgroundImage = Toolkit.getDefaultToolkit().createImage("./Sprites/backgrounds/MainMenuBackground.jpg");
+        
+        ImageIcon img = new ImageIcon("./Sprites/backgrounds/plank.jpg");
+        newGameButton.setIcon(img);
+        exitButton.setIcon(img);
+        loadButton.setIcon(img);
     }
 
     /*Methods*/
@@ -41,9 +51,13 @@ public class MainScreenViewport extends ViewPort {
 
     @Override
     public void updateView(GameObject gameObject) {
-        //
     }
     
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+    }
     
 
     /*Get-Sets*/
@@ -59,32 +73,42 @@ public class MainScreenViewport extends ViewPort {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel2.setText("jLabel2");
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(25, 25));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        exitButton.setFont(new java.awt.Font("Luminari", 3, 18)); // NOI18N
         exitButton.setText("Exit");
-        add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 90, 50));
+        add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 420, 50));
 
-        loadButton.setText("Load");
-        add(loadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 90, 50));
+        loadButton.setFont(new java.awt.Font("Luminari", 3, 18)); // NOI18N
+        loadButton.setText("Load Game");
+        add(loadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 420, 50));
 
+        newGameButton.setFont(new java.awt.Font("Luminari", 3, 18)); // NOI18N
         newGameButton.setText("New Game");
-        add(newGameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 100, 50));
+        add(newGameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 420, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sprites/backgrounds/ezgif.com-video-to-gif.gif"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 490, 350));
+        jLabel3.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Luminari", 3, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 60, 0));
+        jLabel3.setText("Welcome Aboard!");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 310, 90));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton newGameButton;
     // End of variables declaration//GEN-END:variables
