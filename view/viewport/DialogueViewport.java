@@ -24,13 +24,18 @@ import utility.ImageUtil;
  */
 public class DialogueViewport extends ViewPort {
 
+    
+    public static boolean continueButtonVisible = true;
+    public static boolean yesButtonVisible = false;
+    public static boolean noButtonVisible = false;
+    
     /**
      * Creates new form DialogueViewport
      */
     public DialogueViewport() {
         initComponents();
-        yesButton.setVisible(false);
-        noButton.setVisible(false);
+        yesButton.setVisible(yesButtonVisible);
+        noButton.setVisible(noButtonVisible);
     }
 
     @Override
@@ -52,6 +57,18 @@ public class DialogueViewport extends ViewPort {
         super.paintComponent(g);
         Image image = ImageUtil.getImage( ImageUtil.dialogue_viewport_background, this.getWidth(), this.getHeight()).getImage();
         g.drawImage( image, 0, 0, this);
+    }
+    
+    public void setVisibilities(boolean continueVisible, boolean yesVisible, boolean noVisible) {
+        DialogueViewport.continueButtonVisible = continueVisible;
+        DialogueViewport.yesButtonVisible = yesVisible;
+        DialogueViewport.noButtonVisible = noVisible;
+    }
+    
+    public void updateButtonVisibilities() {
+        continueButton.setVisible(continueButtonVisible);
+        yesButton.setVisible(yesButtonVisible);
+        noButton.setVisible(noButtonVisible);
     }
 
     /**
