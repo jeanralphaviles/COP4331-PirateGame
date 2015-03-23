@@ -10,12 +10,20 @@ import controller.Intent;
 import java.awt.Component;
 import java.util.ArrayList;
 
-
 import model.GameObject;
 import controller.IntentMap.IntentMap;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.SwingConstants;
+
+import model.GameObject;
+import controller.IntentMap.IntentMap;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.SwingConstants;
+
 import model.Level;
 import utility.ImageUtil;
 
@@ -35,8 +43,9 @@ public class DialogueViewport extends ViewPort {
      */
     public DialogueViewport() {
         initComponents();
-        yesButton.setVisible(yesButtonVisible);
-        noButton.setVisible(noButtonVisible);
+
+        yesButton.setVisible(false);
+        noButton.setVisible(false);
     }
 
     @Override
@@ -59,18 +68,7 @@ public class DialogueViewport extends ViewPort {
         Image image = ImageUtil.getImage( ImageUtil.dialogue_viewport_background, this.getWidth(), this.getHeight()).getImage();
         g.drawImage( image, 0, 0, this);
     }
-    
-    public void setVisibilities(boolean continueVisible, boolean yesVisible, boolean noVisible) {
-        DialogueViewport.continueButtonVisible = continueVisible;
-        DialogueViewport.yesButtonVisible = yesVisible;
-        DialogueViewport.noButtonVisible = noVisible;
-    }
-    
-    public void updateButtonVisibilities() {
-        continueButton.setVisible(continueButtonVisible);
-        yesButton.setVisible(yesButtonVisible);
-        noButton.setVisible(noButtonVisible);
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

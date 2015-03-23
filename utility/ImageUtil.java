@@ -53,6 +53,7 @@ public class ImageUtil {
      public static final String fruit_3 = "./Sprites/item/I_C_Orange.png";
      public static final String fruit_4 = "./Sprites/item/I_C_Banana.png";
      
+
      public static final String sword_1 = "./Sprites/item/S_Sword09.png";
      public static final String sword_2 = "./Sprites/item/S_Sword10.png";
      public static final String sword_3 = "./Sprites/item/W_Sword013.png";
@@ -64,6 +65,7 @@ public class ImageUtil {
      public static final String book_4 = "./Sprites/item/W_Book04.png";
 
      public static final String booty_pic = "./Sprites/backgrounds/treasure.png";
+
      public static final String dialogue_viewport_background = "./Sprites/backgrounds/blank_black_background.jpg";
 
     public static ImageIcon getImage(ImageIcon image, int width, int height){
