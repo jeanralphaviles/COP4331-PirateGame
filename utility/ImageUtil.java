@@ -23,6 +23,16 @@ public class ImageUtil {
     public static final String trader_view_port_background = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";
     public static final String item = "./Sprites/item/A_Armour03.png";
     public static final String options_viewport_background = "./Sprites/backgrounds/map_theme.jpg";
+    public static final String trader_background = "./Sprites/backgrounds/desert_backgrounds.jpg";
+    
+    // Trade Viewport Items
+     public static final String blue_potion_1 = "./Sprites/item/P_Blue01.png";
+     public static final String blue_potion_2 = "./Sprites/item/P_Blue02.png";
+     public static final String blue_potion_3 = "./Sprites/item/P_Blue03.png";
+     public static final String blue_potion_4 = "./Sprites/item/P_Blue04.png";
+     
+     
+       public static final String sword_1 = "./Sprites/item/S_Sword01.png";
     
     public static ImageIcon getImage(ImageIcon image, int width, int height){
         
