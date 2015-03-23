@@ -164,20 +164,20 @@ public class Level {
     public void advanceEntity(Entity entity) {
         Random rand = new Random();
         if (rand.nextDouble() < 0.3 || entity.isFriendly() == false) { // Entities have 30% chance to take an action or if they're angry
-            if (rand.nextDouble() < 0.5 || entity.isFriendly()) { // 50% Chance to move, or 100% if friendly
+            if (rand.nextDouble() < 0.9 || entity.isFriendly()) { // 90% Chance to move, or 100% if friendly
                 if (rand.nextDouble() < 0.5 || !entity.isFriendly()) { // 50% towards Avatar, or if unfriendly
                     faceEntity(entity, getAvatarLocation());
                     moveEntity(entity, entity.getDirectionFacing());
                 } else { // Move in a random direction
                     moveEntity(entity, new Course(rand.nextInt(2), rand.nextInt(2)));
                 }
-            } else { // 50% Chance to use an Ability, won't use abilities if friendly
+            } else { // 5% Chance to use an Ability, won't use abilities if friendly
                 int randomAbilityIndex = rand.nextInt(entity.getAbilities().size());
                 Ability ability = entity.getAbilities().get(randomAbilityIndex);
                 if (ability instanceof Talk) {
                     //ignore it
                 } else {
-                    entity.getStatistics().changeCurrentMana(100); // Ensure entities always have mana
+                    entity.getStatistics().changeCurrentMana(1); // Entities have mana regen
                     entity.activateAbility(ability, this);
                 }
                 
