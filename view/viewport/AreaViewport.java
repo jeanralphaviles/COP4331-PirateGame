@@ -1,5 +1,6 @@
 package view.viewport;
 
+import controller.IntentMap.IntentMap;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
