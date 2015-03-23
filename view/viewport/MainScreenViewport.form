@@ -36,11 +36,7 @@
     <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-<<<<<<< HEAD
           <Font name="Luminari" size="24" style="3"/>
-=======
-          <Font name="Luminari" size="18" style="3"/>
->>>>>>> Add background image to main screen
         </Property>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
@@ -53,11 +49,7 @@
     <Component class="javax.swing.JButton" name="loadButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-<<<<<<< HEAD
           <Font name="Luminari" size="24" style="3"/>
-=======
-          <Font name="Luminari" size="18" style="3"/>
->>>>>>> Add background image to main screen
         </Property>
         <Property name="text" type="java.lang.String" value="Load Game"/>
       </Properties>
@@ -70,11 +62,7 @@
     <Component class="javax.swing.JButton" name="newGameButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-<<<<<<< HEAD
           <Font name="Luminari" size="24" style="3"/>
-=======
-          <Font name="Luminari" size="18" style="3"/>
->>>>>>> Add background image to main screen
         </Property>
         <Property name="text" type="java.lang.String" value="New Game"/>
       </Properties>
@@ -86,24 +74,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-<<<<<<< HEAD
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Luminari" size="48" style="3"/>
-=======
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Luminari" size="36" style="3"/>
->>>>>>> Add background image to main screen
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="3c" red="66" type="rgb"/>
         </Property>
-<<<<<<< HEAD
         <Property name="horizontalAlignment" type="int" value="0"/>
-=======
->>>>>>> Add background image to main screen
         <Property name="text" type="java.lang.String" value="Welcome Aboard!"/>
       </Properties>
       <AuxValues>
@@ -111,11 +88,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
           <AbsoluteConstraints x="60" y="180" width="580" height="90"/>
-=======
-          <AbsoluteConstraints x="200" y="200" width="310" height="90"/>
->>>>>>> Add background image to main screen
         </Constraint>
       </Constraints>
     </Component>
