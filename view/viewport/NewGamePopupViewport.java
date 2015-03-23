@@ -29,7 +29,7 @@ public class NewGamePopupViewport extends ViewPort {
     public static final String select_turnhat = "select turnhat";
     
     public static final String parrotmancer = "./Sprites/characters/ParrotMancer_NoBG.png";
-    public static final String gankplanker = "./Sprites/characters/DaveOnACamel.jpg";
+    public static final String gankplanker = "./Sprites/characters/gangPlanker.jpg";
     public static final String turnhat = "./Sprites/characters/turnHat.png";
    
     public static final String theme = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";

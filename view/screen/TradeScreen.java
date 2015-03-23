@@ -4,7 +4,10 @@ import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
+<<<<<<< Updated upstream
 import view.viewport.DialogueScreenViewport;
+=======
+>>>>>>> Stashed changes
 import view.viewport.TradeViewport;
 
 public class TradeScreen extends Screen {

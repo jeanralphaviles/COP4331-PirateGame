@@ -12,11 +12,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.entity.occupation.Occupation;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -30,8 +28,8 @@ public class Decal {
     public static final String smasher = "./Sprites/item/W_Sword006.png";
     public static final String sneak = "./Sprites/item/Ac_Ring01.png";
     public static final String summonerPicture = "./Sprites/characters/parrotMancer.jpg";
-    public static final String smasherPicture = "./Sprites/characters/turnHat.png";
-    public static final String sneakPicture = "./Sprites/characters/gangPlanker.jpg";
+    public static final String smasherPicture = "./Sprites/characters/gangPlanker.jpg";
+    public static final String sneakPicture = "./Sprites/characters/turnHat.png";
     public static final String item_default = "./Sprites/item/W_Mace010.png"; 
     private static final String terrain = "./Sprites/map.png";
     public static final String grass = "grass";

@@ -32,8 +32,9 @@ public class ImageUtil {
      public static final String blue_potion_4 = "./Sprites/item/P_Blue04.png";
      
      
-       public static final String sword_1 = "./Sprites/item/S_Sword01.png";
->>>>>>> Stashed changes
+     public static final String sword_1 = "./Sprites/item/S_Sword01.png";
+     public static final String dialogue_viewport_background = "./Sprites/backgrounds/blank_black_background.jpg";
+
     
     public static ImageIcon getImage(ImageIcon image, int width, int height){
         

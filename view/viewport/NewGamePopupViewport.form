@@ -423,7 +423,6 @@
                 </MatteColorBorder>
               </Border>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 60;&#xa;            final int G = 180;&#xa;            final int B = 207;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
@@ -444,7 +443,6 @@
                 </MatteColorBorder>
               </Border>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 76;&#xa;            final int G = 76;&#xa;            final int B = 76;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 50),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
