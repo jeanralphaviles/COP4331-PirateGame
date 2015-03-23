@@ -11,8 +11,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
+import java.awt.Color;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -90,13 +94,67 @@ public class LoadSaveVirtualController extends VirtualController {
         LoadSaveParams loadSaveComponents = (LoadSaveParams)icm.getObject();
         JTextField saveAddress = loadSaveComponents.getJTextField();
         JLabel instructionsLabel = loadSaveComponents.getJLabel();
+        JTree tree = loadSaveComponents.getJTree();
+        JScrollPane scrollPanel = loadSaveComponents.getJScrollPane();
         
         if ( saveAddress != null &&  instructionsLabel != null){
             
             checkSaveAddressInput(saveAddress,  instructionsLabel );
-            
+            updateLoadSaveView(tree,scrollPanel);
+            scrollPanel.repaint();
         }
 
+    }
+    
+    private void updateLoadSaveView(JTree tree, JScrollPane scrollPanel){
+            
+ 
+         // This is the root of the tree
+            File folder = new File("LoadSave/");
+            if ( folder.exists() == false){
+                
+                folder.mkdir();
+            }
+            File[] listOfFiles = folder.listFiles();
+            DefaultMutableTreeNode top = new DefaultMutableTreeNode("Avatars");
+            
+            // If threre are no other directories inside LoadSave return.
+            if (listOfFiles == null){
+                
+                return;
+            }
+            
+            for (File file : listOfFiles) {
+
+                if (file.isDirectory()) {
+
+                    // Create Directory Node
+                    DefaultMutableTreeNode directoryName = new DefaultMutableTreeNode(file.getName());
+                    top.add(directoryName);
+
+                    File avatarFiles = new File( "LoadSave/" + file.getName() + "/" );
+                    File [] listOfAvatarFiles = avatarFiles.listFiles();
+
+                    if ( avatarFiles != null && avatarFiles.exists()){
+
+                        for ( File i : listOfAvatarFiles){
+
+                            if (i.isFile() ){
+
+                                // Create File Nodes
+                                DefaultMutableTreeNode fileName = new DefaultMutableTreeNode(i.getName());
+                                directoryName.add(fileName);
+                            } 
+                        }
+
+                    }
+                }
+            }
+            
+           tree = new JTree( top );
+           tree.setBackground( new Color (123,38,38));
+           tree.setModel(new javax.swing.tree.DefaultTreeModel(top));
+           scrollPanel.setViewportView(tree);
     }
     
     private boolean checkSaveAddressInput(JTextField saveNameTextField, JLabel userInstructionLabel){

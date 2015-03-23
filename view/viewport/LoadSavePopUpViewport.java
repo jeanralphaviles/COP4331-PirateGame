@@ -98,6 +98,8 @@ public class LoadSavePopUpViewport extends ViewPort {
         components.add(userInstructionLabel);
         components.add(playerRecordsTreePanel);
         components.add(saveNameTextField);
+        components.add(playerRecordsTreePanel);
+        components.add(jScrollPane3);
         
         LoadSaveParams params = new LoadSaveParams(components);
         
@@ -146,7 +148,6 @@ public class LoadSavePopUpViewport extends ViewPort {
                             if (i.isFile() ){
 
                                 // Create File Nodes
-                                System.out.println( i.getName() );
                                 DefaultMutableTreeNode fileName = new DefaultMutableTreeNode(i.getName());
                                 directoryName.add(fileName);
                             } 

@@ -9,6 +9,8 @@ import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
@@ -73,4 +75,18 @@ public class LoadSaveParams {
         }
         return null;
     }
+    
+    public JScrollPane getJScrollPane(){
+        
+        for ( Component comps : components){
+            
+            if ( comps instanceof JScrollPane){
+                
+                return (JScrollPane)comps;
+            }
+        }
+        return null;
+    }
+    
+    
 }
