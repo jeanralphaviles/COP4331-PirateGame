@@ -5,6 +5,8 @@ import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
 import controller.physicalController.KeyboardController;
+import controller.physicalController.PhysicalController;
+import controller.physicalController.PhysicalController.PhysicalControllerMode;
 import controller.physicalController.RebindInfo;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -39,7 +41,7 @@ public final class OptionsVirtualController extends VirtualController {
                 //Tell the keyboard controller to capture key to rebind to next key pressed
                 JButton backButton = (JButton)rebindInfo.backButton;
                 backButton.setEnabled(false); //disable back button until a key is pressed
-                controller.activateRebindMode(); //sets to rebind mode
+                controller.setMode(PhysicalControllerMode.REBIND); //controller.activateRebindMode(); //sets to rebind mode
                 break;
             default:
                 break;

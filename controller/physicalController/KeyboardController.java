@@ -2,6 +2,7 @@ package controller.physicalController;
 
 import controller.control.KeyboardControl;
 import controller.IntentMap.IntentMap;
+import controller.control.Control;
 import controller.virtualController.OptionsVirtualController;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
@@ -14,7 +15,7 @@ public class KeyboardController extends PhysicalController {
     /*Properties*/
     private KeyboardFocusManager keyboardManager;
     //
-    private boolean rebindMode = false;  
+    private boolean rebindMode = false;
 
     /*Constructors*/
     public KeyboardController(Model model) {
@@ -24,19 +25,54 @@ public class KeyboardController extends PhysicalController {
     }
 
     /*Methods*/
-    
     private void initKeyboardManager() {
         keyboardManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         keyboardManager.addKeyEventPostProcessor(new EnterKeyListener(model));
     }
-    
+
     public void activateRebindMode() {
         rebindMode = true;
     }
 
     /*Get-Sets*/
-    
-    
+    @Override
+    public void rebind(Control control) {
+        int keyCode = ((KeyboardControl) control).getKeyCode();
+        OptionsVirtualController ovc = ((OptionsVirtualController) virtualController);
+        RebindInfo ri = ovc.getRebindInfo();
+        reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
+        //label key appropriately
+        JButton button = (JButton) ri.component;
+        button.setText(KeyEvent.getKeyText(keyCode));
+        setMode(PhysicalControllerMode.DISABLED); //rebindMode = false; //remember to do this /*Derpy face*/
+        JButton backButton = (JButton) ri.backButton;
+        backButton.setEnabled(true); //re-enable back button 
+    }
+
+    @Override
+    public void performAction(Control control) {
+        int keyCode = ((KeyboardControl) control).getKeyCode();
+        IntentMap im = getIM(keyCode);
+        virtualController.executeAction(im);
+    }
+
+    private IntentMap getIM(int keyCode) {
+        if (intentMaps == null) {
+            return null;
+        }
+        KeyboardControl control;
+        int currentKey;
+        IntentMap im;
+        for (int i = 0; i < intentMaps.size(); i++) {
+            im = intentMaps.get(i);
+            control = (KeyboardControl) im.getControl();
+            if (control.representsKey(keyCode)) {
+                return im;
+            }
+        }
+        return null;
+    }
+
     /*Inner Classes*/
     class EnterKeyListener implements KeyEventPostProcessor {
 
@@ -50,43 +86,28 @@ public class KeyboardController extends PhysicalController {
         public boolean postProcessKeyEvent(KeyEvent e) {
             int keyCode = e.getKeyCode();
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                if (rebindMode) { //if you want to handle listening for the rebinding key
-                    OptionsVirtualController ovc = ((OptionsVirtualController)virtualController);
-                    RebindInfo ri = ovc.getRebindInfo();
-                    reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
-                    //label key appropriately
-                    JButton button = (JButton)ri.component;
-                    button.setText(KeyEvent.getKeyText(keyCode));
-                    rebindMode = false; //remember to do this /*Derpy face*/
-                    JButton backButton = (JButton)ri.backButton;
-                    backButton.setEnabled(true); //re-enable back button 
-                } else { //process key press as usual
-                    if (enabled) {
-                        IntentMap im = getIM(keyCode);
-                        virtualController.executeAction(im);
-                    }
-                }
+                KeyboardControl control = new KeyboardControl(keyCode);
+                mode.actionPerformed(control);
+//                if (rebindMode) { //if you want to handle listening for the rebinding key
+//                    OptionsVirtualController ovc = ((OptionsVirtualController) virtualController);
+//                    RebindInfo ri = ovc.getRebindInfo();
+//                    reassignControlWithIntent(new KeyboardControl(keyCode), ri.object, ri.intent);
+//                    //label key appropriately
+//                    JButton button = (JButton) ri.component;
+//                    button.setText(KeyEvent.getKeyText(keyCode));
+//                    rebindMode = false; //remember to do this /*Derpy face*/
+//                    JButton backButton = (JButton) ri.backButton;
+//                    backButton.setEnabled(true); //re-enable back button 
+//                } else { //process key press as usual
+//                    if (enabled) {
+//                        IntentMap im = getIM(keyCode);
+//                        virtualController.executeAction(im);
+//                    }
+//                }
             }
             return true;
         }
-        
-        private IntentMap getIM(int keyCode) {
-            if (intentMaps == null) {
-                return null;
-            }
-            KeyboardControl control;
-            int currentKey;
-            IntentMap im;
-            for (int i=0; i<intentMaps.size(); i++) {
-                im = intentMaps.get(i);
-                control = (KeyboardControl)im.getControl();
-                if (control.representsKey(keyCode)) {
-                    return im;
-                }
-            }
-            return null;
-        }
-        
+
 //        @Override
 //        public boolean postProcessKeyEvent(KeyEvent e) {
 //            int keyCode = e.getKeyCode();
@@ -134,6 +155,5 @@ public class KeyboardController extends PhysicalController {
 //            }
 //            return true;
 //        }
-        
     }
 }

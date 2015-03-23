@@ -1,5 +1,6 @@
 package controller.physicalController;
 
+import application.RunGame;
 import controller.Controller;
 import controller.Intent;
 import controller.control.Control;
@@ -12,11 +13,13 @@ import model.Model;
 import view.screen.GameScreen;
 import view.screen.Screen;
 
-public class PhysicalController extends Controller {
+public abstract class PhysicalController extends Controller {
 
     /*Properties*/
     protected VirtualController virtualController;
-    protected boolean enabled = true;
+    //protected boolean enabled = true;
+    //
+    protected PhysicalControllerMode mode = new DisabledMode();
     
     /*Constructors*/
     
@@ -26,11 +29,14 @@ public class PhysicalController extends Controller {
     
     /*Methods*/
     
+    public abstract void rebind(Control control);
+    public abstract void performAction(Control control);
+    
     public void adaptForScreen(ArrayList<IntentMap> ims, VirtualController screenController) {
         if (ims == null) {
-            enabled = false; //Disable          
+            setMode(PhysicalControllerMode.DISABLED); //enabled = false; //Disable          
         } else {
-            enabled = true;
+            setMode(PhysicalControllerMode.ENABLED); //enabled = true;
             this.intentMaps = ims;
         }
         this.virtualController = screenController;
@@ -38,7 +44,7 @@ public class PhysicalController extends Controller {
     
     public void reassignControlWithIntent(Control control, Object object, Intent intent) {
         //get screen of interest
-        ArrayList<IntentMap> ims = Screen.getPhysicalControlIMs();
+        ArrayList<IntentMap> ims = GameScreen.getPhysicalControlIMs();
         
         //remove any old ims with that control
         removeICMForControl(ims, control);
@@ -61,8 +67,83 @@ public class PhysicalController extends Controller {
         }
     }
     
+    public void setMode(String mode) {
+        switch (mode) {
+            case PhysicalControllerMode.ENABLED:
+                this.mode = new EnabledMode();
+                break;
+            case PhysicalControllerMode.DISABLED:
+                this.mode = new DisabledMode();
+                break;
+            case PhysicalControllerMode.REBIND:
+                this.mode = new RebindMode();
+                break;
+            default:
+                RunGame.showErrorMessage("Invalid mode: " + mode);
+                break;
+        }
+    }
+    
     /*Get-Sets*/
     
+    /*Inner Classes*//////////////////////////////////////////////////////////////////////////////
+    public abstract class PhysicalControllerMode {
+        
+        /*Properties*/
+        
+        public static final String ENABLED = "ENABLED";
+        public static final String DISABLED = "DISABLED";
+        public static final String REBIND = "REBIND";
+        
+        /*Constructors*/
+        
+        /*Methods*/
+
+        //Perform tasks on different timings
+        public abstract void actionPerformed(Control control);
+
+    }
+
+    private class EnabledMode extends PhysicalControllerMode {
+
+        public EnabledMode() {
+            //
+        }
+        
+        @Override
+        public void actionPerformed(Control control) {
+            performAction(control);
+        }
+
+    }
+
+    private class DisabledMode extends PhysicalControllerMode {
+
+        public DisabledMode() {
+            //
+        }
+        
+        @Override
+        public void actionPerformed(Control control) {
+            //do nothing
+        }
+
+    }
+    
+    private class RebindMode extends PhysicalControllerMode {
+        
+        public RebindMode() {
+            //
+        }
+        
+        @Override
+        public void actionPerformed(Control control) {
+            rebind(control);
+        }
+        
+    }
+    
+    /*END Inner Classes*//////////////////////////////////////////////////////////////////////////////
     
     
 }

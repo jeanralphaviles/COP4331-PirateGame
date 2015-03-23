@@ -55,7 +55,7 @@ public class Model extends Thread {
     private static final int gameStepUpdatesPerSecond = 3; //stuff like npc AI
     private static final int tolerance = 20; //window for checking if an update should occur
     //
-    private Mode mode = new  RunMode(); //new PauseMode();
+    private ModelMode mode = new  RunMode(); //new PauseMode();
 
     /*Constructors*/
     public Model() {
@@ -362,10 +362,10 @@ public class Model extends Thread {
 
     public void setMode(String mode) {
         switch (mode) {
-            case Mode.PAUSE:
+            case ModelMode.PAUSE:
                 this.mode = new PauseMode();
                 break;
-            case Mode.RUN:
+            case ModelMode.RUN:
                 this.mode = new RunMode();
                 break;
             default:
@@ -375,7 +375,7 @@ public class Model extends Thread {
     }
     
     /*Inner Classes*//////////////////////////////////////////////////////////////////////////////
-    public abstract class Mode {
+    public abstract class ModelMode {
         
         /*Properties*/
         
@@ -425,7 +425,7 @@ public class Model extends Thread {
 
     }
 
-    private class PauseMode extends Mode {
+    private class PauseMode extends ModelMode {
 
         public PauseMode() {
             //
@@ -438,7 +438,7 @@ public class Model extends Thread {
 
     }
 
-    private class RunMode extends Mode {
+    private class RunMode extends ModelMode {
 
         public RunMode() {
             //

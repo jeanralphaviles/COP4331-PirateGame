@@ -236,7 +236,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         jScrollPane3 = new javax.swing.JScrollPane();
         playerRecordsTreePanel = new javax.swing.JTree();
 
-        setBackground(new java.awt.Color(148, 61, 78));
+        setBackground(new java.awt.Color(40, 40, 40));
         setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 1, 1, new java.awt.Color(0, 0, 0)));
         setMaximumSize(new java.awt.Dimension(1500, 1000));
         setMinimumSize(new java.awt.Dimension(1500, 1000));
@@ -264,8 +264,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         continueAdventureButton.setText("Continue Adventure");
         continueAdventureButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(0, 0, 0)));
         continueAdventureButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 continueAdventureButtonActionPerformed(evt);
             }
         });
@@ -285,6 +284,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         saveButton.setMaximumSize(new java.awt.Dimension(87, 23));
         saveButton.setMinimumSize(new java.awt.Dimension(87, 23));
         saveButton.setPreferredSize(new java.awt.Dimension(87, 23));
+
         javax.swing.GroupLayout loadSaveFunctionalitiesPanelLayout = new javax.swing.GroupLayout(loadSaveFunctionalitiesPanel);
         loadSaveFunctionalitiesPanel.setLayout(loadSaveFunctionalitiesPanelLayout);
         loadSaveFunctionalitiesPanelLayout.setHorizontalGroup(
@@ -305,7 +305,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(loadSaveFunctionalitiesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(continueAdventureButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                    .addComponent(continueAdventureButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                     .addGroup(loadSaveFunctionalitiesPanelLayout.createSequentialGroup()
                         .addGroup(loadSaveFunctionalitiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
@@ -333,7 +333,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(columnNamesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(userInstructionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         columnNamesPanelLayout.setVerticalGroup(
             columnNamesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +354,7 @@ public class LoadSavePopUpViewport extends ViewPort {
         saveNameLabel.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
 
         saveNameTextField.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        saveNameTextField.setHorizontalAlignment(SwingConstants.CENTER);
+        saveNameTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         saveNameTextField.setText("DEFAULT");
 
         javax.swing.GroupLayout savePanelLayout = new javax.swing.GroupLayout(savePanel);
@@ -375,7 +375,7 @@ public class LoadSavePopUpViewport extends ViewPort {
                 .addGroup(savePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         playerRecordsTreePanel.setBackground(new java.awt.Color(127, 75, 53));
@@ -391,7 +391,7 @@ public class LoadSavePopUpViewport extends ViewPort {
             .addGroup(loadSavePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loadSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(savePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                    .addComponent(savePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
                 .addContainerGap())
             .addComponent(columnNamesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

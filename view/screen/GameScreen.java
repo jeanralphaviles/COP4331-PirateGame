@@ -7,17 +7,22 @@ import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import controller.control.KeyboardControl;
+import controller.physicalController.PhysicalController;
+import controller.physicalController.PhysicalController.PhysicalControllerMode;
 import java.awt.event.KeyEvent;
-import model.Model.Mode;
+import model.Model.ModelMode;
 import model.entity.occupation.ability.instantAbility.Talk;
 import utility.Course;
 import view.viewport.GameScreenViewport;
 
 public class GameScreen extends Screen {
+    
+    protected static ArrayList<IntentMap> physicalControlIMs = null;
 
     public GameScreen(Model model) {
         super(model);
-        model.setMode(Mode.RUN);
+        model.setMode(ModelMode.RUN);
+        RunGame.getAuxController().setMode(PhysicalControllerMode.ENABLED);
     }
     
     @Override
@@ -78,6 +83,10 @@ public class GameScreen extends Screen {
         physicalIMs.add(new IntentMap(new KeyboardControl(KeyEvent.VK_O), null, null, Intent.GOTO_OPTIONS, ""));
         
         return physicalIMs;
+    }
+    
+    public static ArrayList<IntentMap> getPhysicalControlIMs() {
+        return physicalControlIMs;
     }
     
 }

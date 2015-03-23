@@ -1,12 +1,14 @@
 package view.screen;
 
+import application.RunGame;
 import controller.IntentMap.IntentMap;
 import controller.physicalController.PhysicalController;
+import controller.physicalController.PhysicalController.PhysicalControllerMode;
 import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.GameObject;
 import model.Model;
-import model.Model.Mode;
+import model.Model.ModelMode;
 import view.viewport.ViewPort;
 
 public abstract class Screen {
@@ -16,12 +18,11 @@ public abstract class Screen {
     //
     protected ViewPort viewPort;
     protected Model model;
-    //
-    protected static ArrayList<IntentMap> physicalControlIMs = null;
 
     public Screen(Model model) {
         this.model = model;
-        model.setMode(Mode.PAUSE);
+        model.setMode(ModelMode.PAUSE);
+        RunGame.getAuxController().setMode(PhysicalControllerMode.DISABLED);
         init();
     }
 
@@ -62,10 +63,5 @@ public abstract class Screen {
 
     public void setViewPort(ViewPort viewPort) {
         this.viewPort = viewPort;
-    }
-
-    public static ArrayList<IntentMap> getPhysicalControlIMs() {
-        return physicalControlIMs;
-    }
-    
+    } 
 }

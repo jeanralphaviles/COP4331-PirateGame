@@ -22,6 +22,8 @@ public class LoadSavePopup extends Popup {
     protected void createController() {
         ArrayList<IntentMap> ims = viewPort.generateIntentMapping();
         virtualController = new LoadSaveVirtualController(model, ims);
+        
+        
     }
 }
 
