@@ -150,7 +150,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    /*&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 240;&#xa;            final int G = 240;&#xa;            final int B = 240;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;    */&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 76;&#xa;            final int G = 76;&#xa;            final int B = 76;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton()"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="avatarCharaterPanel1">
@@ -219,7 +219,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 76;&#xa;            final int G = 76;&#xa;            final int B = 76;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton()"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="avatarCharacterPanel2">
@@ -279,7 +279,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 76;&#xa;            final int G = 76;&#xa;            final int B = 76;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton()"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="avatarCharacterPanel3">
@@ -426,7 +426,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 60;&#xa;            final int G = 180;&#xa;            final int B = 207;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;        Image image = ImageUtil.getImage( ImageUtil.go_to_gamescreen_pic, this.getWidth(), this.getHeight()).getImage();&#xa;        g.drawImage( image , 0, 0, this);&#xa;&#xa;        this.setOpaque(false);&#xa;        this.setContentAreaFilled(false);&#xa;        this.setBorderPainted(false);&#xa;&#xa;    }&#xa;&#xa;}"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="mainMenuButton">
@@ -447,7 +447,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;&#xa;        if (g instanceof Graphics2D) {&#xa;            final int R = 76;&#xa;            final int G = 76;&#xa;            final int B = 76;&#xa;&#xa;            Paint p =&#xa;            new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 50),&#xa;                0.0f, getHeight(), new Color(R, G, B, 255), true);&#xa;            Graphics2D g2d = (Graphics2D)g;&#xa;            g2d.setPaint(p);&#xa;            g2d.fillRect(0, 0, getWidth(), getHeight());&#xa;        }&#xa;    }&#xa;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;        Image image = ImageUtil.getImage( ImageUtil.go_to_mainscreen_pic, this.getWidth(), this.getHeight()).getImage();&#xa;        g.drawImage( image , 0, 0, this);&#xa;&#xa;        this.setOpaque(false);&#xa;        this.setContentAreaFilled(false);&#xa;        this.setBorderPainted(false);&#xa;&#xa;    }&#xa;&#xa;}"/>
           </AuxValues>
         </Component>
       </SubComponents>

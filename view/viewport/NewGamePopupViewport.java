@@ -23,18 +23,6 @@ public class NewGamePopupViewport extends ViewPort {
 
     /*Properties*/
     
-    public static final String select_nickname = "select nickname";
-    public static final String select_parrotmancer = "select parrotmancer";
-    public static final String select_gankplanker = "select gankplanker";
-    public static final String select_turnhat = "select turnhat";
-    
-    public static final String parrotmancer = "./Sprites/characters/ParrotMancer_NoBG.png";
-    public static final String gankplanker = "./Sprites/characters/DaveOnACamel.jpg";
-    public static final String turnhat = "./Sprites/characters/turnHat.png";
-   
-    public static final String theme = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";
-    public static final String main_menu = "./Sprites/backgrounds/ship1.jpeg";
-    public static final String begin_game = "./Sprites/backgrounds/gold_coin.jpeg";
     
     /*Constructor*/
     
@@ -47,19 +35,17 @@ public class NewGamePopupViewport extends ViewPort {
     /*Methods*/
     private void setBackgroundThemes(){
         
-        mainMenuButton.setIcon( ImageUtil.getImage(main_menu, 125,100) );
-        beginAdventureButton.setIcon( ImageUtil.getImage(begin_game,125,100));
-        avatarCharacterButton1.setIcon( ImageUtil.getImage( parrotmancer) );
-        avatarCharacterButton2.setIcon( ImageUtil.getImage( gankplanker) );
-        avatarCharacterButton3.setIcon( ImageUtil.getImage( turnhat ) );
+        avatarCharacterButton1.setIcon( ImageUtil.getImage( ImageUtil.character_parrotmancer) );
+        avatarCharacterButton2.setIcon( ImageUtil.getImage( ImageUtil.character_gankplanker) );
+        avatarCharacterButton3.setIcon( ImageUtil.getImage( ImageUtil.character_turnhat ) );
     }
     
        @Override
     protected void paintComponent(Graphics g){
         
         super.paintComponent(g);
-        ImageIcon image = new ImageIcon( new Decal(theme).getImage());
-        g.drawImage( image.getImage() , 0, 0, this.getWidth(), this.getHeight(), this);
+        Image image = ImageUtil.getImage( ImageUtil.new_game_background, this.getWidth(), this.getHeight()).getImage();
+        g.drawImage( image , 0, 0, this.getWidth(), this.getHeight(), this);
     }
    
     
@@ -98,94 +84,15 @@ public class NewGamePopupViewport extends ViewPort {
         jPanel3 = new javax.swing.JPanel();
         presentationLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        avatarCharacterButton1 = new javax.swing.JButton(){
-
-            /*
-            @Override
-            protected void paintComponent(Graphics g) {
-                if (g instanceof Graphics2D) {
-                    final int R = 240;
-                    final int G = 240;
-                    final int B = 240;
-
-                    Paint p =
-                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
-                        0.0f, getHeight(), new Color(R, G, B, 255), true);
-                    Graphics2D g2d = (Graphics2D)g;
-                    g2d.setPaint(p);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-                }
-            }
-            */
-
-            @Override
-            protected void paintComponent(Graphics g) {
-
-                super.paintComponent(g);
-
-                if (g instanceof Graphics2D) {
-                    final int R = 76;
-                    final int G = 76;
-                    final int B = 76;
-
-                    Paint p =
-                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
-                        0.0f, getHeight(), new Color(R, G, B, 255), true);
-                    Graphics2D g2d = (Graphics2D)g;
-                    g2d.setPaint(p);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-                }
-            }
-
-        };
+        avatarCharacterButton1 = new javax.swing.JButton();
         avatarCharaterPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         characterTextArea1 = new javax.swing.JTextArea();
-        avatarCharacterButton2 = new javax.swing.JButton(){
-
-            @Override
-            protected void paintComponent(Graphics g) {
-
-                super.paintComponent(g);
-
-                if (g instanceof Graphics2D) {
-                    final int R = 76;
-                    final int G = 76;
-                    final int B = 76;
-
-                    Paint p =
-                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
-                        0.0f, getHeight(), new Color(R, G, B, 255), true);
-                    Graphics2D g2d = (Graphics2D)g;
-                    g2d.setPaint(p);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-                }
-            }
-
-        };
+        avatarCharacterButton2 = new javax.swing.JButton();
         avatarCharacterPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         characterTextArea2 = new javax.swing.JTextArea();
-        avatarCharacterButton3 = new javax.swing.JButton(){
-            @Override
-            protected void paintComponent(Graphics g) {
-
-                super.paintComponent(g);
-
-                if (g instanceof Graphics2D) {
-                    final int R = 76;
-                    final int G = 76;
-                    final int B = 76;
-
-                    Paint p =
-                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
-                        0.0f, getHeight(), new Color(R, G, B, 255), true);
-                    Graphics2D g2d = (Graphics2D)g;
-                    g2d.setPaint(p);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-                }
-            }
-        };
+        avatarCharacterButton3 = new javax.swing.JButton();
         avatarCharacterPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         characterTextArea3 = new javax.swing.JTextArea();
@@ -198,19 +105,13 @@ public class NewGamePopupViewport extends ViewPort {
             protected void paintComponent(Graphics g) {
 
                 super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.go_to_gamescreen_pic, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
 
-                if (g instanceof Graphics2D) {
-                    final int R = 60;
-                    final int G = 180;
-                    final int B = 207;
+                this.setOpaque(false);
+                this.setContentAreaFilled(false);
+                this.setBorderPainted(false);
 
-                    Paint p =
-                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
-                        0.0f, getHeight(), new Color(R, G, B, 255), true);
-                    Graphics2D g2d = (Graphics2D)g;
-                    g2d.setPaint(p);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-                }
             }
 
         };
@@ -220,19 +121,13 @@ public class NewGamePopupViewport extends ViewPort {
             protected void paintComponent(Graphics g) {
 
                 super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.go_to_mainscreen_pic, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
 
-                if (g instanceof Graphics2D) {
-                    final int R = 76;
-                    final int G = 76;
-                    final int B = 76;
+                this.setOpaque(false);
+                this.setContentAreaFilled(false);
+                this.setBorderPainted(false);
 
-                    Paint p =
-                    new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 50),
-                        0.0f, getHeight(), new Color(R, G, B, 255), true);
-                    Graphics2D g2d = (Graphics2D)g;
-                    g2d.setPaint(p);
-                    g2d.fillRect(0, 0, getWidth(), getHeight());
-                }
             }
 
         };
