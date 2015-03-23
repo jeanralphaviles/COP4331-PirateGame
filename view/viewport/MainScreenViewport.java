@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import application.RunGame;
 import java.util.ArrayList;
 import model.GameObject;
 import controller.IntentMap.IntentMap;
@@ -22,19 +23,30 @@ import utility.decal.Decal;
 public class MainScreenViewport extends ViewPort {
     
     /*Properties*/
-    Image backgroundImage;
+    private Image backgroundImage;
+    private Image plankImage;
+    private int mainWidth = -1;
+    private int mainHeight = -1;
 
     /*Constructors*/
     public MainScreenViewport() {
+        backgroundImage = Toolkit.getDefaultToolkit().createImage("./Sprites/backgrounds/MainMenuBackground.jpg");
+        plankImage = Toolkit.getDefaultToolkit().createImage("./Sprites/backgrounds/plank.jpg");
+        
         initComponents();
         setVisible(true);
         
-        backgroundImage = Toolkit.getDefaultToolkit().createImage("./Sprites/backgrounds/MainMenuBackground.jpg");
+        newGameButton.setOpaque(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setBorderPainted(false);
         
-        ImageIcon img = new ImageIcon("./Sprites/backgrounds/plank.jpg");
-        newGameButton.setIcon(img);
-        exitButton.setIcon(img);
-        loadButton.setIcon(img);
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorderPainted(false);
+        
+        loadButton.setOpaque(false);
+        loadButton.setContentAreaFilled(false);
+        loadButton.setBorderPainted(false);
     }
 
     /*Methods*/
@@ -51,12 +63,33 @@ public class MainScreenViewport extends ViewPort {
 
     @Override
     public void updateView(GameObject gameObject) {
+        if (mainWindowSizeChanged()) {
+            RunGame.mainWindow.setSize(this); // Resize view to fit fullscreen
+        }
     }
     
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+    }
+    
+    private boolean mainWindowSizeChanged() {
+        int width = RunGame.mainWindow.getWidth();
+        int height = RunGame.mainWindow.getHeight();
+        if (mainWidth == -1 && mainHeight == -1) {
+            mainWidth = width;
+            mainHeight = height;
+            return false;
+        }
+        
+        else if (mainWidth != width || mainHeight != height) {
+            return true;
+        } 
+        
+        mainWidth = width;
+        mainHeight = height;
+        return false;
     }
     
 
@@ -77,7 +110,13 @@ public class MainScreenViewport extends ViewPort {
         exitButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(plankImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
         jLabel2.setText("jLabel2");
 
@@ -85,23 +124,22 @@ public class MainScreenViewport extends ViewPort {
         setMinimumSize(new java.awt.Dimension(25, 25));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        exitButton.setFont(new java.awt.Font("Luminari", 3, 18)); // NOI18N
+        exitButton.setFont(new java.awt.Font("Luminari", 3, 24)); // NOI18N
         exitButton.setText("Exit");
         add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 420, 50));
 
-        loadButton.setFont(new java.awt.Font("Luminari", 3, 18)); // NOI18N
+        loadButton.setFont(new java.awt.Font("Luminari", 3, 24)); // NOI18N
         loadButton.setText("Load Game");
         add(loadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 420, 50));
 
-        newGameButton.setFont(new java.awt.Font("Luminari", 3, 18)); // NOI18N
+        newGameButton.setFont(new java.awt.Font("Luminari", 3, 24)); // NOI18N
         newGameButton.setText("New Game");
         add(newGameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 420, 50));
 
-        jLabel3.setBackground(new java.awt.Color(255, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Luminari", 3, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Luminari", 3, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 60, 0));
         jLabel3.setText("Welcome Aboard!");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 310, 90));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 400, 90));
     }// </editor-fold>//GEN-END:initComponents
 
 
