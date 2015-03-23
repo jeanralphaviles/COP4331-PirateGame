@@ -22,6 +22,7 @@ public class ImageUtil {
     public static final String trader_pic = "./Sprites/characters/DaveOnACamel.jpg";
     public static final String trader_view_port_background = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";
     public static final String item = "./Sprites/item/A_Armour03.png";
+    public static final String options_viewport_background = "./Sprites/backgrounds/map_theme.jpg";
     
     public static ImageIcon getImage(ImageIcon image, int width, int height){
         
