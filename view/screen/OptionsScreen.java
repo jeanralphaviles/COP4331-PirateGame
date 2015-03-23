@@ -25,7 +25,6 @@ public class OptionsScreen extends Screen {
     @Override
     protected void createView() {
         viewPort = new OptionsViewport();
-        //viewPort = new FlavorImageViewport();
         viewPort.updateView(model.getGameObject());
     }
 

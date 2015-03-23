@@ -47,7 +47,7 @@ public class TradeViewport extends ViewPort {
 
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
-        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+        ArrayList<IntentMap> ims = new ArrayList<>(1);
         
         ims.add(new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
         
