@@ -33,6 +33,14 @@ public class Avatar extends Entity {
         this.equipItem(bazzuca);
         this.setStatistics(new Statistics());
         */
+        
+        Weapon sword = new Weapon(Decal.createDecal(Decal.defualt_sword), "Bazzuca");
+        this.storeItem( sword );
+        this.setStatistics(new Statistics());
+    }   
+    @Override
+    public boolean storeItem(Item item) {
+        return super.storeItem(item); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Avatar(Occupation occupation, Decal decal) {

@@ -25,6 +25,7 @@ public class Decal {
     private BufferedImage image;
 
     public static final String default_entity = "./Sprites/item/C_Hat02.png";
+    public static final String defualt_sword = "./Sprites/item/W_Sword002.png";
     public static final String summoner = "./Sprites/item/S_Magic01.png";
     public static final String smasher = "./Sprites/item/W_Sword006.png";
     public static final String sneak = "./Sprites/item/Ac_Ring01.png";
