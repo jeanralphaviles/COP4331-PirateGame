@@ -1,5 +1,6 @@
 package view.viewport;
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
@@ -22,9 +23,9 @@ import java.util.HashMap;
  */
 public class AreaViewport extends ViewPort {
 
-    private int numTilesWide = 31; //should be odd 19 @ 32,32 scale was good
-    private int numTilesHigh = 27; //should be odd 7 @ 32,32 scale was good
-    private Tile[][] viewTiles = new Tile[numTilesWide][numTilesHigh];
+    private final int numTilesWide = 31; //should be odd 19 @ 32,32 scale was good
+    private final int numTilesHigh = 27; //should be odd 7 @ 32,32 scale was good
+    private final Tile[][] viewTiles = new Tile[numTilesWide][numTilesHigh];
     public static boolean updateNeeded = true;
     
     public AreaViewport() {
@@ -83,10 +84,10 @@ public class AreaViewport extends ViewPort {
 		}
 	}
 	
-	private class Tile {
+	private final class Tile {
 		private Decal decal;
-		private JButton button;
-		private HashMap<String, ImageIcon> scaledImages = new HashMap<String, ImageIcon>();
+		private final JButton button;
+		private final HashMap<String, ImageIcon> scaledImages = new HashMap<String, ImageIcon>();
 		
 		public Tile(Decal decal) {
 			this.setDecal(decal);
