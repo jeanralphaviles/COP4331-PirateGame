@@ -1,5 +1,6 @@
 package view.screen;
 
+import application.RunGame;
 import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
@@ -12,7 +13,10 @@ public class MainScreen extends Screen {
     public MainScreen(Model model) {
         super(model);
         Audio a = new Audio();
-        a.playMusic();
+        if (RunGame.musicEnabled) {
+           a.playMusic(); 
+        }
+        
     }
         
     @Override

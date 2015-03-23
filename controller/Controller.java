@@ -3,6 +3,7 @@ package controller;
 import model.Model;
 import controller.IntentMap.IntentMap;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import model.Level;
 import view.screen.DialogueScreen;
 import view.screen.GameScreen;
@@ -116,8 +117,18 @@ public abstract class Controller {
         }
     }
     
-    protected void action(IntentMap icm) {
-        Intent intent = icm.getIntent();
+    private void activateVirtualKey(IntentMap im) {
+        JButton button = (JButton)im.getObject();
+        button.doClick();
+    }
+    
+    protected void action(IntentMap im) {
+        Intent intent = im.getIntent();
+        switch(intent) {
+            case ACTIVATE_VIRTUAL_KEY:
+                activateVirtualKey(im);
+                break;
+        }
         action(intent);
     }
 

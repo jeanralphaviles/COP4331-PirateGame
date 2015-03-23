@@ -25,12 +25,13 @@ public class Decal {
     private BufferedImage image;
 
     public static final String default_entity = "./Sprites/item/C_Hat02.png";
+    public static final String defualt_sword = "./Sprites/item/W_Sword002.png";
     public static final String summoner = "./Sprites/item/S_Magic01.png";
     public static final String smasher = "./Sprites/item/W_Sword006.png";
     public static final String sneak = "./Sprites/item/Ac_Ring01.png";
     public static final String summonerPicture = "./Sprites/characters/parrotMancer.jpg";
-    public static final String smasherPicture = "./Sprites/characters/turnHat.png";
-    public static final String sneakPicture = "./Sprites/characters/gangPlanker.jpg";
+    public static final String smasherPicture = "./Sprites/characters/gangPlanker.jpg";
+    public static final String sneakPicture = "./Sprites/characters/turnHat.png";
     public static final String item_default = "./Sprites/item/W_Mace010.png"; 
     private static final String terrain = "./Sprites/map.png";
     public static final Decal grass = new Decal("grass");
@@ -49,6 +50,8 @@ public class Decal {
     public static final String one_shot_item ="./Sprites/item/I_C_Banana.png";
     public static final String takeable_item = "./Sprites/item/W_Mace004.png";
     public static final String trader = "./Sprites/item/A_Armour03.png";
+    public static final String glaives = "./Sprites/item/W_Throw004.png";
+    public static final String life = "./Sprites/item/life.png";
         //Misc
     public static final String blank = "blank"; 
     private String fileName = UUID.randomUUID().toString(); // Don't Worry About it, I just need a random string here

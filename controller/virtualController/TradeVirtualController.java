@@ -1,5 +1,6 @@
 package controller.virtualController;
 
+import application.RunGame;
 import java.awt.Color;
 import model.Model;
 import controller.IntentMap.IntentMap;
@@ -11,12 +12,12 @@ import model.entity.occupation.ability.Ability;
 import model.item.Item;
 import utility.Course;
 
-public final class GameVirtualController extends VirtualController {
+public final class TradeVirtualController extends VirtualController {
     
-     private Color SELECTED_COLOR;
-     private Color UNSELECTED_COLOR;
+    private Color SELECTED_COLOR;
+    private Color UNSELECTED_COLOR;
      
-    public GameVirtualController(Model model, ArrayList<IntentMap> ims) {
+    public TradeVirtualController(Model model, ArrayList<IntentMap> ims) {
         super(model, ims);
         // This color is equivalent to the InventoryPanel Background Color
         SELECTED_COLOR = new Color(101,79,57);
@@ -33,30 +34,12 @@ public final class GameVirtualController extends VirtualController {
         Intent intent = im.getIntent();
         
         switch(intent) {
-            case MOVE:
-                Course course = (Course)im.getObject();
-                model.moveAvatar(course);
-                break;
-            case TOGGLE_EQUIPPED:
-                selectItem(im);
-                break;
-            case INVENTORY_ITEM:
-                selectItem(im);
-                break;
-            case EQUIP_ITEM:
-                toggleEquip();
-                break;
-            case UNEQUIP_ITEM:
-                  toggleUnequip();
-                break;
-            case DROP_ITEM:
-                toggleDrop();
-                break;
-            case ACTIVATE_ABILITY:
-                activateAbility(im);
-                break;
-            case TALK:
-                talk(im);
+            case PURCHASE:
+                PurchaseParams params = (PurchaseParams)im.getObject();
+                Item item = params.item;
+                int price = params.price;
+                //forward item and purchase request to model
+                model.purchaseAvatarItem(item, price);
                 break;
             default:
                 break;

@@ -1,5 +1,6 @@
 package model.item;
 
+import java.util.ArrayList;
 import model.Level;
 import model.entity.Entity;
 import model.entity.Statistics;
@@ -166,13 +167,13 @@ public abstract class Item implements Cloneable {
         return response;
     }
     
-    public String[] getInspectionDetails () {
-        String[] details = new String[3];
-        
-        details[0] = "Name: " + getName();
-        details[1] = "Health: " + getStatistics().getCurrentHealth() + "\nMana: " + getStatistics().getCurrentMana();
-        details[2] = constructStatsString();
-        
+    public ArrayList<String> getInspectionDetails () {
+        ArrayList<String> details = new ArrayList<String>();
+        if (isVisibile) {
+            details.add("Name: " + getName());
+            details.add("Health: " + getStatistics().getCurrentHealth() + "\nMana: " + getStatistics().getCurrentMana());
+            details.add(constructStatsString());
+        }
         return details;
     }
 

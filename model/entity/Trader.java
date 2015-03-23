@@ -13,5 +13,7 @@ public final class Trader extends Entity {
         super(Decal.createDecal(Decal.trader));
         response = new TradeResponse();
     }
+    
+    
 
 }

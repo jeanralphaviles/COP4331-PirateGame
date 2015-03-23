@@ -25,8 +25,6 @@ public class Audio {
     private AudioInputStream audioIn;
     private Clip clip;
     public static final String fightingTheStorm = "songs/FightingTheStorm.au";
-    //C:/Users/Juhi/Documents/OOP/Iter2/HelloWorld/COP4331-PirateGame/Songs/FightingTheStorm.au
-    
     
     public Audio() {
         

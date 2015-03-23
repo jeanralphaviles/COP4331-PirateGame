@@ -21,6 +21,12 @@ public class RudeResponse extends Response {
     public void address(Model model) {
         //do nothing
     }
+    
+    @Override
+    public String getDialogue() {
+        return dialogue;
+    }
+    
     /*Get-Sets*/
     
     /*Inner Classes*/

@@ -1,12 +1,14 @@
 package view.screen;
 
+import application.RunGame;
 import controller.IntentMap.IntentMap;
 import controller.physicalController.PhysicalController;
+import controller.physicalController.PhysicalController.PhysicalControllerMode;
 import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.GameObject;
 import model.Model;
-import model.Model.Mode;
+import model.Model.ModelMode;
 import view.viewport.ViewPort;
 
 public abstract class Screen {
@@ -21,7 +23,8 @@ public abstract class Screen {
 
     public Screen(Model model) {
         this.model = model;
-        model.setMode(Mode.PAUSE);
+        model.setMode(ModelMode.PAUSE);
+        RunGame.getAuxController().setMode(PhysicalControllerMode.DISABLED);
         init();
     }
 

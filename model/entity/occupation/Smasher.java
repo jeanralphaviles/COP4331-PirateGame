@@ -2,6 +2,7 @@ package model.entity.occupation;
 
 import utility.decal.Decal;
 import model.entity.Statistics;
+import model.entity.occupation.ability.instantAbility.projectile.Glaives;
 
 /**
  * @author Jean-Ralph Aviles
@@ -12,6 +13,7 @@ public class Smasher extends Occupation {
     
     public Smasher() {
         super("Smasher");
+        this.getAbilities().add(new Glaives());
         this.setPicture(Decal.createDecal(Decal.smasherPicture));
     }
 

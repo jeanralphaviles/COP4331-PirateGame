@@ -7,6 +7,7 @@ package view.screen;
 
 import application.RunGame;
 import controller.IntentMap.IntentMap;
+import controller.physicalController.PhysicalController.PhysicalControllerMode;
 import controller.virtualController.OptionsVirtualController;
 import java.util.ArrayList;
 import model.Model;
@@ -20,12 +21,12 @@ public class OptionsScreen extends Screen {
     
     public OptionsScreen(Model model) {
         super(model);
+        RunGame.getAuxController().setMode(PhysicalControllerMode.ENABLED);
     }
     
     @Override
     protected void createView() {
         viewPort = new OptionsViewport();
-        //viewPort = new FlavorImageViewport();
         viewPort.updateView(model.getGameObject());
     }
 
