@@ -375,6 +375,9 @@ public class Level {
     			triggerProjectileEffect(projectile);
     			removeProjectile(projectile);
     		}
+    	} else {
+    		triggerProjectileEffect(projectile);
+    		removeProjectile(projectile);
     	}
     }
 
