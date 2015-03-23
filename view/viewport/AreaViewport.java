@@ -1,5 +1,6 @@
 package view.viewport;
 
+import controller.IntentMap.IntentMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
