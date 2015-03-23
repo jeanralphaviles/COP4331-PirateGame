@@ -58,6 +58,8 @@ public class KeyboardController extends PhysicalController {
                     JButton button = (JButton)ri.component;
                     button.setText(KeyEvent.getKeyText(keyCode));
                     rebindMode = false; //remember to do this /*Derpy face*/
+                    JButton backButton = (JButton)ri.backButton;
+                    backButton.setEnabled(true); //re-enable back button 
                 } else { //process key press as usual
                     if (enabled) {
                         IntentMap im = getIM(keyCode);

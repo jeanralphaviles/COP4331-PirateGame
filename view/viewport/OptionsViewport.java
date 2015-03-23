@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import model.entity.occupation.ability.instantAbility.Talk;
 import utility.Course;
 import utility.ImageUtil;
 
@@ -39,22 +38,22 @@ public class OptionsViewport extends ViewPort {
         ArrayList<IntentMap> ims = new ArrayList<>(1);
         
         //Reassign movement keys
-        ims.add(new IntentMap(null, upButton, new RebindInfo(Intent.MOVE, new Course(Course.up), upButton) , Intent.LISTEN, ""));   
-        ims.add(new IntentMap(null, upLeftButton, new RebindInfo(Intent.MOVE, new Course(Course.left_up), upLeftButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, leftButton, new RebindInfo(Intent.MOVE, new Course(Course.left), leftButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, leftDownButton, new RebindInfo(Intent.MOVE, new Course(Course.left_down), leftDownButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, downButton, new RebindInfo(Intent.MOVE, new Course(Course.down), downButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, downRightButton, new RebindInfo(Intent.MOVE, new Course(Course.right_down), downRightButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, rightButton, new RebindInfo(Intent.MOVE, new Course(Course.right), rightButton), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, rightUpButton, new RebindInfo(Intent.MOVE, new Course(Course.right_up), rightUpButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, upButton, new RebindInfo(Intent.MOVE, new Course(Course.up), upButton, backButton) , Intent.LISTEN, ""));   
+        ims.add(new IntentMap(null, upLeftButton, new RebindInfo(Intent.MOVE, new Course(Course.left_up), upLeftButton, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, leftButton, new RebindInfo(Intent.MOVE, new Course(Course.left), leftButton, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, leftDownButton, new RebindInfo(Intent.MOVE, new Course(Course.left_down), leftDownButton, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, downButton, new RebindInfo(Intent.MOVE, new Course(Course.down), downButton, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, downRightButton, new RebindInfo(Intent.MOVE, new Course(Course.right_down), downRightButton, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, rightButton, new RebindInfo(Intent.MOVE, new Course(Course.right), rightButton, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, rightUpButton, new RebindInfo(Intent.MOVE, new Course(Course.right_up), rightUpButton, backButton), Intent.LISTEN, ""));
         
         //Reassign other keys (Intents need to be fixed)
-        ims.add(new IntentMap(null, macro1Button, new RebindInfo(Intent.TALK, new Talk(), macro1Button), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro2Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro2Button), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro3Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro3Button), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro4Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro4Button), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, macro5Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro5Button), Intent.LISTEN, ""));
-        ims.add(new IntentMap(null, saveButton, new RebindInfo(Intent.SAVE, null, saveButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, macro1Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro1Button, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, macro2Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro2Button, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, macro3Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro3Button, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, macro4Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro4Button, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, macro5Button, new RebindInfo(Intent.ACTIVATE_VIRTUAL_KEY, null, macro5Button, backButton), Intent.LISTEN, ""));
+        ims.add(new IntentMap(null, saveButton, new RebindInfo(Intent.SAVE, null, saveButton, backButton), Intent.LISTEN, ""));
         
         ims.add(new IntentMap(backButton, Intent.GOTO_GAME));
         ims.add(new IntentMap(resetDefaultsButton, Intent.RESET_DEFAULT_CONTROLS));
@@ -72,7 +71,7 @@ public class OptionsViewport extends ViewPort {
             "Numpad-3",
             "Numpad-6",
             "Numpad-9",
-            "Space",
+            "E",
             "Q",
             "1",
             "2",

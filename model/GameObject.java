@@ -76,6 +76,10 @@ public class GameObject {
 	public void activateAvatarAbility(Ability ability) {
 		this.getLevel().activateAvatarAbility(ability);
 	}
+        
+        public ArrayList<String> getInspectionDetails(GridLocation gridLocation) {
+            return this.getLevel().getInspectionDetails(gridLocation);
+        }
 
 	@Override
 	public String toString() {

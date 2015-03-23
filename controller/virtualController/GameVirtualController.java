@@ -13,8 +13,8 @@ import utility.Course;
 
 public final class GameVirtualController extends VirtualController {
     
-     Color SELECTED_COLOR;
-     Color UNSELECTED_COLOR;
+     private Color SELECTED_COLOR;
+     private Color UNSELECTED_COLOR;
      
     public GameVirtualController(Model model, ArrayList<IntentMap> ims) {
         super(model, ims);

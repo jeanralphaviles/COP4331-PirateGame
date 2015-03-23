@@ -86,6 +86,17 @@ public class Level {
     public boolean isValidGridLocation(GridLocation gridLocation) {
         return map.isValidGridLocation(gridLocation);
     }
+    
+    public ArrayList<String> getInspectionDetails(GridLocation gridLocation) {
+        ArrayList<String> inspectionDetails = new ArrayList<String>();
+        if (getEntity(gridLocation) != null) {
+            inspectionDetails.addAll(getEntity(gridLocation).getInspectionDetails());
+        }
+        if (getItem(gridLocation) != null) {
+            inspectionDetails.addAll(getItem(gridLocation).getInspectionDetails());
+        }
+        return inspectionDetails;
+    }
 
     public boolean addEntity(Entity entity, GridLocation gridLocation) {
         if (isValidGridLocation(gridLocation)) {
@@ -364,6 +375,9 @@ public class Level {
     			triggerProjectileEffect(projectile);
     			removeProjectile(projectile);
     		}
+    	} else {
+    		triggerProjectileEffect(projectile);
+    		removeProjectile(projectile);
     	}
     }
 

@@ -97,13 +97,13 @@ public class StatusViewport extends ViewPort {
         healthBar.setMinimum(0);
         healthBar.setStringPainted(true);
         healthBar.setForeground(Color.red);
-        healthBar.setBackground(Color.red);
+        healthBar.setBackground(new Color(200, 200, 200));
         
         manaBar.setMaximum(maxMana);
         manaBar.setMinimum(0);
         manaBar.setStringPainted(true);
         manaBar.setForeground(Color.blue);
-        manaBar.setBackground(Color.red);
+        manaBar.setBackground(new Color(200, 200, 200));
         
         ImageIcon image = new ImageIcon(Decal.life);
         
