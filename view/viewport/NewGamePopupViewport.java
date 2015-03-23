@@ -7,22 +7,26 @@ import model.entity.occupation.Smasher;
 import model.entity.occupation.Sneak;
 import model.entity.occupation.Summoner;
 import controller.IntentMap.IntentMap;
-import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Paint;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
 import utility.ImageUtil;
-import utility.decal.Decal;
 
 public class NewGamePopupViewport extends ViewPort {
 
     /*Properties*/
     
+    public static final String select_nickname = "select nickname";
+    public static final String select_parrotmancer = "select parrotmancer";
+    public static final String select_gankplanker = "select gankplanker";
+    public static final String select_turnhat = "select turnhat";
+    
+    public static final String parrotmancer = "./Sprites/characters/ParrotMancer_NoBG.png";
+    public static final String gankplanker = "./Sprites/characters/gangPlanker.jpg";
+    public static final String turnhat = "./Sprites/characters/turnHat.png";
+   
+    public static final String theme = "./Sprites/backgrounds/pirate_wallpaper_nice_boat.jpg";
+    public static final String main_menu = "./Sprites/backgrounds/ship1.jpeg";
+    public static final String begin_game = "./Sprites/backgrounds/gold_coin.jpeg";
     
     /*Constructor*/
     

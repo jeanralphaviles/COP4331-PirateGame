@@ -4,7 +4,6 @@ import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
-import view.viewport.DialogueScreenViewport;
 import view.viewport.TradeViewport;
 
 public class TradeScreen extends Screen {

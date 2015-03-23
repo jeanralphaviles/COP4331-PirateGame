@@ -423,7 +423,6 @@
                 </MatteColorBorder>
               </Border>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;        Image image = ImageUtil.getImage( ImageUtil.go_to_gamescreen_pic, this.getWidth(), this.getHeight()).getImage();&#xa;        g.drawImage( image , 0, 0, this);&#xa;&#xa;        this.setOpaque(false);&#xa;        this.setContentAreaFilled(false);&#xa;        this.setBorderPainted(false);&#xa;&#xa;    }&#xa;&#xa;}"/>
@@ -444,7 +443,6 @@
                 </MatteColorBorder>
               </Border>
             </Property>
-            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(){&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;&#xa;        super.paintComponent(g);&#xa;        Image image = ImageUtil.getImage( ImageUtil.go_to_mainscreen_pic, this.getWidth(), this.getHeight()).getImage();&#xa;        g.drawImage( image , 0, 0, this);&#xa;&#xa;        this.setOpaque(false);&#xa;        this.setContentAreaFilled(false);&#xa;        this.setBorderPainted(false);&#xa;&#xa;    }&#xa;&#xa;}"/>

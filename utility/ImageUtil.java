@@ -64,8 +64,8 @@ public class ImageUtil {
      public static final String book_4 = "./Sprites/item/W_Book04.png";
 
      public static final String booty_pic = "./Sprites/backgrounds/treasure.png";
-     
-    
+     public static final String dialogue_viewport_background = "./Sprites/backgrounds/blank_black_background.jpg";
+
     public static ImageIcon getImage(ImageIcon image, int width, int height){
         
          BufferedImage bufferedImage = (BufferedImage)image.getImage();
