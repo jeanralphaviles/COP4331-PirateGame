@@ -53,7 +53,16 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="31" max="32767" attributes="0"/>
               <Component id="dialogueTextView" min="-2" pref="42" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <EmptySpace pref="23" max="32767" attributes="0"/>
+=======
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="noButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="yesButton" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 3e78ff0f68f10f97b70ff2c18e067f39fa5811ec
               <Component id="continueButton" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>

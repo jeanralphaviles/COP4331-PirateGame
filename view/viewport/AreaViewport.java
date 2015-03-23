@@ -27,6 +27,7 @@ public class AreaViewport extends ViewPort {
     private final int numTilesWide = 31; //should be odd 19 @ 32,32 scale was good
     private final int numTilesHigh = 27; //should be odd 7 @ 32,32 scale was good
     private final Tile[][] viewTiles = new Tile[numTilesWide][numTilesHigh];
+
     public static boolean updateNeeded = true;
     //
     private static HashMap<String, ImageIcon> scaledImages = new HashMap<String, ImageIcon>(); //for tiles

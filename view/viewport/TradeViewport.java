@@ -6,13 +6,17 @@
 package view.viewport;
 
 import controller.Intent;
+
 import java.util.ArrayList;
+
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+
+
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.JFrame;
 
+import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
@@ -492,7 +496,6 @@ public class TradeViewport extends ViewPort {
         itemLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         itemLabel1.setText("Name");
         itemLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
-
         itemTextField1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         itemTextField1.setForeground(new java.awt.Color(172, 227, 25));
         itemTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);

@@ -56,6 +56,7 @@ public class NewGamePopupViewport extends ViewPort {
         super.paintComponent(g);
         Image image = ImageUtil.getImage( ImageUtil.new_game_background, this.getWidth(), this.getHeight()).getImage();
         g.drawImage( image , 0, 0, this.getWidth(), this.getHeight(), this);
+
     }
    
     

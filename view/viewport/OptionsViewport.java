@@ -200,7 +200,6 @@ public class OptionsViewport extends ViewPort {
         jButton1.setPreferredSize(new java.awt.Dimension(125, 35));
 
         setBackground(new java.awt.Color(146, 61, 78));
-
         jPanel1.setBackground(new java.awt.Color(70, 52, 35));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 1, 1, new java.awt.Color(0, 0, 0)));
         jPanel1.setAlignmentX(Component.CENTER_ALIGNMENT);
