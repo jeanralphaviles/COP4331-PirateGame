@@ -4,6 +4,7 @@ import controller.virtualController.VirtualController;
 import java.util.ArrayList;
 import model.Model;
 import controller.IntentMap.IntentMap;
+import controller.virtualController.TradeVirtualController;
 import view.viewport.TradeViewport;
 
 public class TradeScreen extends Screen {
@@ -20,7 +21,7 @@ public class TradeScreen extends Screen {
     @Override
     public void createController() {
         ArrayList<IntentMap> ims = viewPort.generateIntentMapping();
-        virtualController = new VirtualController(model, ims);
+        virtualController = new TradeVirtualController(model, ims);
     }
 
 }
