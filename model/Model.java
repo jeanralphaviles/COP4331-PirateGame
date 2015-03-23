@@ -21,6 +21,7 @@ import model.entity.occupation.ability.Ability;
 import model.inventory.Slot;
 import model.item.EntitySpawner;
 import model.item.InteractiveItem;
+import model.item.Item;
 import model.map.GridLocation;
 import model.map.Map;
 import model.map.areaeffect.HealDamageAreaEffect;
@@ -129,6 +130,20 @@ public class Model extends Thread {
 
     public void activateAvatarAbility(Ability ability) {
         this.gameObject.activateAvatarAbility(ability);
+    }
+    
+    public void purchaseAvatarItem(Item item, int price) {
+        Avatar avatar = gameObject.getAvatar();
+        if (avatar.changeBooty(price * -1)) { //enough money
+            //attemp to add to inventory
+            if (avatar.getInventory().storeItem(item)) { //has room
+                return;
+            } else { //not enough room
+                RunGame.showErrorMessage("Not enough room in Inventory!");
+            }
+        } else { //not enough money
+            RunGame.showErrorMessage("Not enough booty!");
+        }
     }
 
     public ArrayList<Ability> getAvatarAbilities() {

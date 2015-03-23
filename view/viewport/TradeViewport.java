@@ -5,6 +5,7 @@
  */
 package view.viewport;
 
+import application.RunGame;
 import controller.Intent;
 import java.util.ArrayList;
 import model.GameObject;
@@ -16,11 +17,15 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.entity.Avatar;
 import model.item.Food;
 import model.item.Item;
 import utility.ImageUtil;
@@ -51,43 +56,87 @@ public class TradeViewport extends ViewPort {
 
     @Override
     public void updateView(GameObject gameObject) {
-
+        updateBooty(gameObject);
+    }
+    
+    private void updateBooty(GameObject gameObject) {
+        Avatar avatar = gameObject.getAvatar();
+        int booty = avatar.getBooty();
+        bootValueLabel.setText(booty + "");
     }
 
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
         ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
 
+        Item item = new Food();
+        JButton button = new JButton();
 
         //buy mana potion
-        JButton button = new JButton();
-        Item item = new Food();
-        int manaBottlePrice = 5;
-        PurchaseParams purchaseParams = new PurchaseParams(item, manaBottlePrice);
-        ims.add(new IntentMap(button, purchaseParams, Intent.PURCHASE));
-        
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        
+        int manaBottlePrice = getPrice(itemTextField1);
+        ims.add(new IntentMap(bluePotionButton1, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+//        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+//        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+//        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+
         //buy health potion
+        int healtPotionPrice = getPrice(itemTextField2);
+
         ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        
+
         //buy fruit
+        int fruitPrice = getPrice(itemTextField3);
         ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        
+
         //buy book
+        int bookPrice = getPrice(itemTextField4);
         ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        
+
         //buy sword
+        int swordPrice = getPrice(itemTextField5);
         ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
-        
+
         //continue
         ims.add(new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
 
         return ims;
     }
+
+    private int getPrice(JTextField priceTextField) {
+        String content = priceTextField.getText().toString();
+        int price = Integer.parseInt(content);
+        return price;
+    }
+
+//    private void setProbeListener(JPanel panel) {
+//        for (Component component : itemsPanel.getComponents()) {
+//            if (component instanceof JButton) {
+//                final JButton button = (JButton) component;
+//                button.addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        JButton temp = button;
+//                        System.out.println();
+//                    }
+//                });
+//            }
+//        }
+//    }
+//
+//    private void setButtonListener(JButton button) {
+//        final JButton temp = button;
+//        button.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                JButton temp = button;
+//                System.out.println();
+//            }
+//        });
+//    }
+//    
+//    private JButton getButton() {
+//        return bluePotionButton1;
+//    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -96,69 +145,66 @@ public class TradeViewport extends ViewPort {
         Image image = ImageUtil.getImage(ImageUtil.trader_view_port_background, this.getWidth(), this.getHeight()).getImage();
         g.drawImage(image, 0, 0, this);
     }
-    
+
     /*
-        By selecting the visual setting for tadeItemsPanel1's components
-        this function will set the same properties to the rest of the panel's
-        components.
-    */
-    private void setGUIsProperties(){
-        
+     By selecting the visual setting for tadeItemsPanel1's components
+     this function will set the same properties to the rest of the panel's
+     components.
+     */
+    private void setGUIsProperties() {
+
         // Set Items Name
         itemLabel1.setText("Blue Potions");
         itemLabel2.setText("Red Potions");
         itemLabel3.setText("Fuits");
         itemLabel4.setText("Books");
         itemLabel5.setText("Swords");
-        
+
         // Set Items Values
         itemTextField1.setText("5");
         itemTextField2.setText("15");
         itemTextField3.setText("3");
         itemTextField4.setText("25");
         itemTextField5.setText("20");
-        
-        
-        for (Component itemPanel : itemsPanel.getComponents() ){
-            
-            if( itemPanel instanceof JPanel){
-                
-                JPanel panels = (JPanel)itemPanel;
-                for (  Component comp : panels.getComponents() ){
 
-                    if ( comp instanceof JLabel ){
-                        
+        for (Component itemPanel : itemsPanel.getComponents()) {
+
+            if (itemPanel instanceof JPanel) {
+
+                JPanel panels = (JPanel) itemPanel;
+                for (Component comp : panels.getComponents()) {
+
+                    if (comp instanceof JLabel) {
+
                         System.out.println("Setting Label properties");
-                        JLabel label = (JLabel)comp;
-                        label.setBackground( itemLabel1.getBackground() );
-                        label.setFont( itemLabel1.getFont()  );
-                        label.setForeground( itemLabel1.getForeground() );
-                        label.setHorizontalAlignment( itemLabel1.getHorizontalAlignment() );
-                        label.setBorder( itemLabel1.getBorder() );
+                        JLabel label = (JLabel) comp;
+                        label.setBackground(itemLabel1.getBackground());
+                        label.setFont(itemLabel1.getFont());
+                        label.setForeground(itemLabel1.getForeground());
+                        label.setHorizontalAlignment(itemLabel1.getHorizontalAlignment());
+                        label.setBorder(itemLabel1.getBorder());
                         label.setOpaque(false);
-                    }
-                    else if ( comp instanceof JPanel){
+                    } else if (comp instanceof JPanel) {
 
-                         JPanel insidePanels = (JPanel)comp;
-                         
-                         for (Component panelsComp : insidePanels.getComponents() ){
-                             
-                             if ( panelsComp instanceof JButton ){
-                                 
-                                 JButton button = (JButton)panelsComp;
-                                 button.setBackground( bluePotionButton1.getBackground() );
-                             }
-                         }
-                       
-                    }
-                    else if ( comp instanceof JTextField){
-                        
-                        JTextField textField = (JTextField)comp;
-                        
-                        textField.setFont(itemTextField1.getFont() ); // NOI18N
-                        textField.setForeground( itemTextField1.getBackground() );
-                        textField.setHorizontalAlignment( itemTextField1.getHorizontalAlignment() );
-                        textField.setBorder( itemTextField1.getBorder());
+                        JPanel insidePanels = (JPanel) comp;
+
+                        for (Component panelsComp : insidePanels.getComponents()) {
+
+                            if (panelsComp instanceof JButton) {
+
+                                JButton button = (JButton) panelsComp;
+                                button.setBackground(bluePotionButton1.getBackground());
+                            }
+                        }
+
+                    } else if (comp instanceof JTextField) {
+
+                        JTextField textField = (JTextField) comp;
+
+                        textField.setFont(itemTextField1.getFont()); // NOI18N
+                        textField.setForeground(itemTextField1.getBackground());
+                        textField.setHorizontalAlignment(itemTextField1.getHorizontalAlignment());
+                        textField.setBorder(itemTextField1.getBorder());
                         textField.setEditable(false);
                         textField.setOpaque(false);
                     }
@@ -173,10 +219,20 @@ public class TradeViewport extends ViewPort {
         JFrame frame = new JFrame();
         frame.setSize(2500, 2500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new TradeViewport());
+        TradeViewport tradeViewport = new TradeViewport();
+        frame.add(tradeViewport);
 
         frame.setVisible(true);
+
+//        tradeViewport.setButtonListener(tradeViewport.getButton());
+////        tradeViewport.generateIntentMapping();
     }
+
+//    private JPanel getPanel() {
+//        return itemPanel3;
+//    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

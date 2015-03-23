@@ -35,11 +35,11 @@ public final class TradeVirtualController extends VirtualController {
         
         switch(intent) {
             case PURCHASE:
-                Item item = (Item)im.getObject();
-                //TODO: forward item and purchase request to model
-                    //if the purchase fails
-                        //if not enough booty, send that error message
-                        //if didn't fit in inventory, send that error message
+                PurchaseParams params = (PurchaseParams)im.getObject();
+                Item item = params.item;
+                int price = params.price;
+                //forward item and purchase request to model
+                model.purchaseAvatarItem(item, price);
                 break;
             default:
                 break;

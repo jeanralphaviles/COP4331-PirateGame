@@ -139,6 +139,7 @@ public class AreaViewport extends ViewPort {
         
         private String getInspectionString(ArrayList<String> inspectionDetails) {
             String inspect = "<html>";
+            
             for (int i=0; i<inspectionDetails.size(); i++) {
                 inspect += "\n" + inspectionDetails.get(i);
                 inspect += "\n" + "<br>";

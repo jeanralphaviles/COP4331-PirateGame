@@ -12,7 +12,7 @@ public class Avatar extends Entity {
 
     private String name;
     private String nickname;
-    private int booty;
+    private int booty = 100;
 
     public Avatar() {
         super();
@@ -85,10 +85,6 @@ public class Avatar extends Entity {
         this.nickname = nickname;
     }
     
-    public void setBooty(int booty) {
-        this.booty = booty;
-    }
-    
     public int getBooty() {
         return this.booty;
     }
@@ -96,12 +92,16 @@ public class Avatar extends Entity {
     //Returns whether the transaction was successful for not.
     //Put positive numbers to give booty, negative to take booty.
     public boolean changeBooty(int amount) {
-        if (amount < 0 && Math.abs(amount) > booty) {
+        if (checkBooty(amount)) { //checks booty; returns true if not enough
             return false;
         } else {
             booty += amount;
         }
         return true;
+    }
+    
+    private boolean checkBooty(int amount) {
+        return amount < 0 && Math.abs(amount) > booty;
     }
 
     @Override

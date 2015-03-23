@@ -22,6 +22,8 @@ public class RunGame {
     private static PhysicalController auxController;
     private static final int viewUpdatesPerSecond = 10;
     public static MainWindow mainWindow;
+    //
+    public static final boolean musicEnabled = false;
 
     /*Constructors*/
     
