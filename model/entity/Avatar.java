@@ -12,11 +12,12 @@ public class Avatar extends Entity {
 
     private String name;
     private String nickname;
+    private int booty;
 
     public Avatar() {
         super();
         this.name = "Richard Bonehard";
-        this.nickname = "TestNickName";
+        this.nickname = "Woodman";
 
         Weapon bazzuca = new Weapon(Decal.createDecal(Decal.item_default), "Bazzuca");
         Weapon pistol = new Weapon(Decal.createDecal(Decal.item_default), "Pistol");
@@ -82,6 +83,25 @@ public class Avatar extends Entity {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+    
+    public void setBooty(int booty) {
+        this.booty = booty;
+    }
+    
+    public int getBooty() {
+        return this.booty;
+    }
+    
+    //Returns whether the transaction was successful for not.
+    //Put positive numbers to give booty, negative to take booty.
+    public boolean changeBooty(int amount) {
+        if (amount < 0 && Math.abs(amount) > booty) {
+            return false;
+        } else {
+            booty += amount;
+        }
+        return true;
     }
 
     @Override

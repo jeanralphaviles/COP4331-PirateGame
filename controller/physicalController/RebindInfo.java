@@ -19,12 +19,14 @@ public class RebindInfo {
     public Intent intent;
     public Object object;
     public Component component;
+    public Component backButton;
     
     /*Constructor*/
 
-    public RebindInfo(Intent intent, Object object, Component component) {
+    public RebindInfo(Intent intent, Object object, Component component, Component backButton) {
         this.intent = intent;
         this.object = object;
         this.component = component;
+        this.backButton = backButton;
     }
 }

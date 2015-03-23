@@ -34,6 +34,12 @@ public class AbilitiesViewport extends ViewPort {
     private ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
     //
     private int mostRecentNumAbilities = -1; //nonsense value to ensure first update
+    //
+    public static final String MACRO_1 = "ability button macro 1";
+    public static final String MACRO_2 = "ability button macro 2";
+    public static final String MACRO_3 = "ability button macro 3";
+    public static final String MACRO_4 = "ability button macro 4";
+    public static final String MACRO_5 = "ability button macro 5";
     
     /*Constructors*/
     

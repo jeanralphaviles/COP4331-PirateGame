@@ -23,5 +23,13 @@ public class ConversationResponse extends Response {
     /*Get-Sets*/
     
     /*Inner Classes*/
+    private class Node {
+        String dialogue;
+        Node yes;
+        Node right;
+    }
     
+    private class ConversationTree {
+        
+    }
 }
