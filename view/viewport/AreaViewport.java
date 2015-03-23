@@ -129,6 +129,7 @@ public class AreaViewport extends ViewPort {
         public void updateTile(Decal decal, ArrayList<String> inspectionDetails, int distance) {
             this.setDecal(decal);
             inspectionDetails.add(0, "Distance: " + distance);
+            inspectionDetails = trimDetailsToDistance(inspectionDetails, distance);
             this.setInspectionDetails(inspectionDetails);
             if (!hasScaledImage(decal)) {
                 addScaledImage(decal);
@@ -146,6 +147,27 @@ public class AreaViewport extends ViewPort {
             }
             inspect += "\n" + "<html>";
             return inspect;
+        }
+        
+        private ArrayList<String> trimDetailsToDistance(ArrayList<String> inspectionDetails, int distance) {
+            int numDetails = inspectionDetails.size();
+            ArrayList<String> temp = new ArrayList<String>(1);
+            int falloff1 = 3;
+            int falloff2 = 6;
+            int falloff_1_numDetails = 2;
+            int falloff_2_numDetails = 1;
+            if ( distance < falloff1) {
+                temp = inspectionDetails;
+            } else if (distance < falloff2) {
+                for (int i=0; i<numDetails && i<falloff_1_numDetails; i++) {
+                    temp.add(inspectionDetails.get(i));
+                }
+            } else {
+                for (int i=0; i<numDetails && i<falloff_2_numDetails; i++) {
+                    temp.add(inspectionDetails.get(i));
+                }
+            }
+            return temp;
         }
 
         private boolean hasScaledImage(Decal decal) {
