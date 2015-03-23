@@ -13,8 +13,9 @@ import model.item.Item;
 import utility.Course;
 
 public final class TradeVirtualController extends VirtualController {
-     Color SELECTED_COLOR;
-     Color UNSELECTED_COLOR;
+    
+    private Color SELECTED_COLOR;
+    private Color UNSELECTED_COLOR;
      
     public TradeVirtualController(Model model, ArrayList<IntentMap> ims) {
         super(model, ims);
@@ -33,30 +34,12 @@ public final class TradeVirtualController extends VirtualController {
         Intent intent = im.getIntent();
         
         switch(intent) {
-            case MOVE:
-                Course course = (Course)im.getObject();
-                model.moveAvatar(course);
-                break;
-            case TOGGLE_EQUIPPED:
-                selectItem(im);
-                break;
-            case INVENTORY_ITEM:
-                selectItem(im);
-                break;
-            case EQUIP_ITEM:
-                toggleEquip();
-                break;
-            case UNEQUIP_ITEM:
-                  toggleUnequip();
-                break;
-            case DROP_ITEM:
-                toggleDrop();
-                break;
-            case ACTIVATE_ABILITY:
-                activateAbility(im);
-                break;
-            case TALK:
-                talk(im);
+            case PURCHASE:
+                Item item = (Item)im.getObject();
+                //TODO: forward item and purchase request to model
+                    //if the purchase fails
+                        //if not enough booty, send that error message
+                        //if didn't fit in inventory, send that error message
                 break;
             default:
                 break;

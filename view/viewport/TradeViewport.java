@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+import controller.virtualController.PurchaseParams;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -24,7 +25,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.item.Food;
+import model.item.Item;
 import utility.ImageUtil;
+import utility.decal.Decal;
 
 /**
  *
@@ -35,97 +39,121 @@ public class TradeViewport extends ViewPort {
     /**
      * Creates new form FlavorImageViewport
      */
-    
-    
     public TradeViewport() {
         initComponents();
-        setGUIsProperties();
-        
-        DialogueViewport dialogueViewport = new DialogueViewport();
-        this.addViewport( dialogueViewport );
-        dialoguePanel.setLayout( new BorderLayout() );
-        dialoguePanel.add( dialogueViewport , BorderLayout.CENTER );
+        generateView();
     }
-    
+
+    private void generateView() {
+        setGUIsProperties();
+
+        DialogueViewport dialogueViewport = new DialogueViewport();
+        this.addViewport(dialogueViewport);
+        dialoguePanel.setLayout(new BorderLayout());
+        dialoguePanel.add(dialogueViewport, BorderLayout.CENTER);
+    }
+
     @Override
     public void updateView(GameObject gameObject) {
-        
+
     }
 
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
         ArrayList<IntentMap> ims = new ArrayList<>(1);
+
+        //buy mana potion
+        JButton button = new JButton();
+        Item item = new Food();
+        int manaBottlePrice = 5;
+        PurchaseParams purchaseParams = new PurchaseParams(item, manaBottlePrice);
+        ims.add(new IntentMap(button, purchaseParams, Intent.PURCHASE));
         
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        
+        //buy health potion
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        
+        //buy fruit
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        
+        //buy book
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        
+        //buy sword
+        ims.add(new IntentMap(button, new PurchaseParams(new Food(new Decal(Decal.fire)), manaBottlePrice), Intent.PURCHASE));
+        
+        //continue
         ims.add(new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
-        
+
         return ims;
     }
-    
-      public static void main(String[] args){
-        
-        JFrame frame = new JFrame();
-        frame.setSize(2500,2500);
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        frame.add( new TradeViewport() );
-     
-        frame.setVisible(true);
-    }
-      
-    
+
     @Override
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        Image image = ImageUtil.getImage( ImageUtil.trader_view_port_background, this.getWidth(), this.getHeight()).getImage();
-        g.drawImage( image , 0, 0, this);
+        Image image = ImageUtil.getImage(ImageUtil.trader_view_port_background, this.getWidth(), this.getHeight()).getImage();
+        g.drawImage(image, 0, 0, this);
     }
-    
+
     /*
-        By selecting the visual setting for tadeItemsPanel1's components
-        this function will set the same properties to the rest of the panel's
-        components.
-    */
-    private void setGUIsProperties(){
-        
-        for (Component itemPanel : itemsPanel.getComponents() ){
-            
-            if( itemPanel instanceof JPanel){
-                
-                JPanel panels = (JPanel)itemPanel;
-                for (  Component comp : panels.getComponents() ){
+     By selecting the visual setting for tadeItemsPanel1's components
+     this function will set the same properties to the rest of the panel's
+     components.
+     */
+    private void setGUIsProperties() {
 
-                    if ( comp instanceof JLabel ){
-                        
+        for (Component itemPanel : itemsPanel.getComponents()) {
+
+            if (itemPanel instanceof JPanel) {
+
+                JPanel panels = (JPanel) itemPanel;
+                for (Component comp : panels.getComponents()) {
+
+                    if (comp instanceof JLabel) {
+
                         System.out.println("Setting Label properties");
-                        JLabel label = (JLabel)comp;
-                        label.setBackground( itemLabel1.getBackground() );
-                        label.setFont( itemLabel1.getFont()  );
-                        label.setForeground( itemLabel1.getForeground() );
-                        label.setHorizontalAlignment( itemLabel1.getHorizontalAlignment() );
+                        JLabel label = (JLabel) comp;
+                        label.setBackground(itemLabel1.getBackground());
+                        label.setFont(itemLabel1.getFont());
+                        label.setForeground(itemLabel1.getForeground());
+                        label.setHorizontalAlignment(itemLabel1.getHorizontalAlignment());
                         label.setText("");
-                        label.setBorder( itemLabel1.getBorder() );
+                        label.setBorder(itemLabel1.getBorder());
                         label.setOpaque(false);
-                    }
-                    else if ( comp instanceof JButton){
+                    } else if (comp instanceof JButton) {
 
+                    } else if (comp instanceof JTextField) {
 
-                    }
-                    else if ( comp instanceof JTextField){
-                        
-                        JTextField textField = (JTextField)comp;
-                        
-                        textField.setFont(itemTextField1.getFont() ); // NOI18N
-                        textField.setForeground( itemTextField1.getBackground() );
-                        textField.setHorizontalAlignment( itemTextField1.getHorizontalAlignment() );
+                        JTextField textField = (JTextField) comp;
+
+                        textField.setFont(itemTextField1.getFont()); // NOI18N
+                        textField.setForeground(itemTextField1.getBackground());
+                        textField.setHorizontalAlignment(itemTextField1.getHorizontalAlignment());
                         textField.setText("");
-                        textField.setBorder( itemTextField1.getBorder());
+                        textField.setBorder(itemTextField1.getBorder());
                         textField.setOpaque(false);
                     }
                 }
-                
+
             }
         }
     }
+
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame();
+        frame.setSize(2500, 2500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new TradeViewport());
+
+        frame.setVisible(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -800,5 +828,4 @@ public class TradeViewport extends ViewPort {
     private javax.swing.JButton tradeButton;
     // End of variables declaration//GEN-END:variables
 
-    
 }
