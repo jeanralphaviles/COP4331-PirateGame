@@ -23,7 +23,7 @@ public class RunGame {
     private static final int viewUpdatesPerSecond = 10;
     public static MainWindow mainWindow;
     //
-    public static final boolean musicEnabled = false;
+    public static final boolean musicEnabled = true;
 
     /*Constructors*/
     
