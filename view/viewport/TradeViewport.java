@@ -6,22 +6,16 @@
 package view.viewport;
 
 import controller.Intent;
-
 import java.util.ArrayList;
-
 import model.GameObject;
 import controller.IntentMap.IntentMap;
-
-
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.swing.JFrame;
-import javax.swing.SwingConstants;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -42,6 +36,7 @@ public class TradeViewport extends ViewPort {
         initComponents();
         setGUIsProperties();
         generateView();
+        
     }
     
     @Override
@@ -51,7 +46,7 @@ public class TradeViewport extends ViewPort {
 
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
-        ArrayList<IntentMap> ims = new ArrayList<>(1);
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
         
         ims.add(new IntentMap(continueAdventureButton, Intent.GOTO_GAME));
         
@@ -84,13 +79,14 @@ public class TradeViewport extends ViewPort {
         dialoguePanel.setLayout( new BorderLayout() );
         dialoguePanel.add( dialogueViewport , BorderLayout.CENTER );
     }
-
+    
     /*
         By selecting the visual setting for tadeItemsPanel1's components
         this function will set the same properties to the rest of the panel's
         components.
     */
     private void setGUIsProperties(){
+        
         // Set Items Name
         itemLabel1.setText("Blue Potions");
         itemLabel2.setText("Red Potions");
@@ -104,6 +100,7 @@ public class TradeViewport extends ViewPort {
         itemTextField3.setText("3");
         itemTextField4.setText("25");
         itemTextField5.setText("20");
+        
         
         for (Component itemPanel : itemsPanel.getComponents() ){
             
@@ -135,6 +132,7 @@ public class TradeViewport extends ViewPort {
                                  button.setBackground( bluePotionButton1.getBackground() );
                              }
                          }
+                       
                     }
                     else if ( comp instanceof JTextField){
                         
@@ -145,7 +143,6 @@ public class TradeViewport extends ViewPort {
                         textField.setHorizontalAlignment( itemTextField1.getHorizontalAlignment() );
                         textField.setBorder( itemTextField1.getBorder());
                         textField.setEditable(false);
-
                         textField.setOpaque(false);
                     }
                 }
@@ -181,6 +178,7 @@ public class TradeViewport extends ViewPort {
         itemTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         bluePotionButton1 = new javax.swing.JButton(){
+
             @Override
             protected void paintComponent(Graphics g) {
 
@@ -201,6 +199,7 @@ public class TradeViewport extends ViewPort {
                 g.drawImage( image , 0, 0, this);
 
             }
+
         };
         jButton3 = new javax.swing.JButton(){
 
@@ -496,6 +495,7 @@ public class TradeViewport extends ViewPort {
         itemLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         itemLabel1.setText("Name");
         itemLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
+
         itemTextField1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         itemTextField1.setForeground(new java.awt.Color(172, 227, 25));
         itemTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -609,16 +609,6 @@ public class TradeViewport extends ViewPort {
                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel9.setBackground(new java.awt.Color(149, 101, 54));
-
-        jButton9.setText("jButton1");
-
-        jButton10.setText("jButton1");
-
-        jButton11.setText("jButton1");
-
-        jButton12.setText("jButton1");
-
         javax.swing.GroupLayout itemPanel2Layout = new javax.swing.GroupLayout(itemPanel2);
         itemPanel2.setLayout(itemPanel2Layout);
         itemPanel2Layout.setHorizontalGroup(
@@ -695,16 +685,6 @@ public class TradeViewport extends ViewPort {
                     .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-
-        jPanel10.setBackground(new java.awt.Color(149, 101, 54));
-
-        jButton13.setText("jButton1");
-
-        jButton14.setText("jButton1");
-
-        jButton15.setText("jButton1");
-
-        jButton16.setText("jButton1");
 
         javax.swing.GroupLayout itemPanel3Layout = new javax.swing.GroupLayout(itemPanel3);
         itemPanel3.setLayout(itemPanel3Layout);
@@ -783,16 +763,6 @@ public class TradeViewport extends ViewPort {
                     .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel11.setBackground(new java.awt.Color(149, 101, 54));
-
-        jButton17.setText("jButton1");
-
-        jButton18.setText("jButton1");
-
-        jButton19.setText("jButton1");
-
-        jButton20.setText("jButton1");
-
         javax.swing.GroupLayout itemPanel4Layout = new javax.swing.GroupLayout(itemPanel4);
         itemPanel4.setLayout(itemPanel4Layout);
         itemPanel4Layout.setHorizontalGroup(
@@ -869,16 +839,6 @@ public class TradeViewport extends ViewPort {
                     .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-
-        jPanel12.setBackground(new java.awt.Color(149, 101, 54));
-
-        jButton21.setText("jButton1");
-
-        jButton22.setText("jButton1");
-
-        jButton23.setText("jButton1");
-
-        jButton24.setText("jButton1");
 
         javax.swing.GroupLayout itemPanel5Layout = new javax.swing.GroupLayout(itemPanel5);
         itemPanel5.setLayout(itemPanel5Layout);
@@ -1043,10 +1003,6 @@ public class TradeViewport extends ViewPort {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel2.setOpaque(false);
-
-        dialoguePanel.setOpaque(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -1133,5 +1089,6 @@ public class TradeViewport extends ViewPort {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel selectionPanel;
     // End of variables declaration//GEN-END:variables
-   
+
+    
 }
