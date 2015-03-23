@@ -6,22 +6,18 @@
 package view.viewport;
 
 import controller.Intent;
-
 import java.util.ArrayList;
-
 import model.GameObject;
 import controller.IntentMap.IntentMap;
+
 import controller.virtualController.PurchaseParams;
-
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.swing.JFrame;
-import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -60,7 +56,8 @@ public class TradeViewport extends ViewPort {
 
     @Override
     public ArrayList<IntentMap> generateIntentMapping() {
-        ArrayList<IntentMap> ims = new ArrayList<>(1);
+        ArrayList<IntentMap> ims = new ArrayList<IntentMap>(1);
+
 
         //buy mana potion
         JButton button = new JButton();
@@ -99,43 +96,70 @@ public class TradeViewport extends ViewPort {
         Image image = ImageUtil.getImage(ImageUtil.trader_view_port_background, this.getWidth(), this.getHeight()).getImage();
         g.drawImage(image, 0, 0, this);
     }
-
+    
     /*
-     By selecting the visual setting for tadeItemsPanel1's components
-     this function will set the same properties to the rest of the panel's
-     components.
-     */
-    private void setGUIsProperties() {
+        By selecting the visual setting for tadeItemsPanel1's components
+        this function will set the same properties to the rest of the panel's
+        components.
+    */
+    private void setGUIsProperties(){
+        
+        // Set Items Name
+        itemLabel1.setText("Blue Potions");
+        itemLabel2.setText("Red Potions");
+        itemLabel3.setText("Fuits");
+        itemLabel4.setText("Books");
+        itemLabel5.setText("Swords");
+        
+        // Set Items Values
+        itemTextField1.setText("5");
+        itemTextField2.setText("15");
+        itemTextField3.setText("3");
+        itemTextField4.setText("25");
+        itemTextField5.setText("20");
+        
+        
+        for (Component itemPanel : itemsPanel.getComponents() ){
+            
+            if( itemPanel instanceof JPanel){
+                
+                JPanel panels = (JPanel)itemPanel;
+                for (  Component comp : panels.getComponents() ){
 
-        for (Component itemPanel : itemsPanel.getComponents()) {
-
-            if (itemPanel instanceof JPanel) {
-
-                JPanel panels = (JPanel) itemPanel;
-                for (Component comp : panels.getComponents()) {
-
-                    if (comp instanceof JLabel) {
-
+                    if ( comp instanceof JLabel ){
+                        
                         System.out.println("Setting Label properties");
-                        JLabel label = (JLabel) comp;
-                        label.setBackground(itemLabel1.getBackground());
-                        label.setFont(itemLabel1.getFont());
-                        label.setForeground(itemLabel1.getForeground());
-                        label.setHorizontalAlignment(itemLabel1.getHorizontalAlignment());
-                        label.setText("");
-                        label.setBorder(itemLabel1.getBorder());
+                        JLabel label = (JLabel)comp;
+                        label.setBackground( itemLabel1.getBackground() );
+                        label.setFont( itemLabel1.getFont()  );
+                        label.setForeground( itemLabel1.getForeground() );
+                        label.setHorizontalAlignment( itemLabel1.getHorizontalAlignment() );
+                        label.setBorder( itemLabel1.getBorder() );
                         label.setOpaque(false);
-                    } else if (comp instanceof JButton) {
+                    }
+                    else if ( comp instanceof JPanel){
 
-                    } else if (comp instanceof JTextField) {
-
-                        JTextField textField = (JTextField) comp;
-
-                        textField.setFont(itemTextField1.getFont()); // NOI18N
-                        textField.setForeground(itemTextField1.getBackground());
-                        textField.setHorizontalAlignment(itemTextField1.getHorizontalAlignment());
-                        textField.setText("");
-                        textField.setBorder(itemTextField1.getBorder());
+                         JPanel insidePanels = (JPanel)comp;
+                         
+                         for (Component panelsComp : insidePanels.getComponents() ){
+                             
+                             if ( panelsComp instanceof JButton ){
+                                 
+                                 JButton button = (JButton)panelsComp;
+                                 button.setBackground( bluePotionButton1.getBackground() );
+                             }
+                         }
+                       
+                    }
+                    else if ( comp instanceof JTextField){
+                        
+                        JTextField textField = (JTextField)comp;
+                        
+                        textField.setFont(itemTextField1.getFont() ); // NOI18N
+                        textField.setForeground( itemTextField1.getBackground() );
+                        textField.setHorizontalAlignment( itemTextField1.getHorizontalAlignment() );
+                        textField.setBorder( itemTextField1.getBorder());
+                        textField.setEditable(false);
                         textField.setOpaque(false);
                     }
                 }
@@ -181,7 +205,7 @@ public class TradeViewport extends ViewPort {
         itemLabel1 = new javax.swing.JLabel();
         itemTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton(){
+        bluePotionButton1 = new javax.swing.JButton(){
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -230,46 +254,252 @@ public class TradeViewport extends ViewPort {
 
         };
         itemPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        itemLabel2 = new javax.swing.JLabel();
+        itemTextField2 = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.red_potion_1, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton10 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.red_potion_4, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton11 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.red_potion_2, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton12 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.red_potion_3, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
         itemPanel3 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        itemLabel3 = new javax.swing.JLabel();
+        itemTextField3 = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.fruit_1, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton14 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.fruit_4, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton15 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.fruit_2, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton16 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.fruit_3, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
         itemPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        itemLabel4 = new javax.swing.JLabel();
+        itemTextField4 = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.book_1, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton18 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.book_4, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton19 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.book_2, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton20 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.book_3, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
         itemPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        itemLabel5 = new javax.swing.JLabel();
+        itemTextField5 = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.sword_1, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton22 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.sword_4, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton23 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.sword_2, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
+        jButton24 = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.sword_3, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+            }
+
+        };
         selectionPanel = new javax.swing.JPanel();
-        continueAdventureButton = new javax.swing.JButton();
-        tradeButton = new javax.swing.JButton();
+        continueAdventureButton = new javax.swing.JButton(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.go_to_gamescreen_pic, this.getWidth(), this.getHeight()).getImage();
+                g.drawImage( image , 0, 0, this);
+
+                this.setOpaque(false);
+                this.setContentAreaFilled(false);
+                this.setBorderPainted(false);
+
+            }
+
+        };
+        jPanel4 = new javax.swing.JPanel();
+        bootyPanel = new javax.swing.JPanel(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+
+                super.paintComponent(g);
+                Image image = ImageUtil.getImage( ImageUtil.booty_pic, 75, 50).getImage();
+                g.drawImage( image , bootValueLabel.getX()+ bootValueLabel.getWidth(), this.getHeight()/2 - image.getHeight(this)/2, this);
+
+            }
+
+        };
+        bootValueLabel = new javax.swing.JLabel();
+        bootyNameLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         dialoguePanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(151, 102, 52));
 
         jPanel1.setBackground(new java.awt.Color(209, 125, 40));
+        jPanel1.setOpaque(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -279,7 +509,7 @@ public class TradeViewport extends ViewPort {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 254, Short.MAX_VALUE)
+            .addGap(0, 225, Short.MAX_VALUE)
         );
 
         itemsPanel.setBackground(new java.awt.Color(201, 168, 135));
@@ -287,12 +517,13 @@ public class TradeViewport extends ViewPort {
 
         itemPanel1.setOpaque(false);
 
-        itemLabel1.setBackground(new java.awt.Color(180, 128, 76));
+        itemLabel1.setBackground(new java.awt.Color(255, 254, 254));
         itemLabel1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
-        itemLabel1.setForeground(new java.awt.Color(172, 227, 25));
+        itemLabel1.setForeground(new java.awt.Color(150, 105, 150));
         itemLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         itemLabel1.setText("Name");
         itemLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 1, 1, new java.awt.Color(0, 0, 0)));
+
         itemTextField1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
         itemTextField1.setForeground(new java.awt.Color(172, 227, 25));
         itemTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -303,7 +534,7 @@ public class TradeViewport extends ViewPort {
         jPanel3.setBackground(new java.awt.Color(149, 101, 54));
         jPanel3.setOpaque(false);
 
-        jButton1.setBackground(new java.awt.Color(57, 57, 30));
+        bluePotionButton1.setBackground(new java.awt.Color(57, 57, 30));
 
         jButton2.setText("jButton1");
 
@@ -318,7 +549,7 @@ public class TradeViewport extends ViewPort {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bluePotionButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,11 +560,11 @@ public class TradeViewport extends ViewPort {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                    .addComponent(bluePotionButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -356,19 +587,22 @@ public class TradeViewport extends ViewPort {
                 .addComponent(itemLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(itemTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jLabel3.setBackground(new java.awt.Color(159, 120, 80));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Name");
+        itemPanel2.setOpaque(false);
 
-        jTextField3.setHorizontalAlignment(SwingConstants.CENTER);
-        jTextField3.setText("Price");
+        itemLabel2.setBackground(new java.awt.Color(159, 120, 80));
+        itemLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        itemLabel2.setText("Name");
+
+        itemTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        itemTextField2.setText("Price");
 
         jPanel9.setBackground(new java.awt.Color(149, 101, 54));
+        jPanel9.setOpaque(false);
 
         jButton9.setText("jButton1");
 
@@ -410,8 +644,8 @@ public class TradeViewport extends ViewPort {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(itemPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addComponent(itemLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(itemTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(itemPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel2Layout.createSequentialGroup()
@@ -423,9 +657,9 @@ public class TradeViewport extends ViewPort {
             itemPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(itemPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel2Layout.createSequentialGroup()
@@ -434,15 +668,18 @@ public class TradeViewport extends ViewPort {
                     .addGap(60, 60, 60)))
         );
 
-        jLabel6.setBackground(new java.awt.Color(175, 129, 83));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Name");
-        jLabel6.setOpaque(true);
+        itemPanel3.setOpaque(false);
 
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("Price");
+        itemLabel3.setBackground(new java.awt.Color(175, 129, 83));
+        itemLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        itemLabel3.setText("Name");
+        itemLabel3.setOpaque(true);
+
+        itemTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        itemTextField3.setText("Price");
 
         jPanel10.setBackground(new java.awt.Color(149, 101, 54));
+        jPanel10.setOpaque(false);
 
         jButton13.setText("jButton1");
 
@@ -484,8 +721,8 @@ public class TradeViewport extends ViewPort {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(itemPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                    .addComponent(itemLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(itemTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(itemPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel3Layout.createSequentialGroup()
@@ -497,9 +734,9 @@ public class TradeViewport extends ViewPort {
             itemPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addComponent(itemTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(itemPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel3Layout.createSequentialGroup()
@@ -508,15 +745,18 @@ public class TradeViewport extends ViewPort {
                     .addGap(59, 59, 59)))
         );
 
-        jLabel7.setBackground(new java.awt.Color(159, 120, 80));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Name");
-        jLabel7.setOpaque(true);
+        itemPanel4.setOpaque(false);
 
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setText("Price");
+        itemLabel4.setBackground(new java.awt.Color(159, 120, 80));
+        itemLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        itemLabel4.setText("Name");
+        itemLabel4.setOpaque(true);
+
+        itemTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        itemTextField4.setText("Price");
 
         jPanel11.setBackground(new java.awt.Color(149, 101, 54));
+        jPanel11.setOpaque(false);
 
         jButton17.setText("jButton1");
 
@@ -558,8 +798,8 @@ public class TradeViewport extends ViewPort {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(itemPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                    .addComponent(itemLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(itemTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(itemPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel4Layout.createSequentialGroup()
@@ -571,9 +811,9 @@ public class TradeViewport extends ViewPort {
             itemPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addComponent(itemTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(itemPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel4Layout.createSequentialGroup()
@@ -582,15 +822,18 @@ public class TradeViewport extends ViewPort {
                     .addGap(59, 59, 59)))
         );
 
-        jLabel8.setBackground(new java.awt.Color(175, 129, 83));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Name");
-        jLabel8.setOpaque(true);
+        itemPanel5.setOpaque(false);
 
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("Price");
+        itemLabel5.setBackground(new java.awt.Color(175, 129, 83));
+        itemLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        itemLabel5.setText("Name");
+        itemLabel5.setOpaque(true);
+
+        itemTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        itemTextField5.setText("Price");
 
         jPanel12.setBackground(new java.awt.Color(149, 101, 54));
+        jPanel12.setOpaque(false);
 
         jButton21.setText("jButton1");
 
@@ -632,8 +875,8 @@ public class TradeViewport extends ViewPort {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(itemPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                    .addComponent(itemLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(itemTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(itemPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel5Layout.createSequentialGroup()
@@ -645,9 +888,9 @@ public class TradeViewport extends ViewPort {
             itemPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addComponent(itemTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(itemPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(itemPanel5Layout.createSequentialGroup()
@@ -686,19 +929,67 @@ public class TradeViewport extends ViewPort {
                 .addContainerGap())
         );
 
+        selectionPanel.setBackground(new java.awt.Color(138, 83, 28));
         selectionPanel.setOpaque(false);
 
         continueAdventureButton.setText("Continue");
 
-        tradeButton.setText("Trade");
+        jPanel4.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        bootyPanel.setOpaque(false);
+
+        bootValueLabel.setBackground(new java.awt.Color(205, 151, 97));
+        bootValueLabel.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        bootValueLabel.setForeground(new java.awt.Color(172, 227, 25));
+        bootValueLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bootValueLabel.setText("5");
+
+        bootyNameLabel.setBackground(new java.awt.Color(97, 71, 45));
+        bootyNameLabel.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        bootyNameLabel.setForeground(new java.awt.Color(172, 227, 25));
+        bootyNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bootyNameLabel.setText("Booty:");
+
+        javax.swing.GroupLayout bootyPanelLayout = new javax.swing.GroupLayout(bootyPanel);
+        bootyPanel.setLayout(bootyPanelLayout);
+        bootyPanelLayout.setHorizontalGroup(
+            bootyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bootyPanelLayout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(bootValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(bootyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bootyPanelLayout.createSequentialGroup()
+                    .addComponent(bootyNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 257, Short.MAX_VALUE)))
+        );
+        bootyPanelLayout.setVerticalGroup(
+            bootyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bootValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(bootyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(bootyNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout selectionPanelLayout = new javax.swing.GroupLayout(selectionPanel);
         selectionPanel.setLayout(selectionPanelLayout);
         selectionPanelLayout.setHorizontalGroup(
             selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(bootyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(continueAdventureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -707,10 +998,11 @@ public class TradeViewport extends ViewPort {
             selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(continueAdventureButton, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                    .addComponent(tradeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(selectionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(continueAdventureButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(bootyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         jPanel2.setOpaque(false);
@@ -774,17 +1066,28 @@ public class TradeViewport extends ViewPort {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bluePotionButton1;
+    private javax.swing.JLabel bootValueLabel;
+    private javax.swing.JLabel bootyNameLabel;
+    private javax.swing.JPanel bootyPanel;
     private javax.swing.JButton continueAdventureButton;
     private javax.swing.JPanel dialoguePanel;
     private javax.swing.JLabel itemLabel1;
+    private javax.swing.JLabel itemLabel2;
+    private javax.swing.JLabel itemLabel3;
+    private javax.swing.JLabel itemLabel4;
+    private javax.swing.JLabel itemLabel5;
     private javax.swing.JPanel itemPanel1;
     private javax.swing.JPanel itemPanel2;
     private javax.swing.JPanel itemPanel3;
     private javax.swing.JPanel itemPanel4;
     private javax.swing.JPanel itemPanel5;
     private javax.swing.JTextField itemTextField1;
+    private javax.swing.JTextField itemTextField2;
+    private javax.swing.JTextField itemTextField3;
+    private javax.swing.JTextField itemTextField4;
+    private javax.swing.JTextField itemTextField5;
     private javax.swing.JPanel itemsPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -803,29 +1106,16 @@ public class TradeViewport extends ViewPort {
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JPanel selectionPanel;
-    private javax.swing.JButton tradeButton;
     // End of variables declaration//GEN-END:variables
 
 }
