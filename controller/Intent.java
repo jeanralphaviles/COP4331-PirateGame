@@ -30,5 +30,6 @@ public enum Intent {
     CAN_NOT_SAVE,
     ACTIVATE_VIRTUAL_KEY,
     ACTIVATE_ABILITY,
-    TALK
+    TALK,
+    REVALIDATE_TOOLTIP
 }

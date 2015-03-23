@@ -229,13 +229,11 @@ public class Entity {
             return response;
         }
         
-        public String[] getInspectionDetails () {  
-            String[] details = new String[3];
-        
-            details[0] = "Occupation: " + getOccupation().getOccupationName();
-            details[1] = "Health: " + getStatistics().getCurrentHealth() + "\nMana: " + getStatistics().getCurrentMana();
-            details[2] = constructStatsString();
-        
+        public ArrayList<String> getInspectionDetails () {  
+            ArrayList<String> details = new ArrayList<String>(3);
+            details.add("Occupation: " + getOccupation().getOccupationName());
+            details.add("Health: " + getStatistics().getCurrentHealth() + "\nMana: " + getStatistics().getCurrentMana());
+            details.add(constructStatsString());
             return details;
         }
 
