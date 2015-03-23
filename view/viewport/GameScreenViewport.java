@@ -6,17 +6,9 @@
 package view.viewport;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import model.GameObject;
 import model.Model;
-import model.entity.occupation.ability.Ability;
-import utility.decal.Decal;
 
 
 /**

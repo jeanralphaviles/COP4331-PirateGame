@@ -75,14 +75,14 @@ public class ImageUtil {
    
     public static ImageIcon getImage(String fileName){
         
-         BufferedImage bufferedImage = new Decal(fileName).getImage();
+         BufferedImage bufferedImage = Decal.createDecal(fileName).getImage();
          bufferedImage = scale(500,550,bufferedImage);
          return new ImageIcon( bufferedImage );
     }
     
     public static ImageIcon getImage(String fileName, int width, int height){
         
-         BufferedImage bufferedImage = new Decal(fileName).getImage();
+         BufferedImage bufferedImage = Decal.createDecal(fileName).getImage();
          bufferedImage = scale(width,height,bufferedImage);
          return new ImageIcon( bufferedImage );
     }

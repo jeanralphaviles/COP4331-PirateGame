@@ -8,7 +8,7 @@ import utility.decal.Decal;
 public final class Firebolt extends ProjectileAbility {
 	
 	public Firebolt() {
-		super(10, "Firebolt", new Projectile(new Course(0, 0), new CollisionEffect(50, 1, 1), new Decal(Decal.fire)), new Decal(Decal.fire));
+		super(10, "Firebolt", new Projectile(new Course(0, 0), new CollisionEffect(50, 1, 1), Decal.createDecal(Decal.fire)), Decal.createDecal(Decal.fire));
                 this.setManaCost(0);
 	}
 

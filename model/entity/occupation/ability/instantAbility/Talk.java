@@ -13,7 +13,7 @@ public final class Talk extends InstantAbility {
         super();
         this.setManaCost(0);
         this.setName("Talk");
-        this.setIcon(new Decal(Decal.take_damage));
+        this.setIcon(Decal.createDecal(Decal.take_damage));
     }
 
     @Override

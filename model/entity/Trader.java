@@ -10,7 +10,7 @@ public final class Trader extends Entity {
     /*Constructors*/
     
     public Trader() {
-        super(new Decal(Decal.trader));
+        super(Decal.createDecal(Decal.trader));
         response = new TradeResponse();
     }
     

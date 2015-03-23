@@ -29,7 +29,7 @@ public class TakeableItem extends Item implements Cloneable {
     }
 
     public TakeableItem(SlotCategory slotCategory) {
-        super(new Decal(Decal.takeable_item), Category.TAKEABLE_ITEM);
+        super(Decal.createDecal(Decal.takeable_item), Category.TAKEABLE_ITEM);
         this.slotCategory = slotCategory;
     }
 
@@ -105,7 +105,7 @@ public class TakeableItem extends Item implements Cloneable {
 	}
 
 	public static void main(String[] args) {
-    	TakeableItem orig = new TakeableItem(SlotCategory.EYEPATCH, new Decal(Decal.item_default), "Eyepatch", new Statistics());
+    	TakeableItem orig = new TakeableItem(SlotCategory.EYEPATCH, Decal.createDecal(Decal.item_default), "Eyepatch", new Statistics());
     	orig.setVisbility(false);
     	TakeableItem restored = fromString(orig.toString());
     	if (orig.toString().equals(restored.toString()) == false) {

@@ -4,7 +4,6 @@ import model.Model;
 import model.entity.occupation.Occupation;
 import controller.IntentMap.IntentMap;
 import controller.Intent;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.util.ArrayList;
 import utility.decal.Decal;
@@ -39,7 +38,7 @@ public final class NewGameVirtualController extends VirtualController {
         // Get the buttons image and set it the the avatar's decal
         JButton button = (JButton)icm.getComponent();
         ImageIcon image = (ImageIcon)button.getIcon();
-        model.getGameObject().getAvatar().setDecal( Decal.getImageIcon(image));
+        model.getGameObject().getAvatar().setDecal( Decal.getDecalFromImageIcon(image));
         Occupation  ocupation = (Occupation )icm.getObject();
         model.setAvatarOccupation(ocupation);
         

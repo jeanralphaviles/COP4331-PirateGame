@@ -22,7 +22,7 @@ public abstract class Item implements Cloneable {
     protected Response response = new RudeResponse("The item says nothing... what did you expect?");
 
     public Item() {
-        decal = new Decal(Decal.item_default);
+        decal = Decal.createDecal(Decal.item_default);
         statistics = new Statistics();
         category = Category.ONE_SHOT_ITEM;
         name = DEFAULT_NAME;

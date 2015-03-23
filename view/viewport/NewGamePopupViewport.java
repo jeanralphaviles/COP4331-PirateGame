@@ -1,14 +1,20 @@
 package view.viewport;
 
 import controller.Intent;
+
 import java.util.ArrayList;
+
 import model.GameObject;
 import model.entity.occupation.Smasher;
 import model.entity.occupation.Sneak;
 import model.entity.occupation.Summoner;
 import controller.IntentMap.IntentMap;
-import java.awt.Graphics;
 import java.awt.Image;
+
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+
 import utility.ImageUtil;
 
 public class NewGamePopupViewport extends ViewPort {
@@ -307,7 +313,7 @@ public class NewGamePopupViewport extends ViewPort {
         jPanel1.setOpaque(false);
 
         nicknameTextField.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        nicknameTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nicknameTextField.setHorizontalAlignment(SwingConstants.CENTER);
         nicknameTextField.setText("Woodman");
         nicknameTextField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 4, 4, new java.awt.Color(158, 87, 17)));
 

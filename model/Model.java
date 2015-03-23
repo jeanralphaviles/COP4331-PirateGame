@@ -403,7 +403,7 @@ public class Model extends Thread {
             
             if (environmentRemainder > 0 && environmentRemainder < tolerance) { // Environment Timer
                 gameObject.environmentGameStep();
-                AreaViewport.registerGameStep();
+            	AreaViewport.updateNeeded = true;
             }
         }
         
@@ -411,16 +411,16 @@ public class Model extends Thread {
             int gameStepRemainder = ms%(second/gameStepUpdatesPerSecond);
             
             if (gameStepRemainder > 0 && gameStepRemainder < tolerance) { // Game step timer
-            gameObject.gameStep();
-            AreaViewport.registerGameStep();
-            if (gameObject.getAvatar().isDead()) {
-                // Launch Popup
-                RunGame.showErrorMessage("You have died. Insert coin to continue!");
-                // Give avatar some more lives
-                gameObject.getAvatar().getStatistics().changeCurrentHealth(1000);
-                gameObject.getAvatar().getStatistics().changeLivesLeft(1);
+            	gameObject.gameStep();
+            	AreaViewport.updateNeeded = true;
+            	if (gameObject.getAvatar().isDead()) {
+            		// Launch Popup
+            		RunGame.showErrorMessage("You have died. Insert coin to continue!");
+            		// Give avatar some more lives
+            		gameObject.getAvatar().getStatistics().changeCurrentHealth(1000);
+            		gameObject.getAvatar().getStatistics().changeLivesLeft(1);
+            	}
             }
-        }
         }
 
     }

@@ -23,7 +23,7 @@ public abstract class Occupation {
 		this.abilities.add(new Melee());
                 this.abilities.add(new Talk());
                 
-		this.picture = new Decal(Decal.summonerPicture);
+		this.picture = Decal.createDecal(Decal.summonerPicture);
 	}
 	
 	/**

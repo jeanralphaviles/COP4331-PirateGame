@@ -1,6 +1,5 @@
 package controller.virtualController;
 
-import application.RunGame;
 import java.awt.Color;
 import model.Model;
 import controller.IntentMap.IntentMap;

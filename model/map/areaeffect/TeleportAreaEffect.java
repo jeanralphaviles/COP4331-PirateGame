@@ -9,12 +9,12 @@ public final class TeleportAreaEffect extends AreaEffect {
 	private GridLocation destination;
 	
 	public TeleportAreaEffect() {
-		super(new Decal(Decal.map));
+		super(Decal.createDecal(Decal.map));
 		destination = new GridLocation();
 	}
 	
 	public TeleportAreaEffect(GridLocation destination) {
-		super(new Decal(Decal.map));
+		super(Decal.createDecal(Decal.map));
 		this.destination = destination;
 	}
 

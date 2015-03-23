@@ -13,7 +13,7 @@ public abstract class AreaEffect {
 	private boolean isActive = true;
 
 	public AreaEffect() {
-		setDecal(new Decal(Decal.blank));
+		setDecal(Decal.createDecal(Decal.blank));
 	}
 
 	public AreaEffect(Decal decal) {

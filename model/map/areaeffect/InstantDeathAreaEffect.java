@@ -9,7 +9,7 @@ import model.entity.Entity;
  */
 public final class InstantDeathAreaEffect extends AreaEffect {
 	public InstantDeathAreaEffect() {
-		super(new Decal(Decal.instant_death));
+		super(Decal.createDecal(Decal.instant_death));
 	}
 	
 	public InstantDeathAreaEffect(Decal decal) {

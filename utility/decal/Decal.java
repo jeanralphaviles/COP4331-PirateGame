@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,9 +33,9 @@ public class Decal {
     public static final String sneakPicture = "./Sprites/characters/turnHat.png";
     public static final String item_default = "./Sprites/item/W_Mace010.png"; 
     private static final String terrain = "./Sprites/map.png";
-    public static final String grass = "grass";
-    public static final String mountain = "mountain"; 
-    public static final String water = "water"; 
+    public static final Decal grass = new Decal("grass");
+    public static final Decal mountain = new Decal("mountain");
+    public static final Decal water = new Decal("water");
     public static final String heal_damage = "./Sprites/item/S_Holy03.png";
     public static final String instant_death = "./Sprites/item/S_Death01.png"; 
     public static final String level_up = "./Sprites/item/S_Magic04.png"; 
@@ -50,6 +51,7 @@ public class Decal {
     public static final String trader = "./Sprites/item/A_Armour03.png";
         //Misc
     public static final String blank = "blank"; 
+    private String fileName = UUID.randomUUID().toString(); // Don't Worry About it, I just need a random string here
 
     public Decal() {
         
@@ -61,6 +63,7 @@ public class Decal {
     
     public Decal(String filename) {
         this(extractImage(filename));
+        this.setFileName(fileName);
     }
     
     public Decal(File decalFile) {
@@ -79,9 +82,12 @@ public class Decal {
         }
         return null;
     }
+	
+	public ImageIcon getImageIcon() {
+		return new ImageIcon(getImage());
+	}
         
-    public static Decal getImageIcon(ImageIcon imageIcon){
-        
+    public static Decal getDecalFromImageIcon(ImageIcon imageIcon){
         BufferedImage bufferImage = (BufferedImage)imageIcon.getImage();
         return new Decal( bufferImage );
     }
@@ -151,6 +157,10 @@ public class Decal {
         BufferedImage bi = extractImage(file);
         setImage(bi);
     }
+    
+    public boolean equals(Decal decal) {
+    	return this.fileName.equals(decal.getFileName());
+    }
 
     @Override
     public String toString() {
@@ -194,7 +204,7 @@ public class Decal {
     }
     
     public static void main(String[] args) {
-    	Decal orig = new Decal(Decal.grass);
+    	Decal orig = createDecal(Decal.grass);
     	Decal restored = Decal.fromString(orig.toString());
     	
     	if (orig.toString().equals(restored.toString()) == false) {
@@ -214,7 +224,7 @@ public class Decal {
         JLabel label = new JLabel("decal label");
         
         //Create Decal
-        Decal decal = new Decal(Decal.mountain);
+        Decal decal = createDecal(Decal.mountain);
         BufferedImage image = scale(decal, 200, 200);
         decal.setImage(image);
         
@@ -247,5 +257,21 @@ public class Decal {
             g2.drawImage(srcImg, 0, 0, w, h, null);
             g2.dispose();
             return resizedImg;
-    } 
+    }
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public static Decal createDecal(String filename) {
+		return new Decal(filename);
+	} 
+	
+	public static Decal createDecal(Decal decal) { // This is here for reasons
+		return decal;
+	}
 }

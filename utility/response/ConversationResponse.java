@@ -1,6 +1,5 @@
 package utility.response;
 
-import java.util.ArrayList;
 import model.Model;
 
 public class ConversationResponse extends Response {
